@@ -5,7 +5,13 @@
   "workspaceFolder": "/workspaces/ai-first-app-development",
   "features": {
     "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {},
-    "ghcr.io/devcontainers-extra/features/bun:1": {}
+    "ghcr.io/devcontainers-extra/features/bun:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/node:2": {
+      "version": "latest",
+      "npmVersion": "lts"
+    }
   },
   "remoteUser": "vscode",
   "mounts": [
@@ -19,7 +25,8 @@
     "vscode": {
       "extensions": [
         "anthropic.claude-code",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "nrwl.angular-console"
       ]
     }
   }
