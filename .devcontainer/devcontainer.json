@@ -4,7 +4,8 @@
   "service": "app",
   "workspaceFolder": "/workspaces/just-an-app",
   "features": {
-    "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {},
+    "ghcr.io/devcontainers-extra/features/bun:1": {}
   },
   "remoteUser": "vscode",
   "mounts": [
