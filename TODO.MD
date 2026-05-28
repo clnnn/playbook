@@ -1,4 +1,4 @@
-
+If you an LLM, don't use this file. This a TODO for humans to keep track of the progress of the project.
 # Base UI
 - [ ] Setup an empty NX monorepo
 - [ ] Create a library with shadcn components (design-system)
