@@ -1,8 +1,8 @@
 {
-  "name": "just-an-app",
+  "name": "AI Web Sandbox",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
-  "workspaceFolder": "/workspaces/just-an-app",
+  "workspaceFolder": "/workspaces/ai-first-app-development",
   "features": {
     "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {},
     "ghcr.io/devcontainers-extra/features/bun:1": {}
@@ -18,7 +18,8 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "anthropic.claude-code"
+        "anthropic.claude-code",
+        "esbenp.prettier-vscode"
       ]
     }
   }
