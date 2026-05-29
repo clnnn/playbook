@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "ShadcnUiGenerator",
+  "title": "Scaffold a shadcn shared UI library",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Package name under packages/ (e.g. 'ui' creates packages/ui).",
+      "default": "ui",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like for the UI library? (default: ui)"
+    },
+    "preset": {
+      "type": "string",
+      "description": "shadcn preset code (e.g. a2r6bw) — encodes style, colors, fonts, and icons. When omitted, sensible defaults are used."
+    }
+  },
+  "required": []
+}

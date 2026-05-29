@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "shadcn-ui": {
+      "factory": "./src/generators/shadcn-ui/shadcn-ui",
+      "schema": "./src/generators/shadcn-ui/schema.json",
+      "description": "Scaffold a shadcn shared UI library under packages/"
+    }
+  }
+}
