@@ -16,8 +16,9 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["@org/source"],
+    "customConditions": ["@workspace/root"],
     "paths": {
+      "@workspace/ui/*": ["./packages/ui/src/*"]
     }
   }
 }

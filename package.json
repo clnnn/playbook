@@ -1,5 +1,5 @@
 {
-  "name": "@org/source",
+  "name": "@workspace/root",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {},
@@ -24,6 +24,7 @@
   },
   "workspaces": [
     "packages/*",
-    "tools/*"
+    "tools/*",
+    "apps/*"
   ]
 }
