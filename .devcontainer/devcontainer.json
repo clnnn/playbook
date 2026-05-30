@@ -18,7 +18,8 @@
     "source=claude-code-config-${devcontainerId},target=/home/vscode/.claude,type=volume"
   ],
   "containerEnv": {
-    "CLAUDE_CONFIG_DIR": "/home/vscode/.claude"
+    "CLAUDE_CONFIG_DIR": "/home/vscode/.claude",
+    "NX_DAEMON": "true"
   },
   "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.claude",
   "customizations": {

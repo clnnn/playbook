@@ -7,7 +7,7 @@
     "jsx": "react-jsx",
     "skipLibCheck": true,
     "strict": true,
-    "noEmit": true,
+    "noEmit": true
   },
   "include": ["."],
   "exclude": ["node_modules", "dist"]
