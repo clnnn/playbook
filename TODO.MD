@@ -10,6 +10,14 @@ If you an LLM, don't use this file. This a TODO for humans to keep track of the 
 - [X] Go to https://tweakcn.com/editor/theme
 - [X] Design you theme
 - [X] Run bunx shadcn@latest add https://tweakcn.com/r/themes/amber-minimal.json --cwd packages/ui 
-- [ ] Eval skill
 
 # 2. use skill.sh to install the existing tools to have .skill.lock that acts like a package manager
+
+
+# 1. /grill-me when you don't have codebase, grill-me-with docs when you have a ubiquoes language, codebase, context
+
+
+Future improvements
+- [ ] 3rd party skills should be managed (E.g. skills.sh) like any library
+- [ ] Eval for custom skills
+- [ ] 
