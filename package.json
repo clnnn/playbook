@@ -21,10 +21,5 @@
     "shadcn": "^4.8.2",
     "tslib": "^2.3.0",
     "typescript": "~5.9.2"
-  },
-  "workspaces": [
-    "packages/*",
-    "tools/*",
-    "apps/*"
-  ]
+  }
 }

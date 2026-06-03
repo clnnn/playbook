@@ -1,8 +1,8 @@
 ---
 name: tweakcn-theme
-description: Customize the shadcn/ui theme using tweakcn.com editor. Opens the theme editor in a browser, waits for the developer to share a theme URL, then applies it to packages/ui using bunx shadcn add.
+description: Customize the shadcn/ui theme using tweakcn.com editor. Opens the theme editor in a browser, waits for the developer to share a theme URL, then applies it to packages/ui using pnpm dlx shadcn add.
 user-invocable: true
-allowed-tools: Bash(xdg-open *), Bash(bunx shadcn*), Bash(ls *), Bash(cat *)
+allowed-tools: Bash(xdg-open *), Bash(pnpm dlx shadcn*), Bash(ls *), Bash(cat *)
 ---
 
 # tweakcn Theme Customizer
@@ -31,7 +31,7 @@ After running the open command, tell the developer:
 > Customize your theme there. When you're done, share any of the following:
 > - A predefined theme URL or name, e.g. `https://tweakcn.com/r/themes/bubblegum.json` or just `bubblegum`
 > - A custom theme URL or ID, e.g. `https://tweakcn.com/themes/cmpsfc0j3000304ld215uhwj7` or just `cmpsfc0j3000304ld215uhwj7`
-> - A `bunx shadcn add` command copied from the site
+> - A `pnpm dlx shadcn add` command copied from the site
 >
 > **Paste it here when ready.**
 
@@ -48,26 +48,26 @@ Do NOT proceed until the developer pastes a URL or identifier. The input can tak
 - Full URL: `https://tweakcn.com/themes/cmpsfc0j3000304ld215uhwj7`
 - ID only: `cmpsfc0j3000304ld215uhwj7` → construct `https://tweakcn.com/themes/cmpsfc0j3000304ld215uhwj7`
 
-If they paste a `bunx shadcn add` command, extract the URL or slug from it directly.
+If they paste a `pnpm dlx shadcn add` command, extract the URL or slug from it directly.
 
 ### 3. Apply the theme to packages/ui
 
 Construct the full URL if needed (see above), then run:
 
 ```bash
-bunx shadcn add <full-url> --cwd packages/ui -y
+pnpm dlx shadcn add <full-url> --cwd packages/ui -y
 ```
 
 Examples:
 ```bash
 # Predefined theme
-bunx shadcn add https://tweakcn.com/r/themes/bubblegum.json --cwd packages/ui -y 
+pnpm dlx shadcn add https://tweakcn.com/r/themes/bubblegum.json --cwd packages/ui -y 
 
 # Custom theme
-bunx shadcn add https://tweakcn.com/themes/cmpsfc0j3000304ld215uhwj7 --cwd packages/ui -y
+pnpm dlx shadcn add https://tweakcn.com/themes/cmpsfc0j3000304ld215uhwj7 --cwd packages/ui -y
 ```
 
-If the `bunx shadcn add` command asks to overwrite existing files, answer **yes** to apply the new theme CSS variables.
+If the `pnpm dlx shadcn add` command asks to overwrite existing files, answer **yes** to apply the new theme CSS variables.
 
 ### 4. Confirm success
 
@@ -80,4 +80,4 @@ After the command completes:
 - The `packages/ui` directory contains the shared UI package with `components.json` pointing to `src/styles/globals.css` as the Tailwind CSS file.
 - Theme changes are applied as CSS custom properties in that globals file.
 - If the developer is in a devcontainer without display forwarding, `xdg-open` will silently fail — in that case, print the URL clearly so they can open it in the host browser.
-- Always run `bunx shadcn add` from inside `packages/ui` so the CLI picks up the correct `components.json`.
+- Always run `pnpm dlx shadcn add` from inside `packages/ui` so the CLI picks up the correct `components.json`.
