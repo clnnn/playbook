@@ -1,6 +1,10 @@
+# Project Setup
+
+- **Monorepo Tool**: Nx
+- **Package Manager**: pnpm
+
 <!-- nx configuration start-->
 <!-- Leave the start & end comments to automatically receive updates. -->
-
 # General Guidelines for working with Nx
 
 - For navigating/exploring the workspace, invoke the `nx-workspace` skill first - it has patterns for querying projects, targets, and dependencies
