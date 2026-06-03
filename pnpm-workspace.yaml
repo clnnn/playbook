@@ -2,3 +2,8 @@ packages:
   - 'packages/*'
   - 'tools/*'
   - 'apps/*'
+allowBuilds:
+  '@swc/core': true
+  msw: true
+  nx: true
+  unrs-resolver: true
