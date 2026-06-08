@@ -30,6 +30,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^10",
+    "@nx/eslint": "^22.7.5",
+    "@nx/eslint-plugin": "^22.7.5",
     "@nx/jest": "22.7.2",
     "@nx/js": "22.7.2",
     "@nx/plugin": "22.7.2",
