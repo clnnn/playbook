@@ -1,3 +1,11 @@
 {
-    "claudeCode.useTerminal": true
+    "claudeCode.useTerminal": true,
+    "terminal.integrated.defaultProfile.linux": "Claude Code",
+    "terminal.integrated.profiles.linux": {
+        "Claude Code": {
+            "command": "claude",
+            "args": ["--dangerously-skip-permissions"],
+            "icon": "robot"
+        }
+    }
 }
