@@ -1,5 +1,6 @@
 {
   "name": "@workspace/ui",
+  "tags": ["scope:shared", "type:ui"],
   "targets": {
     "typecheck": {
       "executor": "nx:run-commands",
