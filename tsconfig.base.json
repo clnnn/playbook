@@ -9,13 +9,35 @@
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "noEmitOnError": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "skipLibCheck": true,
-    "strict": true,
     "target": "es2022",
+     // Type Checking - ALL STRICT FLAGS
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,
+
+    // Additional Checks
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": true,
+
+    // Completeness
+    "skipLibCheck": false,
+    "skipDefaultLibCheck": false,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
     "customConditions": ["@workspace/root"],
     "paths": {
       "@workspace/ui/*": ["./packages/ui/src/*"]
