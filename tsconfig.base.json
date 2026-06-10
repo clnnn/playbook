@@ -35,7 +35,6 @@
 
     // Completeness
     "skipLibCheck": false,
-    "skipDefaultLibCheck": false,
     "forceConsistentCasingInFileNames": true,
     "verbatimModuleSyntax": true,
     "customConditions": ["@workspace/root"],
