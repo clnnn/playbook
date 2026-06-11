@@ -22,7 +22,8 @@
       }
     ],
     "outDir": "dist",
-    "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo"
+    "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo",
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*.ts",
