@@ -25,6 +25,12 @@
       "skillPath": "skills/productivity/handoff/SKILL.md",
       "computedHash": "1a78d774f8a59db5daa6e65e20a6596872fa8cde769f9a6e3a09b678dd5ae8cc"
     },
+    "idea-refine": {
+      "source": "addyosmani/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/idea-refine/SKILL.md",
+      "computedHash": "926e51c45782a7a1074ee15558993966770e6c4ac52ea466a5de14638d151a12"
+    },
     "impeccable": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
