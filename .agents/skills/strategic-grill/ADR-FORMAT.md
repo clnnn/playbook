@@ -1,29 +1,72 @@
-# ADR Format
+# ADR format
 
-ADRs live in `docs/adr/` and use sequential numbering: `0001-slug.md`, `0002-slug.md`, etc.
+ADRs use [MADR](https://adr.github.io/madr/) (Markdown Architectural Decision Records).
+
+Files live in `docs/adr/` and use sequential numbering: `0001-slug.md`, `0002-slug.md`, etc.
 
 For system-wide decisions, use `docs/adr/` at the repo root.
-For context-specific decisions, use `{context-path}/docs/adr/`.
 
 Create the `docs/adr/` directory lazily — only when the first ADR is needed.
 
-## Template
+## Minimal template
 
-```md
-# {Short title of the decision}
+Start here. Most ADRs need nothing more.
 
-{1-3 sentences: what's the context, what did we decide, and why.}
+```markdown
+# [Short title — decision and solution]
+
+* Status: accepted
+* Date: YYYY-MM-DD
+
+## Context and Problem Statement
+
+[Two or three sentences: what situation forced this decision?]
+
+## Considered Options
+
+* [Option A]
+* [Option B]
+
+## Decision Outcome
+
+Chosen option: "[Option A]", because [why this option over the others].
 ```
-
-That's it. An ADR can be a single paragraph. The value is in recording *that* a decision was made and *why* — not in filling out sections.
 
 ## Optional sections
 
-Only include these when they add genuine value. Most ADRs won't need them.
+Only add these when they genuinely help a future reader. Most ADRs won't need them.
 
-- **Status** frontmatter (`proposed | accepted | deprecated | superseded by ADR-NNNN`) — useful when decisions are revisited
-- **Considered Options** — only when the rejected alternatives are worth remembering
-- **Consequences** — only when non-obvious downstream effects need to be called out
+```markdown
+## Decision Drivers
+
+* [Force or concern that shaped the choice]
+
+### Positive Consequences
+
+* [What gets better]
+
+### Negative Consequences
+
+* [What gets worse or what debt is taken on]
+
+## Pros and Cons of the Options
+
+### [Option A]
+
+* Good, because [argument]
+* Bad, because [argument]
+
+### [Option B]
+
+* Good, because [argument]
+* Bad, because [argument]
+
+## Links
+
+* Superseded by [ADR-0005](0005-example.md)
+```
+
+`Status` values: `proposed` | `accepted` | `deprecated` | `superseded by [ADR-XXXX](XXXX-slug.md)`
 
 ## Numbering
 
@@ -34,10 +77,10 @@ Scan `docs/adr/` for the highest existing number and increment by one.
 All three of these must be true:
 
 1. **Hard to reverse** — the cost of changing your mind later is meaningful
-2. **Surprising without context** — a future reader will look at the code and wonder "why on earth did they do it this way?"
+2. **Surprising without context** — a future reader will wonder "why did they do it this way?"
 3. **The result of a real trade-off** — there were genuine alternatives and you picked one for specific reasons
 
-If a decision is easy to reverse, skip it — you'll just reverse it. If it's not surprising, nobody will wonder why. If there was no real alternative, there's nothing to record beyond "we did the obvious thing."
+If any of the three is missing, skip the ADR.
 
 ### What qualifies
 
@@ -54,24 +97,18 @@ If a decision is easy to reverse, skip it — you'll just reverse it. If it's no
 
 **Boundary and scope decisions**
 - "Customer data is owned by the Customer context; other contexts reference it by ID only."
-- The explicit no-s are as valuable as the yes-s.
 
 **Domain categorisation choices** _(DDD-specific)_
 - "We classified Auth as `generic` and chose Clerk over building our own, accepting Clerk's session model as-is (Conformist)."
-- "We initially considered Notifications as `supporting` but reclassified it as `core` because personalised notification timing is our retention differentiator."
 
 **Context map relationship type choices** _(DDD-specific)_
-- "Billing uses ACL against Ordering rather than Conformist, because we anticipate replacing Ordering with a third-party OMS in 18 months and don't want Billing coupled to its model."
-- "Ordering and Inventory use Partnership rather than Customer-Supplier because both teams are co-owned and interface changes need joint sign-off."
-- "We chose Shared Kernel for CustomerId and Money between Ordering and Billing; the operational cost of two diverging representations outweighs the coupling risk at current team size."
+- "Billing uses ACL against Ordering rather than Conformist, because we anticipate replacing Ordering with a third-party OMS in 18 months."
 
 **Deliberate deviations from the obvious path**
 - "We're using manual SQL instead of an ORM because X."
-- Anything where a reasonable reader would assume the opposite. These stop the next engineer from "fixing" something that was deliberate.
 
 **Constraints not visible in the code**
 - "We can't use AWS because of compliance requirements."
-- "Response times must be under 200ms because of the partner API contract."
 
 **Rejected alternatives when the rejection is non-obvious**
 - If you considered GraphQL and picked REST for subtle reasons, record it — otherwise someone will suggest GraphQL again in six months.

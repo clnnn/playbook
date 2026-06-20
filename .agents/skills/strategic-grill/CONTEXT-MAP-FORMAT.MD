@@ -1,26 +1,50 @@
-# CONTEXT-MAP.md format
+# CONTEXT-MAP.yaml format
 
-```md
-# Context Map
+```yaml
+contexts:
+  - name: Ordering
+    path: ./src/ordering/CONTEXT.yaml
+    tag: core
+    description: Receives and tracks customer orders; the competitive differentiator is our real-time rerouting algorithm.
 
-## Contexts
+  - name: Billing
+    path: ./src/billing/CONTEXT.yaml
+    tag: supporting
+    description: Generates invoices and processes payments.
 
-- [Ordering](./src/ordering/CONTEXT.md) `core` — receives and tracks customer orders; the competitive differentiator is our real-time rerouting algorithm
-- [Billing](./src/billing/CONTEXT.md) `supporting` — generates invoices and processes payments
-- [Auth](./src/auth/CONTEXT.md) `generic` — identity and session management; using Clerk
+  - name: Auth
+    path: ./src/auth/CONTEXT.yaml
+    tag: generic
+    description: Identity and session management; using Clerk.
 
-## Relationships
+relationships:
+  - upstream: Ordering
+    downstream: Fulfillment
+    label: Customer-Supplier
+    implication: Ordering sets the OrderPlaced event contract; Fulfillment adapts with no veto on contract changes.
 
-- **Ordering → Fulfillment** `Customer-Supplier` — Ordering sets the OrderPlaced event contract; Fulfillment adapts. Fulfillment has no veto on contract changes.
-- **Fulfillment → Billing** `ACL` — Billing translates ShipmentDispatched into its own InvoiceTrigger; insulated from Fulfillment model changes.
-- **Ordering ↔ Billing** `Shared Kernel` — Shared types for CustomerId and Money; both teams must sign off on changes to these types.
+  - upstream: Fulfillment
+    downstream: Billing
+    label: ACL
+    implication: Billing translates ShipmentDispatched into its own InvoiceTrigger; insulated from Fulfillment model changes.
+
+  - peers:
+      - Ordering
+      - Billing
+    label: Shared Kernel
+    implication: Shared types for CustomerId and Money; both teams must sign off on changes to these types.
 ```
+
+## Relationship schema
+
+Directed relationships (Customer-Supplier, Open Host Service, ACL, Published Language, Conformist) use `upstream` / `downstream`.
+Symmetric relationships (Shared Kernel, Partnership, Separate Ways) use `peers` as a two-item list.
 
 ## Rules
 
-- **Every context carries exactly one tag.** `core`, `supporting`, or `generic` — never two, never none. The tag drives a build-vs-buy decision, so it has to be definite.
-- **Justify the tag in the description.** A `core` entry must name the specific capability that would be lost if replaced off-the-shelf. A `generic` entry should name what you're buying or why you'd build a commodity yourself.
-- **Every relationship carries exactly one label** from the DDD set, never free-form prose. The label encodes a precise team-autonomy consequence:
+- **Every context carries exactly one tag.** `core`, `supporting`, or `generic` — never two, never none.
+- **Justify the tag in `description`.** A `core` entry must name the specific capability that would be lost if replaced off-the-shelf. A `generic` entry should name what you're buying or why you'd build a commodity yourself.
+- **Every relationship carries exactly one `label`** from the DDD set — never free-form prose:
 
   | Label | Implication |
   |-------|-------------|
@@ -33,6 +57,5 @@
   | `Published Language` | OHS with a shareable documented format (JSON Schema, Avro, Protobuf) |
   | `Separate Ways` | No integration; teams fully independent |
 
-- **Add a one-sentence implication note after each label** so a reader understands the autonomy consequence without consulting the table.
+- **`implication` is required on every relationship.** One sentence capturing the autonomy consequence.
 - **No implementation details.** This is a map of boundaries and their relationships, not an architecture spec.
-- **Use arrows for direction.** `→` for directed (upstream/downstream) relationships, `↔` for symmetric ones (Shared Kernel, Partnership, Separate Ways).
