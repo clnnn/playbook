@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "The response shows evidence of reading the existing context files (references Orders, Inventory, and/or Customers)",
+      "passed": true,
+      "evidence": "Lists Orders/Inventory/Customers tags and that Orders reads from the other two."
+    },
+    {
+      "text": "The response raises the question of ownership or boundaries for a feature that reads across multiple existing contexts",
+      "passed": true,
+      "evidence": "Raises ownership: 'owned by whoever owns the business needs to see numbers' and read-only boundary."
+    },
+    {
+      "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+      "passed": true,
+      "evidence": "'**Q:** Is this purely read-only reporting, or will anyone act on it?' + concrete Recommendation."
+    },
+    {
+      "text": "The response treats reporting as likely a separate context rather than silently embedding it in one of the three",
+      "passed": true,
+      "evidence": "'this is a new fourth area... reads from the other three rather than living inside any of them.'"
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1
+  },
+  "timing": {
+    "total_tokens": 23812,
+    "duration_ms": 59911,
+    "total_duration_seconds": 59.9
+  }
+}

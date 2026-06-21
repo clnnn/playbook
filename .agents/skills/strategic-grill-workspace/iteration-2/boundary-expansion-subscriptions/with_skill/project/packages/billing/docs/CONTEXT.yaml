@@ -1,0 +1,9 @@
+name: Billing
+description: Generates invoices and processes payments.
+
+language:
+  - term: Invoice
+    definition: A request for payment sent to a customer for a billing period.
+    avoid:
+      - Bill
+      - Statement

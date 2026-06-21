@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "The response shows evidence of reading the existing Payments, Orders, and/or Inventory contexts",
+      "passed": true,
+      "evidence": "Lists Orders(core)/Payments/Inventory tags and the existing Orders→Payments, Inventory→Orders wiring."
+    },
+    {
+      "text": "The response asks whether the refund flow should be a new context/area or distributed across the existing three",
+      "passed": false,
+      "evidence": "Asks which existing module owns the refund (Orders vs Payments); does not offer 'new Refund context vs distributed' as the framing."
+    },
+    {
+      "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+      "passed": true,
+      "evidence": "'**Q:** ...which single module decides a refund is in progress — Orders or Payments?' + Recommendation: Orders owns it."
+    },
+    {
+      "text": "The response stays at the boundary/ownership level and does not jump straight into implementation mechanics of reversing charges",
+      "passed": true,
+      "evidence": "Stays on ownership/boundary; defers full-vs-partial and restock mechanics to later turns."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 1,
+    "total": 4,
+    "pass_rate": 0.75
+  },
+  "timing": {
+    "total_tokens": 23829,
+    "duration_ms": 60884,
+    "total_duration_seconds": 60.9
+  }
+}

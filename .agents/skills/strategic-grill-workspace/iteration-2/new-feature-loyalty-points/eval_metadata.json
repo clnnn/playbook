@@ -1,0 +1,14 @@
+{
+  "eval_id": 6,
+  "eval_name": "new-feature-loyalty-points",
+  "prompt": "I want to add a loyalty points system to our platform — customers earn points on orders and redeem them. How should we fit this in?",
+  "assertions": [
+    "Shows evidence of reading the existing context files (references Orders and/or Customers by name or documented definition)",
+    "Asks whether loyalty points should be a new context/area or live inside an existing one (Customers or Orders)",
+    "Uses the Q:/Recommendation format with a concrete recommendation",
+    "Does not re-ask about file structure, since context files already exist",
+    "Uses plain business language with NO DDD jargon in the user-facing text",
+    "If it proposes a relationship label, it uses only canonical DDD patterns (Customer-Supplier, ACL, Open Host Service, etc.) and does NOT invent labels such as 'Publisher-Subscriber'",
+    "Keeps implementation details (DB schemas, points-ledger/table design) out — artifacts stay glossaries, not specs"
+  ]
+}

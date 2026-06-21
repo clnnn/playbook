@@ -1,0 +1,13 @@
+{
+  "eval_id": 2,
+  "eval_name": "fuzzy-language-member",
+  "prompt": "We have accounts, users, and customers in our system, and now I want to add a 'member' concept for people who've paid for a subscription. Walk me through it.",
+  "assertions": [
+    "Shows evidence of reading the existing glossary that defines account, user, and customer",
+    "The Q:/Recommendation block itself works to disambiguate 'member' against the existing terms (the sharpening is the question, not an aside)",
+    "Asks exactly one focused question — no bundled questions",
+    "Uses the Q:/Recommendation format with a concrete recommendation",
+    "Uses plain business language with NO DDD jargon in the user-facing text",
+    "Does not re-ask about file structure, since context docs already exist"
+  ]
+}

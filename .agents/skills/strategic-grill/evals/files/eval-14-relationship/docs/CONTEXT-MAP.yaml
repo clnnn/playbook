@@ -1,0 +1,12 @@
+contexts:
+  - name: Orders
+    path: ./packages/orders/docs/CONTEXT.yaml
+    tag: core
+    description: Receives and tracks customer orders; the differentiator is real-time inventory-aware order promising.
+
+  - name: Notifications
+    path: ./packages/notifications/docs/CONTEXT.yaml
+    tag: generic
+    description: Sends transactional emails and SMS; thin wrapper over a third-party provider.
+
+relationships: []

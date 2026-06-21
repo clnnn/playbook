@@ -1,0 +1,11 @@
+{
+  "eval_id": 6,
+  "eval_name": "new-feature-loyalty-points",
+  "prompt": "I want to add a loyalty points system to our platform — customers earn points on orders and redeem them. How should we fit this in?",
+  "assertions": [
+    "The response shows evidence of reading the existing context files (references Orders and/or Customers contexts by name or their documented definitions)",
+    "The response asks whether loyalty points should be a new context/area or live inside an existing one (Customers or Orders)",
+    "The opening question uses the Q/Recommendation format with a concrete recommendation",
+    "The response does not re-ask about file structure, since context files already exist"
+  ]
+}

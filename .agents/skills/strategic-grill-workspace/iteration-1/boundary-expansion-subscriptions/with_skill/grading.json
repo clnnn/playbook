@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "The response shows evidence of reading the existing User context and its documented (narrow) scope",
+      "passed": true,
+      "evidence": "Quotes User charter: 'owns who a person is and how they log in, nothing about what they pay for.'"
+    },
+    {
+      "text": "The response challenges folding subscriptions into the User module rather than accepting the 'makes sense to keep them together' reasoning",
+      "passed": true,
+      "evidence": "'dropping subscription rules into it directly contradicts its stated charter.'"
+    },
+    {
+      "text": "The challenge references a real distinction (different lifecycle, different owner, billing concern vs identity concern)",
+      "passed": true,
+      "evidence": "Distinguishes entitlements vs charging, identity vs money, and Billing's territory."
+    },
+    {
+      "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+      "passed": true,
+      "evidence": "'**Q:** ...what's the heaviest piece — deciding entitlement, or charging?' + Recommendation."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1
+  },
+  "timing": {
+    "total_tokens": 23544,
+    "duration_ms": 56589,
+    "total_duration_seconds": 56.6
+  }
+}

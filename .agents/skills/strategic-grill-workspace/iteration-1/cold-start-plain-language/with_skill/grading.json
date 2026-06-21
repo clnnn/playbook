@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "The response asks exactly one question, not multiple bundled questions",
+      "passed": true,
+      "evidence": "Single formatted grilling Q about the differentiator; a preceding file-layout ask is the skill's mandated housekeeping step, not a second grilling question."
+    },
+    {
+      "text": "The opening question uses the format: a bold 'Q:' line followed by a bold 'Recommendation:' line",
+      "passed": true,
+      "evidence": "'**Q:** Of everything this product will do...' followed by '**Recommendation:** ...'."
+    },
+    {
+      "text": "The recommendation takes a concrete position rather than saying 'it depends' or leaving it open",
+      "passed": true,
+      "evidence": "Recommendation takes a firm position: differentiator is restaurant-specific prediction/waste-flagging, not table-stakes tracking."
+    },
+    {
+      "text": "The question is phrased in plain business language and does NOT use DDD jargon (bounded context, ubiquitous language, subdomain, anti-corruption layer, ACL, core domain) in the question text shown to the user",
+      "passed": true,
+      "evidence": "Uses 'area of the system' / 'differentiator'; no 'bounded context', 'ubiquitous language', 'ACL' etc."
+    },
+    {
+      "text": "Because no CONTEXT-MAP.yaml or CONTEXT.yaml exists, the response either asks the user how the file structure should look or proposes a starting structure",
+      "passed": true,
+      "evidence": "States 'nothing set up yet' and proposes a concrete docs/ + packages/*/docs/CONTEXT.yaml layout, asking the user to confirm."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1
+  },
+  "timing": {
+    "total_tokens": 27161,
+    "duration_ms": 60707,
+    "total_duration_seconds": 60.7
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Shows evidence of reading the existing glossary where 'Order' is defined as a customer-facing concept",
+      "passed": true,
+      "evidence": "Quotes the Order definition and avoid list."
+    },
+    {
+      "text": "Flags the conflict between the user's supplier-facing 'order' and the existing customer-facing 'Order' term",
+      "passed": true,
+      "evidence": "'two incompatible meanings of the same word.'"
+    },
+    {
+      "text": "Proposes a distinct term for the supplier-facing concept (e.g. Purchase Order, Restock Order, Supplier Order)",
+      "passed": true,
+      "evidence": "'The industry-standard term... is a Purchase Order.'"
+    },
+    {
+      "text": "Uses the Q:/Recommendation format with a concrete recommendation",
+      "passed": false,
+      "evidence": "No Q:/Recommendation format; 5 numbered questions."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 1,
+    "total": 4,
+    "pass_rate": 0.75
+  },
+  "timing": {
+    "total_tokens": 13516,
+    "duration_ms": 34599,
+    "total_duration_seconds": 34.6
+  }
+}

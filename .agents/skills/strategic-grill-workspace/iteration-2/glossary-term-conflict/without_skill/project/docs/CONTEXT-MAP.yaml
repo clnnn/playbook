@@ -1,0 +1,17 @@
+contexts:
+  - name: Orders
+    path: ./packages/orders/docs/CONTEXT.yaml
+    tag: core
+    description: Receives and tracks customer orders; the differentiator is real-time inventory-aware order promising.
+
+  - name: Suppliers
+    path: ./packages/suppliers/docs/CONTEXT.yaml
+    tag: supporting
+    description: Manages supplier records and contact details for restocking.
+
+relationships:
+  - peers:
+      - Orders
+      - Suppliers
+    label: Separate Ways
+    implication: No integration today; the two areas are fully independent.

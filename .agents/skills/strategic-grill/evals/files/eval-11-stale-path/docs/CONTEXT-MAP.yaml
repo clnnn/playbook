@@ -1,0 +1,16 @@
+contexts:
+  - name: Orders
+    path: ./packages/orders/docs/CONTEXT.yaml
+    tag: core
+    description: Receives and tracks customer orders; the differentiator is real-time inventory-aware order promising.
+
+  - name: Billing
+    path: ./packages/billing/docs/CONTEXT.yaml
+    tag: supporting
+    description: Captures and settles payments and generates invoices.
+
+relationships:
+  - upstream: Orders
+    downstream: Billing
+    label: Customer-Supplier
+    implication: Orders sets the OrderPlaced contract; Billing adapts to it.

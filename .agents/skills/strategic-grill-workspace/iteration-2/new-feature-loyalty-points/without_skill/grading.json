@@ -1,0 +1,50 @@
+{
+  "expectations": [
+    {
+      "text": "Shows evidence of reading the existing context files (references Orders and/or Customers by name or documented definition)",
+      "passed": true,
+      "evidence": "Quotes Orders/Customers tags."
+    },
+    {
+      "text": "Asks whether loyalty points should be a new context/area or live inside an existing one (Customers or Orders)",
+      "passed": true,
+      "evidence": "'Loyalty is its own bounded context' — answers new-vs-existing."
+    },
+    {
+      "text": "Uses the Q:/Recommendation format with a concrete recommendation",
+      "passed": false,
+      "evidence": "No Q:/Recommendation format; 5-question essay."
+    },
+    {
+      "text": "Does not re-ask about file structure, since context files already exist",
+      "passed": true,
+      "evidence": "Does not re-ask file structure."
+    },
+    {
+      "text": "Uses plain business language with NO DDD jargon in the user-facing text",
+      "passed": false,
+      "evidence": "Leaks jargon: 'bounded context', 'Customer-Supplier', 'upstream/downstream'."
+    },
+    {
+      "text": "If it proposes a relationship label, it uses only canonical DDD patterns (Customer-Supplier, ACL, Open Host Service, etc.) and does NOT invent labels such as 'Publisher-Subscriber'",
+      "passed": false,
+      "evidence": "Invents a non-canonical label: 'label: Publisher-Subscriber' in the proposed map block."
+    },
+    {
+      "text": "Keeps implementation details (DB schemas, points-ledger/table design) out — artifacts stay glossaries, not specs",
+      "passed": false,
+      "evidence": "Leaks implementation: append-only points ledger, balance = sum of ledger, schema design."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 4,
+    "total": 7,
+    "pass_rate": 0.429
+  },
+  "timing": {
+    "total_tokens": 13893,
+    "duration_ms": 41430,
+    "total_duration_seconds": 41.4
+  }
+}

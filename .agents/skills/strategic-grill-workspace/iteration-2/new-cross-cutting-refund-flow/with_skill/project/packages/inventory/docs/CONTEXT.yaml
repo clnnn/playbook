@@ -1,0 +1,9 @@
+name: Inventory
+description: Tracks stock levels per warehouse.
+
+language:
+  - term: Stock Level
+    definition: The quantity of a product available at a warehouse at a point in time.
+    avoid:
+      - Count
+      - Amount

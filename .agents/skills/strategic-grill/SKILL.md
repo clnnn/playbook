@@ -38,21 +38,11 @@ Example:
 │           └── CONTEXT.yaml
 ```
 
-**If neither a `CONTEXT-MAP.yaml` nor separate `CONTEXT.yaml` files exist, ask the user how the file structure should look before creating anything.** Don't assume a layout. For example, a monorepo will typically have one root `docs/CONTEXT-MAP.yaml` plus a separate `docs/CONTEXT.yaml` per package/lib. 
+**If neither a `CONTEXT-MAP.yaml` nor separate `CONTEXT.yaml` files exist, ask the user how the file structure should look before continuing.** Don't assume a layout. If the user doesn't have a preference, suggest the structure above as a starting point.
 
-### 3. Start the live graph visualizer
+**If `CONTEXT-MAP.yaml` already exists**, cross-check every `path:` entry against the actual codebase. If a referenced path doesn't exist, flag the mismatch to the user before proceeding — don't silently carry stale data into the session.
 
-Launch the visualizer server before the first question so the user can watch the context map build in real time:
-
-```bash
-curl -s http://localhost:8765/api/hash >/dev/null 2>&1 || \
-  nohup node "$(git rev-parse --show-toplevel)/.agents/skills/strategic-grill/scripts/serve_graph.js" \
-    --no-browser > /tmp/context-graph.log 2>&1 &
-```
-
-The server watches all context files and pushes live reloads — you never need to restart it. Tell the user: **"Graph live at http://localhost:8765"**
-
-### 4. "Grill" the plan
+### 3. "Grill" the plan
 
 Interview the user relentlessly about every aspect of their plan until you reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one.
 
@@ -60,26 +50,58 @@ Format every question using the structure in [QUESTION-FORMAT.md](./references/Q
 
 If a question can be answered by exploring the codebase, explore the codebase instead.
 
+#### Language
+
+- **Calibrate your language to the user.** If the user is not using DDD vocabulary, don't introduce it unprompted. Conduct the entire conversation in **plain business language**. Use DDD terms only in YAML artifacts — never in the questions you ask. Translate like this:
+
+| DDD concept | Plain-language equivalent to use in conversation |
+|-------------|--------------------------------------------------|
+| bounded context | "area of the system", "module", "team ownership" |
+| core domain | "what makes your product unique", "your competitive edge" |
+| supporting subdomain | "necessary infrastructure, but not your differentiator" |
+| generic subdomain | "off-the-shelf problem — buy, don't build" |
+| ubiquitous language | "what you call things", "the right word for X" |
+| Customer-Supplier | "who owns the contract", "who adapts to whom" |
+| ACL | "translation layer", "insulation from upstream changes" |
+| Shared Kernel | "shared code both teams must sign off on" |
+| Open Host Service | "stable API that both teams can rely on" |
+
 #### Between-Turn Protocol (MANDATORY)
 
-After **every** user answer, before **every** next question, run these four steps in order. Never skip. Never batch.
+After **every** user answer, before **every** next question, run these three steps in order. Never skip. Never batch.
 
-1. **Scan against techniques** — check each [TECHNIQUES.md](./references/TECHNIQUES.md) one-by-one against the answer. Address every technique that fires now, not later.
+1. **Apply techniques** — read [TECHNIQUES.md](./references/TECHNIQUES.md) and check whether any technique is triggered by this answer. Use judgment: don't force techniques that don't apply. Common triggers to watch for:
+   - User uses a term that conflicts with or is absent from the glossary → **Sharpen fuzzy language** or **Challenge against the glossary**
+   - User describes a boundary → **Subdomain alignment check**
+   - User claims something is their competitive differentiator → **Push back on weak core-domain claims**
+   - User describes how two parts interact → **Relationship labelling**
+   - User states a rule about the domain → **Discuss concrete scenarios** to stress-test it
+   - User's description contradicts something in the codebase → **Cross-reference with code**
 
 2. **Write to files** — apply every decision that crystallised:
    - A resolved term → update `CONTEXT.yaml` (format: [CONTEXT-FORMAT.md](./references/CONTEXT-FORMAT.md))
    - A context established or tagged → update `CONTEXT-MAP.yaml` (format: [CONTEXT-MAP-FORMAT.md](./references/CONTEXT-MAP-FORMAT.md))
    - A relationship labelled → update `CONTEXT-MAP.yaml`
-3. **Output the turn separator** — emit this block verbatim before the next question:
+
+   **If `CONTEXT-MAP.yaml` was just created in this turn**, start the live graph visualizer:
+   ```bash
+   curl -s http://localhost:8765/api/hash >/dev/null 2>&1 || \
+     nohup node "$(git rev-parse --show-toplevel)/.agents/skills/strategic-grill/scripts/serve_graph.js" \
+       --no-browser > /tmp/context-graph.log 2>&1 &
    ```
-   Techniques fired: [comma-separated list, or "none"]
-   Captured: [bullet list of file changes, or "nothing"]
+   If the server starts successfully, tell the user: **"Graph live at http://localhost:8765"**
+   If it fails, tell the user: **"Graph server didn't start — check `/tmp/context-graph.log` if you need it. You can work from the YAML directly."**
+   The server watches all context files and pushes live reloads — you never need to restart it.
+
+3. **Emit a turn separator** — only if something happened (a technique fired or a file changed). Skip entirely if nothing was captured:
    ```
-4. **Live graph updates automatically** — the server watches all context files. No action needed.
+   Techniques fired: [comma-separated list]
+   Captured: [bullet list of file changes]
+   ```
 
 `CONTEXT.yaml` and `CONTEXT-MAP.yaml` should be totally devoid of implementation details. Do not treat them as a spec, a scratch pad, or a repository for implementation decisions. They are glossaries and nothing else.
 
-### 5. Offer ADRs sparingly
+### 4. Offer ADRs sparingly
 
 Only offer to create an ADR when all three are true:
 

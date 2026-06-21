@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "Shows evidence of reading the existing User context and its documented (narrow) scope",
+      "passed": true,
+      "evidence": "Quotes the narrow User description."
+    },
+    {
+      "text": "Challenges folding subscriptions into the User module rather than accepting the 'makes sense to keep them together' reasoning",
+      "passed": true,
+      "evidence": "'reversing an explicit boundary decision... deserves scrutiny.'"
+    },
+    {
+      "text": "The challenge references a real distinction (different lifecycle, different owner, billing concern vs identity concern)",
+      "passed": true,
+      "evidence": "'a paying relationship... may not map one-to-one to a login.'"
+    },
+    {
+      "text": "Uses the Q:/Recommendation format with a concrete recommendation",
+      "passed": false,
+      "evidence": "No Q:/Recommendation format; four numbered questions."
+    },
+    {
+      "text": "Uses plain business language with NO DDD jargon in the user-facing text",
+      "passed": false,
+      "evidence": "Leaks jargon: 'that's the thing bounded contexts exist to prevent', 'Customer-Supplier'."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 2,
+    "total": 5,
+    "pass_rate": 0.6
+  },
+  "timing": {
+    "total_tokens": 13683,
+    "duration_ms": 39306,
+    "total_duration_seconds": 39.3
+  }
+}

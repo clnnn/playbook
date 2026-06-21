@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Cross-checks the paths listed in CONTEXT-MAP.yaml against the actual directories present in the codebase",
+      "passed": true,
+      "evidence": "'on disk there is no packages/billing/ — the actual package is packages/payments/.'"
+    },
+    {
+      "text": "Flags that a referenced path is stale or missing (the map points to a billing directory that doesn't exist; the real one is payments)",
+      "passed": true,
+      "evidence": "Flags stale path and old name."
+    },
+    {
+      "text": "Surfaces this mismatch to the user rather than silently proceeding",
+      "passed": true,
+      "evidence": "'Worth fixing the map... so the rest references something real.'"
+    },
+    {
+      "text": "Still moves toward the user's actual question (where fraud detection should go) after flagging the mismatch",
+      "passed": true,
+      "evidence": "Gives a placement recommendation (new Risk context)."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1
+  },
+  "timing": {
+    "total_tokens": 13737,
+    "duration_ms": 35324,
+    "total_duration_seconds": 35.3
+  }
+}

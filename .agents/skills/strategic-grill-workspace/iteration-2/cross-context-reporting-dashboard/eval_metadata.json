@@ -1,0 +1,13 @@
+{
+  "eval_id": 7,
+  "eval_name": "cross-context-reporting-dashboard",
+  "prompt": "We want to build a reporting dashboard that pulls data from Orders, Inventory, and Customers to show business KPIs. Where should it live?",
+  "assertions": [
+    "Shows evidence of reading the existing context files (references Orders, Inventory, and/or Customers)",
+    "Raises the question of ownership or boundaries for a feature that reads across multiple existing contexts",
+    "Uses the Q:/Recommendation format with a concrete recommendation",
+    "Treats reporting as likely a separate context rather than silently embedding it in one of the three",
+    "Uses plain business language with NO DDD jargon in the user-facing text",
+    "Keeps implementation details (ETL/event-store/query mechanics) out — stays at the ownership/boundary level"
+  ]
+}

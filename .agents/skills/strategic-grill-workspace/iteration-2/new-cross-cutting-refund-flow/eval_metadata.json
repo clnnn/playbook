@@ -1,0 +1,12 @@
+{
+  "eval_id": 10,
+  "eval_name": "new-cross-cutting-refund-flow",
+  "prompt": "I want to add a refund flow. It touches payments, orders, and inventory since we have to reverse the charge, mark the order, and restock items.",
+  "assertions": [
+    "Shows evidence of reading the existing Payments, Orders, and/or Inventory contexts",
+    "Surfaces who owns/orchestrates the refund (a single owning context driving the others) before mechanics — whether by asking new-context-vs-existing or which existing context owns it",
+    "Uses the Q:/Recommendation format with a concrete recommendation",
+    "Stays at the boundary/ownership level and does not jump into implementation mechanics (saga/compensation, warehouse resolution, per-field schema)",
+    "Uses plain business language with NO DDD jargon in the user-facing text"
+  ]
+}

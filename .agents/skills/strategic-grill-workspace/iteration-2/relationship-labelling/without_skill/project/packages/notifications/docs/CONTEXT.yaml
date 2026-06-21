@@ -1,0 +1,9 @@
+name: Notifications
+description: Sends transactional emails and SMS; thin wrapper over a third-party provider.
+
+language:
+  - term: Notification
+    definition: A single message (email or SMS) sent to a customer in response to an event.
+    avoid:
+      - Message
+      - Alert

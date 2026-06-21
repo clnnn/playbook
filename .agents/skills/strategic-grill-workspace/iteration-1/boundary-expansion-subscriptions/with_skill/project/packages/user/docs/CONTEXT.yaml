@@ -1,0 +1,15 @@
+name: User
+description: Identity, authentication and session management. Deliberately narrow — owns who a person is and how they log in, nothing about what they pay for.
+
+language:
+  - term: User
+    definition: An authenticated identity that can log into the system.
+    avoid:
+      - Account
+      - Member
+      - Customer
+
+  - term: Session
+    definition: A time-bounded authenticated period for a User.
+    avoid:
+      - Login

@@ -1,0 +1,9 @@
+name: Suppliers
+description: Manages supplier records and contact details for restocking.
+
+language:
+  - term: Supplier
+    definition: An external organization we buy stock from.
+    avoid:
+      - Vendor
+      - Provider

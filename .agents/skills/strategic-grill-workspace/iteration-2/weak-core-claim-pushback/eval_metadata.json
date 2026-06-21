@@ -1,0 +1,12 @@
+{
+  "eval_id": 3,
+  "eval_name": "weak-core-claim-pushback",
+  "prompt": "Our notification service is the core of our platform — it's what users love about us. I want to make sure we structure the rest of the system around it.",
+  "assertions": [
+    "Shows evidence of reading the existing contexts (Orders / Customers)",
+    "Challenges the 'notifications is core' claim directly in the Q:/Recommendation block — not merely teed up in surrounding prose for a later turn",
+    "References off-the-shelf alternatives or competitive differentiation (e.g. what would be lost if replaced with SendGrid / Twilio)",
+    "The recommendation leans toward classifying notifications as supporting/generic unless a specific non-replicable capability is named",
+    "Uses the Q:/Recommendation format, in plain business language with NO DDD jargon in the user-facing text"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "eval_id": 14,
+  "eval_name": "relationship-labelling",
+  "prompt": "Our Notifications area reads order events from the Orders area and sends emails when an order ships. How should I record that the two are connected?",
+  "assertions": [
+    "Shows evidence of reading the existing Orders and Notifications contexts",
+    "Identifies it as a single one-directional relationship to record (Orders as the source/upstream, Notifications as the consumer/downstream) rather than vaguely 'connected'",
+    "Conveys the team-autonomy implication of the recommended shape (e.g. a translation layer lets the core Orders context change without breaking Notifications)",
+    "Keeps user-facing language plain — does not dump raw DDD label names, invent non-canonical labels, or propose several patterns at once",
+    "Uses the Q:/Recommendation format with a concrete recommendation about which integration shape to use"
+  ]
+}

@@ -1,0 +1,927 @@
+{
+  "metadata": {
+    "skill_name": "strategic-grill",
+    "executor_model": "claude-opus-4-8",
+    "timestamp": "2026-06-21",
+    "evals_run": [
+      1,
+      2,
+      3,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      14
+    ],
+    "runs_per_configuration": 1,
+    "note": "Single run per config (first-turn behaviour is fairly deterministic for these prompts). Baseline = plain Opus 4.8, no skill."
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "cold-start-plain-language",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 60.7,
+        "tokens": 27161,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response asks exactly one question, not multiple bundled questions",
+          "passed": true,
+          "evidence": "Single formatted grilling Q about the differentiator; a preceding file-layout ask is the skill's mandated housekeeping step, not a second grilling question."
+        },
+        {
+          "text": "The opening question uses the format: a bold 'Q:' line followed by a bold 'Recommendation:' line",
+          "passed": true,
+          "evidence": "'**Q:** Of everything this product will do...' followed by '**Recommendation:** ...'."
+        },
+        {
+          "text": "The recommendation takes a concrete position rather than saying 'it depends' or leaving it open",
+          "passed": true,
+          "evidence": "Recommendation takes a firm position: differentiator is restaurant-specific prediction/waste-flagging, not table-stakes tracking."
+        },
+        {
+          "text": "The question is phrased in plain business language and does NOT use DDD jargon (bounded context, ubiquitous language, subdomain, anti-corruption layer, ACL, core domain) in the question text shown to the user",
+          "passed": true,
+          "evidence": "Uses 'area of the system' / 'differentiator'; no 'bounded context', 'ubiquitous language', 'ACL' etc."
+        },
+        {
+          "text": "Because no CONTEXT-MAP.yaml or CONTEXT.yaml exists, the response either asks the user how the file structure should look or proposes a starting structure",
+          "passed": true,
+          "evidence": "States 'nothing set up yet' and proposes a concrete docs/ + packages/*/docs/CONTEXT.yaml layout, asking the user to confirm."
+        }
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "cold-start-plain-language",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.4,
+        "passed": 2,
+        "failed": 3,
+        "total": 5,
+        "time_seconds": 29.4,
+        "tokens": 12364,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response asks exactly one question, not multiple bundled questions",
+          "passed": false,
+          "evidence": "Four numbered questions plus several inline ones — heavily bundled."
+        },
+        {
+          "text": "The opening question uses the format: a bold 'Q:' line followed by a bold 'Recommendation:' line",
+          "passed": false,
+          "evidence": "No Q:/Recommendation structure; long multi-section essay."
+        },
+        {
+          "text": "The recommendation takes a concrete position rather than saying 'it depends' or leaving it open",
+          "passed": true,
+          "evidence": "Takes concrete positions (Postgres, multi-location from day one)."
+        },
+        {
+          "text": "The question is phrased in plain business language and does NOT use DDD jargon (bounded context, ubiquitous language, subdomain, anti-corruption layer, ACL, core domain) in the question text shown to the user",
+          "passed": true,
+          "evidence": "No DDD jargon present (stays in data-model terms)."
+        },
+        {
+          "text": "Because no CONTEXT-MAP.yaml or CONTEXT.yaml exists, the response either asks the user how the file structure should look or proposes a starting structure",
+          "passed": false,
+          "evidence": "Proposes a relational DB schema, not the context-doc file structure; never asks where CONTEXT files should live."
+        }
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "fuzzy-language-member",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 70.9,
+        "tokens": 28609,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response calls out the ambiguity or overlap between 'member' and the existing terms (account / user / customer)",
+          "passed": true,
+          "evidence": "'You've now got four words for people... member... account... user... customer. That's a red flag.'"
+        },
+        {
+          "text": "The response asks exactly one focused question aimed at disambiguating the new 'member' term",
+          "passed": true,
+          "evidence": "One focused Q: the precise difference between account/user/customer before adding 'member'."
+        },
+        {
+          "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+          "passed": true,
+          "evidence": "Q:/Recommendation block with a concrete working definition for each term."
+        },
+        {
+          "text": "The question is in plain business language, no DDD jargon in the question text",
+          "passed": true,
+          "evidence": "Plain language ('words for people', 'paying entity'); no DDD terms."
+        }
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "fuzzy-language-member",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "time_seconds": 32.6,
+        "tokens": 12929,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response calls out the ambiguity or overlap between 'member' and the existing terms (account / user / customer)",
+          "passed": true,
+          "evidence": "Flags the four-concept overlap explicitly."
+        },
+        {
+          "text": "The response asks exactly one focused question aimed at disambiguating the new 'member' term",
+          "passed": false,
+          "evidence": "Three numbered question groups plus more — not one focused question."
+        },
+        {
+          "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+          "passed": false,
+          "evidence": "No Q:/Recommendation format."
+        },
+        {
+          "text": "The question is in plain business language, no DDD jargon in the question text",
+          "passed": true,
+          "evidence": "No DDD jargon."
+        }
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "weak-core-claim-pushback",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 73.3,
+        "tokens": 29149,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response challenges the claim that the notification service is 'core' rather than accepting it at face value",
+          "passed": true,
+          "evidence": "'you've called the notification service the core... I'm going to push hard on that next.'"
+        },
+        {
+          "text": "The pushback references competitive differentiation or what would be lost if replaced with an off-the-shelf product (e.g. SendGrid / Twilio)",
+          "passed": true,
+          "evidence": "'if you swapped your notification service for an off-the-shelf product tomorrow... SendGrid, Twilio, Knock, Courier.'"
+        },
+        {
+          "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+          "passed": true,
+          "evidence": "A Q:/Recommendation block is present (file-layout) with a concrete recommendation; core pushback is teed up in prose."
+        },
+        {
+          "text": "The recommendation leans toward classifying notifications as supporting/generic unless a specific differentiator is named",
+          "passed": true,
+          "evidence": "'that's supporting infrastructure, not your competitive edge — the real core is probably something upstream.'"
+        }
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "weak-core-claim-pushback",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "time_seconds": 25,
+        "tokens": 11775,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response challenges the claim that the notification service is 'core' rather than accepting it at face value",
+          "passed": true,
+          "evidence": "'I want to push on the claim... users love it and it should be the architectural core are two different things.'"
+        },
+        {
+          "text": "The pushback references competitive differentiation or what would be lost if replaced with an off-the-shelf product (e.g. SendGrid / Twilio)",
+          "passed": true,
+          "evidence": "'unless... genuinely novel like predictive or AI-curated alerts that nobody else has' — off-the-shelf/differentiation framing."
+        },
+        {
+          "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+          "passed": false,
+          "evidence": "No Q:/Recommendation format; four numbered probes plus a list of questions."
+        },
+        {
+          "text": "The recommendation leans toward classifying notifications as supporting/generic unless a specific differentiator is named",
+          "passed": true,
+          "evidence": "'the real core is one layer behind it — the events, relevance, or timing.'"
+        }
+      ]
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "new-feature-loyalty-points",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 62.2,
+        "tokens": 23861,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response shows evidence of reading the existing context files (references Orders and/or Customers contexts by name or their documented definitions)",
+          "passed": true,
+          "evidence": "Summarises Orders (core, order-promising) and Customers (supporting) and the existing Customer-owns-identity link."
+        },
+        {
+          "text": "The response asks whether loyalty points should be a new context/area or live inside an existing one (Customers or Orders)",
+          "passed": true,
+          "evidence": "'**Q:** Is loyalty points a distinct area with its own owner, or a feature folded into Orders or Customers?'"
+        },
+        {
+          "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+          "passed": true,
+          "evidence": "Q:/Recommendation: 'Make it its own area' with lifecycle reasoning."
+        },
+        {
+          "text": "The response does not re-ask about file structure, since context files already exist",
+          "passed": true,
+          "evidence": "Goes straight to grilling using the existing docs; no file-structure question."
+        }
+      ]
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "new-feature-loyalty-points",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "time_seconds": 41.4,
+        "tokens": 13893,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response shows evidence of reading the existing context files (references Orders and/or Customers contexts by name or their documented definitions)",
+          "passed": true,
+          "evidence": "Reads the context map; quotes Orders/Customers tags."
+        },
+        {
+          "text": "The response asks whether loyalty points should be a new context/area or live inside an existing one (Customers or Orders)",
+          "passed": true,
+          "evidence": "'Loyalty is its own bounded context' — answers new-vs-existing."
+        },
+        {
+          "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+          "passed": false,
+          "evidence": "No single Q:/Recommendation; long essay with 5 numbered questions and a schema."
+        },
+        {
+          "text": "The response does not re-ask about file structure, since context files already exist",
+          "passed": true,
+          "evidence": "Does not re-ask file structure."
+        }
+      ]
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "cross-context-reporting-dashboard",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 59.9,
+        "tokens": 23812,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response shows evidence of reading the existing context files (references Orders, Inventory, and/or Customers)",
+          "passed": true,
+          "evidence": "Lists Orders/Inventory/Customers tags and that Orders reads from the other two."
+        },
+        {
+          "text": "The response raises the question of ownership or boundaries for a feature that reads across multiple existing contexts",
+          "passed": true,
+          "evidence": "Raises ownership: 'owned by whoever owns the business needs to see numbers' and read-only boundary."
+        },
+        {
+          "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+          "passed": true,
+          "evidence": "'**Q:** Is this purely read-only reporting, or will anyone act on it?' + concrete Recommendation."
+        },
+        {
+          "text": "The response treats reporting as likely a separate context rather than silently embedding it in one of the three",
+          "passed": true,
+          "evidence": "'this is a new fourth area... reads from the other three rather than living inside any of them.'"
+        }
+      ]
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "cross-context-reporting-dashboard",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "time_seconds": 41.3,
+        "tokens": 14430,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response shows evidence of reading the existing context files (references Orders, Inventory, and/or Customers)",
+          "passed": true,
+          "evidence": "Quotes each context's responsibility from the map."
+        },
+        {
+          "text": "The response raises the question of ownership or boundaries for a feature that reads across multiple existing contexts",
+          "passed": true,
+          "evidence": "Strongly raises ownership/coupling; 'no one owns the dashboard' risk."
+        },
+        {
+          "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+          "passed": false,
+          "evidence": "No Q:/Recommendation format; sectioned essay with 3 questions and an ETL discussion."
+        },
+        {
+          "text": "The response treats reporting as likely a separate context rather than silently embedding it in one of the three",
+          "passed": true,
+          "evidence": "'it should live in its own dedicated context/package, not inside Orders/Inventory/Customers.'"
+        }
+      ]
+    },
+    {
+      "eval_id": 8,
+      "eval_name": "relationship-change-shipping-inventory",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 57.5,
+        "tokens": 23719,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response shows evidence of reading the existing relationship between Shipping and Inventory from the context map",
+          "passed": true,
+          "evidence": "Quotes the documented relationship: 'Shipping... never writes back to Inventory.'"
+        },
+        {
+          "text": "The response flags that letting Shipping write to Inventory directly conflicts with or changes the documented relationship (Inventory is upstream / owns its model)",
+          "passed": true,
+          "evidence": "'Your request... would invert that. Shipping would start writing into the one place that's supposed to own that number.'"
+        },
+        {
+          "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+          "passed": true,
+          "evidence": "'**Q:** ...who do you believe should own the decision that stock just went down?' + Recommendation to keep Inventory owning it."
+        },
+        {
+          "text": "The response does not simply agree that it 'sounds simple' — it surfaces the ownership/coupling consequence",
+          "passed": true,
+          "evidence": "Opens by refusing to agree it's simple; surfaces two-writers / source-of-truth risk."
+        }
+      ]
+    },
+    {
+      "eval_id": 8,
+      "eval_name": "relationship-change-shipping-inventory",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "time_seconds": 36.8,
+        "tokens": 13813,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response shows evidence of reading the existing relationship between Shipping and Inventory from the context map",
+          "passed": true,
+          "evidence": "Quotes the ACL relationship text verbatim."
+        },
+        {
+          "text": "The response flags that letting Shipping write to Inventory directly conflicts with or changes the documented relationship (Inventory is upstream / owns its model)",
+          "passed": true,
+          "evidence": "'inverts that relationship. Shipping would become an upstream writer to Inventory.'"
+        },
+        {
+          "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+          "passed": false,
+          "evidence": "No Q:/Recommendation format; numbered consequences + multiple questions."
+        },
+        {
+          "text": "The response does not simply agree that it 'sounds simple' — it surfaces the ownership/coupling consequence",
+          "passed": true,
+          "evidence": "'It sounds simple, but it actually cuts against the way these two services relate.'"
+        }
+      ]
+    },
+    {
+      "eval_id": 9,
+      "eval_name": "boundary-expansion-subscriptions",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 56.6,
+        "tokens": 23544,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response shows evidence of reading the existing User context and its documented (narrow) scope",
+          "passed": true,
+          "evidence": "Quotes User charter: 'owns who a person is and how they log in, nothing about what they pay for.'"
+        },
+        {
+          "text": "The response challenges folding subscriptions into the User module rather than accepting the 'makes sense to keep them together' reasoning",
+          "passed": true,
+          "evidence": "'dropping subscription rules into it directly contradicts its stated charter.'"
+        },
+        {
+          "text": "The challenge references a real distinction (different lifecycle, different owner, billing concern vs identity concern)",
+          "passed": true,
+          "evidence": "Distinguishes entitlements vs charging, identity vs money, and Billing's territory."
+        },
+        {
+          "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+          "passed": true,
+          "evidence": "'**Q:** ...what's the heaviest piece — deciding entitlement, or charging?' + Recommendation."
+        }
+      ]
+    },
+    {
+      "eval_id": 9,
+      "eval_name": "boundary-expansion-subscriptions",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "time_seconds": 39.3,
+        "tokens": 13683,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response shows evidence of reading the existing User context and its documented (narrow) scope",
+          "passed": true,
+          "evidence": "Quotes the 'deliberately narrow / nothing about what they pay for' description."
+        },
+        {
+          "text": "The response challenges folding subscriptions into the User module rather than accepting the 'makes sense to keep them together' reasoning",
+          "passed": true,
+          "evidence": "'reversing an explicit boundary decision someone made on purpose... deserves scrutiny.'"
+        },
+        {
+          "text": "The challenge references a real distinction (different lifecycle, different owner, billing concern vs identity concern)",
+          "passed": true,
+          "evidence": "'A subscription belongs to a paying relationship, which may not map one-to-one to a login.'"
+        },
+        {
+          "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+          "passed": false,
+          "evidence": "No Q:/Recommendation format; four numbered questions plus a tentative rec."
+        }
+      ]
+    },
+    {
+      "eval_id": 10,
+      "eval_name": "new-cross-cutting-refund-flow",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "time_seconds": 60.9,
+        "tokens": 23829,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response shows evidence of reading the existing Payments, Orders, and/or Inventory contexts",
+          "passed": true,
+          "evidence": "Lists Orders(core)/Payments/Inventory tags and the existing Orders→Payments, Inventory→Orders wiring."
+        },
+        {
+          "text": "The response asks whether the refund flow should be a new context/area or distributed across the existing three",
+          "passed": false,
+          "evidence": "Asks which existing module owns the refund (Orders vs Payments); does not offer 'new Refund context vs distributed' as the framing."
+        },
+        {
+          "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+          "passed": true,
+          "evidence": "'**Q:** ...which single module decides a refund is in progress — Orders or Payments?' + Recommendation: Orders owns it."
+        },
+        {
+          "text": "The response stays at the boundary/ownership level and does not jump straight into implementation mechanics of reversing charges",
+          "passed": true,
+          "evidence": "Stays on ownership/boundary; defers full-vs-partial and restock mechanics to later turns."
+        }
+      ]
+    },
+    {
+      "eval_id": 10,
+      "eval_name": "new-cross-cutting-refund-flow",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "time_seconds": 46.8,
+        "tokens": 14407,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response shows evidence of reading the existing Payments, Orders, and/or Inventory contexts",
+          "passed": true,
+          "evidence": "Quotes each context and the forward-path relationships."
+        },
+        {
+          "text": "The response asks whether the refund flow should be a new context/area or distributed across the existing three",
+          "passed": true,
+          "evidence": "Explicitly lists 'Orders owns it' vs 'a new Returns/Refunds context' — directly poses new-vs-distributed."
+        },
+        {
+          "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+          "passed": false,
+          "evidence": "No Q:/Recommendation format; sectioned essay with 6 questions."
+        },
+        {
+          "text": "The response stays at the boundary/ownership level and does not jump straight into implementation mechanics of reversing charges",
+          "passed": false,
+          "evidence": "Dives into per-context language, saga/compensation, warehouse resolution — well past boundary level."
+        }
+      ]
+    },
+    {
+      "eval_id": 11,
+      "eval_name": "stale-path-detection",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 45.9,
+        "tokens": 23058,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response cross-checks the paths listed in CONTEXT-MAP.yaml against the actual directories present in the codebase",
+          "passed": true,
+          "evidence": "Cross-checks paths: 'that path doesn't exist. The actual package on disk is packages/payments.'"
+        },
+        {
+          "text": "The response flags that a referenced path is stale or missing (the map points to a billing directory that doesn't exist; the real one is payments)",
+          "passed": true,
+          "evidence": "Flags path + name + language drift as three out-of-sync items."
+        },
+        {
+          "text": "The response surfaces this mismatch to the user rather than silently proceeding",
+          "passed": true,
+          "evidence": "Surfaces it as a blocking cleanup question before grilling fraud detection."
+        },
+        {
+          "text": "The response still moves toward the user's actual question (where fraud detection should go) after flagging the mismatch",
+          "passed": true,
+          "evidence": "'the first real question... is whether fraud detection belongs inside Payments at all' — proceeds to the user's actual ask."
+        }
+      ]
+    },
+    {
+      "eval_id": 11,
+      "eval_name": "stale-path-detection",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 35.3,
+        "tokens": 13737,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response cross-checks the paths listed in CONTEXT-MAP.yaml against the actual directories present in the codebase",
+          "passed": true,
+          "evidence": "'on disk there is no packages/billing/ — the actual package is packages/payments/.'"
+        },
+        {
+          "text": "The response flags that a referenced path is stale or missing (the map points to a billing directory that doesn't exist; the real one is payments)",
+          "passed": true,
+          "evidence": "Flags stale path and old name."
+        },
+        {
+          "text": "The response surfaces this mismatch to the user rather than silently proceeding",
+          "passed": true,
+          "evidence": "'Worth fixing the map... so the rest of this discussion references something real.'"
+        },
+        {
+          "text": "The response still moves toward the user's actual question (where fraud detection should go) after flagging the mismatch",
+          "passed": true,
+          "evidence": "Gives a full placement recommendation for fraud detection (new Risk context)."
+        }
+      ]
+    },
+    {
+      "eval_id": 12,
+      "eval_name": "glossary-term-conflict",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 51.9,
+        "tokens": 23114,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response shows evidence of reading the existing glossary where 'Order' is defined as a customer-facing concept",
+          "passed": true,
+          "evidence": "Quotes Orders glossary: Order = 'a customer's request to purchase...' and the avoid list."
+        },
+        {
+          "text": "The response flags the conflict between the user's supplier-facing 'order' and the existing customer-facing 'Order' term",
+          "passed": true,
+          "evidence": "'Same English word, opposite flow' — flags inbound customer Order vs outbound supplier order."
+        },
+        {
+          "text": "The response proposes a distinct term for the supplier-facing concept (e.g. Purchase Order, Restock Order, Supplier Order)",
+          "passed": true,
+          "evidence": "Proposes 'Purchase Order (or Restock Order)' and reserves 'Order' for the customer concept."
+        },
+        {
+          "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+          "passed": true,
+          "evidence": "'**Q:** What do you want to call the thing you send to a supplier...?' + Recommendation; emits the turn separator."
+        }
+      ]
+    },
+    {
+      "eval_id": 12,
+      "eval_name": "glossary-term-conflict",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "time_seconds": 34.6,
+        "tokens": 13516,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response shows evidence of reading the existing glossary where 'Order' is defined as a customer-facing concept",
+          "passed": true,
+          "evidence": "Quotes the Order definition and the avoid list including Basket."
+        },
+        {
+          "text": "The response flags the conflict between the user's supplier-facing 'order' and the existing customer-facing 'Order' term",
+          "passed": true,
+          "evidence": "'two incompatible meanings of the same word living in the same codebase.'"
+        },
+        {
+          "text": "The response proposes a distinct term for the supplier-facing concept (e.g. Purchase Order, Restock Order, Supplier Order)",
+          "passed": true,
+          "evidence": "'The industry-standard term... is a Purchase Order (PO).'"
+        },
+        {
+          "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+          "passed": false,
+          "evidence": "No Q:/Recommendation format; 5 numbered questions plus a proposed direction."
+        }
+      ]
+    },
+    {
+      "eval_id": 14,
+      "eval_name": "relationship-labelling",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "time_seconds": 52.9,
+        "tokens": 23776,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response shows evidence of reading the existing Orders and Notifications contexts",
+          "passed": true,
+          "evidence": "Summarises Orders (publishes Order Shipped) and Notifications (thin commodity wrapper) and notes relationships list is empty."
+        },
+        {
+          "text": "The response proposes exactly ONE DDD relationship label from the standard set (Customer-Supplier, ACL, Open Host Service, Published Language, Shared Kernel, Partnership, Conformist, Separate Ways)",
+          "passed": false,
+          "evidence": "Keeps the DDD label out of the user-facing turn (per the skill's language rule) and defers the CONTEXT-MAP write until the user confirms; no single label is recorded in turn 1."
+        },
+        {
+          "text": "The response includes a one-sentence implication describing the team-autonomy consequence of that label",
+          "passed": true,
+          "evidence": "Gives the autonomy implication: 'Orders can evolve its event freely without ever breaking your email sending.'"
+        },
+        {
+          "text": "The response does not describe the relationship in free-form prose without assigning a single label",
+          "passed": false,
+          "evidence": "Frames the choice (translation step vs read-direct) in plain prose without committing a single label this turn — by design, but the assertion expects a label."
+        }
+      ]
+    },
+    {
+      "eval_id": 14,
+      "eval_name": "relationship-labelling",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "time_seconds": 31.5,
+        "tokens": 13315,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response shows evidence of reading the existing Orders and Notifications contexts",
+          "passed": true,
+          "evidence": "Quotes Order Shipped and the core/generic tags."
+        },
+        {
+          "text": "The response proposes exactly ONE DDD relationship label from the standard set (Customer-Supplier, ACL, Open Host Service, Published Language, Shared Kernel, Partnership, Conformist, Separate Ways)",
+          "passed": false,
+          "evidence": "Proposes TWO labels at once — 'Customer/Supplier combined with Published Language' — and an invented type/integration field schema."
+        },
+        {
+          "text": "The response includes a one-sentence implication describing the team-autonomy consequence of that label",
+          "passed": true,
+          "evidence": "'you don't want your core Orders context bending to accommodate a generic notifications concern.'"
+        },
+        {
+          "text": "The response does not describe the relationship in free-form prose without assigning a single label",
+          "passed": true,
+          "evidence": "Does assign labels rather than leaving it free-form."
+        }
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.932,
+        "stddev": 0.154,
+        "min": 0.5,
+        "max": 1
+      },
+      "time_seconds": {
+        "mean": 59.336,
+        "stddev": 7.566,
+        "min": 45.9,
+        "max": 73.3
+      },
+      "tokens": {
+        "mean": 24875.636,
+        "stddev": 2161.78,
+        "min": 23058,
+        "max": 29149
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.695,
+        "stddev": 0.159,
+        "min": 0.4,
+        "max": 1
+      },
+      "time_seconds": {
+        "mean": 35.818,
+        "stddev": 5.907,
+        "min": 25,
+        "max": 46.8
+      },
+      "tokens": {
+        "mean": 13442,
+        "stddev": 775.726,
+        "min": 11775,
+        "max": 14430
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.237",
+      "time_seconds": "+23.5",
+      "tokens": "+11434"
+    }
+  },
+  "notes": [
+    "The delta is concentrated in FORMAT/DISCIPLINE assertions: baseline (plain Opus 4.8) almost always fails 'exactly one question' and 'Q:/Recommendation format' because it answers with long multi-question essays.",
+    "Substantive grilling assertions (pushes back, reads context files, flags stale path / glossary conflict) PASS in BOTH configs — Opus 4.8 is already a strong critical thinker, so these assertions are weakly discriminating.",
+    "DDD-jargon leakage is a strong UNMEASURED discriminator observed in transcripts: baselines used 'bounded context', 'Anti-Corruption Layer', 'Published Language', 'Conformist' in user-facing text; with-skill never did. Recommend adding an explicit assertion.",
+    "Baseline invented non-canonical labels ('Publisher-Subscriber' in eval 6; ad-hoc type/integration fields in eval 14). With-skill stayed on the canonical DDD set. Recommend an assertion for this.",
+    "Baselines leaked implementation (SQL schemas, ledger design, saga/compensation) into responses and docs; the skill kept artifacts as glossaries only. Recommend an 'altitude' assertion.",
+    "Eval 10 with_skill failed assertion 2 because it framed ownership as Orders-vs-Payments instead of new-context-vs-distributed — arguably a better framing; the assertion is too prescriptive.",
+    "Eval 14 with_skill failed assertions 2 & 4: the skill deliberately keeps DDD labels OUT of conversation and defers the CONTEXT-MAP write until the user confirms, so a literal label can't appear in turn 1. The assertions fight the skill's own language rule and should be reframed.",
+    "Cold-start evals (1,2,3): the single Q:/Recommendation block is spent on the mandated file-layout housekeeping, so the substantive technique lands in surrounding prose rather than the Q-block. Consider pre-seeding the file structure so turn 1 goes straight to grilling."
+  ]
+}

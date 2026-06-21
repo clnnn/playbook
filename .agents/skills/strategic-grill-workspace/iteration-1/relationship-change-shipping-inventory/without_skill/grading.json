@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "The response shows evidence of reading the existing relationship between Shipping and Inventory from the context map",
+      "passed": true,
+      "evidence": "Quotes the ACL relationship text verbatim."
+    },
+    {
+      "text": "The response flags that letting Shipping write to Inventory directly conflicts with or changes the documented relationship (Inventory is upstream / owns its model)",
+      "passed": true,
+      "evidence": "'inverts that relationship. Shipping would become an upstream writer to Inventory.'"
+    },
+    {
+      "text": "The opening question uses the Q/Recommendation format with a concrete recommendation",
+      "passed": false,
+      "evidence": "No Q:/Recommendation format; numbered consequences + multiple questions."
+    },
+    {
+      "text": "The response does not simply agree that it 'sounds simple' — it surfaces the ownership/coupling consequence",
+      "passed": true,
+      "evidence": "'It sounds simple, but it actually cuts against the way these two services relate.'"
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 1,
+    "total": 4,
+    "pass_rate": 0.75
+  },
+  "timing": {
+    "total_tokens": 13813,
+    "duration_ms": 36750,
+    "total_duration_seconds": 36.8
+  }
+}

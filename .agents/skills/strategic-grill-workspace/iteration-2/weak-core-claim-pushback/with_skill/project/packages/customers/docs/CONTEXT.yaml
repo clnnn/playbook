@@ -1,0 +1,10 @@
+name: Customers
+description: Stores customer profiles and contact details.
+
+language:
+  - term: Customer
+    definition: A person or organization that places orders.
+    avoid:
+      - Client
+      - Buyer
+      - Account

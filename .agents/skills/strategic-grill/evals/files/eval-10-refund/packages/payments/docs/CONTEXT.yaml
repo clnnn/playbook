@@ -1,0 +1,9 @@
+name: Payments
+description: Captures and settles payments via a third-party gateway.
+
+language:
+  - term: Charge
+    definition: An authorized and captured payment against a customer's payment method.
+    avoid:
+      - Payment
+      - Transaction

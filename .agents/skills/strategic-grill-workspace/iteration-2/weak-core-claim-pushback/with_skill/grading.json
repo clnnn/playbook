@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "Shows evidence of reading the existing contexts (Orders / Customers)",
+      "passed": true,
+      "evidence": "Quotes Orders=core (order promising) and Customers=supporting; notes no notifications area exists."
+    },
+    {
+      "text": "Challenges the 'notifications is core' claim directly in the Q:/Recommendation block — not merely teed up in surrounding prose for a later turn",
+      "passed": true,
+      "evidence": "'**Q:** If a competitor offered the exact same notification experience... would your customers leave...?' directly tests the core claim."
+    },
+    {
+      "text": "References off-the-shelf alternatives or competitive differentiation (e.g. what would be lost if replaced with SendGrid / Twilio)",
+      "passed": true,
+      "evidence": "'a well-solved problem you could buy off the shelf (Twilio, Courier, Knock).'"
+    },
+    {
+      "text": "The recommendation leans toward classifying notifications as supporting/generic unless a specific non-replicable capability is named",
+      "passed": true,
+      "evidence": "'I'd push back on notifications being the core... keep it tagged as supporting, not core.'"
+    },
+    {
+      "text": "Uses the Q:/Recommendation format, in plain business language with NO DDD jargon in the user-facing text",
+      "passed": true,
+      "evidence": "Q:/Recommendation format; plain language (uses the map's own core/supporting tags, no bounded-context/ACL)."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1
+  },
+  "timing": {
+    "total_tokens": 22962,
+    "duration_ms": 50513,
+    "total_duration_seconds": 50.5
+  }
+}

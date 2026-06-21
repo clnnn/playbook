@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "Shows evidence of reading the existing relationship between Shipping and Inventory from the context map",
+      "passed": true,
+      "evidence": "Quotes the documented relationship: 'Shipping... never writes back to Inventory.'"
+    },
+    {
+      "text": "Flags that letting Shipping write to Inventory directly conflicts with or changes the documented relationship (Inventory is upstream / owns its model)",
+      "passed": true,
+      "evidence": "'Your request... would invert that. Shipping would start writing into the one place supposed to own that number.'"
+    },
+    {
+      "text": "Uses the Q:/Recommendation format with a concrete recommendation",
+      "passed": true,
+      "evidence": "'**Q:** ...who should own the decision that stock just went down?' + Recommendation to keep Inventory owning it."
+    },
+    {
+      "text": "Does not simply agree that it 'sounds simple' — surfaces the ownership/coupling consequence",
+      "passed": true,
+      "evidence": "Refuses to agree it's simple; surfaces two-writers / source-of-truth risk."
+    },
+    {
+      "text": "Uses plain business language with NO DDD jargon (e.g. spells out 'translation layer' rather than dropping 'ACL') in the user-facing text",
+      "passed": true,
+      "evidence": "Plain language; quotes the YAML implication in plain words and never says 'ACL' in user text."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1
+  },
+  "timing": {
+    "total_tokens": 23719,
+    "duration_ms": 57526,
+    "total_duration_seconds": 57.5
+  }
+}

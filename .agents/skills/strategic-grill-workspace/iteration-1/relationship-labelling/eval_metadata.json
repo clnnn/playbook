@@ -1,0 +1,11 @@
+{
+  "eval_id": 14,
+  "eval_name": "relationship-labelling",
+  "prompt": "Our Notifications area reads order events from the Orders area and sends emails when an order ships. How should I record that the two are connected?",
+  "assertions": [
+    "The response shows evidence of reading the existing Orders and Notifications contexts",
+    "The response proposes exactly ONE DDD relationship label from the standard set (Customer-Supplier, ACL, Open Host Service, Published Language, Shared Kernel, Partnership, Conformist, Separate Ways)",
+    "The response includes a one-sentence implication describing the team-autonomy consequence of that label",
+    "The response does not describe the relationship in free-form prose without assigning a single label"
+  ]
+}

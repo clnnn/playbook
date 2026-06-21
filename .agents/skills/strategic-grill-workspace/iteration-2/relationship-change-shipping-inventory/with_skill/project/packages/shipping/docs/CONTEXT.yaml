@@ -1,0 +1,14 @@
+name: Shipping
+description: Dispatches parcels and tracks delivery status.
+
+language:
+  - term: Parcel
+    definition: A package of items dispatched to a customer address.
+    avoid:
+      - Package
+      - Box
+
+  - term: Pick List
+    definition: The set of items a warehouse worker must collect to fulfil a dispatch.
+    avoid:
+      - Picking sheet

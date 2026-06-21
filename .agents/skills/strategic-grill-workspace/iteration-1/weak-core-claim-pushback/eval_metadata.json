@@ -1,0 +1,11 @@
+{
+  "eval_id": 3,
+  "eval_name": "weak-core-claim-pushback",
+  "prompt": "Our notification service is the core of our platform — it's what users love about us. I want to make sure we structure the rest of the system around it.",
+  "assertions": [
+    "The response challenges the claim that the notification service is 'core' rather than accepting it at face value",
+    "The pushback references competitive differentiation or what would be lost if replaced with an off-the-shelf product (e.g. SendGrid / Twilio)",
+    "The opening question uses the Q/Recommendation format with a concrete recommendation",
+    "The recommendation leans toward classifying notifications as supporting/generic unless a specific differentiator is named"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "eval_id": 1,
+  "eval_name": "cold-start-plain-language",
+  "prompt": "I'm building a SaaS tool for restaurant inventory management. We need to track ingredients, suppliers, and orders. Help me think through how to structure this.",
+  "assertions": [
+    "The response asks exactly one question, not multiple bundled questions",
+    "The opening question uses the format: a bold 'Q:' line followed by a bold 'Recommendation:' line",
+    "The recommendation takes a concrete position rather than saying 'it depends' or leaving it open",
+    "The question is phrased in plain business language and does NOT use DDD jargon (bounded context, ubiquitous language, subdomain, anti-corruption layer, ACL, core domain) in the question text shown to the user",
+    "Because no CONTEXT-MAP.yaml or CONTEXT.yaml exists, the response either asks the user how the file structure should look or proposes a starting structure"
+  ]
+}

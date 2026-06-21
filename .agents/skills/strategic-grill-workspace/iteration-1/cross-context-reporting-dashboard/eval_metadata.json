@@ -1,0 +1,11 @@
+{
+  "eval_id": 7,
+  "eval_name": "cross-context-reporting-dashboard",
+  "prompt": "We want to build a reporting dashboard that pulls data from Orders, Inventory, and Customers to show business KPIs. Where should it live?",
+  "assertions": [
+    "The response shows evidence of reading the existing context files (references Orders, Inventory, and/or Customers)",
+    "The response raises the question of ownership or boundaries for a feature that reads across multiple existing contexts",
+    "The opening question uses the Q/Recommendation format with a concrete recommendation",
+    "The response treats reporting as likely a separate context rather than silently embedding it in one of the three"
+  ]
+}

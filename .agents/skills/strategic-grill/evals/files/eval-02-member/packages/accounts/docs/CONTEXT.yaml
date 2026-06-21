@@ -1,0 +1,21 @@
+name: Accounts
+description: Manages who can access the system and the commercial relationship behind them.
+
+language:
+  - term: Account
+    definition: The billing entity that owns a subscription; may represent a single person or a company.
+    avoid:
+      - Org
+      - Workspace
+
+  - term: User
+    definition: A single human who logs in with their own credentials. An Account can have many Users.
+    avoid:
+      - Login
+      - Seat
+
+  - term: Customer
+    definition: The party with a commercial relationship to us — in practice, whoever the Account bills.
+    avoid:
+      - Client
+      - Buyer
