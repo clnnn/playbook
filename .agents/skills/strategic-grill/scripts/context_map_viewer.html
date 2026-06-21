@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Context Map · Live View</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#dce8ef}
+#root{
+  background:#dce8ef;color:#1a2a38;
+  font-family:var(--font-sans,Inter,system-ui,sans-serif);
+  height:100vh;position:relative;overflow:hidden;
+  transition:background .35s,color .35s;
+}
+#root.dark{background:#0c1720;color:#cce8f0}
+#rc{position:absolute;inset:0;z-index:1}
+#rc canvas{display:block}
+.bar{
+  position:absolute;top:12px;left:12px;right:12px;
+  display:flex;align-items:center;justify-content:space-between;
+  z-index:20;pointer-events:none;
+}
+.bar-l,.bar-r{display:flex;align-items:center;gap:7px;pointer-events:all}
+.pill{
+  background:rgba(240,246,249,0.92);border:0.5px solid rgba(50,130,160,0.22);
+  color:#4a7080;font-size:11px;font-weight:500;
+  padding:4px 10px;border-radius:20px;letter-spacing:.03em;
+  transition:background .35s,color .35s,border-color .35s;
+}
+#root.dark .pill{background:rgba(19,32,48,0.92);color:#5fa8b8;border-color:rgba(78,205,196,0.2)}
+.pill-a{color:#1a7a95!important;border-color:rgba(78,205,196,0.4)!important}
+#root.dark .pill-a{color:#4ecdc4!important}
+.pill-live{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(240,246,249,0.92);border:0.5px solid rgba(50,130,160,0.22);
+  color:#4a7080;font-size:10px;font-weight:500;
+  padding:4px 9px;border-radius:20px;
+}
+#root.dark .pill-live{background:rgba(19,32,48,0.92);color:#5fa8b8;border-color:rgba(78,205,196,0.2)}
+.live-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:#6a8898;flex-shrink:0;transition:background .4s;
+}
+.live-dot.on{background:#2aa8c0;box-shadow:0 0 4px rgba(42,168,192,.6)}
+#root.dark .live-dot.on{background:#4ecdc4;box-shadow:0 0 4px rgba(78,205,196,.5)}
+.btn{
+  background:rgba(240,246,249,0.92);border:0.5px solid rgba(50,130,160,0.22);
+  color:#4a7080;width:30px;height:30px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:14px;user-select:none;
+  transition:background .15s,color .15s,border-color .15s;
+}
+#root.dark .btn{background:rgba(19,32,48,0.92);color:#5fa8b8;border-color:rgba(78,205,196,0.2)}
+.btn:hover{background:rgba(226,238,244,1);color:#1a2a38;border-color:rgba(42,168,192,.6)}
+#root.dark .btn:hover{background:rgba(26,45,64,1);color:#cce8f0;border-color:rgba(78,205,196,.6)}
+.leg{
+  position:absolute;top:50px;left:14px;
+  display:flex;flex-direction:column;gap:5px;
+  z-index:10;pointer-events:none;
+}
+.li{display:flex;align-items:center;gap:6px;font-size:10px;color:#4a7080}
+#root.dark .li{color:#5fa8b8}
+.ld{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.hint{
+  position:absolute;bottom:12px;left:14px;
+  font-size:10px;color:#6a8898;pointer-events:none;z-index:5;
+  transition:opacity .2s;
+}
+#root.dark .hint{color:#4a7888}
+.panel{
+  position:absolute;right:12px;bottom:12px;width:264px;
+  background:rgba(236,245,250,0.98);
+  border:0.5px solid rgba(50,130,160,0.22);
+  border-radius:12px;padding:15px;z-index:30;
+  transform:translateX(290px);
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+  max-height:80vh;overflow-y:auto;
+}
+#root.dark .panel{background:rgba(12,23,32,0.98);border-color:rgba(78,205,196,0.18)}
+.panel.open{transform:translateX(0)}
+.panel::-webkit-scrollbar{width:3px}
+.panel::-webkit-scrollbar-thumb{background:rgba(50,130,160,0.2);border-radius:2px}
+.ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.pname{font-size:13px;font-weight:500;color:#1a2a38;line-height:1.3}
+#root.dark .pname{color:#cce8f0}
+.player{font-size:10px;color:#2aa8c0;margin-top:3px;letter-spacing:.06em;text-transform:uppercase}
+#root.dark .player{color:#4ecdc4}
+.xbtn{background:none;border:none;color:#6a8898;cursor:pointer;font-size:15px;line-height:1;padding:2px;border-radius:4px}
+.xbtn:hover{color:#1a2a38}
+#root.dark .xbtn:hover{color:#cce8f0}
+.pdiv{border:none;border-top:0.5px solid rgba(50,130,160,0.18);margin:8px 0}
+#root.dark .pdiv{border-color:rgba(78,205,196,0.15)}
+.pdesc{font-size:12px;color:#4a7080;line-height:1.65;margin-bottom:10px}
+#root.dark .pdesc{color:#5fa8b8}
+.dr{display:flex;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid rgba(50,130,160,0.12);font-size:11px}
+#root.dark .dr{border-color:rgba(78,205,196,0.1)}
+.dr:last-child{border-bottom:none}
+.dk{color:#6a8898}
+#root.dark .dk{color:#5fa8b8}
+.dv{color:#1a2a38;font-weight:500;font-size:10px;font-family:monospace}
+#root.dark .dv{color:#cce8f0}
+.dv.ok{color:#2aa8c0}
+#root.dark .dv.ok{color:#4ecdc4}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.tag{
+  font-size:10px;font-weight:500;padding:2px 7px;border-radius:20px;
+  background:rgba(42,168,192,0.1);color:#1a7a95;
+  border:0.5px solid rgba(42,168,192,0.28);
+}
+#root.dark .tag{background:rgba(78,205,196,0.1);color:#4ecdc4;border-color:rgba(78,205,196,0.28)}
+.empty-msg{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:10px;pointer-events:none;z-index:2;
+}
+.empty-title{font-size:14px;color:#4a7080;font-weight:500}
+.empty-sub{font-size:11px;color:#6a8898;text-align:center;max-width:320px;line-height:1.6}
+#root.dark .empty-title{color:#5fa8b8}
+#root.dark .empty-sub{color:#4a7888}
+/* Node labels rendered by CSS2DRenderer */
+.nl{pointer-events:none;text-align:center;line-height:1.4;user-select:none}
+.nl-name{
+  display:block;font-size:11px;font-weight:500;white-space:nowrap;
+  color:rgba(12,50,68,.88);
+  text-shadow:0 1px 3px rgba(220,236,239,.98),0 0 8px rgba(220,236,239,.7);
+}
+#root.dark .nl-name{
+  color:rgba(204,234,240,.9);
+  text-shadow:0 1px 3px rgba(8,18,28,.98),0 0 8px rgba(8,18,28,.7);
+}
+.nl-sub{
+  display:block;font-size:10px;font-weight:400;white-space:nowrap;
+  color:rgba(20,100,130,.62);
+}
+#root.dark .nl-sub{color:rgba(78,205,196,.52)}
+</style>
+</head>
+<body>
+<div id="root">
+  <div id="rc"></div>
+
+  <div class="bar">
+    <div class="bar-l">
+      <div class="pill pill-a" id="pill-title">Loading…</div>
+      <div class="pill" id="pill-count">—</div>
+      <div class="pill-live" id="pill-live" title="Live connection status">
+        <div class="live-dot" id="live-dot"></div>
+        <span id="live-label">connecting</span>
+      </div>
+    </div>
+    <div class="bar-r">
+      <div class="btn" id="rb" title="Reset view">↺</div>
+      <div class="btn" id="tb" title="Toggle theme">◑</div>
+    </div>
+  </div>
+
+  <div class="leg">
+    <div class="li"><div class="ld" style="background:#2bb8b0"></div>Core domain</div>
+    <div class="li"><div class="ld" style="background:#38aaa2;opacity:.85"></div>Supporting</div>
+    <div class="li"><div class="ld" style="background:#8ab8b5;opacity:.7"></div>Generic</div>
+  </div>
+
+  <div class="hint" id="hint">Drag · Scroll to zoom · Click context to inspect</div>
+
+  <div class="panel" id="panel">
+    <div class="ph">
+      <div><div class="pname" id="pname"></div><div class="player" id="player"></div></div>
+      <button class="xbtn" id="xb">✕</button>
+    </div>
+    <hr class="pdiv">
+    <div class="pdesc" id="pdesc"></div>
+    <div id="pdet"></div>
+    <div class="tags" id="ptags"></div>
+  </div>
+
+  <div class="empty-msg" id="empty" style="display:none">
+    <div class="empty-title">No contexts yet</div>
+    <div class="empty-sub">The graph updates automatically as you add contexts and relationships to CONTEXT-MAP.yaml during the grilling session.</div>
+  </div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// ── DOM refs ──────────────────────────────────────────────────────────────────
+const rootEl  = document.getElementById('root');
+const rcEl    = document.getElementById('rc');
+const dotEl   = document.getElementById('live-dot');
+const lblEl   = document.getElementById('live-label');
+const emptyEl = document.getElementById('empty');
+const hintEl  = document.getElementById('hint');
+
+// ── Theme ─────────────────────────────────────────────────────────────────────
+let dark = false;
+const P = {
+  light: { bg: 0xdce8ef, core: 0x2bb8b0, supporting: 0x38aaa2, generic: 0x8ab8b5,
+           edge: 0x1c769e, ring: 0x2aa8c0, grid: 0x2aa8c0 },
+  dark:  { bg: 0x0c1720, core: 0x4ecdc4, supporting: 0x3bbdb5, generic: 0x7ab8a5,
+           edge: 0x4ecdc4, ring: 0x4ecdc4, grid: 0x4ecdc4 },
+};
+const pal     = () => dark ? P.dark : P.light;
+const nodeCol = g => pal()[g] ?? pal().supporting;
+
+// ── Renderer + camera ─────────────────────────────────────────────────────────
+let W = window.innerWidth, H = window.innerHeight;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(W, H);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.setClearColor(pal().bg);
+rcEl.appendChild(renderer.domElement);
+
+// Label overlay — plain DOM div; positions updated manually each frame
+const labelsWrap = document.createElement('div');
+labelsWrap.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:2;overflow:hidden';
+rcEl.appendChild(labelsWrap);
+
+const camera = new THREE.PerspectiveCamera(42, W / H, 0.1, 200);
+camera.position.set(0, 5.5, 15);
+
+// ── Controls ──────────────────────────────────────────────────────────────────
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping  = true;
+controls.dampingFactor  = 0.06;
+controls.minDistance    = 4;
+controls.maxDistance    = 30;
+controls.enablePan      = false;
+controls.autoRotate     = true;
+controls.autoRotateSpeed = 0.38;
+controls.target.set(0, 0, 0);
+
+let idleTimer = null;
+controls.addEventListener('start', () => {
+  controls.autoRotate = false;
+  clearTimeout(idleTimer);
+});
+controls.addEventListener('end', () => {
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(() => { if (!selected) controls.autoRotate = true; }, 3800);
+});
+
+// ── Scene ─────────────────────────────────────────────────────────────────────
+const scene = new THREE.Scene();
+
+// Lighting
+const ambLight  = new THREE.AmbientLight(0xffffff, 0.52);
+const sunLight  = new THREE.DirectionalLight(0xffffff, 0.9);
+sunLight.position.set(7, 13, 9);
+sunLight.castShadow = true;
+sunLight.shadow.mapSize.setScalar(1024);
+sunLight.shadow.camera.near = 1;
+sunLight.shadow.camera.far  = 40;
+sunLight.shadow.camera.left = sunLight.shadow.camera.bottom = -12;
+sunLight.shadow.camera.right = sunLight.shadow.camera.top  =  12;
+
+const fillLight = new THREE.DirectionalLight(0x88ddff, 0.14);
+fillLight.position.set(-6, -4, -8);
+
+const glowLight = new THREE.PointLight(0x4ecdc4, 0, 8, 1.6);
+
+scene.add(ambLight, sunLight, fillLight, glowLight);
+
+// Groups
+const nodeGroup = new THREE.Group();
+const edgeGroup = new THREE.Group();
+const ringGroup = new THREE.Group();
+scene.add(nodeGroup, edgeGroup, ringGroup);
+
+// Floor grid
+const gridHelper = new THREE.GridHelper(24, 24);
+gridHelper.material.opacity = 0.055;
+gridHelper.material.transparent = true;
+gridHelper.position.y = -2.5;
+scene.add(gridHelper);
+
+// ── Data state ────────────────────────────────────────────────────────────────
+let N = [], E = [], GMETA = { title: 'Context Map', nodeCount: 0, edgeCount: 0 };
+let hovered = null, selected = null;
+let nodeObjs = {};   // id -> { mesh, mat, edgeMat, sz, node, labelEl }
+let edgeObjs = [];   // [{curve, tube, mat, dotMesh, a, b}]
+
+// ── Geometry helpers ──────────────────────────────────────────────────────────
+function disposeObj(obj) {
+  obj.traverse(c => {
+    if (c.geometry) c.geometry.dispose();
+    if (c.material) {
+      const ms = Array.isArray(c.material) ? c.material : [c.material];
+      ms.forEach(m => m.dispose());
+    }
+  });
+}
+
+function rebuild() {
+  // Tear down nodes
+  for (const obj of Object.values(nodeObjs)) {
+    disposeObj(obj.mesh);
+    nodeGroup.remove(obj.mesh);
+  }
+  nodeObjs = {};
+
+  // Tear down edges
+  for (const e of edgeObjs) {
+    e.tube.geometry.dispose(); e.mat.dispose();
+    e.dotMesh.geometry.dispose(); e.dotMesh.material.dispose();
+    edgeGroup.remove(e.tube);
+    scene.remove(e.dotMesh);
+  }
+  edgeObjs = [];
+
+  // Tear down rings
+  ringGroup.children.slice().forEach(c => { disposeObj(c); ringGroup.remove(c); });
+
+  // Clear label divs
+  labelsWrap.innerHTML = '';
+
+  buildRings();
+  for (const n of N)      buildNode(n);
+  for (const [a, b] of E) buildEdge(a, b);
+
+  // Update grid colour
+  gridHelper.material.color.setHex(pal().grid);
+}
+
+// ── Tier rings ────────────────────────────────────────────────────────────────
+const TIERS = [
+  { tag: 'core',       y: -1.6, r: 2.2 },
+  { tag: 'supporting', y:  0.3, r: 3.3 },
+  { tag: 'generic',    y:  1.5, r: 4.0 },
+];
+
+function buildRings() {
+  for (const t of TIERS) {
+    const geo = new THREE.TorusGeometry(t.r, 0.016, 4, 128);
+    const mat = new THREE.MeshBasicMaterial({
+      color: pal().ring,
+      opacity: dark ? 0.09 : 0.11,
+      transparent: true,
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.rotation.x = Math.PI / 2;
+    mesh.position.y = -t.y;   // flip y: core (y=-1.6) → y=1.6 in Three.js
+    ringGroup.add(mesh);
+  }
+}
+
+// ── Nodes ─────────────────────────────────────────────────────────────────────
+function buildNode(n) {
+  const sz  = n.group === 'core' ? 0.70 : n.group === 'generic' ? 0.44 : 0.56;
+  const col = nodeCol(n.group);
+
+  const geo = new THREE.BoxGeometry(sz, sz, sz);
+  const mat = new THREE.MeshStandardMaterial({
+    color:            col,
+    metalness:        0.16,
+    roughness:        0.50,
+    emissive:         col,
+    emissiveIntensity:0.07,
+  });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.set(n.x, -n.y, n.z);
+  mesh.castShadow = true;
+  mesh.userData.nodeId = n.id;
+
+  // Sharp edge overlay
+  const edgeGeo = new THREE.EdgesGeometry(geo);
+  const edgeMat = new THREE.LineBasicMaterial({ color: col, opacity: 0.52, transparent: true });
+  mesh.add(new THREE.LineSegments(edgeGeo, edgeMat));
+
+  // Label — positioned manually each frame via Vector3.project()
+  const div = document.createElement('div');
+  div.className = 'nl';
+  div.style.position = 'absolute';
+  div.style.transform = 'translate(-50%, 0)';
+  div.innerHTML = `<span class="nl-name">${n.label}</span><span class="nl-sub">${n.group}</span>`;
+  labelsWrap.appendChild(div);
+
+  nodeGroup.add(mesh);
+  // labelY: world-space Y of the bottom of the box + a small gap
+  nodeObjs[n.id] = { mesh, mat, edgeMat, sz, node: n, labelEl: div,
+                     labelY: -n.y - (sz / 2 + 0.30) };
+}
+
+// ── Edges ─────────────────────────────────────────────────────────────────────
+function buildEdge(aid, bid) {
+  const na = N.find(n => n.id === aid);
+  const nb = N.find(n => n.id === bid);
+  if (!na || !nb) return;
+
+  const pa  = new THREE.Vector3(na.x, -na.y, na.z);
+  const pb  = new THREE.Vector3(nb.x, -nb.y, nb.z);
+  const mid = pa.clone().add(pb).multiplyScalar(0.5);
+  // Arc inward toward scene centre + lift upward
+  const inward = mid.clone().negate().normalize().multiplyScalar(0.85);
+  mid.add(inward);
+  mid.y -= 0.7;
+
+  const curve   = new THREE.QuadraticBezierCurve3(pa, mid, pb);
+  const tubeGeo = new THREE.TubeGeometry(curve, 48, 0.034, 6, false);
+  const mat     = new THREE.MeshBasicMaterial({
+    color:       pal().edge,
+    opacity:     0.22,
+    transparent: true,
+  });
+  const tube = new THREE.Mesh(tubeGeo, mat);
+  edgeGroup.add(tube);
+
+  // Animated flow sphere
+  const dotGeo  = new THREE.SphereGeometry(0.066, 8, 8);
+  const dotMat  = new THREE.MeshBasicMaterial({ color: pal().edge });
+  const dotMesh = new THREE.Mesh(dotGeo, dotMat);
+  dotMesh.visible = false;
+  scene.add(dotMesh);
+
+  edgeObjs.push({ curve, tube, mat, dotMesh, dotMat, a: aid, b: bid });
+}
+
+// ── Raycaster ─────────────────────────────────────────────────────────────────
+const raycaster = new THREE.Raycaster();
+const pointer   = new THREE.Vector2();
+
+function pick(clientX, clientY) {
+  const rect = renderer.domElement.getBoundingClientRect();
+  pointer.set(
+    ((clientX - rect.left) / rect.width)  *  2 - 1,
+    ((clientY - rect.top)  / rect.height) * -2 + 1,
+  );
+  raycaster.setFromCamera(pointer, camera);
+  const hits = raycaster.intersectObjects(nodeGroup.children, false);
+  if (!hits.length) return null;
+  const id = hits[0].object.userData.nodeId;
+  return id ? N.find(n => n.id === id) ?? null : null;
+}
+
+renderer.domElement.addEventListener('pointermove', e => {
+  if (e.buttons) return;
+  hovered = pick(e.clientX, e.clientY);
+  renderer.domElement.style.cursor = hovered ? 'pointer' : 'default';
+});
+
+renderer.domElement.addEventListener('click', e => {
+  const h = pick(e.clientX, e.clientY);
+  if (h) {
+    if (selected?.id === h.id) closePanel();
+    else openPanel(h);
+  } else {
+    closePanel();
+  }
+});
+
+// ── Panel ─────────────────────────────────────────────────────────────────────
+const CATEGORY_LABELS = { core: 'Core domain', supporting: 'Supporting', generic: 'Generic' };
+
+function openPanel(n) {
+  selected = n;
+  document.getElementById('pname').textContent  = n.label;
+  document.getElementById('player').textContent = CATEGORY_LABELS[n.group] || n.group;
+  document.getElementById('pdesc').textContent  = n.desc;
+  document.getElementById('pdet').innerHTML     = (n.det || []).map(([k, v]) =>
+    `<div class="dr"><span class="dk">${k}</span><span class="dv ${['core','Active','Stable'].includes(v)?'ok':''}">${v}</span></div>`
+  ).join('');
+  document.getElementById('ptags').innerHTML    = (n.tags || []).map(t =>
+    `<span class="tag">${t}</span>`
+  ).join('');
+  document.getElementById('panel').classList.add('open');
+  hintEl.style.opacity = '0';
+  controls.autoRotate  = false;
+  clearTimeout(idleTimer);
+}
+
+function closePanel() {
+  selected = null;
+  document.getElementById('panel').classList.remove('open');
+  hintEl.style.opacity = '1';
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(() => { controls.autoRotate = true; }, 3800);
+}
+
+document.getElementById('xb').addEventListener('click', closePanel);
+
+document.getElementById('rb').addEventListener('click', () => {
+  camera.position.set(0, 5.5, 15);
+  controls.target.set(0, 0, 0);
+  controls.reset();
+  controls.autoRotate = true;
+  closePanel();
+});
+
+document.getElementById('tb').addEventListener('click', () => {
+  dark = !dark;
+  rootEl.classList.toggle('dark', dark);
+  document.body.style.background = dark ? '#0c1720' : '#dce8ef';
+  renderer.setClearColor(pal().bg);
+  gridHelper.material.color.setHex(pal().grid);
+  // Rebuild to recolour everything
+  if (N.length) rebuild();
+});
+
+// ── Live data ─────────────────────────────────────────────────────────────────
+function setLive(on, text) {
+  dotEl.classList.toggle('on', on);
+  lblEl.textContent = text;
+}
+
+async function loadData() {
+  try {
+    const d = await fetch('/api/data').then(r => r.json());
+    N     = d.nodes || [];
+    E     = d.edges || [];
+    GMETA = d.meta  || { title: 'Context Map', nodeCount: 0, edgeCount: 0 };
+    document.getElementById('pill-title').textContent = GMETA.title || 'Context Map';
+    document.getElementById('pill-count').textContent =
+      `${N.length} context${N.length !== 1 ? 's' : ''} · ${E.length} relationship${E.length !== 1 ? 's' : ''}`;
+    emptyEl.style.display = N.length === 0 ? 'flex' : 'none';
+    const prevId = selected?.id;
+    if (selected && !N.find(n => n.id === prevId)) closePanel();
+    rebuild();
+    if (prevId) {
+      const resel = N.find(n => n.id === prevId);
+      if (resel) openPanel(resel);
+    }
+  } catch (_) {}
+}
+
+;(function connectSSE() {
+  try {
+    const sse = new EventSource('/api/events');
+    sse.addEventListener('ping',   () => setLive(true, 'live'));
+    sse.addEventListener('reload', () => {
+      loadData();
+      dotEl.classList.remove('on');
+      setTimeout(() => dotEl.classList.add('on'), 120);
+    });
+    sse.onerror = () => { setLive(false, 'reconnecting'); setTimeout(connectSSE, 3000); };
+  } catch (_) { setLive(false, 'offline'); }
+})();
+
+loadData();
+
+// ── Animation loop ────────────────────────────────────────────────────────────
+const clock  = new THREE.Clock();
+const _v3tmp = new THREE.Vector3();
+
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  const t = clock.getElapsedTime();
+
+  for (const [id, obj] of Object.entries(nodeObjs)) {
+    const isSel = selected?.id === id;
+    const isHov = !isSel && hovered?.id === id;
+    const isDim = !!selected && !isSel && !E.some(([a, b]) =>
+      (a === selected.id && b === id) || (b === selected.id && a === id));
+
+    // Emissive pulse
+    obj.mat.emissiveIntensity = isSel
+      ? 0.38 + Math.sin(t * 3.2) * 0.09
+      : isHov ? 0.28
+      : isDim  ? 0.015
+      :          0.07;
+
+    // Opacity dim
+    const targetOpacity = isDim ? 0.28 : 1.0;
+    obj.mat.opacity += (targetOpacity - obj.mat.opacity) * 0.1;
+    obj.mat.transparent = obj.mat.opacity < 0.99;
+
+    // Scale
+    _v3tmp.setScalar(isSel ? 1.14 + Math.sin(t * 3.2) * 0.02 : isHov ? 1.07 : 1.0);
+    obj.mesh.scale.lerp(_v3tmp, 0.14);
+
+    // Label: project world position to screen and update left/top every frame
+    _v3tmp.set(obj.node.x, obj.labelY, obj.node.z);
+    _v3tmp.project(camera);
+    const lx = (_v3tmp.x *  0.5 + 0.5) * W;
+    const ly = (_v3tmp.y * -0.5 + 0.5) * H;
+    const behind = _v3tmp.z > 1;
+    obj.labelEl.style.left    = lx + 'px';
+    obj.labelEl.style.top     = ly + 'px';
+    obj.labelEl.style.opacity = behind ? '0' : isDim ? '0.14' : '1';
+    obj.labelEl.style.display = 'block';
+  }
+
+  // Glow light follows hovered / selected node
+  const spotlight = selected ?? hovered;
+  if (spotlight) {
+    const obj = nodeObjs[spotlight.id];
+    if (obj) {
+      glowLight.position.copy(obj.mesh.position);
+      glowLight.intensity = selected ? 1.4 : 0.65;
+      glowLight.color.setHex(nodeCol(spotlight.group));
+    }
+  } else {
+    glowLight.intensity = 0;
+  }
+
+  // Edges
+  for (const e of edgeObjs) {
+    const isSel = !!selected && (e.a === selected.id || e.b === selected.id);
+    const targetOp = isSel ? 0.78 : selected ? 0.04 : 0.22;
+    e.mat.opacity += (targetOp - e.mat.opacity) * 0.1;
+    e.mat.color.setHex(isSel ? nodeCol(selected.group) : pal().edge);
+
+    if (isSel) {
+      e.dotMesh.visible = true;
+      e.curve.getPointAt((t * 0.38) % 1, e.dotMesh.position);
+      e.dotMesh.material.color.setHex(nodeCol(selected.group));
+    } else {
+      e.dotMesh.visible = false;
+    }
+  }
+
+  renderer.render(scene, camera);
+}
+
+// ── Resize ────────────────────────────────────────────────────────────────────
+window.addEventListener('resize', () => {
+  W = window.innerWidth; H = window.innerHeight;
+  camera.aspect = W / H;
+  camera.updateProjectionMatrix();
+  renderer.setSize(W, H);
+});
+
+animate();
+</script>
+</body>
+</html>

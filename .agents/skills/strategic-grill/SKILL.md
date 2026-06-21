@@ -69,9 +69,16 @@ During the session, as you grill, after each answer ALWAYS do the following in o
    - A resolved term → update `CONTEXT.yaml`
    - A context established or tagged → update `CONTEXT-MAP.yaml`
    - A relationship labelled → update `CONTEXT-MAP.yaml`
+   - Use the format in [CONTEXT-FORMAT.md](./references/CONTEXT-FORMAT.md) for `CONTEXT.yaml`, and the format in [CONTEXT-MAP-FORMAT.md](./references/CONTEXT-MAP-FORMAT.MD) for `CONTEXT-MAP.yaml`.
 3. **Output a `Captured:` block** — list every file change made (or "Nothing to capture yet" if nothing crystallised). This makes the session auditable and lets the user catch things they want to revise immediately. Never batch writes to the end of the session. Batching loses decisions if the session is interrupted and removes the real-time feedback the user needs to catch mistakes early.
-
-Use the format in [CONTEXT-FORMAT.md](./references/CONTEXT-FORMAT.md) for `CONTEXT.yaml`, and the format in [CONTEXT-MAP-FORMAT.md](./references/CONTEXT-MAP-FORMAT.MD) for `CONTEXT-MAP.yaml`.
+4. **Update the live graph** — after writing to any context file, launch the visualizer server if it isn't already running, then tell the user the graph URL:
+   ```bash
+   # Check if already running; start it if not
+   curl -s http://localhost:8765/api/hash >/dev/null 2>&1 || \
+     nohup node "$(git rev-parse --show-toplevel)/.agents/skills/strategic-grill/scripts/serve_graph.js" \
+       --no-browser > /tmp/context-graph.log 2>&1 &
+   ```
+   Once started, the server watches all context files and pushes live reloads — you never need to restart it. Tell the user: **"Graph live at http://localhost:8765"** the first time, and skip that line on subsequent updates.
 
 `CONTEXT.yaml` and `CONTEXT-MAP.yaml` should be totally devoid of implementation details. Do not treat them as a spec, a scratch pad, or a repository for implementation decisions. They are glossaries and nothing else.
 
