@@ -42,9 +42,9 @@ Example:
 
 ### 3. "Grill" the plan
 
-Interview the user relentlessly about every aspect of their plan until you reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
+Interview the user relentlessly about every aspect of their plan until you reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one.
 
-Ask the questions one at a time, waiting for feedback on each question before continuing. This matters because each answer shapes which branch to explore next — asking several at once lets the user give shallow answers and loses the thread.
+Format every question using the structure in [QUESTION-FORMAT.md](./references/QUESTION-FORMAT.md) — a single sharp question followed by a plain-text recommendation with a reason.
 
 If a question can be answered by exploring the codebase, explore the codebase instead.
 
@@ -62,7 +62,20 @@ Calibrate your language to the user. If the user is not using DDD vocabulary, do
 | Shared Kernel | "shared code both teams must sign off on" |
 | Open Host Service | "stable API that both teams can rely on" |
 
-**During the session, as you grill, after each answer**:
+During the session, as you grill, after each answer ALWAYS do the following in order before asking the next question:
+
+1. **Scan against techniques** — run through 3.1–3.9 against the answer. For each technique that fires, address it now — don't queue it for later. If nothing fires, move on.
+2. **Write to files** — apply every decision that crystallised from the answer:
+   - A resolved term → update `CONTEXT.yaml`
+   - A context established or tagged → update `CONTEXT-MAP.yaml`
+   - A relationship labelled → update `CONTEXT-MAP.yaml`
+3. **Output a `Captured:` block** — list every file change made (or "Nothing to capture yet" if nothing crystallised). This makes the session auditable and lets the user catch things they want to revise immediately. Never batch writes to the end of the session. Batching loses decisions if the session is interrupted and removes the real-time feedback the user needs to catch mistakes early.
+
+Use the format in [CONTEXT-FORMAT.md](./references/CONTEXT-FORMAT.md) for `CONTEXT.yaml`, and the format in [CONTEXT-MAP-FORMAT.md](./references/CONTEXT-MAP-FORMAT.MD) for `CONTEXT-MAP.yaml`.
+
+`CONTEXT.yaml` and `CONTEXT-MAP.yaml` should be totally devoid of implementation details. Do not treat them as a spec, a scratch pad, or a repository for implementation decisions. They are glossaries and nothing else.
+
+Beside the grill questions, you may also ask the user to clarify or justify their decisions. Use the following techniques:
 
 #### 3.1 Challenge against the glossary
 
@@ -133,18 +146,6 @@ Every relationship entry must carry exactly one label. Do not use free-form pros
 
 After the label, add a one-sentence implication note so the reader immediately understands the team-autonomy consequence.
 
-#### 3.10 Update CONTEXT.yaml and CONTEXT-MAP.yaml inline
-
-Write to these files the moment a decision crystallises — never batch them up, never wait until the end of the session. Batching loses decisions if the session is interrupted, and it deprives the user of seeing the model take shape in real time, which is often when they catch things they want to revise.
-
-- **As soon as a term is resolved**, update `CONTEXT.yaml` right there.
-- **As soon as a context is established and tagged** (`core`, `supporting`, or `generic`), update `CONTEXT-MAP.yaml` right there.
-- **As soon as a relationship is decided and labelled**, update `CONTEXT-MAP.yaml` right there.
-
-Use the format in [CONTEXT-FORMAT.md](./CONTEXT-FORMAT.md) for `CONTEXT.yaml`, and the format in [CONTEXT-MAP-FORMAT.md](./CONTEXT-MAP-FORMAT.MD) for `CONTEXT-MAP.yaml`.
-
-`CONTEXT.yaml` and `CONTEXT-MAP.yaml` should be totally devoid of implementation details. Do not treat them as a spec, a scratch pad, or a repository for implementation decisions. They are glossaries and nothing else.
-
 ### 4. Offer ADRs sparingly
 
 Only offer to create an ADR when all three are true:
@@ -153,4 +154,4 @@ Only offer to create an ADR when all three are true:
 2. **Surprising without context** — a future reader will wonder "why did they do it this way?"
 3. **The result of a real trade-off** — there were genuine alternatives and you picked one for specific reasons
 
-If any of the three is missing, skip the ADR. Use the format in [ADR-FORMAT.md](./ADR-FORMAT.md). ADR files use the MADR format with `.md` extension.
+If any of the three is missing, skip the ADR. Use the format in [ADR-FORMAT.md](./references/ADR-FORMAT.md). ADR files use the MADR format with `.md` extension.
