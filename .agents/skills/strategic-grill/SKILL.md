@@ -93,10 +93,18 @@ After **every** user answer, before **every** next question, run these three ste
    If it fails, tell the user: **"Graph server didn't start — check `/tmp/context-graph.log` if you need it. You can work from the YAML directly."**
    The server watches all context files and pushes live reloads — you never need to restart it.
 
-3. **Emit a turn separator** — only if something happened (a technique fired or a file changed). Skip entirely if nothing was captured:
+3. **Emit a turn separator** — always, after every answer. If a technique fired or a file changed, list what happened:
    ```
    Techniques fired: [comma-separated list]
    Captured: [bullet list of file changes]
+   Reason: [plain-text explanation of why these techniques fired and why these file changes were made, in the context of the user's answer]
+   ```
+   Listing what fired and what was captured gives the user a running audit trail of how their answers reshaped the model, so they can catch a wrong technique or an unwanted file change immediately rather than discovering it turns later.
+   If nothing happened (no technique fired and no file changed), still emit the separator and say so explicitly:
+   ```
+   Techniques fired: none
+   Captured: nothing this turn
+   Reason: [plain-text explanation of why no techniques fired and why no file changes were made, in the context of the user's answer]
    ```
 
 `CONTEXT.yaml` and `CONTEXT-MAP.yaml` should be totally devoid of implementation details. Do not treat them as a spec, a scratch pad, or a repository for implementation decisions. They are glossaries and nothing else.
