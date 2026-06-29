@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://strategic-grill/context-map.schema.json",
+  "title": "CONTEXT-MAP.yaml",
+  "description": "System-wide map of bounded contexts and their relationships. Boundaries only — no implementation details.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contexts": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/context" }
+    },
+    "relationships": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/relationship" }
+    }
+  },
+  "definitions": {
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "path", "tag", "description"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path to this context's CONTEXT.yaml. Existence is checked by the referential validator, not by schema."
+        },
+        "tag": {
+          "description": "Exactly one strategic classification.",
+          "enum": ["core", "supporting", "generic"]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Must justify the tag — name the differentiating capability (core) or what's being bought/commoditised (generic)."
+        }
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "implication"],
+      "properties": {
+        "label": {
+          "enum": [
+            "Customer-Supplier",
+            "Open Host Service",
+            "ACL",
+            "Conformist",
+            "Published Language",
+            "Shared Kernel",
+            "Partnership",
+            "Separate Ways"
+          ]
+        },
+        "implication": {
+          "type": "string",
+          "minLength": 1,
+          "description": "One sentence capturing the autonomy consequence."
+        },
+        "upstream": { "type": "string", "minLength": 1 },
+        "downstream": { "type": "string", "minLength": 1 },
+        "peers": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      },
+      "oneOf": [
+        {
+          "description": "Directed relationship: uses upstream/downstream with a directed label.",
+          "required": ["upstream", "downstream"],
+          "not": { "required": ["peers"] },
+          "properties": {
+            "label": {
+              "enum": [
+                "Customer-Supplier",
+                "Open Host Service",
+                "ACL",
+                "Conformist",
+                "Published Language"
+              ]
+            }
+          }
+        },
+        {
+          "description": "Symmetric relationship: uses a two-item peers list with a symmetric label.",
+          "required": ["peers"],
+          "not": {
+            "anyOf": [
+              { "required": ["upstream"] },
+              { "required": ["downstream"] }
+            ]
+          },
+          "properties": {
+            "label": {
+              "enum": ["Shared Kernel", "Partnership", "Separate Ways"]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

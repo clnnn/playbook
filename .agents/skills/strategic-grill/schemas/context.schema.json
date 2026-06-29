@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://strategic-grill/context.schema.json",
+  "title": "CONTEXT.yaml",
+  "description": "A bounded context's glossary. Terms only — no implementation details.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "description"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The context name. Must match the name used for this context in CONTEXT-MAP.yaml."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "One or two sentences on what this context is responsible for."
+    },
+    "language": {
+      "type": "array",
+      "description": "The ubiquitous language for this context. Only terms unique to this context.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["term", "definition"],
+        "properties": {
+          "term": {
+            "type": "string",
+            "minLength": 1
+          },
+          "definition": {
+            "type": "string",
+            "minLength": 1,
+            "description": "What the term IS, not what it does. One or two sentences."
+          },
+          "avoid": {
+            "type": "array",
+            "description": "Rejected synonyms for this term.",
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "group": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Optional cluster label when natural groups of terms emerge."
+          }
+        }
+      }
+    }
+  }
+}
