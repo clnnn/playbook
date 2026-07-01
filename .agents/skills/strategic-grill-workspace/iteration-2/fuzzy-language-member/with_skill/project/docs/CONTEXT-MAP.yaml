@@ -1,7 +1,0 @@
-contexts:
-  - name: Accounts
-    path: ./packages/accounts/docs/CONTEXT.yaml
-    tag: supporting
-    description: Manages who can access the system and the commercial relationship behind them.
-
-relationships: []

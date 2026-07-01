@@ -1,9 +1,0 @@
-name: Orders
-description: Receives and tracks customer orders from placement to dispatch.
-
-language:
-  - term: Order
-    definition: A customer's request to purchase one or more items at a point in time.
-    avoid:
-      - Purchase
-      - Transaction
