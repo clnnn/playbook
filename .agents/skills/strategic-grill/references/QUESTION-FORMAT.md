@@ -3,7 +3,7 @@
 Use this structure for every question asked during the grilling session.
 
 ```
-**Q: [Sharp, focused question]**
+**Q: [Sharp, focused question, plain business language, no DDD jargons (see Language section)]**
 
 **Recommendation:** [Direct answer — 1–2 sentences stating what you recommend and why, given what you know so far.]
 ```
