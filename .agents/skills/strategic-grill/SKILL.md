@@ -26,17 +26,6 @@ After **every** user answer, before **every** next question, complete every item
 
 Read `./references/TECHNIQUES.md` and evaluate whether any technique is triggered by this answer. Use judgment: don't force techniques that don't apply.
 
-Triggers to watch for:
-
-| What the user did | Technique to consider |
-|---|---|
-| Used a term that conflicts with or is absent from the glossary | **Sharpen fuzzy language** or **Challenge against the glossary** |
-| Described a boundary between areas | **Subdomain alignment check** |
-| Claimed something is their competitive differentiator | **Push back on weak core-domain claims** |
-| Described how two parts interact | **Relationship labelling** |
-| Stated a rule about the domain | **Discuss concrete scenarios** to stress-test it |
-| Said something that contradicts the codebase | **Cross-reference with code** |
-
 ---
 
 **[ ] Item 2 — Write to files**
