@@ -73,7 +73,7 @@ curl -s http://localhost:8765/api/hash >/dev/null 2>&1 || \
 
 The server watches all context files and pushes live reloads — you never need to restart it.
 
-### 3. Ask questions and capture contexts, relationships, and language
+### 3. Ask questions
 
 Each question MUST follow the structure and language from `./references/QUESTION-FORMAT.md`
 
@@ -154,6 +154,8 @@ Techniques fired: none
 Captured: nothing this turn
 Reason: [plain-text explanation of why no techniques fired and why no file changes were made, in the context of the user's answer]
 ```
+
+Ask the next question only after the checklist is complete.
 
 ## Ending the session
 
