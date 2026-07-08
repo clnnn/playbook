@@ -160,3 +160,11 @@ Ask the next question only after the checklist is complete.
 ## Ending the session
 
 When the context map, the ubiquitous language glossary are precisely defined and there are no more open questions to ask, the session is complete. The user should have a clear understanding of the business and technical structure of their system, and the context map and glossary should be up-to-date and validated.
+
+Once the session is complete, close the live graph server so it doesn't keep running in the background:
+
+```bash
+lsof -ti tcp:8765 | xargs -r kill 2>/dev/null || true
+```
+
+Tell the user **"Graph server stopped."** The final context map and glossary remain in the YAML files.
