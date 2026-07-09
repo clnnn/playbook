@@ -28,6 +28,16 @@ relationships:
     label: ACL
     implication: Billing translates ShipmentDispatched into its own InvoiceTrigger; insulated from Fulfillment model changes.
 
+  - upstream: Auth
+    downstream: Ordering
+    label: Conformist
+    implication: Ordering adopts Clerk's user model as-is; no translation layer, accepted because the auth provider rarely changes.
+
+  - upstream: Ordering
+    downstream: PartnerPortal
+    label: Open Host Service (Published Language)
+    implication: Ordering publishes a stable versioned API; external consumers adapt to its documented schema without negotiation.
+
   - peers:
       - Ordering
       - Billing
@@ -37,8 +47,8 @@ relationships:
 
 ## Relationship schema
 
-Directed relationships (Customer-Supplier, Open Host Service, ACL, Published Language, Conformist) use `upstream` / `downstream`.
-Symmetric relationships (Shared Kernel, Partnership, Separate Ways) use `peers` as a two-item list.
+Directed relationships (Customer-Supplier, ACL, Conformist, Open Host Service (Published Language)) use `upstream` / `downstream`.
+Symmetric relationships (Shared Kernel) use `peers` as a two-item list.
 
 ## Rules
 
@@ -48,14 +58,11 @@ Symmetric relationships (Shared Kernel, Partnership, Separate Ways) use `peers` 
 
   | Label | Implication |
   |-------|-------------|
-  | `Shared Kernel` | Shared sub-model; both teams sign off on changes |
-  | `Customer-Supplier` | Upstream sets the interface; downstream adapts |
-  | `Open Host Service` | Upstream publishes a stable versioned API; downstream consumes without negotiation |
-  | `ACL` | Downstream owns translation; insulated from upstream model changes |
-  | `Partnership` | Both teams coordinate on interface changes; high coupling |
-  | `Conformist` | Downstream enslaved to upstream model; use only when ACL cost exceeds benefit |
-  | `Published Language` | OHS with a shareable documented format (JSON Schema, Avro, Protobuf) |
-  | `Separate Ways` | No integration; teams fully independent |
+  | `Shared Kernel` | Shared sub-model; both teams sign off on changes. Use between your own modules for common objects only (value objects, ID types). |
+  | `Customer-Supplier` | Upstream sets the interface; downstream adapts. Use between your own internal modules. |
+  | `ACL` | Downstream owns translation; insulated from upstream model changes. Use as a firewall from a 3rd party you don't want leaking into your model. |
+  | `Conformist` | Downstream adopts the upstream model as-is; no translation. Use for a 3rd party that rarely changes, where an ACL isn't worth the cost. |
+  | `Open Host Service (Published Language)` | Upstream publishes a stable, versioned, documented API (JSON Schema, Avro, Protobuf); external consumers adapt to it without negotiation. |
 
 - **`implication` is required on every relationship.** One sentence capturing the autonomy consequence.
 - **No implementation details.** This is a map of boundaries and their relationships, not an architecture spec.

@@ -46,13 +46,10 @@
         "label": {
           "enum": [
             "Customer-Supplier",
-            "Open Host Service",
             "ACL",
             "Conformist",
-            "Published Language",
-            "Shared Kernel",
-            "Partnership",
-            "Separate Ways"
+            "Open Host Service (Published Language)",
+            "Shared Kernel"
           ]
         },
         "implication": {
@@ -78,10 +75,9 @@
             "label": {
               "enum": [
                 "Customer-Supplier",
-                "Open Host Service",
                 "ACL",
                 "Conformist",
-                "Published Language"
+                "Open Host Service (Published Language)"
               ]
             }
           }
@@ -97,7 +93,7 @@
           },
           "properties": {
             "label": {
-              "enum": ["Shared Kernel", "Partnership", "Separate Ways"]
+              "enum": ["Shared Kernel"]
             }
           }
         }
