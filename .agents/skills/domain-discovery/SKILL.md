@@ -1,5 +1,5 @@
 ---
-name: strategic-grill
+name: domain-discovery
 description: Stress-tests a business idea, plan, or feature entirely in plain business
   language while quietly extracting Domain-Driven Design bounded contexts behind
   the scenes, then writes a boundary map document and ubiquitous language. Use whenever someone shares an
@@ -13,7 +13,7 @@ description: Stress-tests a business idea, plan, or feature entirely in plain bu
   grill it in plain terms and map the domain first.
 ---
 
-# Strategic Grill
+# Domain Discovery
 
 Interview the user relentlessly in plain business language about every aspect of their plan until you reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one.
 
