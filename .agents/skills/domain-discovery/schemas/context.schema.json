@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://strategic-grill/context.schema.json",
+  "$id": "https://domain-discovery/context.schema.json",
   "title": "CONTEXT.yaml",
   "description": "A bounded context's glossary. Terms only — no implementation details.",
   "type": "object",

@@ -64,7 +64,7 @@ If the context map exists, start the graph server so the user can see the contex
 
 ```bash
 curl -s http://localhost:8765/api/hash >/dev/null 2>&1 || \
-  nohup node "$(git rev-parse --show-toplevel)/.agents/skills/strategic-grill/scripts/serve_graph.js" \
+  nohup node "$(git rev-parse --show-toplevel)/.agents/skills/domain-discovery/scripts/serve_graph.js" \
     --no-browser > /tmp/context-graph.log 2>&1 &
 ```
 
@@ -130,7 +130,7 @@ For each context, relationship, or term you've heard:
 Run the validator on the context map:
 
 ```bash
-node "$(git rev-parse --show-toplevel)/.agents/skills/strategic-grill/scripts/validate_context.js" <path/to/CONTEXT-MAP.yaml>
+node "$(git rev-parse --show-toplevel)/.agents/skills/domain-discovery/scripts/validate_context.js" <path/to/CONTEXT-MAP.yaml>
 ```
 
 - If it exits `0`: continue.
