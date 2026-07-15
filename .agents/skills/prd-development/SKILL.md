@@ -145,7 +145,7 @@ Use `template.md` as the fill-in document. The template includes:
 - **Inline gap tagging** — tag every gap as 🔶 **Assumption** (plausible but unvalidated) or 🔵 **Open Question** (unknown, needs discovery). Tag inline where the gap appears, not just at the end.
 - **Cross-section recommendation prompts** — after completing each section, a "Before moving on" block checks consistency with prior sections and warns about what the next section will need.
 - **Self-assessment** — after Section 10, a diagnostic captures the strongest section, weakest section, top assumptions to validate, and the recommended next step before sharing the PRD.
-- **Skill cross-reference table** — maps 15 skills to the specific sections they feed (e.g., `problem-framing-canvas` → Section 2, `epic-breakdown-advisor` → Section 7).
+- **Skill cross-reference table** — maps 9 skills to the specific sections they feed (e.g., `problem-statement` → Section 2, `epic-breakdown-advisor` → Section 7).
 
 This workflow orchestrates **8 phases** over **2-4 days**, using multiple component and interactive skills. The phases below describe the facilitation sequence; the template captures the output.
 
@@ -178,7 +178,7 @@ This workflow orchestrates **8 phases** over **2-4 days**, using multiple compon
 
 **1. Write Problem Statement**
 - **Use:** `skills/problem-statement/SKILL.md` (component)
-- **Input:** Discovery insights from `skills/discovery-process/SKILL.md` or `skills/problem-framing-canvas/SKILL.md`
+- **Input:** Discovery insights from `skills/domain-discovery/SKILL.md`
 - **Participants:** PM
 - **Duration:** 30 minutes
 - **Output:** Structured problem statement
@@ -269,7 +269,6 @@ Non-technical small business owners (solopreneurs, 1-10 employees) who sign up f
   > "This initiative supports our Q1 OKR: Reduce churn from 15% to 8%. Improving onboarding activation directly impacts retention."
 
 **2. Size Market Opportunity (Optional)**
-- **Use:** `skills/tam-sam-som-calculator/SKILL.md` (interactive) output
 - **When:** For major initiatives, new products, exec presentations
 - **Example:**
   > "TAM: 50M small businesses globally. SAM: 5M using SaaS tools. SOM: 500K solopreneurs in our target segments. Improving onboarding could unlock 30% of SAM (1.5M potential customers)."
@@ -545,7 +544,7 @@ Day 1:
 ├─ Phase 3: Target Users & Personas (30 min)
 │  └─ Use: skills/proto-persona/SKILL.md
 └─ Phase 4: Strategic Context (45 min)
-   └─ Use: skills/tam-sam-som-calculator/SKILL.md (optional)
+   └─ Use: skills/positioning-statement/SKILL.md (optional)
 
 Day 2:
 ├─ Phase 5: Solution Overview (60 min)
@@ -602,7 +601,7 @@ Mini example excerpt:
 
 **Consequence:** Team questions whether problem is real
 
-**Fix:** Use discovery insights from `skills/discovery-process/SKILL.md`; include customer quotes, analytics, support tickets
+**Fix:** Use discovery insights from `skills/domain-discovery/SKILL.md`; include customer quotes, analytics, support tickets
 
 ---
 
@@ -639,7 +638,6 @@ Mini example excerpt:
 
 **Phase 2:**
 - `skills/problem-statement/SKILL.md` (component)
-- `skills/problem-framing-canvas/SKILL.md` (interactive, for context)
 - `skills/customer-journey-mapping-workshop/SKILL.md` (interactive, optional)
 
 **Phase 3:**
@@ -647,7 +645,7 @@ Mini example excerpt:
 - `skills/jobs-to-be-done/SKILL.md` (component, optional)
 
 **Phase 4:**
-- `skills/tam-sam-som-calculator/SKILL.md` (interactive, optional)
+- `skills/positioning-statement/SKILL.md` (component, optional)
 
 **Phase 5:**
 - `skills/user-story-mapping-workshop/SKILL.md` (interactive, optional)

@@ -212,7 +212,6 @@ Mini example excerpt:
 
 ### Related Skills
 - **[pol-probe-advisor](skills/pol-probe-advisor/SKILL.md)** (Interactive) — Decision framework for choosing which prototype type to use
-- **[discovery-process](skills/discovery-process/SKILL.md)** (Workflow) — Use PoL probes in validation phase
 - **[problem-statement](skills/problem-statement/SKILL.md)** (Component) — Define problem before creating PoL probe
 - **[epic-hypothesis](skills/epic-hypothesis/SKILL.md)** (Component) — Frame hypothesis before testing with PoL probe
 

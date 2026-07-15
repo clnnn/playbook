@@ -74,7 +74,7 @@ Anything supplied with the invocation itself — text after the skill name, a pa
 - You want to avoid prototype theater
 
 ❌ **Don't use this when:**
-- You don't have a hypothesis yet (use `problem-statement.md` or `problem-framing-canvas.md` first)
+- You don't have a hypothesis yet (use `problem-statement.md` first)
 - You're trying to impress executives (that's not validation)
 - You already know the answer (confirmation bias)
 - You need to ship an MVP (this is for pre-MVP reconnaissance)
@@ -487,8 +487,6 @@ If executives need a demo, build it *after* you've validated the hypothesis with
 ### Related Skills
 - **[pol-probe](../pol-probe/SKILL.md)** (Component) — Template for documenting PoL probes
 - **[problem-statement](../problem-statement/SKILL.md)** (Component) — Frame problem before choosing validation method
-- **[problem-framing-canvas](../problem-framing-canvas/SKILL.md)** (Interactive) — MITRE Problem Framing before validation
-- **[discovery-process](../discovery-process/SKILL.md)** (Workflow) — Use PoL probes in validation phase
 - **[epic-hypothesis](../epic-hypothesis/SKILL.md)** (Component) — Turn epics into testable hypotheses
 
 ### External Frameworks

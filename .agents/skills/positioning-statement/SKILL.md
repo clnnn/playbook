@@ -221,7 +221,6 @@ Mini example excerpt:
 - `skills/problem-statement/SKILL.md` — Defines the problem positioning addresses
 - `skills/jobs-to-be-done/SKILL.md` — Informs the "that need" statement
 - `skills/proto-persona/SKILL.md` — Defines the "For [target]" segment
-- `skills/press-release/SKILL.md` — Positioning informs press release messaging
 
 ### External Frameworks
 - Geoffrey Moore, *Crossing the Chasm* (1991) — Origin of this framework

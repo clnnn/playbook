@@ -441,7 +441,6 @@ After collecting responses, the agent recommends a framework:
 ### Related Skills
 - `user-story.md` — Prioritized features become user stories
 - `epic-hypothesis.md` — Prioritized epics validated with experiments
-- `recommendation-canvas.md` — Business outcomes inform prioritization
 
 ### External Frameworks
 - Intercom, *RICE Prioritization* (2016) — Origin of RICE framework

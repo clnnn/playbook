@@ -1,41 +1,11 @@
 {
   "version": 1,
   "skills": {
-    "acquisition-channel-advisor": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/acquisition-channel-advisor/SKILL.md",
-      "computedHash": "9639329ba278fde3cda1c23e85b23064f2968e7b55cc379b9611e8b542660b23"
-    },
-    "business-health-diagnostic": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/business-health-diagnostic/SKILL.md",
-      "computedHash": "3460b5cb9f154352d1ab945e7cd8e5905d85aa719a14ddded4193a68ab5128db"
-    },
-    "customer-journey-map": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/customer-journey-map/SKILL.md",
-      "computedHash": "82755e646a35beb2d100a396db7f69a36c8de8f7ef228073ed3834dee24153c4"
-    },
     "customer-journey-mapping-workshop": {
       "source": "deanpeters/product-manager-skills",
       "sourceType": "github",
       "skillPath": "skills/customer-journey-mapping-workshop/SKILL.md",
       "computedHash": "3cc53dec8e28b80a495daf71f7c7205e5b997fb3262eeef85510fe3b26618205"
-    },
-    "discovery-interview-prep": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/discovery-interview-prep/SKILL.md",
-      "computedHash": "b6a30665e24f963eb78347e84e4dffb56f186b0d4a79ab7ff2ece3cc7221a264"
-    },
-    "discovery-process": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/discovery-process/SKILL.md",
-      "computedHash": "501dffec798ac5bb7ecf07187fb688cdf867576c5b1666737ec03a85cd43c78e"
     },
     "epic-breakdown-advisor": {
       "source": "deanpeters/product-manager-skills",
@@ -48,24 +18,6 @@
       "sourceType": "github",
       "skillPath": "skills/epic-hypothesis/SKILL.md",
       "computedHash": "3c80b5e3ae2c5daee79e49d9363e2df30d289b12b70d36e798bc5517790fa061"
-    },
-    "feature-investment-advisor": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/feature-investment-advisor/SKILL.md",
-      "computedHash": "41a80f944a40e840df2536cde2791744420b2e17787244cbad22f523664d6778"
-    },
-    "finance-based-pricing-advisor": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/finance-based-pricing-advisor/SKILL.md",
-      "computedHash": "32ff1ef85d7cdc20245b915208b63a7ac9ac9af5968231aabae806d1ca3c823f"
-    },
-    "finance-metrics-quickref": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/finance-metrics-quickref/SKILL.md",
-      "computedHash": "60c051237d3118068f88d35b2e78c428baacc82ca137f029f15dec0af301161e"
     },
     "handoff": {
       "source": "mattpocock/skills",
@@ -84,12 +36,6 @@
       "sourceType": "github",
       "skillPath": "skills/jobs-to-be-done/SKILL.md",
       "computedHash": "3e4e061abe1bfca6b182ea740c932b5c13c62a8231ddb38ed08d46d251b8e36e"
-    },
-    "lean-ux-canvas": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/lean-ux-canvas/SKILL.md",
-      "computedHash": "424981063ad462a5b75aed43e34b5aeeb313f347625ccd47325ee47dff8a1557"
     },
     "link-workspace-packages": {
       "source": "nrwl/nx-ai-agents-config",
@@ -133,18 +79,6 @@
       "skillPath": "skills/opportunity-solution-tree/SKILL.md",
       "computedHash": "d6922a0b10a5da5f788c623e828154a3938a453785bcd853acd4679a65d040bc"
     },
-    "organic-growth-advisor": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/organic-growth-advisor/SKILL.md",
-      "computedHash": "4d72ba97642e298d9051ae40664d8f9460345d15501f657338d48f7ff5b4be57"
-    },
-    "pestel-analysis": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/pestel-analysis/SKILL.md",
-      "computedHash": "5753e5e3c2c6df2798645bf722e04ee82e9c8cf69f658877daa2a22c5134941b"
-    },
     "pol-probe": {
       "source": "deanpeters/product-manager-skills",
       "sourceType": "github",
@@ -169,23 +103,11 @@
       "skillPath": "skills/prd-development/SKILL.md",
       "computedHash": "8914afd214e2dc3e8f23808bd42f6ac8bc49e71fa5d3688b90b025eb2e71ebe0"
     },
-    "press-release": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/press-release/SKILL.md",
-      "computedHash": "726b64b9ca4b24d3e49de9929b302ee10d9e02b3279bea0c9105cad63ea92cf1"
-    },
     "prioritization-advisor": {
       "source": "deanpeters/product-manager-skills",
       "sourceType": "github",
       "skillPath": "skills/prioritization-advisor/SKILL.md",
       "computedHash": "3bc39ee5292afde5be38b73a8c3d97f4351f554e9a749579680478a24b2c53dc"
-    },
-    "problem-framing-canvas": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/problem-framing-canvas/SKILL.md",
-      "computedHash": "f56955cfcdc0fdf32cd0982404afd470321994ab29811fca2fab5a32ed7c2251"
     },
     "problem-statement": {
       "source": "deanpeters/product-manager-skills",
@@ -199,53 +121,11 @@
       "skillPath": "skills/proto-persona/SKILL.md",
       "computedHash": "66973104d2d738f178b113a984d4529150dd173b1047e49097c419a60f9ec25e"
     },
-    "recommendation-canvas": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/recommendation-canvas/SKILL.md",
-      "computedHash": "bd6c0ed9ac75033baea1d8c52bdc1b9e2330ce2bf8c5b3acb6cb66ae58d05f41"
-    },
-    "saas-economics-efficiency-metrics": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/saas-economics-efficiency-metrics/SKILL.md",
-      "computedHash": "b5874c6ea90ca0755599db1517432f7b4614aa7b8a6f9704982b9e1d4e557d63"
-    },
-    "saas-revenue-growth-metrics": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/saas-revenue-growth-metrics/SKILL.md",
-      "computedHash": "690d42ad4c3e73ad0c7f062a74fea0ed4382516a853f5c0e3203b67ef43846e5"
-    },
     "shadcn": {
       "source": "shadcn/ui",
       "sourceType": "github",
       "skillPath": "skills/shadcn/SKILL.md",
       "computedHash": "80a6226e78f6d1fe464214ae0ef449d49d8ffaa3e7704f011e9b418c678ad4d1"
-    },
-    "stakeholder-engagement-advisor": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/stakeholder-engagement-advisor/SKILL.md",
-      "computedHash": "de5831f5e6b71a5bab6961b41f3b0999ab281a219d77f30f1291cfce1ec33193"
-    },
-    "stakeholder-identification": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/stakeholder-identification/SKILL.md",
-      "computedHash": "855eac2745f664848a0405245a0308647ca5b13b895784d289e44ee2b0eb9c90"
-    },
-    "stakeholder-mapping": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/stakeholder-mapping/SKILL.md",
-      "computedHash": "3f4fe2bb2df0a8ef01d72704cdab39e6b371a74c4ae5e26d3af7aa1400f84b92"
-    },
-    "tam-sam-som-calculator": {
-      "source": "deanpeters/product-manager-skills",
-      "sourceType": "github",
-      "skillPath": "skills/tam-sam-som-calculator/SKILL.md",
-      "computedHash": "06aaf67a0243885a34f6f54f118b69cf547e58ad5e28f3b8ed09d1854c22027b"
     },
     "user-story": {
       "source": "deanpeters/product-manager-skills",

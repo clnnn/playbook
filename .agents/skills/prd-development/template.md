@@ -35,21 +35,15 @@
 >
 > | Skill | Primary Input To |
 > |---|---|
-> | **Problem Framing Canvas** (`problem-framing-canvas`) | Section 2 — Problem Statement |
 > | **Problem Statement** (`problem-statement`) | Section 2 — Problem Statement |
 > | **Proto-Persona** (`proto-persona`) | Section 3 — Target Users & Personas |
 > | **Jobs-to-Be-Done** (`jobs-to-be-done`) | Section 3 — Target Users & Personas |
-> | **Customer Journey Map** (`customer-journey-map`) | Section 3 — Target Users & Personas |
-> | **TAM/SAM/SOM Calculator** (`tam-sam-som-calculator`) | Section 4 — Strategic Context |
 > | **Positioning Statement** (`positioning-statement`) | Section 4 — Strategic Context |
 > | **Opportunity Solution Tree** (`opportunity-solution-tree`) | Section 1 — Executive Summary; Section 5 — Solution Overview |
 > | **User Story Mapping Workshop** (`user-story-mapping-workshop`) | Section 5 — Solution Overview; Section 7 — User Stories |
-> | **PESTEL Analysis** (`pestel-analysis`) | Section 9 — Dependencies & Risks |
 > | **Epic Hypothesis** (`epic-hypothesis`) | Section 7 — User Stories & Requirements |
 > | **Epic Breakdown Advisor** (`epic-breakdown-advisor`) | Section 7 — User Stories & Requirements |
 > | **User Story** (`user-story`) | Section 7 — User Stories & Requirements |
-> | **Recommendation Canvas** (`recommendation-canvas`) | Stakeholder alignment (pre-PRD or appendix) |
-> | **Stakeholder Mapping** (`stakeholder-mapping`) | Stakeholder alignment (pre-PRD or appendix) |
 
 ***
 
@@ -150,8 +144,6 @@
 ##### **Contributing Skills:**
 
 > - **Problem Statement** (`problem-statement`): Structures the problem using a validated format. Complete this before writing requirements to prevent premature solution bias.
-> - **Problem Framing Canvas** (`problem-framing-canvas`): Uses MITRE's Look Inward / Look Outward / Reframe sequence to ensure the team is solving the right problem — not just the first problem that came to mind.
-> - **Discovery Process** (`discovery-process`): If you haven't done discovery yet, run this first. A PRD without discovery evidence is a guess dressed up as a plan.
 
 ##### **Section Activities:**
 
@@ -185,7 +177,7 @@
 
 > The problem statement names who has the problem. Check:
 > - Is the **"who"** specific enough to build a persona around, or is it a broad category like "small business owners"? Section 3 needs a concrete individual — role, goals, pain points, current behaviour.
-> - Does your **evidence** include at least one direct customer quote or data point? If all four evidence slots are empty or tagged 🔶 Assumption, consider running `discovery-interview-prep` before continuing.
+> - Does your **evidence** include at least one direct customer quote or data point? If all four evidence slots are empty or tagged 🔶 Assumption, consider gathering more discovery evidence before continuing.
 > - Does the **business impact** connect to a metric your leadership actually tracks? If not, Section 4 (Strategic Context) will struggle to make the case.
 
 ***
@@ -209,8 +201,6 @@
 
 > - **Proto-Persona** (`proto-persona`): Creates a structured persona profile grounded in discovery research. Avoid creating personas from scratch in isolation — anchor them to real customer data.
 > - **Jobs-to-Be-Done** (`jobs-to-be-done`): Identifies the functional, emotional, and social jobs customers need to get done, the pains they experience today, and the gains they are seeking. Use this to validate persona definitions.
-> - **Customer Journey Map** (`customer-journey-map`): Maps the end-to-end experience to identify where the persona's pain points cluster — useful when the problem spans multiple touchpoints.
-> - **Discovery Interview Prep** (`discovery-interview-prep`): Plans Mom Test-style interviews to validate persona assumptions before committing to them.
 
 ##### **Section Activities:**
 
@@ -267,9 +257,7 @@
 
 ##### **Contributing Skills:**
 
-> - **TAM/SAM/SOM Calculator** (`tam-sam-som-calculator`): Sizes the market opportunity with structured inputs. Use for major initiatives or exec presentations — skip for incremental features.
 > - **Positioning Statement** (`positioning-statement`): Geoffrey Moore's template for defining who you serve, what you solve, and how you're different. Use alongside competitive analysis to sharpen differentiation.
-> - **Organic Growth Advisor** (`organic-growth-advisor`): McKinsey Growth Pyramid triage — diagnoses whether the growth constraint is in new segments, geographies, channels, or products.
 
 ##### **Section Activities:**
 
@@ -378,12 +366,6 @@
 > 2. **Define secondary metrics**: Additional indicators of success that you'll monitor but not optimise for.
 > 3. **Define guardrail metrics**: Metrics that should NOT get worse as a result of this initiative.
 > 4. **Set targets**: For each metric, state the current baseline and the target.
-
-##### **Contributing Skills:**
-
-> - **Business Health Diagnostic** (`business-health-diagnostic`): Diagnoses SaaS health across growth, retention, efficiency, and capital. Use to identify which metrics are already underperforming and should be tracked.
-> - **Feature Investment Advisor** (`feature-investment-advisor`): Build/don't-build recommendation using revenue impact, cost, ROI, and strategic value. Use to validate that the expected metric impact justifies the investment.
-> - **SaaS Revenue Growth Metrics** (`saas-revenue-growth-metrics`): Reference for selecting the right growth and retention metrics.
 
 ##### **Section Activities:**
 
@@ -559,8 +541,6 @@ As a [persona], I want [capability], so that [outcome].
 
 ##### **Contributing Skills:**
 
-> - **PESTEL Analysis** (`pestel-analysis`): Surfaces political, economic, social, technological, environmental, and legal risks from the external environment. Use to identify which external factors are most likely to shift during the product lifecycle.
-> - **Feature Investment Advisor** (`feature-investment-advisor`): Assesses feasibility and viability risks as part of the build/don't-build recommendation.
 > - **POL Probe Advisor** (`pol-probe-advisor`): Recommends which prototype type to run based on your hypothesis and risk level — useful for mitigating value and usability risks cheaply before committing to full build.
 
 ##### **Section Activities:**
