@@ -37,6 +37,12 @@
       "skillPath": "skills/jobs-to-be-done/SKILL.md",
       "computedHash": "3e4e061abe1bfca6b182ea740c932b5c13c62a8231ddb38ed08d46d251b8e36e"
     },
+    "lean-ux-canvas": {
+      "source": "deanpeters/product-manager-skills",
+      "sourceType": "github",
+      "skillPath": "skills/lean-ux-canvas/SKILL.md",
+      "computedHash": "424981063ad462a5b75aed43e34b5aeeb313f347625ccd47325ee47dff8a1557"
+    },
     "link-workspace-packages": {
       "source": "nrwl/nx-ai-agents-config",
       "sourceType": "github",
