@@ -413,6 +413,7 @@ Mini example excerpt:
 - `skills/jobs-to-be-done/SKILL.md` — Helps identify opportunities from JTBD research
 - `skills/epic-hypothesis/SKILL.md` — Turns validated solutions into testable epics
 - `skills/user-story/SKILL.md` — Breaks experiments into deliverable stories
+- `skills/discovery-interview-prep/SKILL.md` — Validates opportunities through customer interviews
 
 ### External Frameworks
 - Teresa Torres, *Continuous Discovery Habits* (2021) — Origin of Opportunity Solution Tree

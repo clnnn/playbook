@@ -375,7 +375,7 @@ After completing the flow, the agent outputs:
 
 ## Next Steps
 
-1. **Validate opportunities:** Use `pol-probe-advisor.md` to design a cheap probe that tests your riskiest hypotheses
+1. **Validate opportunities:** Use `discovery-interview-prep.md` to test hypotheses with customers
 2. **Prioritize fixes:** Use `prioritization-advisor.md` to choose which opportunities to tackle first
 3. **Create problem statements:** Use `problem-statement.md` to frame top opportunities
 4. **Build experiments:** Use `opportunity-solution-tree.md` to design solutions and POCs
@@ -516,6 +516,7 @@ Pain Points:
 ### Related Skills
 - `proto-persona.md` — Defines actor for journey mapping
 - `problem-statement.md` — Converts opportunities into problem statements
+- `discovery-interview-prep.md` — Gathers research input for mapping
 - `opportunity-solution-tree.md` — Designs solutions for journey opportunities
 
 ### External Frameworks

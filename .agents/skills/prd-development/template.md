@@ -177,7 +177,7 @@
 
 > The problem statement names who has the problem. Check:
 > - Is the **"who"** specific enough to build a persona around, or is it a broad category like "small business owners"? Section 3 needs a concrete individual — role, goals, pain points, current behaviour.
-> - Does your **evidence** include at least one direct customer quote or data point? If all four evidence slots are empty or tagged 🔶 Assumption, consider gathering more discovery evidence before continuing.
+> - Does your **evidence** include at least one direct customer quote or data point? If all four evidence slots are empty or tagged 🔶 Assumption, consider running `discovery-interview-prep` before continuing.
 > - Does the **business impact** connect to a metric your leadership actually tracks? If not, Section 4 (Strategic Context) will struggle to make the case.
 
 ***
@@ -201,6 +201,7 @@
 
 > - **Proto-Persona** (`proto-persona`): Creates a structured persona profile grounded in discovery research. Avoid creating personas from scratch in isolation — anchor them to real customer data.
 > - **Jobs-to-Be-Done** (`jobs-to-be-done`): Identifies the functional, emotional, and social jobs customers need to get done, the pains they experience today, and the gains they are seeking. Use this to validate persona definitions.
+> - **Discovery Interview Prep** (`discovery-interview-prep`): Plans Mom Test-style interviews to validate persona assumptions before committing to them.
 
 ##### **Section Activities:**
 
