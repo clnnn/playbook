@@ -7,6 +7,12 @@
       "skillPath": "skills/customer-journey-mapping-workshop/SKILL.md",
       "computedHash": "3cc53dec8e28b80a495daf71f7c7205e5b997fb3262eeef85510fe3b26618205"
     },
+    "discovery-interview-prep": {
+      "source": "deanpeters/product-manager-skills",
+      "sourceType": "github",
+      "skillPath": "skills/discovery-interview-prep/SKILL.md",
+      "computedHash": "b6a30665e24f963eb78347e84e4dffb56f186b0d4a79ab7ff2ece3cc7221a264"
+    },
     "epic-breakdown-advisor": {
       "source": "deanpeters/product-manager-skills",
       "sourceType": "github",
