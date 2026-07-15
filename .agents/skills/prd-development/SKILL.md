@@ -275,6 +275,7 @@ Non-technical small business owners (solopreneurs, 1-10 employees) who sign up f
 
 **3. Document Competitive Landscape (Optional)**
 - **Source:** Competitor research, G2/Capterra reviews
+- **Use:** `skills/positioning-statement/SKILL.md` (component) to sharpen how you differ from alternatives
 - **Example:**
   > "Competitors (Competitor A, B) have guided onboarding. Our lack of guidance is cited as a churn reason in exit surveys."
 
