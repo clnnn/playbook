@@ -1,16 +1,11 @@
 ---
 name: domain-discovery
-description: Stress-tests a business idea, plan, or feature entirely in plain business
-  language while quietly extracting Domain-Driven Design bounded contexts behind
-  the scenes, then writes a boundary map document and ubiquitous language. Use whenever someone shares an
-  idea, plan, feature concept, or system they're building — "I'm building X", "I
-  want to add a feature that...", "here's my plan", "how should we structure
-  this?", "what do you think of this approach?", "help me think through this" —
-  even if they never mention DDD, domains, or boundaries. Especially for
-  non-technical or business stakeholders who should never be asked about
-  aggregates, contexts, or ubiquitous language directly. Trigger proactively when
-  someone describes what they're building, don't just agree and start coding —
-  grill it in plain terms and map the domain first.
+description: Stress-tests a business idea, plan, or feature in plain language while
+  quietly extracting Domain-Driven Design bounded contexts behind the scenes, then
+  writes a boundary map and ubiquitous-language glossary. Use whenever someone
+  describes something they're building or want to build — an idea, a plan, a
+  feature, a system — even if they never mention DDD, domains, or boundaries, and
+  trigger proactively rather than agreeing and starting to code.
 ---
 
 # Domain Discovery
@@ -42,7 +37,7 @@ just opened their terminal. If you say "bounded context, "ubiquitous language," 
 spell and made them feel dumb. Keep every word you say in the language of *their*
 business.
 - **Cross-reference with code:** If the user states how something works, check whether the code agrees. If you find a contradiction, surface it: "Your code cancels entire Orders, but you just said partial cancellation is possible — which is right?"
-- **Challenge against the glossary:** When the user uses a term that conflicts with the existing language in CONTEXT.md, call it out immediately. "Your glossary defines 'cancellation' as X, but you seem to mean Y — which is it?"
+- **Challenge against the glossary:** When the user uses a term that conflicts with the existing language in `CONTEXT.yaml`, call it out immediately. "Your glossary defines 'cancellation' as X, but you seem to mean Y — which is it?"
 
 
 ## Running the session
@@ -51,12 +46,9 @@ This is a conversation, not an interrogation. Grill in **rounds**, not floods.
 
 ### 1. Explore the context
 
-Before asking anything, read the codebase's existing context structure — `CONTEXT-MAP.yaml` at the root and any `CONTEXT.yaml` files you can find — so you know what's already been decided before your first question.
+Before asking anything, read the codebase's existing context structure — the system-wide `CONTEXT-MAP.yaml` and any per-context `CONTEXT.yaml` files you can find — so you know what's already been decided before your first question. See `./references/CONTEXT-FILE-STRUCTURE-EXAMPLE.md` for the recommended layout.
 
-If neither a `CONTEXT-MAP.yaml` nor separate `CONTEXT.yaml` files exist, ask the user how the file structure should look before continuing. If the user doesn't have a preference, suggest the structure above as a starting point. Don't assume a layout and do not proceed until the user has confirmed a structure. After the structure is confirmed, create an empty `CONTEXT-MAP.yaml` at the root to enable the graph server to start in the next step.
-
-Example:
-See `./references/CONTEXT-FILE-STRUCTURE-EXAMPLE.md` for a recommended file structure.
+If neither a `CONTEXT-MAP.yaml` nor separate `CONTEXT.yaml` files exist, ask the user how the file structure should look before continuing. If the user doesn't have a preference, suggest the layout in `./references/CONTEXT-FILE-STRUCTURE-EXAMPLE.md` as a starting point. Don't assume a layout and do not proceed until the user has confirmed a structure. After the structure is confirmed, create an empty `CONTEXT-MAP.yaml` to enable the graph server to start in the next step.
 
 ### 2. Start the graph server
 
@@ -108,8 +100,7 @@ For a deeper catalogue of how business answers map to DDD structure, read
 `references/BOUNDARY-SIGNALS.md` — pull it in when the domain is large or tangled
 and you want to be systematic about not missing a seam.
 
-After each answer, before asking the next question, complete the following checklist in order (required every turn, no exceptions). 
-**Never skip an item. Never batch items across turns. Never ask the next question until all items are checked.**
+After each answer, before asking the next question, work the three-item checklist below in order — every item, every turn, all within the current turn.
 
 The checklist:
 
@@ -139,7 +130,7 @@ node "$(git rev-parse --show-toplevel)/.agents/skills/domain-discovery/scripts/v
 
 **[ ] Item 3 — Emit turn separator**
 
-This is the audit receipt. It proves items 1–4 ran. Emit it whether or not anything happened.
+This is the audit receipt. It proves items 1–2 ran. Emit it whether or not anything happened.
 
 If a technique fired or a file changed:
 ```
@@ -159,7 +150,14 @@ Ask the next question only after the checklist is complete.
 
 ## Ending the session
 
-When the context map, the ubiquitous language glossary are precisely defined and there are no more open questions to ask, the session is complete. The user should have a clear understanding of the business and technical structure of their system, and the context map and glossary should be up-to-date and validated.
+The session is complete only when all of these hold:
+
+- `validate_context.js` exits `0` on `CONTEXT-MAP.yaml`.
+- Every context on the map carries exactly one tag and at least one defined term in its `CONTEXT.yaml`.
+- Every angle in step 3 has been either explored or explicitly judged not live for this idea.
+- No open question you raised is left unanswered, and no term the user used still conflicts with the glossary.
+
+Until all four hold, keep grilling in rounds. When they do, the user has a clear picture of the business and its structure, and the map and glossary are current and validated.
 
 Once the session is complete, close the live graph server so it doesn't keep running in the background:
 

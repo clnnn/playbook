@@ -3,17 +3,17 @@
 ```yaml
 contexts:
   - name: Ordering
-    path: ./src/ordering/CONTEXT.yaml
+    path: ./src/ordering/docs/CONTEXT.yaml
     tag: core
     description: Receives and tracks customer orders; the competitive differentiator is our real-time rerouting algorithm.
 
   - name: Billing
-    path: ./src/billing/CONTEXT.yaml
+    path: ./src/billing/docs/CONTEXT.yaml
     tag: supporting
     description: Generates invoices and processes payments.
 
   - name: Auth
-    path: ./src/auth/CONTEXT.yaml
+    path: ./src/auth/docs/CONTEXT.yaml
     tag: generic
     description: Identity and session management; using Clerk.
 
