@@ -162,7 +162,9 @@ Until all four hold, keep grilling in rounds. When they do, the user has a clear
 Once the session is complete, close the live graph server so it doesn't keep running in the background:
 
 ```bash
-lsof -ti tcp:8765 | xargs -r kill 2>/dev/null || true
+lsof -ti tcp:8765 -sTCP:LISTEN | xargs -r kill 2>/dev/null || true
 ```
+
+`-sTCP:LISTEN` is load-bearing: without it, `lsof -ti tcp:8765` also returns every process *connected* to the port — including the editor's port-forwarder (e.g. the VS Code Remote / devcontainer server). Killing that tears down the whole session/devcontainer. Only ever kill the listener.
 
 Tell the user **"Graph server stopped."** The final context map and glossary remain in the YAML files.
