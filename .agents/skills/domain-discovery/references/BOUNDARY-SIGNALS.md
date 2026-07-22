@@ -27,7 +27,7 @@ question you naturally ask — followed by the boundary it usually reveals.
 
 ## Signals about which context matters most (subdomain classification)
 
-- **Core domain** — the answer to "what must you be uniquely great at, that you'd
+- **Core domain — the moat.** The answer to "what must you be uniquely great at, that you'd
   never let anyone else run?" This is where custom design effort pays off. Grill
   this one hardest; get the language exactly right.
 - **Supporting subdomain** — "it has to work, but it's not your edge." Needs to

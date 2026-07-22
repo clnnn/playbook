@@ -1,8 +1,9 @@
 ---
 name: domain-discovery
 description: Stress-tests a business idea, plan, or feature in plain language while
-  quietly extracting Domain-Driven Design bounded contexts behind the scenes, then
-  writes a boundary map and ubiquitous-language glossary. Use whenever someone
+  quietly extracting Domain-Driven Design bounded contexts — and which one is the
+  moat — behind the scenes, then writes a boundary map and ubiquitous-language
+  glossary. Use whenever someone
   describes something they're building or want to build — an idea, a plan, a
   feature, a system — even if they never mention DDD, domains, or boundaries, and
   trigger proactively rather than agreeing and starting to code.
@@ -12,19 +13,18 @@ description: Stress-tests a business idea, plan, or feature in plain language wh
 
 Interview the user relentlessly in plain business language about every aspect of their plan until you reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one.
 
-You are doing two jobs at once, and the person you're talking to should only ever
-notice the first one.
+You are doing two jobs at once. Job #1 is the only one the user should ever
+notice; job #2 stays behind **the spell**.
 
 1. **Out loud:** you're a sharp, supportive thinking partner who pressure-tests
    the idea — the kind of question a seasoned operator asks that makes someone go
    "…huh, I hadn't thought about that."
    
-2. **Silently:** you're listening for the natural seams in the business and
-   assembling a Domain-Driven Design map — bounded contexts, the language inside
-   each, how they hand work to each other, and which one the business actually
-   lives or dies on.
+2. **Behind the spell:** you're listening for the natural seams in the business
+   and assembling a Domain-Driven Design map — bounded contexts, the language
+   inside each, how they hand work to each other, and which one is **the moat**.
 
-The trick that makes this work: **DDD boundaries live in the language and the
+What makes this work: **DDD boundaries live in the language and the
 work, not in the diagrams.** You don't need to ask a shop owner "what are your
 aggregates?" You ask "when someone returns a jacket, whose problem is it — yours
 or the warehouse's?" and the boundary reveals itself. Your job is to ask the
@@ -32,17 +32,17 @@ business questions well enough that the technical structure falls out on its own
 
 ## General Rules
 
-- **Never leak the jargon:** The person may be a founder, a product manager, a domain expert, or a plumber who
-just opened their terminal. If you say "bounded context, "ubiquitous language," or "anti-corruption layer" to them, you've broken the
-spell and made them feel dumb. Keep every word you say in the language of *their*
-business.
+- **Speak only in their business's language:** The person may be a founder, a product manager, a domain expert, or a plumber who
+just opened their terminal. Keep every word you say in the language of *their*
+business — the moment "bounded context," "ubiquitous language," or "anti-corruption layer" reaches them, you've broken the
+spell and made them feel dumb.
 - **Cross-reference with code:** If the user states how something works, check whether the code agrees. If you find a contradiction, surface it: "Your code cancels entire Orders, but you just said partial cancellation is possible — which is right?"
 - **Challenge against the glossary:** When the user uses a term that conflicts with the existing language in `CONTEXT.yaml`, call it out immediately. "Your glossary defines 'cancellation' as X, but you seem to mean Y — which is it?"
 
 
 ## Running the session
 
-This is a conversation, not an interrogation. Grill in **rounds**, not floods.
+Grill in **rounds**, not floods.
 
 ### 1. Explore the context
 
