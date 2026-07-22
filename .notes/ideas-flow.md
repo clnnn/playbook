@@ -123,3 +123,66 @@ All **26 are direct** references. Tracing what *those* skills reference adds **1
 > **Trimmed from situational (2026-07-14):** `tam-sam-som-calculator`, `feature-investment-advisor`, `recommendation-canvas`, `pestel-analysis`, the duplicate `customer-journey-map`, and the stakeholder pair (`stakeholder-identification`, `stakeholder-mapping`) were moved to 🔴 Skip below — each serves a business/investment/org-alignment decision rather than the requirements-and-stories job.
 
 ---
+
+# Section 7 Deep-Dive — the User-Stories Trio
+
+**Date:** 2026-07-22
+**Question:** In `prd-development` §7 ("User Stories & Requirements"), which skills are referenced, how do they work together, and can they run **without** `prd-development` — e.g. given only domain-discovery context files + an already-written PRD?
+
+---
+
+## The three skills §7 orchestrates
+
+§7 = Phase 7 (the longest phase, 90–120 min). It turns the high-level solution (§5) into an engineering-actionable backlog via three skills in sequence:
+
+| Order | Skill | Type | Role in §7 |
+|---|---|---|---|
+| 1 | **epic-hypothesis** | component | Frame the initiative as a falsifiable **If/Then** bet + tiny-acts-of-discovery experiments + validation measures. Outcome over output. |
+| 2 | **epic-breakdown-advisor** | interactive | Split the (validated) epic into **vertical slices**: pre-split INVEST check → 9 Humanizing-Work patterns in order → evaluate split (reveals low-value work? equal-sized?). Iterative + Cynefin-aware. |
+| 3 | **user-story** | component | Write each slice in **Mike Cohn + Gherkin** (As a / I want / so that + Given/When/Then). "One When / one Then" rule doubles as a split tripwire. |
+
+## How they work together (standalone pipeline)
+
+```
+   epic-hypothesis          epic-breakdown-advisor            user-story
+   (WHY / the bet)   ───▶   (WHAT / right size)      ───▶    (HOW / spec-ready)
+        ▲                                                          │
+        └──────── feedback: multiple When/Then ⇒ re-split ─────────┘
+```
+
+- **hypothesis → breakdown:** only a *validated* hypothesis feeds the split (epic-hypothesis Step 6; advisor Step 0 accepts a hypothesis as its epic input).
+- **breakdown → user-story:** advisor's output template already embeds Cohn+Gherkin — it effectively calls `user-story` inline; lists it as a dependency.
+- **user-story → back to splitting:** the one-When/one-Then rule kicks oversized stories back to splitting. Not strictly linear.
+- **Shared connective tissue:** INVEST runs through all three; vertical-slice / outcome-over-output philosophy is consistent; all three point upstream at `proto-persona` + `problem-statement` for the "who" and "why".
+
+`prd-development` §7 only *orchestrates* this chain — the trio stands on its own.
+
+---
+
+## Can I use them with domain-discovery files + an existing PRD (no prd-development)?
+
+**Yes.** All three are standalone and context-hungry by design — each Input section says pasted context "counts as answers already given… don't re-ask." They need the *upstream facts* (persona, problem, outcome, solution), not the orchestrator.
+
+**What each input supplies:**
+
+| Input | Feeds |
+|---|---|
+| domain-discovery **ubiquitous-language glossary** | consistent domain terms in stories/AC |
+| domain-discovery **bounded contexts** + ownership answers | natural seams for vertical slices; maps to INVEST **Independent** |
+| domain-discovery **moat context** | which epic/stories to sequence first |
+| PRD **problem + persona** | the "for/as a [persona]" and the "why" |
+| PRD **solution overview** | raw material the advisor slices |
+| PRD **success metrics** | the epic hypothesis **validation measures** |
+
+**Run order (same as §7):**
+```
+1. epic-hypothesis        ← PRD problem + solution + metrics
+2. epic-breakdown-advisor ← epic + PRD acceptance criteria + bounded contexts
+3. user-story             ← each slice + glossary
+```
+
+**Caveats:**
+1. **May skip `epic-hypothesis`** if the PRD already has a hypothesis or the bet is validated — the advisor accepts a plain epic. Only run it if the initiative is still an unvalidated bet.
+2. **Skills read pasted context, not the filesystem** — they won't auto-discover the PRD or `CONTEXT.yaml`; point them at paths or paste content inline.
+
+---
