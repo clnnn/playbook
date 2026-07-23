@@ -186,3 +186,84 @@ All **26 are direct** references. Tracing what *those* skills reference adds **1
 2. **Skills read pasted context, not the filesystem** — they won't auto-discover the PRD or `CONTEXT.yaml`; point them at paths or paste content inline.
 
 ---
+
+# End-to-End Delivery Workflow — Skills → Linear
+
+**Date:** 2026-07-23
+**Question:** After domain-discovery + PRD, what's the workflow through the epic/story skills, and what goes into Linear so developers can work? Also: for a *new feature*, do I need a PRD?
+**Chosen setup:** epics = Linear **Projects**; **full hypothesis loop** (willing to kill epics on negative experiments).
+
+---
+
+## The funnel (uncertainty → shippable work)
+
+Each skill answers one question and hands off to the next:
+
+| Stage | Skill | Question | Artifact |
+|---|---|---|---|
+| 1. Domain | `domain-discovery` | Problem space, language, bounded contexts? | CONTEXT-MAP.yaml |
+| 2. Product | `prd` / `prd-development` | What/for whom/why/success? | PRD |
+| 3. Shape journey | `user-story-mapping` | End-to-end journey + thinnest releasable slice? | Story map → **epics + release slices** |
+| 4. Frame each epic | `epic-hypothesis` | What do we believe this achieves; how'd we know we're wrong? | If/Then + validation measures |
+| 5. Split the epic | `epic-breakdown-advisor` (front door) → `user-story-splitting` (raw patterns) | How to cut into sprint-sized vertical slices? | Story titles |
+| 6. Write each story | `user-story` | Story + testable AC a dev can build? | Story w/ Gherkin AC |
+
+**`epic-breakdown-advisor` vs `user-story-splitting`:** same Humanizing-Work methodology at different grain. Advisor = guided interview for one epic (the front door). Splitting = raw pattern library it draws on, usable standalone when a *single story* turns out too big. Rarely invoke splitting directly.
+
+```
+CONTEXT-MAP.yaml ✅ ─► PRD ✅ ─► ① user-story-mapping ─► (per epic) ② epic-hypothesis
+   ─► [risky? run tiny experiment → validated? build / invalidated? kill] ─► ③ epic-breakdown-advisor
+   ─► ④ user-story (+ user-story-splitting if still too big) ─► Linear
+```
+
+## What enters Linear at each step
+
+```
+Initiative:  <the PRD / whole app>
+  └─ Project (=Epic):  <a story-map slice>
+        │  description = epic hypothesis (If/Then + success measures)
+        ├─ Issue (spike):  <tiny act of discovery / experiment>
+        ├─ Issue (story):  <Mike Cohn story + Gherkin AC>   ← what a dev picks up
+        └─ Issue (story):  ...
+```
+
+- **Initiative** = PRD / whole app.
+- **Project = Epic**; the epic hypothesis lives in the **Project description**; experiments become **spike Issues** in it. Project stays out of build cycles until validated.
+- **Issue = user story**; story + Gherkin AC in the description — the unit devs work on. Optional eng **sub-issues**, but AC (not tasks) define "done".
+- **Release slices** from the map → Linear **Cycles / Milestones / labels**; they cut *across* Projects (pull top story from several epics into MVP).
+
+## Full hypothesis loop without theater — triage by risk
+
+Per epic ask: "if I'm wrong here, how expensive is that?"
+- **Low risk / obvious** → write If/Then + success measures for framing only; proceed to build. No experiment.
+- **High risk / uncertain** (installer field behavior, offline-sync assumptions, guessed workflows) → run a **tiny act of discovery** (clickable prototype w/ real users, concierge test) *before* engineering. Validated → build; invalidated → kill/pivot.
+
+> The loop only pays off if you're actually willing to kill an epic. If you'd build anyway, skip the experiment and use the hypothesis purely for outcome framing.
+
+## Definition of Ready (the one rule that unblocks devs)
+
+An Issue is "ready" only with: a **persona**, an **outcome** ("so that…"), and **testable Gherkin AC**. Everything upstream (map, hypothesis, breakdown) exists to make that Issue trustworthy.
+
+---
+
+## New feature: do I need a PRD? — enter the funnel at the right level
+
+The funnel is **scalable** — enter at the level matching the feature's size. The real question is **"is this feature one epic, or several?"**
+
+| Adding | Enter at | In Linear |
+|---|---|---|
+| New product / major initiative (many epics) | **PRD** → map → hypothesis → breakdown → stories | new Initiative (or group of Projects) |
+| **One feature** (~one epic) | **epic-hypothesis** → breakdown → stories | **one new Project** under existing Initiative |
+| Small enhancement (a few stories) | `epic-breakdown-advisor` or straight to `user-story` | Issues in an existing Project |
+| Tweak (one story) | `user-story` | one Issue |
+
+**Key insight:** for a single feature, **the epic-hypothesis *is* the mini-PRD** — it captures persona, outcome, and success measures (the PRD's core job at epic grain). Writing a full PRD for one epic is over-engineering (both the `epic-hypothesis` "when NOT to use" and PRD skills warn against it). Reserve PRDs for multi-epic initiatives that need shared problem/users/success alignment.
+
+**On updating domain artifacts for a new feature:** only update `CONTEXT-MAP.yaml` if the feature introduces new domain concepts / bounded contexts / ubiquitous language. If it lives entirely inside existing contexts, skip it. Whatever new language it surfaces should flow into the hypothesis + story wording so devs use the domain's terms.
+
+**Decision rule:**
+> One epic → `epic-hypothesis` → breakdown → stories → one new Project.
+> Several epics → lightweight PRD → story-map → epics → stories.
+> Genuinely tiny → straight to `user-story`.
+
+---
