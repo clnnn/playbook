@@ -1,6 +1,6 @@
 ---
 name: lean-product-canvas
-description: Facilitate Jeff Gothelf's Lean Product Canvas (v3) for a whole product team — where Business Outcomes follows the money to the final money-capturer before writing any metric, and metrics are stated as "who does what by how much" key results.
+description: Facilitate Jeff Gothelf's Lean Product Canvas (v3) — frame a business problem across 8 boxes, from following the money to the smallest experiment.
 argument-hint: "[business problem]"
 disable-model-invocation: true
 ---
@@ -18,20 +18,18 @@ The canvas is an insurance policy: it turns assumptions into experiments before 
 
 Works best with the business problem you're framing — or the solution someone handed you, which the canvas reframes as a problem. Also useful: known users, evidence so far, and what the team already believes.
 
-Anything supplied at invocation — text after the skill name, a pasted context dump, an appended `ARGUMENTS:` line — counts as answers already given. Use it and skip whatever it covers; never re-ask. Arriving empty-handed works too: open at Box 1.
+Anything supplied at invocation — text after the skill name, an appended `ARGUMENTS:` line — counts as answers already given. Use it and skip whatever it covers; never re-ask. Arriving empty-handed works too: open at Box 1.
 
 ## How to run this session
 
 This is a workshop, run one turn at a time. Hold to this protocol through all 8 boxes:
 
-- **Open with a heads-up and an entry mode.** Tell the user this is an 8-box canvas for the whole product team, then offer: **Guided** (one question at a time), **Context dump** (they paste everything, you slot it into boxes and ask only about gaps), or **Best guess** (you draft every box from what you have, they correct).
+- **Open with a heads-up.** Tell the user this is an 8-box canvas for the whole product team, then run it **Guided** — one question at a time, filling the boxes in order.
 - **One question per turn.** Ask a single box's question in plain language, then wait. Never stack questions.
 - **Label progress every turn** — e.g. `Box 3 of 8 — Users`.
 - **Offer numbered options and recommend one.** Each box gives the user a way to answer directly, a "help me work it out" path, and — where they're stuck — the distilled helper for that box. Put your recommendation first, marked `(Recommended)`.
 - **Validate against the box's completion criterion before advancing.** If it isn't met, ask a follow-up rather than moving on.
 - **Pause and resume on request**, and absorb interruptions without losing the current box.
-
-**Completion criterion:** Selected answers must meet the box's completion criterion before advancing. If not, ask a follow-up question rather than moving on.
 
 ## The canvas
 
@@ -238,20 +236,6 @@ The canvas is one iteration, not a deliverable. Close the session by making the 
 4. **Repeat Box 7 → Box 8** until confidence is high enough to commit to building — or until the evidence kills the initiative, which is a win, not a failure.
 
 Bump the iteration number and keep the prior canvas; the trail of what you believed and learned is part of the insurance policy.
-
-## Common pitfalls
-
-Watch for these while facilitating — each is a completion-criterion failure with a fix:
-
-- **Solution smuggled into Box 1** ("we need to build X") → ask what *changed* in the world and why it's a problem now.
-- **Vague Box 2** ("increase revenue") → force a measurable behavior change in "who does what by how much" form, tied to the final money-capturer; no way to tell success otherwise.
-- **"Everyone" in Box 3** → pick one primary persona; you can expand later, but you can't target a crowd.
-- **Box 2 / Box 4 swapped** (emotions in 2, metrics in 4) → Box 2 is behavior change you measure, Box 4 is human motivation (jobs, pains, gains).
-- **Only functional jobs in Box 4** → social and emotional jobs drive adoption harder; name at least one of each and rank pains by intensity.
-- **One idea in Box 5** (the pre-decided feature) → force 3+ candidates; without alternatives there's nothing to test between.
-- **Picking the first hypothesis instead of the riskiest** (Box 7) → run the risk × perceived value plot; test the high-value / high-risk one (the Test quadrant) first, not the comfortable one.
-- **Skipping Box 8** ("we'll just build it and see") → design the smallest experiment first; if none comes to mind, that's the signal to slow down, not speed up.
-- **Probe with no disposal date** (Box 8) → it silently becomes the MVP; set the delete-by date before you build, or you'll defend the throwaway instead of throwing it away.
 
 ## References
 
