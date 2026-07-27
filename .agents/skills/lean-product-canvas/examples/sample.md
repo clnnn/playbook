@@ -44,7 +44,7 @@ First persona: **members with a young child**, who trigger anxious after-hours "
 We believe enrolled members cutting ER visits per 1,000 by 20% will be achieved if anxious parents attain a fast, trusted after-hours answer with AI triage plus one-tap nurse escalation.
 
 ### 7. Learning Priorities
-- **Prioritization (risk × evidence):** the trust hypothesis is **high risk, low evidence** — if parents won't trust the app at 11pm, nothing downstream works, and we have no data that they will. It sits top-left → test first, ahead of the dashboard (higher evidence) and the nudge (lower risk).
+- **Prioritization (risk × perceived value):** the trust hypothesis is **high value, high risk** — if parents trust the app at 11pm the whole model works (high value), and if they won't, nothing downstream works (high risk). It sits in the **Test** quadrant → test first, ahead of the dashboard (lower risk, a known pattern → Ship & Measure) and the nudge (lower value).
 - **Riskiest assumption — value/trust:** anxious parents will trust an app's triage answer at 11pm instead of just going to the ER. If false, no ER visits are avoided and the insurer captures nothing.
 
 ### 8. Experiments
@@ -64,7 +64,7 @@ The same insurer initiative, filled the wrong way. Each box shows why it collaps
 - **4. User Outcomes (JTBD):** "Users will like the app." → *Not a job, benefit, pain, or gain — just a hope. Says nothing about why anyone opens it at 11pm.*
 - **5. Solutions:** "The AI chatbot." → *One pre-decided idea; no space to test dashboard vs. nudge vs. escalation.*
 - **6. Hypotheses:** "We believe users will like AI triage." → *Not falsifiable, ignores the template, links no outcome to no user to no benefit.*
-- **7. Learning Priorities:** "Let's test the dashboard first, it's easiest." → *Comfort, not risk. The risk × evidence plot says the trust hypothesis is the one that kills the initiative if wrong.*
+- **7. Learning Priorities:** "Let's test the dashboard first, it's easiest." → *Comfort, not risk. The risk × perceived value plot puts the trust hypothesis in the Test quadrant — it's the one that kills the initiative if wrong.*
 - **8. Experiment:** "Ship it to all members and watch." → *Not the smallest test — it's the whole build. Nothing is learned cheaply.*
 
-**The fix is the good example above:** start from what changed, follow the money to the insurer as capturer, pick the anxious-parent persona, run a full JTBD pass, list several solutions, write one falsifiable hypothesis, prioritize by risk × evidence, and settle the trust risk with a two-week concierge test before building anything.
+**The fix is the good example above:** start from what changed, follow the money to the insurer as capturer, pick the anxious-parent persona, run a full JTBD pass, list several solutions, write one falsifiable hypothesis, prioritize by risk × perceived value, and settle the trust risk with a two-week concierge test before building anything.

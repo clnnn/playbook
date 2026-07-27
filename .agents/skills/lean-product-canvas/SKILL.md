@@ -10,7 +10,7 @@ Facilitate **Jeff Gothelf's Lean Product Canvas**. It is a one-page tool that fr
 This variant is self-contained (every helper skill is distilled inline) and keeps two deliberate enrichments over the stock canvas:
 
 - **Box 2 follows the money first.** You trace the cashflow to the final money-capturer *before* naming a metric — then write each metric in v3's **"who does what by how much"** key-result format. You cannot state a credible business outcome until you know who ultimately gets paid.
-- **Box 4 runs a full Jobs-to-be-Done pass** (functional / social / emotional jobs, plus pains and gains), and **Box 7 uses Hypothesis-Prioritization thinking** (risk × evidence) to pick what to test first.
+- **Box 4 runs a full Jobs-to-be-Done pass** (functional / social / emotional jobs, plus pains and gains), and **Box 7 uses Hypothesis-Prioritization thinking** (risk × perceived value) to pick what to test first.
 
 The canvas is an insurance policy: it turns assumptions into experiments before you commit to building, and shifts the conversation from outputs to outcomes.
 
@@ -194,16 +194,16 @@ Turn the assumptions from Boxes 2, 3, 4 & 5 into testable hypotheses, **one feat
 
 You now have several hypotheses. This box does two things: **pick which hypothesis to test first**, then **name the riskiest assumption inside it**.
 
-*Prioritize with the Hypothesis Prioritization Canvas (risk × evidence).* Plot each Box 6 hypothesis on two axes — **risk** (how catastrophic if we're wrong) and **evidence** (how much data we already have supporting it):
+*Prioritize with the Hypothesis Prioritization Canvas (risk × perceived value).* Plot each Box 6 hypothesis on two axes — **risk** (how catastrophic if we're wrong — the team's collective best guess at the damage to the product, service, or business) and **perceived value** (how much business value we imagine the idea delivers — and remember that value is still *imagined*, not yet proven):
 
-- **High risk + little evidence → experiment now.** This is where Box 8 goes. If we're wrong here it hurts, and we don't yet know if we're wrong.
-- **High risk + strong evidence → build/prioritize.** Act on it; you already have the evidence.
-- **Low risk + little evidence → defer** (run cheap experiments later).
-- **Low risk + strong evidence → just build it** (task, no experiment needed).
+- **High value + high risk → Test.** Big upside, big downside, still unproven — this earns discovery time and experimentation. **This is where Box 8 goes.**
+- **High value + low risk → Ship & Measure.** High-confidence, high-payoff — no discovery needed. Build it, launch it, then track the metric.
+- **Low value + low risk → don't test, usually don't build.** Foundational table-stakes (e.g. payments) that don't differentiate the offering but are operationally required.
+- **Low value + high risk → Discard.** Not worth the exposure — neither test nor build it.
 
-Pick the top-left hypothesis. Then, for it, list all the reasons it might fail (its risks), and choose the single riskiest assumption *right now*. Classify that assumption: **value** (do they want it?), **usability** (can they use it?), **feasibility** (can we build it?), **viability** (does it hit the business outcome / move the money?). Early on, weight risks to **value** over feasibility.
+Pick the high-value, high-risk hypothesis (the **Test** quadrant). Then, for it, list all the reasons it might fail (its risks), and choose the single riskiest assumption *right now*. Classify that assumption: **value** (do they want it?), **usability** (can they use it?), **feasibility** (can we build it?), **viability** (does it hit the business outcome / move the money?). Early on, weight risks to **value** over feasibility.
 
-**Completion criterion:** the highest-priority hypothesis is chosen via risk × evidence, and within it one riskiest assumption is named with its risk type and a stated reason — the one that, if wrong, would kill the initiative.
+**Completion criterion:** the highest-priority hypothesis is chosen via risk × perceived value (the Test quadrant), and within it one riskiest assumption is named with its risk type and a stated reason — the one that, if wrong, would kill the initiative.
 
 ### Box 8 — Experiments (least work to learn next)
 
@@ -234,7 +234,7 @@ The canvas is one iteration, not a deliverable. Close the session by making the 
 
 1. **Run the Box 8 experiment** against a timebox (the <2-week limit you already set).
 2. **Record the learning** — was the Box 7 assumption validated or invalidated, and what's the evidence?
-3. **Update the canvas** — revise the hypotheses that moved, and re-run the Box 7 risk × evidence prioritization to re-pick the next-riskiest assumption.
+3. **Update the canvas** — revise the hypotheses that moved, and re-run the Box 7 risk × perceived value prioritization to re-pick the next-riskiest assumption.
 4. **Repeat Box 7 → Box 8** until confidence is high enough to commit to building — or until the evidence kills the initiative, which is a win, not a failure.
 
 Bump the iteration number and keep the prior canvas; the trail of what you believed and learned is part of the insurance policy.
@@ -249,7 +249,7 @@ Watch for these while facilitating — each is a completion-criterion failure wi
 - **Box 2 / Box 4 swapped** (emotions in 2, metrics in 4) → Box 2 is behavior change you measure, Box 4 is human motivation (jobs, pains, gains).
 - **Only functional jobs in Box 4** → social and emotional jobs drive adoption harder; name at least one of each and rank pains by intensity.
 - **One idea in Box 5** (the pre-decided feature) → force 3+ candidates; without alternatives there's nothing to test between.
-- **Picking the first hypothesis instead of the riskiest** (Box 7) → run the risk × evidence plot; test the high-risk / low-evidence one first, not the comfortable one.
+- **Picking the first hypothesis instead of the riskiest** (Box 7) → run the risk × perceived value plot; test the high-value / high-risk one (the Test quadrant) first, not the comfortable one.
 - **Skipping Box 8** ("we'll just build it and see") → design the smallest experiment first; if none comes to mind, that's the signal to slow down, not speed up.
 - **Probe with no disposal date** (Box 8) → it silently becomes the MVP; set the delete-by date before you build, or you'll defend the throwaway instead of throwing it away.
 
