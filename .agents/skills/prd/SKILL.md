@@ -97,7 +97,7 @@ Fill `template.md` — it is the deliverable: field structure and inline example
 
 ## Section 4 — Strategic Context
 
-**Goal:** Explain why this matters to the business and why now. Market sizing and competitive landscape live in a separate investment-case skill, not here.
+**Goal:** Explain why this matters to the business and why now.
 
 **Method.** Two parts only:
 
