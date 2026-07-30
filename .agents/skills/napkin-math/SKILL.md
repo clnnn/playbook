@@ -36,7 +36,14 @@ Carry units through every step. They act as a checksum — if the units don't re
 
 ### 6. Replay the calculation in code
 
-Rewrite the arithmetic as a short script (Python or similar) that computes the answer directly from the assumption values — the only numbers it may contain are the assumptions themselves, never intermediate results from your hand math. Run it. The step is done when the script's output matches your hand answer's exponent. On a mismatch, trust the code: fix the hand math (or a mistranscribed assumption) and replay until they agree.
+The replay is scratch work: it validates the formulas you derived against executable code before you write a single line of output. Rewrite the arithmetic as a short throwaway script (Python or similar) that computes the answer directly from the assumption values — the only numbers it may contain are the assumptions themselves, never intermediate results from your hand math:
+
+```python
+line_bytes, rps, days, compression = 1_000, 100_000, 30, 3   # assumptions only
+print(line_bytes * rps * 86_400 * days / compression / 1e9)  # GB stored
+```
+
+Run it. The step is done when the script's output matches your hand answer's exponent. On a mismatch, trust the code: fix the hand math (or a mistranscribed assumption) and replay until they agree. What ships is the corrected calculation; the script stays in scratch.
 
 ### 7. State the answer and make the decision
 
@@ -115,9 +122,6 @@ Use powers of 10 for all arithmetic — don't fuss over GiB vs GB for napkin mat
 ## Calculation
 - [step-by-step, carrying units, using c * 10^e notation]
 
-## Replay
-- [the script that recomputes the answer from the assumptions, and its actual output]
-
 ## Answer
 - [final number with units, stated as an order of magnitude range]
 - [the decision: is this feasible/acceptable/worth investigating further?]
@@ -149,20 +153,6 @@ Per day:      10^8 bytes/s * 9*10^4 s/day = 9*10^12 bytes/day ~ 9 TB/day
 30 days:     9 TB * 30 = 270 TB raw
 Compressed:  270 TB / 3 = 90 TB stored
 Cost:        90*10^3 GB * $0.02/GB = $1,800/month (storage only)
-```
-
-### Replay
-```python
-line_bytes = 1_000        # bytes per log line
-rps = 100_000             # requests/second
-days = 30
-compression = 3
-price_gb_month = 0.02     # blob storage $/GB/month
-
-raw_bytes = line_bytes * rps * 86_400 * days
-stored_gb = raw_bytes / compression / 1e9
-print(f"stored: {stored_gb:,.0f} GB -> ${stored_gb * price_gb_month:,.0f}/month")
-# stored: 86,400 GB -> $1,728/month  ✓ matches $1,800 hand answer
 ```
 
 ### Answer
