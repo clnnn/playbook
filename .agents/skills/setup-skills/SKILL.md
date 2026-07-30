@@ -1,80 +1,76 @@
 ---
 name: setup-skills
-description: Configure this repo's per-repo settings for the product and engineering skills.
+description: Configure the per-repo settings the product and engineering skills depend on — currently, where product documents get published.
 disable-model-invocation: true
 ---
 
 # Setup Skills
 
-Scaffold the per-repo configuration the product and engineering skills assume. Each section below configures one skill's setup needs; the skill grows a new section whenever another skill needs one — for now there's just:
+Scaffold the per-repo configuration the product and engineering skills assume. Each section below covers one setup need and runs the same shape: **explore → ask → confirm → write**. Prompt-driven throughout — read the repo, show the user what you found, get their sign-off, then write.
 
-This is a prompt-driven skill, not a deterministic script. Explore, present what you found, confirm with the user, then write.
+## Docs storage
 
-## Process
+### 1. Explore
 
-### Section A — Docs storage
-
-#### 1. Explore
-
-Look at the current repo before asking anything:
+Read the repo before asking anything:
 
 - `git remote -v` — is this a GitHub repo? Which one?
-- Is the `gh` CLI installed and authenticated (`gh auth status`)? The GitHub Discussion option needs both.
+- `gh auth status` — is the `gh` CLI installed and authenticated? The GitHub Discussion option needs both.
 - `docs/product/` — sign that a local-markdown convention is already in use.
-- `AGENTS.md` and `CLAUDE.md` at the repo root — does either exist? Is there already an `## Agent skills` section in either?
-- `docs/agents/docs-storage.md` — does this skill's prior output already exist?
+- `AGENTS.md` at the repo root — does it exist? Does it already carry an `## Agent skills` section?
+- `docs/agents/docs-storage.md` — has this section already run?
 
-#### 2. Present findings and ask
+**Advance when:** all five are answered. If `docs/agents/docs-storage.md` already exists, read it, tell the user which backend it configures, and ask whether they're switching — if they aren't, stop here.
 
-Summarise what's present, then ask exactly one question:
+### 2. Present findings and ask
 
-> Where should product documents (PRDs, Lean Product Canvases, user story maps) be stored?
+Summarise what's present, then put the storage question to the user:
 
-- **GitHub Discussion** — published as a Discussion in the **Product** category, via the `gh` CLI. Recommend this when `git remote -v` points at GitHub and `gh auth status` succeeds.
+> Where should the documents produced by `/prd`, `/lean-product-canvas`, `/nfr-elicitation`, and `/user-story-mapping-workshop` be stored?
+
+- **GitHub Discussion** — published as a Discussion in the **Knowledge Base** category, via the `gh` CLI. Recommend this when `git remote -v` points at GitHub and `gh auth status` succeeds.
 - **Local markdown** — published as a file under `docs/product/` in this repo. Recommend this when there's no GitHub remote, `gh` isn't authenticated, or `docs/product/` already holds files.
 
-If the user picks **GitHub Discussion**, tell them up front that the **Product** category must already exist in the repo's Discussions settings — `gh` can file into a category but can't create one. Ask if it exists yet; if not, point them at **Settings → Discussions → pencil icon next to Categories → New category** and let them create it before or after this setup runs (it doesn't block writing the config).
+On **GitHub Discussion**, say up front that the **Knowledge Base** category must already exist in the repo's Discussions settings — `gh` files into a category but can't create one. Ask whether it exists; if not, point them at **Settings → Discussions → pencil icon next to Categories → New category**. They can create it before or after this setup runs — it doesn't block writing the config.
 
-If the user picks **Local markdown**, confirm the folder — default `docs/product/`.
+On **Local markdown**, confirm the folder — default `docs/product/`.
 
-#### 3. Confirm and edit
+**Advance when:** the backend is chosen and its follow-up is settled — category confirmed, or folder confirmed.
 
-Show the user a draft of:
+### 3. Confirm and edit
 
-- The `## Agent skills` block to add to whichever of `CLAUDE.md` / `AGENTS.md` is being edited (see step 4 for selection rules)
+Show the user a draft of both artifacts:
+
+- The `## Agent skills` block to add to `AGENTS.md`
 - The contents of `docs/agents/docs-storage.md`
 
-Let them edit before writing.
+While the draft is on screen, point out the naming convention: documents are named by type first — `[PRD] Checkout Redesign` as a discussion title, `prd-checkout-redesign.md` as a file. The seed template carries the full type list, so this is a mention rather than a question.
 
-#### 4. Write
+**Advance when:** the user has approved both drafts, with any edits they asked for folded in.
 
-**Pick the file to edit:**
+### 4. Write
 
-- If `CLAUDE.md` exists, edit it.
-- Else if `AGENTS.md` exists, edit it.
-- If neither exists, ask the user which one to create — don't pick for them.
-
-Never create `AGENTS.md` when `CLAUDE.md` already exists (or vice versa) — always edit the one that's already there.
-
-If an `## Agent skills` block already exists in the chosen file, add or update the `### Docs storage` subsection in-place rather than appending a duplicate block. Don't overwrite unrelated sections.
+Edit `AGENTS.md` at the repo root, creating it if it's absent. When an `## Agent skills` block is already there, update its `### Docs storage` subsection in place and leave every other section as it stands.
 
 The subsection:
 
 ```markdown
 ### Docs storage
 
-[one-line summary — e.g. "GitHub Discussion, category **Product**" or "Local markdown under `docs/product/`"]. See `docs/agents/docs-storage.md`.
+[one-line summary — e.g. "GitHub Discussion, category **Knowledge Base**" or "Local markdown under `docs/product/`"]. See `docs/agents/docs-storage.md`.
 ```
 
-Then write `docs/agents/docs-storage.md` using the matching seed template in this skill folder as a starting point:
+Then write `docs/agents/docs-storage.md` from the seed template matching the chosen backend:
 
 - [docs-storage-github-discussion.md](./docs-storage-github-discussion.md) — GitHub Discussion
 - [docs-storage-local-markdown.md](./docs-storage-local-markdown.md) — local markdown
 
-#### 5. Done
+**Advance when:** both files exist on disk, `AGENTS.md` holds exactly one `## Agent skills` block, and its `### Docs storage` summary names the same backend as `docs/agents/docs-storage.md`.
 
-Tell the user this section is complete, and that `/prd`, `/lean-product-canvas`, and `/user-story-mapping-workshop` can now follow `docs/agents/docs-storage.md` when it's time to publish a finished document. Mention they can edit that file directly later — re-running this section is only necessary to switch storage backends.
+### 5. Done
 
-### Other sections
+Tell the user this section is complete: `docs/agents/docs-storage.md` is now the repo's standing answer to "where does a finished product document go", and `AGENTS.md` points every agent at it. They can edit that file directly — re-running this section is for switching backends.
 
-None yet. When a skill needs its own per-repo setup (e.g. the issue tracker), it gets a new `### Section` here, following the same explore → ask → confirm → write shape as Section A.
+## Adding a section
+
+When another skill needs per-repo setup — an issue tracker, say — give it its own `##` section here, following the same explore → ask → confirm → write shape, with one seed template per option the user can choose.
