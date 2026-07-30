@@ -22,6 +22,11 @@ phases with the feedback loops that make it *not* a waterfall.
  │  /positioning-statement   (optional — go-to-market clarity)   │
  │  /prd                                                         │
  │    └─ §6 Success Metrics: primary + guardrail + baseline→now  │
+ │  /nfr-elicitation                                             │
+ │    └─ interrogates until NFRs are pinned: performance,        │
+ │       scale, availability, security, compliance, offline      │
+ │    └─ a killer NFR (can't meet it) ⟲ back to Phase 1 as a     │
+ │       feasibility risk                                        │
  └──────────────────────────────────────────────────────────────┘
                           │
                           ▼
@@ -53,7 +58,7 @@ phases with the feedback loops that make it *not* a waterfall.
 | # | Phase | Skills | Why it sits here |
 |---|---|---|---|
 | 1 | **Validate** | `lean-product-canvas` → `pol-probe-advisor` → `pol-probe` | Reduce *market* risk before spending build effort. The canvas embeds JTBD + persona + problem framing, so it's a strong single entry point. Loop on Box 7's riskiest assumption until problem, solution-fit, willingness-to-pay, **and feasibility** are cleared. |
-| 2 | **Define** | `positioning-statement` (optional), `prd` | Now that you know you *should* build, align on *what/why*. Critically, **PRD §6 forces success metrics + guardrail + baseline-to-analytics before launch** — this is the "measure the release" discipline that fills the canvas-only gap. |
+| 2 | **Define** | `positioning-statement` (optional), `prd`, `nfr-elicitation` | Now that you know you *should* build, align on *what/why*. Critically, **PRD §6 forces success metrics + guardrail + baseline-to-analytics before launch** — this is the "measure the release" discipline that fills the canvas-only gap. Then `nfr-elicitation` keeps asking questions until the **non-functional requirements** are pinned — performance, scale, availability, security, compliance, offline tolerance — the "how well" the functional PRD leaves implicit. It sits after `/prd` (you need the functional scope to ask sharp NFR questions) and before Phase 3 (NFRs shape bounded contexts and architecture). A requirement you *can't* meet is a killer feasibility risk → loop back to Phase 1. |
 | 3 | **Structure** | `domain-discovery` | Establishes the **ubiquitous language** (so the map's labels are consistent, not "context-free mulch") and finds **the moat** (so the walking skeleton bites where value concentrates). Must precede mapping for both reasons. |
 | 4 | **Plan the build** | `user-story-mapping-workshop` → `epic-breakdown-advisor` → `user-story` → `user-story-splitting` | Turn the aligned "what" into sequenced, deliverable work. Mapping defines the thin end-to-end walking skeleton + release slices; the rest decompose it. PRD explicitly hands off here ("user stories are out of scope, produced separately"). |
 | 5 | **Build & measure** | `nx-generate`, `shadcn` / `impeccable` / `tweakcn-theme`, then ship | Scaffold, build the walking skeleton, release, and watch the PRD §6 metrics. The result feeds straight back into Phase 1 as your next validated learning. |
