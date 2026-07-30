@@ -1,31 +1,43 @@
 ---
 name: nfr-elicitation
 description: Interrogates a plan or feature in plain language until every
-  non-functional requirement carries a number and a consequence — speed, load,
-  uptime, failure behaviour, security, compliance, accessibility, offline reach,
-  data durability, and operability. Use once a functional spec or PRD exists and
-  before domain/architecture work, or whenever someone says how well a system
-  must behave — "fast", "always-on", "secure", "handles scale" — without saying
-  how much. Other skills reach it to pin down the "how well" a functional spec
+  non-functional requirement is SMART — specific, measurable, agreed,
+  realistic, time-bound — across speed, load, uptime, failure behaviour,
+  security, compliance, accessibility, offline reach, data durability, and
+  operability. Use once a functional spec or PRD exists and before
+  domain/architecture work, or whenever someone says how well a system must
+  behave — "fast", "always-on", "secure", "handles scale" — without saying how
+  much. Other skills reach it to pin down the "how well" a functional spec
   leaves implicit.
 ---
 
 # NFR Elicitation
 
 Interview the user in plain language until every non-functional requirement is
-pinned. People don't hand you NFRs; they hand you adjectives — "fast",
-"reliable", "secure". Your job is to turn each adjective into **the number**.
+**SMART**. People don't hand you NFRs; they hand you adjectives — "fast",
+"reliable", "secure". Your job is to make each adjective SMART, per the
+[DPR SMART NFR Elicitation activity](https://socadk.github.io/design-practice-repository/activities/DPR-SMART-NFR-Elicitation.html):
 
-**The number** is the whole game. A requirement isn't real until it carries:
+- **Specific** — scoped to a feature, business process, or moment, never the
+  system as a whole. "The job screen", not "the app" — different features earn
+  different quality levels, and a per-system number is a smell.
+- **Measurable** — a threshold with a consequence: the measurable line ("under
+  3 seconds", "500 concurrent", "99.9%") and what breaks the moment it's
+  crossed ("the installer abandons the job"). You elicit it by asking about the
+  consequence, never the metric — people can't answer "what's your p99 latency
+  target?" but they can always answer "how long before someone gives up
+  waiting?" When a single number won't surface, record a **landing zone** — a
+  minimal / target / outstanding triplet — rather than stalling or guessing.
+- **Agreed** — a source who dictates the line and has said yes: user
+  tolerance, business, a contract, or regulation.
+- **Realistic** — plausibly achievable. A number the build plausibly can't hit
+  is a feasibility risk, not an NFR: flag it and hand it back to validation (a
+  Proof-of-Life or spike) rather than recording it as settled.
+- **Time-bound** — when the number must hold ("at launch", "by 10k users") and
+  how it tightens as the system grows.
 
-- **a threshold** — the measurable line ("under 3 seconds", "500 concurrent", "99.9%")
-- **a consequence** — what breaks the moment you cross it ("the installer abandons the job")
-- **a source** — who dictates the line: user tolerance, business, a contract, or regulation
-
-"Fast" is an adjective. "Loads in under 3s or the field technician gives up and
-calls the office" is **the number**. You elicit it by asking about the
-consequence, never the metric — people can't answer "what's your p99 latency
-target?" but they can always answer "how long before someone gives up waiting?"
+"Fast" is an adjective. "Job screen loads < 3s on 4G at launch, or the field
+technician gives up and calls the office" is SMART.
 
 ## General rules
 
@@ -36,9 +48,12 @@ target?" but they can always answer "how long before someone gives up waiting?"
   your private notes — the moment they reach the user, the answers get worse.
 - **Cross-reference the functional spec.** If a PRD or feature doc exists, read
   it first; an NFR that contradicts a stated function is a question, not a note.
-- **A number you can't meet is a feasibility risk, not an NFR.** When the user
-  names a threshold the build plausibly can't hit, flag it and hand it back to
-  validation (a Proof-of-Life or spike) rather than recording it as settled.
+- **Separate constraints from quality attributes.** A rule nobody gets to tune
+  — a mandated database, an enterprise licence, a platform decree — is a
+  constraint: record it in its own section instead of forcing a threshold on it.
+- **Make conflicts explicit.** When two pinned numbers fight (security vs
+  speed, durability vs cost), name the tradeoff and which side wins, with the
+  user's say-so.
 
 ## Running the session
 
@@ -56,11 +71,12 @@ this protocol until [Ending the session](#ending-the-session) is met:
 - **Anchor with a number, and recommend one.** Where the domain lets you guess a
   plausible threshold, offer it as a starting number the user can accept, raise,
   or reject — an anchor pulls a sharper answer than a blank. Put your
-  recommendation first, marked `(Recommended)`.
-- **Force the number before advancing.** An answer that's still an adjective
-  isn't done — ask the follow-up that surfaces the consequence, then the
-  threshold and its source. Record each pinned requirement into the spec (see
-  Output) before the next question.
+  recommendation first, marked `(Recommended)`. If the user waves between
+  numbers, offer a landing zone instead.
+- **Make it SMART before advancing.** An answer that's still an adjective isn't
+  done — ask the follow-ups that surface the consequence, then the threshold,
+  its scope, its source, and when it must hold. Record each pinned requirement
+  into the spec (see Output) before the next question.
 - **Pause and resume on request**, and absorb interruptions without losing the
   attribute in front of you.
 
@@ -85,14 +101,16 @@ one you skip must be skipped *on purpose*, not forgotten.
 
 The session is complete only when all of these hold:
 
-- Every attribute above is either pinned with **the number** (threshold +
-  consequence + source) or explicitly recorded as *not live for this system*.
-- No adjective survives unquantified — no "fast", "secure", or "reliable" stands
-  in the spec without a number behind it.
+- Every attribute above is either pinned **SMART** (scope + threshold +
+  consequence + source + time-bound) or explicitly recorded as *not live for
+  this system*.
+- No adjective survives unquantified — no "fast", "secure", or "reliable"
+  stands in the spec without a number or landing zone behind it.
 - Every number the build plausibly can't hit is flagged as a feasibility risk,
   not silently accepted.
+- Every conflict between pinned numbers is named, with a winner.
 
-Until all three hold, keep grilling in rounds.
+Until all four hold, keep grilling in rounds.
 
 ## Output
 
@@ -102,11 +120,17 @@ if one exists). One row per pinned requirement:
 ```markdown
 # Non-Functional Requirements — [system/feature]
 
-| Attribute | The number (threshold) | Consequence if crossed | Source | Priority |
-|---|---|---|---|---|
-| Speed | Job screen loads < 3s on 4G | Installer abandons, calls office | User tolerance | Must |
-| Load  | 500 concurrent installers, 10× on launch day | Queue backs up, jobs mis-assigned | Business forecast | Must |
-| … | | | | |
+| Attribute | Scope | Threshold (or landing zone) | Consequence if crossed | Source | Time-bound | Priority |
+|---|---|---|---|---|---|---|
+| Speed | Job screen | < 3s on 4G (min 5s / target 3s / outstanding 1s) | Installer abandons, calls office | User tolerance | At launch | Must |
+| Load  | Job assignment | 500 concurrent installers, 10× on launch day | Queue backs up, jobs mis-assigned | Business forecast | Launch day | Must |
+| … | | | | | | |
+
+## Constraints (rules nobody gets to tune)
+- [Constraint] — who mandates it and why
+
+## Conflicts (tradeoffs, resolved)
+- [Attribute A vs Attribute B] — which wins and why
 
 ## Ruled out (not live)
 - [Attribute] — why it doesn't apply to this system
