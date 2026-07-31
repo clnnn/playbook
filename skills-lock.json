@@ -25,6 +25,12 @@
       "skillPath": "skills/epic-hypothesis/SKILL.md",
       "computedHash": "3c80b5e3ae2c5daee79e49d9363e2df30d289b12b70d36e798bc5517790fa061"
     },
+    "grilling": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/productivity/grilling/SKILL.md",
+      "computedHash": "368d3dd7251247c69f3656d93dc83c8f1577792eacac2111f1e7981db2ece49b"
+    },
     "handoff": {
       "source": "mattpocock/skills",
       "sourceType": "github",
