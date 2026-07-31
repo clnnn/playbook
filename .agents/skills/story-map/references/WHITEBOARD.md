@@ -4,11 +4,7 @@ One self-contained HTML file that renders the current map. Created at Q3 (backbo
 
 ## Publish and refresh
 
-**Primary:** publish with the Artifact tool, following that tool's own publishing requirements. Favicon `🗺️`, title `Story Map — <Subject>`. Every refresh re-publishes the **same file path**, so the URL never changes — the user keeps one tab open and reloads it.
-
-**Fallback (no Artifact tool):** write the file where the user can reach it and tell them to open it in a browser and reload after each update.
-
-Artifact pages must be fully self-contained — no CDN scripts, fonts, or remote images. Hand-write the CSS; support light and dark (`prefers-color-scheme` plus `:root[data-theme]` overrides).
+Before writing the file, read [`PUBLISHING.md`](PUBLISHING.md) — it holds the page contract and the delivery path. Title `Story Map — <Subject>`, favicon `🗺️`.
 
 ## Data-driven render — the drift guard
 

@@ -4,8 +4,7 @@ Built only after the review gate passes. One file, `prototype.html`, that a stak
 
 ## Constraints
 
-- **One HTML file:** full `<!DOCTYPE html>` document with `<script src="https://cdn.tailwindcss.com"></script>`, all styling via Tailwind classes, all behavior in inline vanilla JS. No other external assets, no build step.
-- **Delivered as a file the user opens locally.** Never publish it with the Artifact tool — the Artifact CSP blocks the Tailwind CDN and the page would render unstyled.
+- **Published like the whiteboard:** before writing the file, read [`PUBLISHING.md`](PUBLISHING.md) — it holds the page contract and the delivery path. Title `<Product name> — Walking Skeleton`, favicon `🦴`.
 - **Walking skeleton by default:** the prototype implements every Release 1 task in its simplest form and nothing from Release 2/3. If the user asks to preview a later-slice feature, add it behind an obvious toggle rather than blending it into the skeleton.
 
 ## Structure — the map drives the screens
@@ -31,9 +30,9 @@ It should look like a designed product, not a wireframe:
 
 ## Feedback loop
 
-Present the file path, tell the user to open it in a browser, and ask what they'd change. Then:
+Give the user the prototype's link and ask what they'd change. Then:
 
-- **UI-only feedback** (layout, copy, colors, widget choice) → edit `prototype.html`, tell them to reload.
+- **UI-only feedback** (layout, copy, colors, widget choice) → edit `prototype.html` and refresh it; the link stays the same.
 - **Feedback that changes the map** (missing task, wrong order, wrong scope) → update the map first, refresh the whiteboard, then the prototype. The map stays the single source of truth.
 
 Loop until the user agrees the prototype flow matches the map — that agreement triggers the Close step in `SKILL.md`.

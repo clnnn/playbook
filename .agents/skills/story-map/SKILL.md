@@ -96,15 +96,15 @@ Fold every accepted answer into the map and refresh the whiteboard. Loop until t
 
 ### Prototype
 
-Read [`references/PROTOTYPE.md`](references/PROTOTYPE.md) and build `prototype.html`: one file, Tailwind CDN, vanilla JS, mocked data — an interactive, high-fidelity click-through of the walking skeleton. Iterate on the user's feedback: UI-only feedback edits the prototype; feedback that reveals a map change updates the map, the whiteboard, and the prototype.
+Read [`references/PROTOTYPE.md`](references/PROTOTYPE.md) and build `prototype.html`: one file, vanilla JS, mocked data — an interactive, high-fidelity click-through of the walking skeleton, published the same way the whiteboard is. Iterate on the user's feedback: UI-only feedback edits the prototype; feedback that reveals a map change updates the map, the whiteboard, and the prototype.
 
 ### Close
 
 When the user agrees with both the story map and the prototype flow:
 
 1. Write the story map document per [`references/MAP-FORMAT.md`](references/MAP-FORMAT.md) and publish the product document.
-2. Save `prototype.html` in the repo (default `docs/prototypes/<subject-slug>.html`) and link it from the document as its visual companion.
-3. Report the document location and prototype path, and end the session.
+2. Save `prototype.html` in the repo (default `docs/prototypes/<subject-slug>.html`) and link it from the document as its visual companion — the published URL when there is one, otherwise the repo path.
+3. Report the document location, the prototype's link, and its repo path, and end the session.
 
 ## Pitfalls
 

@@ -7,7 +7,7 @@ The final deliverable, rendered from the approved map. Publish it as the product
 
 **Author:** [Author]
 **Date:** [Today's date]
-**Prototype:** [relative link to prototype.html] — interactive walking-skeleton companion
+**Prototype:** [published URL, else relative link to prototype.html] — interactive walking-skeleton companion
 
 ## Who
 
