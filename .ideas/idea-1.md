@@ -27,8 +27,10 @@ phases with the feedback loops that make it *not* a waterfall.
  │       scale, availability, security, compliance, offline      │
  │    └─ a killer NFR (can't meet it) ⟲ back to Phase 1 as a     │
  │       feasibility risk                                        │
+ │  /user-story-mapping-workshop                                 │
+ │    └─ backbone + walking skeleton + release slices            │
  └──────────────────────────────────────────────────────────────┘
-                          │
+                          │ (scope, NFRs, and the map)
                           ▼
  ┌─ PHASE 3: STRUCTURE ─────────────────────────────────────────┐
  │  /domain-discovery                                            │
@@ -37,7 +39,6 @@ phases with the feedback loops that make it *not* a waterfall.
                           │ (glossary + moat feed naming & priority)
                           ▼
  ┌─ PHASE 4: PLAN THE BUILD ────────────────────────────────────┐
- │  /user-story-mapping-workshop → walking skeleton + slices     │
  │  /epic-breakdown-advisor      → map areas into epics          │
  │  /user-story                  → stories + Gherkin criteria    │
  │  /user-story-splitting        → split anything still too big  │
@@ -58,14 +59,14 @@ phases with the feedback loops that make it *not* a waterfall.
 | # | Phase | Skills | Why it sits here |
 |---|---|---|---|
 | 1 | **Validate** | `lean-product-canvas` → `pol-probe-advisor` → `pol-probe` | Reduce *market* risk before spending build effort. The canvas embeds JTBD + persona + problem framing, so it's a strong single entry point. Loop on Box 7's riskiest assumption until problem, solution-fit, willingness-to-pay, **and feasibility** are cleared. |
-| 2 | **Define** | `positioning-statement` (optional), `prd`, `nfr-elicitation` | Now that you know you *should* build, align on *what/why*. Critically, **PRD §6 forces success metrics + guardrail + baseline-to-analytics before launch** — this is the "measure the release" discipline that fills the canvas-only gap. Then `nfr-elicitation` keeps asking questions until the **non-functional requirements** are pinned — performance, scale, availability, security, compliance, offline tolerance — the "how well" the functional PRD leaves implicit. It sits after `/prd` (you need the functional scope to ask sharp NFR questions) and before Phase 3 (NFRs shape bounded contexts and architecture). A requirement you *can't* meet is a killer feasibility risk → loop back to Phase 1. |
-| 3 | **Structure** | `domain-discovery` | Establishes the **ubiquitous language** (so the map's labels are consistent, not "context-free mulch") and finds **the moat** (so the walking skeleton bites where value concentrates). Must precede mapping for both reasons. |
-| 4 | **Plan the build** | `user-story-mapping-workshop` → `epic-breakdown-advisor` → `user-story` → `user-story-splitting` | Turn the aligned "what" into sequenced, deliverable work. Mapping defines the thin end-to-end walking skeleton + release slices; the rest decompose it. PRD explicitly hands off here ("user stories are out of scope, produced separately"). |
+| 2 | **Define** | `positioning-statement` (optional), `prd`, `nfr-elicitation`, `user-story-mapping-workshop` | Now that you know you *should* build, align on *what/why*. Critically, **PRD §6 forces success metrics + guardrail + baseline-to-analytics before launch** — this is the "measure the release" discipline that fills the canvas-only gap. Then `nfr-elicitation` keeps asking questions until the **non-functional requirements** are pinned — performance, scale, availability, security, compliance, offline tolerance — the "how well" the functional PRD leaves implicit. It sits after `/prd` (you need the functional scope to ask sharp NFR questions). Finally, **mapping is a definition activity, not a planning one**: laying the journey out end-to-end is what exposes the steps a prose PRD silently drops, and it's how the scope becomes a *shape* — backbone, walking skeleton, release slices — that everyone can argue with. A requirement you *can't* meet is a killer feasibility risk → loop back to Phase 1. |
+| 3 | **Structure** | `domain-discovery` | Takes the PRD, the NFRs, and the map as input. Names the **bounded contexts** sitting behind the map's activities, locks the **ubiquitous language** so epics and stories inherit consistent labels instead of "context-free mulch", and finds **the moat** so the walking skeleton's slices get prioritised where value concentrates. A map step that won't name cleanly is the tell that a boundary is wrong. |
+| 4 | **Plan the build** | `epic-breakdown-advisor` → `user-story` → `user-story-splitting` | Decompose. The backbone and slices are already fixed in Phase 2 and the vocabulary in Phase 3, so this phase is pure breakdown: map areas → epics → stories with Gherkin criteria → splits for anything still too big. PRD explicitly hands off here ("user stories are out of scope, produced separately"). |
 | 5 | **Build & measure** | `nx-generate`, `shadcn` / `impeccable` / `tweakcn-theme`, then ship | Scaffold, build the walking skeleton, release, and watch the PRD §6 metrics. The result feeds straight back into Phase 1 as your next validated learning. |
 
 ## The three honest caveats
 
-1. **It's a loop, not a line.** Every phase can send you back: a failed probe → re-frame the canvas; a journey step you can't name → back to domain-discovery; a released metric that misses → back to validate. The arrows down are the *happy path*; the ⟲ marks are where reality lives.
+1. **It's a loop, not a line.** Every phase can send you back: a failed probe → re-frame the canvas; a map step domain-discovery can't name cleanly → re-open the map; a released metric that misses → back to validate. The arrows down are the *happy path*; the ⟲ marks are where reality lives.
 
 2. **You can skip based on scale.** Solo dev with a small, validated scope? You can collapse Phase 2 to just PRD §6's metric discipline, and even skip mapping if the journey is one short activity — go canvas → domain-discovery → epic-breakdown → build. The full chain earns its keep when there's a *team* to align or a *multi-activity journey* to sequence.
 
@@ -73,4 +74,4 @@ phases with the feedback loops that make it *not* a waterfall.
 
 ## One-line summary
 
-**Validate what's riskiest → define what success means → learn the language and the moat → sequence the thinnest slice → build it → measure → repeat.**
+**Validate what's riskiest → define what success means and map the thinnest slice → learn the language and the moat → decompose into stories → build it → measure → repeat.**

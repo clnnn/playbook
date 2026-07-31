@@ -25,3 +25,9 @@
 - The `nx-generate` skill handles generator discovery internally - don't call nx_docs just to look up generator syntax
 
 <!-- nx configuration end-->
+
+## Agent skills
+
+### Docs storage
+
+GitHub Discussion, category **Knowledge Base**. See `docs/agents/docs-storage.md`.
