@@ -9,6 +9,8 @@ disable-model-invocation: true
 
 Facilitate a Jeff Patton story mapping session in which the user watches the map grow on a **live whiteboard**, then — once the map passes the review gate — receives a high-fidelity HTML prototype of the **walking skeleton**. The session ends with two deliverables: the story map document and the prototype as its visual companion.
 
+The map is a strategic artifact, not a backlog: it shows *how* users reach their goal, which is what tells you what to build. It is not a Gantt chart, not a feature list, and never finished — it changes as the team learns.
+
 ## Input
 
 **Works best with:** the system or workflow to map.
@@ -51,9 +53,11 @@ Hold session state as one map: subject, segment/persona, narrative, activities �
 
 Who is the primary persona (offer options: single persona / multiple sharing a workflow / multiple with distinct workflows / roles within an organization), and what are they trying to get done? Condense to a one-sentence, outcome-focused narrative ("deliver a client project on time and get paid", not "use the product").
 
+Capture the **segment** the persona belongs to as well — specific enough to exclude someone ("freelance graphic designers billing 5–10 clients", not "users"). Infer it from the persona and confirm it in one line rather than spending a separate question on it; the document needs it.
+
 ### Q3: Backbone — the whiteboard goes live — `Map Q3/6`
 
-Generate 5–8 **backbone** activities in narrative order, left to right — the sequence you'd use explaining the system to someone. Each activity is something the user *does*, never a product feature or a technical layer.
+Generate 5–8 **backbone** activities in narrative order, left to right — the sequence you'd use explaining the system to someone. Each activity is something the user *does*, never a product feature or a technical layer. Stay inside 5–8: fewer flattens the journey, and past 8 you're almost certainly listing steps as activities — consolidate them one level up.
 
 Before the first render, read [`references/WHITEBOARD.md`](references/WHITEBOARD.md). Create the whiteboard showing the backbone, publish it, and give the user the link. Ask whether to add, remove, or reorder activities — every accepted change lands on the board.
 
@@ -67,7 +71,7 @@ Done when every activity has approved steps and the board shows them.
 
 ### Q5: Tasks — `Map Q5/6`
 
-Under each step, generate 3–7 tasks — small, specific, prioritizable actions — stacked vertically, most essential on top. Refresh the whiteboard, ask whether tasks and their vertical order are right.
+Under each step, generate 3–7 tasks — small, specific, prioritizable actions — stacked vertically, most essential on top. Cover both halves of the step: the user-facing action *and* the behind-the-scenes work it depends on ("send the invoice" **and** "receive payment confirmation"), or the map will read as UI-only and the slices will miss real work. Refresh the whiteboard, ask whether tasks and their vertical order are right.
 
 Done when every step has approved, ordered tasks and the board shows them.
 
@@ -112,6 +116,8 @@ When the user agrees with both the story map and the prototype flow:
 - **Waterfall slices** ("Release 1 = Activity 1 complete"): the walking skeleton is a thin slice across *all* activities, not one activity finished.
 - **Whiteboard drift:** never rewrite the board's render code between turns — edit only the embedded map data, so every refresh is a data change.
 - **Feature-speak:** activities and tasks describe what the user does ("compare quotes"), not what the product provides ("comparison dashboard").
+- **Backbone sprawl** (10+ activities): the map stops being readable and the walking skeleton stops being thin. It means activities and steps got mixed — roll the fine-grained ones down into steps under a broader activity.
+- **Vague tasks** ("handle the payment"): unprioritizable and unbuildable, so the slice cut becomes guesswork. Name the object and the action — "enter the client's email in the Bill To field".
 
 ## References
 
