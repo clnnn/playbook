@@ -27,7 +27,7 @@ phases with the feedback loops that make it *not* a waterfall.
  │       scale, availability, security, compliance, offline      │
  │    └─ a killer NFR (can't meet it) ⟲ back to Phase 1 as a     │
  │       feasibility risk                                        │
- │  /user-story-mapping-workshop                                 │
+ │  /story-map (Claude artifacts)                                │
  │    └─ backbone + walking skeleton + release slices            │
  └──────────────────────────────────────────────────────────────┘
                           │ (scope, NFRs, and the map)
