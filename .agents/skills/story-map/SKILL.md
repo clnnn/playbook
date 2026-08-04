@@ -122,3 +122,7 @@ When the user agrees with both the story map and the prototype flow:
 ## References
 
 - Jeff Patton, *User Story Mapping* (2014) — origin of the backbone / walking-skeleton framework
+
+## Publishing
+
+Publish the finished story map as a product document, following whatever product-document convention this repo documents for agents.

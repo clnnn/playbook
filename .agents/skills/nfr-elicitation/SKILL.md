@@ -114,8 +114,7 @@ Until all four hold, keep grilling in rounds.
 
 ## Output
 
-Write the requirements to `nfr-spec.md` (or into the PRD's non-functional section
-if one exists). One row per pinned requirement:
+The spec, one row per pinned requirement:
 
 ```markdown
 # Non-Functional Requirements — [system/feature]
@@ -138,3 +137,8 @@ if one exists). One row per pinned requirement:
 ## Feasibility risks (numbers we may not hit)
 - [Attribute + number] — hand to validation before committing
 ```
+
+## Publishing
+
+Publish the finished spec as a product document, following whatever
+product-document convention this repo documents for agents.

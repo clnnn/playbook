@@ -41,7 +41,7 @@ Three rules govern every turn. They are the whole skill; the sections below just
 
 ## Output
 
-Fill `template.md` — it is the deliverable: field structure and inline examples for each section. This skill drives the conversation; the template captures the result. Save the completed PRD as a new markdown file (do not overwrite the template). Before sharing it, review the draft with design + engineering — a PRD written alone gets no buy-in.
+Fill `template.md` — it is the deliverable: field structure and inline examples for each section. This skill drives the conversation; the template captures the result, in a new document that leaves the template itself untouched. Before publishing it, review the draft with design + engineering — a PRD written alone gets no buy-in.
 
 ---
 
@@ -181,3 +181,9 @@ For each: current baseline → target → timeline. A missing baseline is tagged
 ## Self-Assessment
 
 After Section 9, run the diagnostic (template's final section): name the **strongest** and **weakest** sections, collect every 🔶 Assumption into the risk table (assumption · section · risk if wrong · proposed validation), and state the single **recommended next step** before the PRD goes to stakeholders. Share this alongside the PRD.
+
+---
+
+## Publishing
+
+Publish the finished PRD as a product document, following whatever product-document convention this repo documents for agents. Where the repo has no such convention, save it as a markdown file in the working directory and report the path.

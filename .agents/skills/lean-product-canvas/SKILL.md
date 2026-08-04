@@ -224,7 +224,7 @@ Recommend by the Box 7 risk type; let the user pick or design their own.
 
 ### Export
 
-Render the completed canvas from `template.md`, with Box 2 showing both a **Money trail** line and an **Outcome (key results)** line in "who does what by how much" form. Then offer to: export as a markdown file, refine any box that feels thin, or suggest what to run next.
+Render the completed canvas from `template.md`, with Box 2 showing both a **Money trail** line and an **Outcome (key results)** line in "who does what by how much" form. Then offer to: publish it, refine any box that feels thin, or suggest what to run next.
 
 ### After the canvas — the learning loop
 
@@ -240,3 +240,7 @@ Bump the iteration number and keep the prior canvas; the trail of what you belie
 ## References
 
 Template: `template.md`. Worked example: `examples/sample.md`.
+
+## Publishing
+
+Publish the finished canvas as a product document, following whatever product-document convention this repo documents for agents. Where the repo has no such convention, save it as a markdown file in the working directory and report the path.

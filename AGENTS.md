@@ -28,6 +28,6 @@
 
 ## Agent skills
 
-### Docs storage
+### Knowledge Base
 
-GitHub Discussion, category **Knowledge Base**. See `docs/agents/docs-storage.md`.
+PRDs, Lean Product Canvases, NFR specs, and Story Maps live in the OKF v0.2 knowledge bundle at `.okf/`. Publishing, discovery, and updates follow `docs/agents/okf-workflows.md`.

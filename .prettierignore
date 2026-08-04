@@ -1,4 +1,6 @@
 # Add files here to ignore them from prettier formatting
+# .okf holds generated index.md files; formatting them fights `okf index`
+/.okf
 /dist
 /coverage
 /.nx/cache

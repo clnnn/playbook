@@ -1,6 +1,6 @@
 # Story map document format
 
-The final deliverable, rendered from the approved map. Publish it as the product document (`[Story Map] <Subject>`, per the repo's docs-storage convention) with the prototype linked as its visual companion.
+The final deliverable, rendered from the approved map, with the prototype linked as its visual companion.
 
 ```markdown
 # User Story Map: [Subject]
