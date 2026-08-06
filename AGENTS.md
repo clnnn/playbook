@@ -30,4 +30,4 @@
 
 ### Knowledge Base
 
-PRDs, Lean Product Canvases, NFR specs, and Story Maps live in the OKF v0.2 knowledge bundle at `.okf/`. Publishing, discovery, and updates follow `docs/agents/okf-workflows.md`.
+PRDs, Lean Product Canvases, and Story Maps live in the OKF v0.2 knowledge bundle at `.okf/`. Publishing, discovery, and updates follow `docs/agents/okf-workflows.md`.

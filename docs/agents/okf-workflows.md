@@ -12,7 +12,6 @@ Write the document to `.okf/product/<subject>/<file>.md`, where `<subject>` is t
 |---|---|---|---|
 | PRD | `prd.md` | `PRD` | `PRD: <Subject>` |
 | Lean Product Canvas | `canvas.md` | `Lean Product Canvas` | `Lean Product Canvas: <Subject>` |
-| NFR spec | `nfr.md` | `NFR Spec` | `NFR Spec: <Subject>` |
 | Story map | `story-map.md` | `Story Map` | `Story Map: <Subject>` |
 
 ### Frontmatter

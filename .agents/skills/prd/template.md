@@ -42,10 +42,11 @@
 3. [Target Users & Personas](#3-target-users--personas)
 4. [Strategic Context](#4-strategic-context)
 5. [Solution Overview](#5-solution-overview)
-6. [Success Metrics](#6-success-metrics)
-7. [Out of Scope](#7-out-of-scope)
-8. [Dependencies & Risks](#8-dependencies--risks)
-9. [Open Questions](#9-open-questions)
+6. [Non-Functional Requirements](#6-non-functional-requirements)
+7. [Success Metrics](#7-success-metrics)
+8. [Out of Scope](#8-out-of-scope)
+9. [Dependencies & Risks](#9-dependencies--risks)
+10. [Open Questions](#10-open-questions)
 
 ***
 
@@ -138,7 +139,92 @@
 
 ***
 
-## 6. Success Metrics
+## 6. Non-Functional Requirements
+
+> How well the §5 features must behave. Each requirement is a **quality attribute scenario**. Pinned means Must — anything you wouldn't delay launch for belongs under *Ruled Out* with its reason.
+
+**The nine fields**
+
+| Field | Holds |
+|---|---|
+| `ID` | Attribute prefix + number — `PERF-01`, `RESIL-02` |
+| `Trace` | The §5 key feature, and the §2 pain or §7 primary metric it serves. Both, or this isn't a requirement |
+| `Source` | Who or what generates the stimulus |
+| `Stimulus` | What arrives at the system |
+| `Environment` | The conditions it arrives under — peak load, degraded network, a failed dependency |
+| `Response` | What the system does about it |
+| `Response Measure` | The number, or a landing zone (minimal / target / outstanding) |
+| `Breaks if missed` | What the persona actually does when the number is missed, and which metric that costs |
+| `Holds from` | When it must hold, and how it tightens as the system grows |
+
+### Pinned Requirements
+
+```
+ID:               PERF-01
+Trace:            §5 Key Feature 2 — Account dashboard → §2 pain "can't answer a balance question while the client is on the phone"
+Source:           Authenticated advisor
+Stimulus:         Opens the account dashboard mid-call
+Environment:      Weekday peak, 5k concurrent sessions
+Response:         Complete balance payload rendered
+Response Measure: p99 ≤ 400ms, error rate < 0.1%
+Breaks if missed: Advisor reloads twice, then reads from the spreadsheet — activation metric misses
+Holds from:       Launch; tightens to p99 ≤ 250ms at 20k concurrent
+```
+
+```
+ID:               RESIL-01
+Trace:            §5 Key Feature 3 — Multi-step onboarding → §2 pain "abandons and never returns"
+Source:           New user, mid-onboarding
+Stimulus:         Identity-verification provider stops responding
+Environment:      Provider outage of any length
+Response:         Progress is preserved, the user is told what happened and when to return
+Response Measure: Zero steps lost; resumable for 🔶 30 days *(assumed — no data on return windows)*
+Breaks if missed: User restarts from step 1, abandons — the 60% drop-off this initiative exists to fix returns
+Holds from:       Launch
+```
+
+```
+ID:               SCALE-01
+Trace:            §5 Key Feature 1 — Bulk import → §7 primary metric (time-to-first-value)
+Source:           Onboarding customer
+Stimulus:         Uploads a full member roster
+Environment:      January renewal season, 20× the median month
+Response:         Import completes and the user is notified
+Response Measure: Landing zone — minimal 30 min / target 10 min / outstanding 2 min for 50k rows
+Breaks if missed: Customer chases support, first value slips past the trial window
+Holds from:       First renewal season, 🔵 exact peak volume pending finance forecast
+```
+
+### Tradeoffs
+
+> Pairs of pinned scenarios that pull against each other. Each row names a winner and the scenario that was amended to make the set achievable. Unsettled tradeoffs belong in §10 with an owner, not here.
+
+| Tradeoff | The decision that forces it | Winner, and why | Amended |
+|----------|-----------------------------|-----------------|---------|
+| [A vs B *(e.g., SEC-01 vs PERF-01)*] | [*(e.g., per-request entitlement checks on the aggregated balance payload)*] | [*(e.g., SEC-01 — a leaked balance costs us the client; a slow balance costs us a reload)*] | [*(e.g., PERF-01 relaxed p99 400ms → 700ms at launch)*] |
+| [A vs B *(e.g., AVAIL-01 vs COMP-02)*] | [*(e.g., failover region for the 99.99% target)*] | [*(e.g., COMP-02 — EU data residency is contractual, not negotiable)*] | [*(e.g., AVAIL-01 lowered to 99.9%, EU-only multi-AZ)*] |
+
+### Ruled Out
+
+> Every attribute the signal table raised that isn't pinned. A deliberate exclusion and a forgotten one look identical later; only one of them is defensible.
+
+| Attribute | Why it isn't live |
+|-----------|-------------------|
+| [Attribute *(e.g., Reach)*] | [Reason *(e.g., every persona is desk-bound on corporate wifi; no field or offline use in any §3 persona)*] |
+| [Attribute *(e.g., Compliance)*] | [Reason *(e.g., no regulated data — the product stores no personal data beyond an email address)*] |
+
+### Constraints
+
+> Rules nobody gets to tune. These carry no threshold — forcing a number onto a constraint produces nonsense.
+
+- [Constraint + who mandates it *(e.g., all customer data stays in EU regions — group data-residency policy, non-negotiable)*]
+- [Constraint + who mandates it *(e.g., must run on the existing Postgres cluster — platform team decision, ratified Q4)*]
+
+***
+
+## 7. Success Metrics
+
+> Business outcomes. System qualities — latency, uptime, durability — live in §6 as scenarios.
 
 ### Primary Metric
 
@@ -159,7 +245,7 @@
 
 ***
 
-## 7. Out of Scope
+## 8. Out of Scope
 
 ### Not Included in This Release
 
@@ -173,13 +259,19 @@
 
 ***
 
-## 8. Dependencies & Risks
+## 9. Dependencies & Risks
 
 ### Dependencies
 
 - **Technical**: [Platform or infrastructure requirements *(e.g., no technical dependencies — uses existing modals framework)*]
 - **External**: [Third-party integrations or partnerships *(e.g., analytics provider must support custom event tracking for checklist interactions)*]
 - **Team**: [Cross-team handoffs *(e.g., design: wireframes for checklist UI, ETA Week 1)*]
+
+### Feasibility Risks (§6 numbers we may not hit)
+
+- **Requirement**: [ID + measure *(e.g., PERF-01 — p99 ≤ 400ms across four aggregated sources)*]
+  - **Why it's at risk**: [*(e.g., roughly 3× what a single-region setup delivers; needs a caching design not yet chosen)*]
+  - **Mitigation**: [Owner + trigger *(e.g., platform team spikes a read-through cache in Week 2; if p99 stays above 600ms, renegotiate to 700ms at launch)*]
 
 ### Risks & Mitigations
 
@@ -190,7 +282,7 @@
 
 ***
 
-## 9. Open Questions
+## 10. Open Questions
 
 | Question | Owner | Deadline | Status |
 |----------|-------|----------|--------|
@@ -202,7 +294,7 @@
 
 ## PRD Self-Assessment
 
-*Complete after all 9 sections. Share alongside the PRD.*
+*Complete after all 10 sections. Share alongside the PRD.*
 
 ### Strongest Section
 
