@@ -7,7 +7,9 @@ disable-model-invocation: true
 
 ## Purpose
 
-Guide a product manager through a complete PRD (Product Requirements Document), section by section, from problem to success criteria — in one self-contained pass. Every contributing method (problem statement, proto-persona, jobs-to-be-done, quality attribute scenarios) is embedded here;
+Guide a product manager through a complete PRD (Product Requirements Document), section by section, from executive summary to open questions — in one self-contained pass.
+
+Contributing methods are embedded inline: problem statement (§2), proto-persona and jobs-to-be-done (§3), Cagan's four risks (§9). Quality attribute scenarios (§6) are the one exception — their attribute list, ranking rubric and tradeoff pairs are large enough to live in [`references/NFR-SIGNALS.md`](references/NFR-SIGNALS.md), read on entry to that section.
 
 User stories, epic breakdown, and acceptance criteria are out of scope — produced separately afterward in the dedicated user-story skill.
 
@@ -23,13 +25,13 @@ Arriving empty-handed works too: the flow starts at the executive summary and bu
 
 Three rules govern every turn. They are the whole skill; the sections below just apply them.
 
-**Strict flow.** Complete Sections 1–10 in order, then the Self-Assessment. Finish one section fully — every field gate-passed, its **Advance when** criterion met — before starting the next.
+**Strict flow.** Complete Sections 1–10 in order, then the Self-Assessment. Finish one section fully — every field gate-passed and its **Advance when** criterion met — before starting the next.
 
 **The gate.** Every field the PRD needs passes one of three ways:
 
 - **Found** — supplied in the invocation, a dump, or a readable file. Restate it back and ask the user to confirm or correct. Never silently accept found input as final.
-- **Missing** — ask one focused question to get it. One question per turn.
-- **Unanswerable** — the user doesn't know. Tag the gap inline: 🔶 **Assumption** (plausible but unvalidated) or 🔵 **Open Question** (unknown, needs discovery). Never invent facts, data, quotes, or approvals.
+- **Missing** — ask one focused question to get it. **Anchor** it: offer a candidate answer to accept, correct, or reject, since an anchor pulls a sharper reply than a blank does. A vague answer earns two follow-ups before you settle for it.
+- **Unanswerable** — the user genuinely doesn't know. Tag the gap inline where it appears: 🔶 **Assumption** (plausible but unvalidated) or 🔵 **Open Question** (unknown, needs discovery). Every 🔵 collects into §10; every 🔶 collects into the Self-Assessment table, and a 🔶 carrying stakes also lands in §9 as a risk. Never invent facts, data, quotes, or approvals.
 
 **Facilitation.** Run it as a guided workshop:
 
@@ -51,9 +53,7 @@ Fill `template.md` — it is the deliverable: field structure and inline example
 
 **Method.** Format: *"We're building [solution] for [persona] to solve [problem], which will result in [impact]."* Draft it first to force clarity, refine it last once Sections 2–8 exist. If it needs more than one sentence to state, the scope is unclear.
 
-**Gate:** solution, persona, problem, measurable impact.
-
-**Advance when:** the named problem has evidence (or is tagged 🔶), the persona maps to a real segment you can detail in §3, and the impact is a measurable outcome, not an aspiration.
+**Advance when:** all four slots — solution, persona, problem, impact — are filled, the named problem has evidence (or is tagged 🔶), the persona maps to a real segment you can detail in §3, and the impact is a measurable outcome, not an aspiration.
 
 ---
 
@@ -70,9 +70,7 @@ Fill `template.md` — it is the deliverable: field structure and inline example
 
 **Reject** solution smuggling ("we lack AI analytics"), business problems ("revenue is down"), feature requests ("users need a dashboard"), and symptoms dressed as root causes.
 
-**Gate:** who has it, what it is, why it's painful (user + business impact), evidence.
-
-**Advance when:** the "who" is specific enough to build a persona around, evidence includes at least one quote or data point (else run discovery first), and the business impact ties to a metric leadership tracks.
+**Advance when:** the problem is stated in concrete, observable terms, the "who" is specific enough to build a persona around, both user impact and business impact are named with the business one tied to a metric leadership tracks, and evidence includes at least one quote or data point (else run discovery first).
 
 ---
 
@@ -89,9 +87,7 @@ Fill `template.md` — it is the deliverable: field structure and inline example
 - **Pains**: Challenges · Costliness · Common Mistakes · Unresolved Problems
 - **Gains**: Expectations · Savings · Adoption Factors · Life Improvement
 
-**Gate:** primary persona, secondary personas (if any), functional/emotional/social jobs.
-
-**Advance when:** the persona's biggest pain matches §2's problem, the persona is the product's *user/buyer* (not your team or PM audience), and any inferred JTBD is tagged 🔶.
+**Advance when:** the primary persona carries every proto-persona field, functional, social and emotional jobs are each captured, the persona's biggest pain matches §2's problem, the persona is the product's *user/buyer* (not your team or PM audience), and any inferred JTBD is tagged 🔶.
 
 ---
 
@@ -104,9 +100,7 @@ Fill `template.md` — it is the deliverable: field structure and inline example
 1. **Business goals** — tie the initiative to a company OKR or strategic priority, and to the revenue/retention/cost impact. The quantified goal becomes the success threshold in §7.
 2. **Why now** — the urgency: what changed that makes this the right time? A manufactured "why now" reads as manufactured. The root cause behind "why now" scopes what to build.
 
-**Gate:** business-goal/OKR link, why now.
-
-**Advance when:** you can draw a straight line — business goal → problem (§2) → persona (§3) → this initiative. A weak link means the solution in §5 may be wrong.
+**Advance when:** the initiative is tied to a named OKR or strategic priority with a quantified impact, the "why now" names what actually changed, and you can draw a straight line — business goal → problem (§2) → persona (§3) → this initiative. A weak link means the solution in §5 may be wrong.
 
 ---
 
@@ -119,8 +113,6 @@ Fill `template.md` — it is the deliverable: field structure and inline example
 1. **Solution description** — 2–3 paragraphs on what the product does and how.
 2. **Key features** — the capabilities it provides.
 3. **User flows / wireframes** *(optional)* — only for complex features needing a visual.
-
-**Gate:** solution description, key features.
 
 **Advance when:** every key feature traces to a §2 pain or §3 job (a feature that solves no stated problem is scope creep — move it to §8 or justify it), the description stays high-level (no button labels or pixel dimensions), and you can name a metric that will move if it works.
 
@@ -135,16 +127,14 @@ Fill `template.md` — it is the deliverable: field structure and inline example
 1. **Derive.** Match what this product *does* — money moves, regulated data, field work, a time-based §7 metric, a third-party dependency — to candidate attributes, reading §2, §3 and §5 against the signal table. Candidates come from this document, not from a checklist walked out of habit.
 2. **Admit.** Every candidate names a §5 key feature **and** a §2 pain or the §7 primary metric. One that names only itself is scope creep — drop it.
 3. **Rank** survivors on business importance × technical risk. High importance is pinned; everything else is ruled out *in the document* with a one-line reason, since you can only deliberately exclude from a closed list. Past ~8 pinned, ask which three would delay launch and rule out the rest — a silent truncation reads as coverage.
-4. **Pin** each survivor as a scenario on the template's nine fields. Ask the **breakage**, never the metric — "how long before they give up waiting?" gets an answer, "what's your p99 target?" does not — then offer a number to accept, raise, or reject. Three follow-ups is the floor: still waving → a **landing zone** (minimal / target / outstanding); genuinely unknown → 🔵 into §10; a measure with no evidence behind it → 🔶.
+4. **Pin** each survivor as a scenario on the template's nine fields. Ask the **breakage**, never the metric — "how long before they give up waiting?" gets an answer, "what's your p99 target?" does not — then offer a number to accept, raise, or reject. Three follow-ups is the floor here, one more than the contract's two: still waving → a **landing zone**; genuinely unknown → 🔵 into §10; a measure with no evidence behind it → 🔶.
 5. **Reconcile.** Walk the pinned set against the reference's **tradeoff** pairs — each is one design decision pulling two attributes apart, and eight individually plausible numbers make a collectively impossible set. Name the winner and amend the loser's Response Measure on the spot, since a settled tradeoff usually rewrites a number. A tradeoff nobody will settle today is a 🔵 into §10 with an owner.
 
 Latency, throughput, concurrency, data-volume and cost measures get a `napkin-math` check; surface the verdict alone. A number the envelope calls implausible is pinned *and* mirrored into §9 as a feasibility risk, as is any pinned scenario that ranked high on technical risk.
 
 A rule nobody gets to tune — a mandated database, an enterprise licence, a data-residency decree — is a **constraint**, not a quality attribute: it goes in its own subsection, since forcing a threshold onto it produces nonsense.
 
-**Gate:** pinned scenarios, settled tradeoffs, ruled-out attributes + reasons, constraints.
-
-**Advance when:** every pinned scenario carries a Response Measure or landing zone and traces to a feature and a pain/metric, every attribute the signal table raised is pinned or ruled out with a stated reason, every tradeoff pair the reference lists has a named winner or a 🔵 owner, and every implausible or high-risk number appears in §9.
+**Advance when:** every pinned scenario carries a Response Measure or landing zone and traces to a feature and a pain/metric, every attribute the signal table raised is pinned or ruled out with a stated reason, every tradeoff pair the reference lists has a named winner or a 🔵 owner, every mandated rule sits under Constraints rather than wearing a threshold, and every implausible or high-risk number appears in §9.
 
 ---
 
@@ -158,11 +148,9 @@ A rule nobody gets to tune — a mandated database, an enterprise licence, a dat
 2. **Secondary metrics** — monitored, not optimized for.
 3. **Guardrail metrics** — what must NOT regress. Every initiative has side effects; name at least one. Guardrails are business outcomes; system qualities are §6's job, so a threshold like "p99 under 400ms" belongs there as a scenario.
 
-For each: current baseline → target → timeline. A missing baseline is tagged 🔶 and flagged for analytics now, not after launch.
+For each: current baseline → target → timeline.
 
-**Gate:** primary metric + baseline/target/timeline, secondary metrics, ≥1 guardrail.
-
-**Advance when:** the primary metric directly measures the §2 problem, every metric has a baseline (or a 🔶 flagged to analytics), and at least one guardrail is named.
+**Advance when:** exactly one primary metric is named and it directly measures the §2 problem, every metric carries baseline → target → timeline (a missing baseline tagged 🔶 and flagged to analytics now, not after launch), secondary metrics read as monitored rather than optimised for, and at least one guardrail is named.
 
 ---
 
@@ -172,9 +160,7 @@ For each: current baseline → target → timeline. A missing baseline is tagged
 
 **Method.** List excluded capabilities, each with a rationale, plus future considerations. The valuable entries are the ones someone will be disappointed about — give those the strongest rationale.
 
-**Gate:** excluded features + rationale, future considerations.
-
-**Advance when:** nothing here also appears in §5, and any exclusion that is a dependency in disguise (e.g. "mobile out of scope" when 40% of the persona is mobile) is moved to §9 as a risk.
+**Advance when:** every exclusion carries a rationale, future considerations are listed, nothing here also appears in §5, and any exclusion that is a dependency in disguise (e.g. "mobile out of scope" when 40% of the persona is mobile) is moved to §9 as a risk.
 
 ---
 
@@ -184,11 +170,7 @@ For each: current baseline → target → timeline. A missing baseline is tagged
 
 **Method.** Map technical, external, and team dependencies. Assess risk with **Cagan's four risks** — value (will they want it?), usability (can they use it?), feasibility (can we build it?), viability (does the business case hold?); most PRDs overweight feasibility and underweight value. Each mitigation needs an owner and a trigger — "monitor closely" is not a mitigation.
 
-**Feasibility risks** land here too: every §6 number the envelope calls implausible, and every pinned scenario that ranked high on technical risk. A quality target you may not hit is a risk to mitigate, not a requirement already settled.
-
-**Gate:** dependencies (technical/external/team), risks + mitigations, feasibility risks from §6.
-
-**Advance when:** all four of Cagan's risks are considered, every mitigation has an owner and a trigger, and every stakes-carrying 🔶 Assumption from earlier sections appears here as a risk.
+**Advance when:** technical, external and team dependencies are each mapped, all four of Cagan's risks are considered, every §6 feasibility risk has crossed over into the template's Feasibility Risks table, every mitigation has an owner and a trigger, and every stakes-carrying 🔶 Assumption from earlier sections appears here as a risk.
 
 ---
 
@@ -196,15 +178,19 @@ For each: current baseline → target → timeline. A missing baseline is tagged
 
 **Goal:** Make the unknowns visible so they're resolved deliberately.
 
-**Method.** A table of unresolved decisions, each with an owner, a deadline, and a status. Every 🔵 Open Question tagged earlier collects here.
+**Method.** A table of unresolved decisions, each with an owner, a deadline, and a status.
 
-**Gate:** open questions, owners, deadlines.
+**Advance when:** every 🔵 tagged earlier in the document appears in the table, and each row names an owner and a deadline — an open question with no name against it is one nobody will answer.
 
 ---
 
 ## Self-Assessment
 
-After Section 10, run the diagnostic (template's final section): name the **strongest** and **weakest** sections, collect every 🔶 Assumption into the risk table (assumption · section · risk if wrong · proposed validation), and state the single **recommended next step** before the PRD goes to stakeholders. Share this alongside the PRD.
+**Goal:** A one-page read on how far this PRD can be trusted, shared alongside it.
+
+**Method.** Run the diagnostic in the template's final section: name the **strongest** and **weakest** sections, collect every 🔶 Assumption into the risk table (assumption · section · risk if wrong · proposed validation), and state the single **recommended next step** before the PRD goes to stakeholders.
+
+**Advance when:** the strongest and weakest calls each name a section and the reason for it, every 🔶 in the document appears in the table with a risk-if-wrong and a proposed validation, and the recommended next step is one action with a named first move — not a list.
 
 ---
 

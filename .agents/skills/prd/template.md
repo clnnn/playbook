@@ -2,9 +2,9 @@
 
 > This PRD is a communications and alignment device — a bridge between strategy and execution. It clarifies **what** the product must achieve, **why** it matters, and **how** success is measured.
 >
-> **Tag every gap inline, right where it appears** (Section 9 collects them, but surface them in context too):
-> - **🔶 Assumption** — filled in from inference or incomplete data; plausible but unvalidated. Every assumption is a risk until confirmed.
-> - **🔵 Open Question** — not yet known; needs discovery, a stakeholder conversation, or data you don't have.
+> **Tag every gap inline, right where it appears** — then collect it where it belongs:
+> - **🔶 Assumption** — filled in from inference or incomplete data; plausible but unvalidated. Every assumption is a risk until confirmed. Collects into the Self-Assessment table; the ones carrying stakes also appear in Section 9 as risks.
+> - **🔵 Open Question** — not yet known; needs discovery, a stakeholder conversation, or data you don't have. Collects into Section 10.
 >
 > Do not invent facts, data, approvals, or commitments.
 

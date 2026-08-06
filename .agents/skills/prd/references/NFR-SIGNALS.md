@@ -62,13 +62,13 @@ Signals over-generate on purpose: a payments feature legitimately raises eight a
 - **Medium** — achievable with known techniques, given deliberate effort.
 - **Low** — falls out of any reasonable build.
 
-High importance is pinned, whatever its risk. High importance **and** high risk is pinned *and* mirrored into §9 as a feasibility risk. Everything else is ruled out in the document with its one-line reason — "Offline: not live, every persona is desk-bound on corporate wifi" is a decision someone can argue with six months from now, where silence is not.
+High importance is pinned, whatever its risk. Everything else is ruled out in the document with its one-line reason — "Offline: not live, every persona is desk-bound on corporate wifi" is a decision someone can argue with six months from now, where silence is not.
 
 ## Anchoring and landing zones
 
 An anchor pulls a sharper answer than a blank, so offer a number rather than asking for one: *"3 seconds on 4G is the usual bar for a screen someone opens in front of a customer — accept, raise, or reject?"* This is also where realism gets its teeth. Run the `napkin-math` check on latency, throughput, concurrency, data-volume and cost measures and surface only the verdict: *"5k concurrent at p99 400ms across four aggregated sources is roughly 3× what a single region gives you — 700ms is the honest launch number, or this needs a caching design."*
 
-Three follow-ups is the floor. When the user is still waving between numbers, record a **landing zone** instead of stalling:
+When the user is still waving between numbers, record a **landing zone** instead of stalling:
 
 - **Minimal** — below this, the release is off.
 - **Target** — the number to design for.
