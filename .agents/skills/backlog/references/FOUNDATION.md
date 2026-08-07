@@ -2,17 +2,11 @@
 
 One issue in its own **Release 0 — Foundation** milestone, blocking every Release 1 story. It exists to make the **walking skeleton** runnable: it closes when the thinnest end-to-end path — request → logic → datastore → response — runs in CI with the harness green. Demonstrated, not chosen.
 
-It is explicitly exempt from the one-PR ceiling, and its body says so.
-
 ## Gap detection
 
 The workspace stack is already decided — read it from the repo (package manifests, the Nx project graph) and take it as given; the issue re-decides nothing that already runs. A **gap** is a capability a §6 scenario or §7 metric demands that the repo cannot yet provide. Candidates to check: **datastore, auth, third parties, observability**.
 
 For each gap, draft a proposal: the tool or service to fill it, the specific §6 scenario or §7 metric that forces it, and the alternatives considered. A proposal that traces to no scenario and no metric is scope creep — drop it. With §6/§7 missing (a declared degradation), gaps reduce to what the story set plainly cannot run without, and each says so.
-
-## The stack decision
-
-Put the whole proposal set to the user as **one numbered confirmation point** — the run's first interaction. The issue body records each choice **and** its rejected alternatives; the next reader needs the why-not as much as the what.
 
 ## Fitness functions
 
@@ -28,4 +22,4 @@ With no context map (a declared degradation), this section is omitted, and the b
 
 ## Body
 
-The foundational issue uses the ISSUE-BODY.md contract with the Story section replaced by the walking-skeleton goal, plus: the stack decisions with rejected alternatives, the fitness functions it carries (command each), the module structure, and the ceiling exemption. Labelled `foundational`.
+The foundational issue uses the ISSUE-BODY.md contract with the Story section replaced by the walking-skeleton goal, plus: each confirmed stack decision **and** the alternatives it beat (the next reader needs the why-not as much as the what), the fitness functions it carries (command each), the module structure, and the ceiling exemption. Labelled `foundational`.

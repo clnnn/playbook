@@ -14,7 +14,7 @@ gh label create "context:ordering" --color 1D76DB --description "Ordering bounde
 
 **Epics** — one parent issue per backbone activity, stories attached as native sub-issues. The epic body is short but real: the activity, its steps, the narrative sentence, and the child list.
 
-**Dependencies** — native edges **plus** the mirrored body line carrying the reason. Deliberate duplication: native for tooling, prose for the reader.
+**Dependencies** — native edges **plus** the mirrored body line of ISSUE-BODY.md §6.
 
 **Titles** — short, user-value phrasing, no prefix: *"Apply a member discount at checkout"*. Slice, activity, and context live in the milestone, epic, and labels.
 
@@ -41,6 +41,8 @@ Classify each derived story against the inventory:
 A human-edited body is never overwritten silently — the gate is the only place that conflict resolves.
 
 ## Apply order
+
+Every body is written to a file under the session scratchpad directory first, one file per issue named `<story-id>.md`, and applied with `--body-file` — the repo working tree is never touched.
 
 Strictly in sequence, each phase complete before the next:
 

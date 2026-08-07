@@ -9,7 +9,7 @@ disable-model-invocation: true
 
 Compile the upstream product documents into GitHub issues an agent can execute: milestones, labels, epics, dependency-ordered stories, and one foundational issue. Fourth step in `/prd → /domain-discovery → /story-map → /backlog`. The deliverable is GitHub issues only — no backlog document, nothing published to `.okf/`.
 
-The run has exactly two interaction points — the **stack decision** and the **plan gate**. Everything between them is legwork. GitHub stays untouched until the gate opens.
+A full run has exactly two interaction points — the **stack decision** and the **plan gate**. Everything between them is legwork. GitHub stays untouched until the gate opens.
 
 ## Inputs
 
@@ -17,7 +17,7 @@ The run has exactly two interaction points — the **stack decision** and the **
 
 Each source is a *resolvable reference*, not necessarily a repo path: an `.okf/` bundle document (discover per `docs/agents/okf-workflows.md`), a file path, a URL, or a GitHub Discussion fetched with `gh`.
 
-**Promote a slice** (`/backlog promote <release>`): a re-run branch. Derivation of new stories is skipped; that release's placeholder issues are upgraded to full fidelity and pass through assembly, self-check, and the gate like new ones.
+**Promote a slice** (`/backlog promote <release>`): a re-run branch. Steps 3 and 4 are skipped — no new stories are derived and the stack is already decided — so the run has one interaction point, the gate. That release's placeholder issues are upgraded to full fidelity and pass through assembly, self-check, and the gate like new ones.
 
 ## Flow
 
@@ -34,7 +34,7 @@ Resolve every source and restate what each one is — initiative, personas, rele
 
 ### 2. Read pass
 
-`gh issue list --state all`, parsing each body's hidden marker into an inventory per [`references/GITHUB.md`](references/GITHUB.md).
+List every issue and parse each body's hidden marker into an inventory, per [`references/GITHUB.md`](references/GITHUB.md).
 
 **Done when** every backlog-created issue on GitHub is known by story id and body-hash.
 
@@ -60,21 +60,9 @@ Classify each story against the step-2 inventory — **new**, **unchanged**, **u
 
 ### 6. Self-check
 
-Apply every rule to every full-fidelity story. One regeneration attempt per violation; a survivor reaches the gate flagged with the specific rule it broke, and the user decides its fate.
+Re-apply every rule to every full-fidelity story — the ISSUE-BODY.md section contracts, DERIVATION.md's judging rules and its coverage criterion — plus the one rule with no other home: **the dependency graph is acyclic.**
 
-Per story:
-
-- *Scope: out* is non-empty
-- at least one edge-case scenario and one failure-mode scenario
-- every *Then* is observable — a "better / faster / improved" *Then* fails
-- every domain term used is defined in the glossary or inline
-- the story names an observable user outcome (the vertical-slice test)
-- it fits the ceiling
-
-Across the set:
-
-- the dependency graph is acyclic
-- coverage holds
+One regeneration attempt per violation; a survivor reaches the gate flagged with the specific rule it broke, and the user decides its fate.
 
 A story spanning two bounded contexts is flagged at the gate as a **boundary smell**, and the user rules on it — it is a signal, not a violation.
 
@@ -97,6 +85,6 @@ Human-edited collisions surface here with their diff — the user picks overwrit
 
 ### 8. Apply and report
 
-Apply per GITHUB.md, in order: labels + milestones → epics → stories → the relations pass. **Fail fast**: on any error, stop, report every issue created with its number, and state that re-running resumes for free via the markers — half a dependency graph is worse than none.
+Apply per GITHUB.md, in order: labels + milestones → epics → stories → the relations pass. **Fail fast** on any error, per GITHUB.md's failure contract.
 
 **Done when** every planned mutation is applied and reported with issue numbers — or the failure report names exactly what exists and what remains.

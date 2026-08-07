@@ -14,7 +14,7 @@ Two lists: **In** and **Out**. The out-list is what kills ambiguity — it names
 
 ## 3. Context you can't infer
 
-What a fresh agent cannot read from the code: domain terms with their glossary meaning, decisions already made upstream, existing code touchpoints (project, file, symbol).
+What a fresh agent cannot read from the code: decisions already made upstream, existing code touchpoints (project, file, symbol), and domain terms with their glossary meaning — **every domain term the body uses is defined here or inline at its use, no exceptions.**
 
 ## 4. Acceptance criteria
 
@@ -23,7 +23,7 @@ Gherkin scenarios:
 - **One When/Then per scenario** — `user-story`'s "only one When/Then" rule reads *per scenario*, not per story.
 - One scenario for the happy path, one per edge case, one per failure mode, plus any fitness-function checks inherited from the foundational issue.
 - **Two happy paths = two stories** — a split trigger (DERIVATION.md), never a longer criteria list.
-- Every *Then* observable: a state, message, or number someone can check.
+- Every *Then* observable: a state, message, or number someone can check — a "better / faster / improved" *Then* fails.
 
 ## 5. Inherited from upstream
 
