@@ -1,8 +1,7 @@
 ```
 /
 ├── docs/
-│   ├── CONTEXT-MAP.yaml              ← system-wide context map
-│   └── adr/                          ← system-wide decisions (.md files, MADR format)
+│   └── CONTEXT-MAP.yaml              ← system-wide context map
 ├── src/ (or packages/, libs/, …)
 │   ├── ordering/
 │   │   └── docs/

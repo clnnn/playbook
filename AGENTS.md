@@ -31,3 +31,7 @@
 ### Knowledge Base
 
 PRDs, Lean Product Canvases, and Story Maps live in the OKF v0.2 knowledge bundle at `.okf/`. Publishing, discovery, and updates follow `docs/agents/okf-workflows.md`.
+
+### Domain docs
+
+Bounded contexts and their ubiquitous language live in `docs/CONTEXT-MAP.yaml` and the per-context `CONTEXT.yaml` files it points at. Before exploring the codebase, read them as described in `docs/agents/domain-docs.md`.
