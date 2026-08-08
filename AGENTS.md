@@ -5,7 +5,8 @@
 
 <!-- nx configuration start-->
 <!-- Leave the start & end comments to automatically receive updates. -->
-# General Guidelines for working with Nx
+
+## General Guidelines for working with Nx
 
 - For navigating/exploring the workspace, invoke the `nx-workspace` skill first - it has patterns for querying projects, targets, and dependencies
 - When running tasks (for example build, lint, test, e2e, etc.), always prefer running the task through `nx` (i.e. `nx run`, `nx run-many`, `nx affected`) instead of using the underlying tooling directly
@@ -24,14 +25,13 @@
 - DON'T USE for: basic generator syntax (`nx g @nx/react:app`), standard commands, things you already know
 - The `nx-generate` skill handles generator discovery internally - don't call nx_docs just to look up generator syntax
 
+
 <!-- nx configuration end-->
 
-## Agent skills
-
-### Knowledge Base
+## Knowledge Base
 
 PRDs, Lean Product Canvases, and Story Maps live in the OKF v0.2 knowledge bundle at `.okf/`. Publishing, discovery, and updates follow `docs/agents/okf-workflows.md`.
 
-### Domain docs
+## Domain docs
 
 Bounded contexts and their ubiquitous language live in `docs/CONTEXT-MAP.yaml` and the per-context `CONTEXT.yaml` files it points at. Before exploring the codebase, read them as described in `docs/agents/domain-docs.md`.
