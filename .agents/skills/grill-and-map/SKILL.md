@@ -1,9 +1,9 @@
 ---
 name: grill-and-map
-description: Interviews you relentlessly about a plan or design until you and the
-  agent share one understanding, and writes the vocabulary, the boundaries, and the
-  hard decisions into the repo as it goes. Use when someone proposes a substantial
-  new plan, feature, or system — not for small changes.
+description: Grills a plan relentlessly until you and the agent share one understanding,
+  and writes the vocabulary, the boundaries and the hard decisions into the repo as
+  it goes. Use when someone proposes a substantial new feature, system or design;
+  skip it for small changes.
 ---
 
 # Grill and Map
@@ -15,7 +15,7 @@ You do two jobs at once. Job #1 is the only one the user notices; job #2 stays b
 1. **Out loud:** a sharp thinking partner who pressure-tests the plan — the question a seasoned operator asks that makes someone say "…huh, I hadn't thought about that."
 2. **Behind the spell:** you listen for the seams in the work and record what you hear — the language, the boundaries, and the decisions that are hard to reverse.
 
-Boundaries live in the language and the work, not in diagrams. You never ask "what are your aggregates?" You ask "when someone returns a jacket, whose problem is it — yours or the warehouse's?" and the boundary shows itself.
+Boundaries live in the language and the work. Ask "when someone returns a jacket, whose problem is it — yours or the warehouse's?" and the boundary shows itself — where "what are your aggregates?" gets you a blank look.
 
 ## Plain English
 
@@ -70,18 +70,7 @@ Two banks generate the candidates. Each angle stress-tests the plan *and* expose
 - **Language seams** — Does everyone mean the same thing by the key nouns? Where does one word carry two meanings? *(One word, two meanings → a boundary runs through it.)*
 - **The moat** — What is the one thing this must do better than anyone, that you would never outsource? *(That is where the real design effort belongs.)* Needs language and rate of change settled first.
 
-Arming does three things at once, so they can never drift apart: the boundary questions enter the frontier, a second context makes the file layout worth confirming with the user (`./references/CONTEXT-MAP-FORMAT.md`), and the graph server starts:
-
-```bash
-curl -s http://localhost:8765/api/hash >/dev/null 2>&1 || \
-  nohup node "$(git rev-parse --show-toplevel)/.agents/skills/grill-and-map/scripts/serve_graph.js" \
-    --no-browser > /tmp/context-graph.log 2>&1 &
-```
-
-- It starts: tell the user **"Graph live at http://localhost:8765"**
-- It fails: tell the user **"Graph server didn't start — check `/tmp/context-graph.log` if you need it. You can work from the YAML directly."**
-
-The server watches every context file and pushes live reloads, so it runs once for the whole session.
+Arming does three things at once, so they can never drift apart: the boundary questions enter the frontier, the file layout goes to the user to confirm (`./references/CONTEXT-MAP-FORMAT.md`), and the graph server starts (`./references/GRAPH-SERVER.md`).
 
 Ask every frontier question in one message, in the format in `./references/QUESTION-FORMAT.md`. Then wait for the answers.
 
@@ -98,9 +87,7 @@ Every session establishes at least one context, and every term lives in the `lan
 - A resolved term → `CONTEXT.yaml` (`./references/CONTEXT-FORMAT.md`)
 - A context established or tagged → `CONTEXT-MAP.yaml` (`./references/CONTEXT-MAP-FORMAT.md`)
 - A relationship labelled → `CONTEXT-MAP.yaml` (same file)
-- A decision that passes all three gates → an ADR in `/docs/adr/` (`./references/ADR-FORMAT.md`)
-
-`CONTEXT.yaml` and `CONTEXT-MAP.yaml` are a glossary and a boundary map. Decisions, trade-offs and implementation details belong in ADRs. Every ADR lives in `/docs/adr/`, whatever it affects — one directory, no second place to look.
+- A decision that passes the three gates → an ADR in `/docs/adr/` (`./references/ADR-FORMAT.md`)
 
 **[ ] Item 2 — Validate**
 
@@ -132,23 +119,14 @@ Return to step 2 only after the checklist is complete.
 
 ## Ending the session
 
-The session is complete when all six hold:
+The session is complete when all five hold:
 
 - `validate_context.js --final <path>` exits `0`.
-- The universal bank is exhausted, and the boundary bank too if it armed.
-- Every decision that passes all three gates has an ADR.
-- No open question is unanswered, and no term the user used still conflicts with the glossary.
 - The frontier is empty: every branch of the design tree visited, nothing left silently assumed.
+- The universal bank is exhausted, and the boundary bank too if it armed.
+- No term the user used still conflicts with the glossary, and every decision that passes the three gates has an ADR.
 - You stated the shared understanding back to the user, and they confirmed it.
 
-Until all six hold, keep grilling in rounds.
+Until all five hold, keep grilling in rounds.
 
-The confirmation comes last, and it comes while the graph is still live — that view is what the user reads to answer you. Once they confirm, and only if the server started, close it:
-
-```bash
-lsof -ti tcp:8765 -sTCP:LISTEN | xargs -r kill 2>/dev/null || true
-```
-
-`-sTCP:LISTEN` is load-bearing: without it, `lsof -ti tcp:8765` also returns every process *connected* to the port — including the editor's port-forwarder (e.g. the VS Code Remote / devcontainer server). Killing that tears down the whole session. Only ever kill the listener.
-
-Tell the user **"Graph server stopped."** The map, the glossaries and the ADRs stay in the repo.
+The confirmation comes last, and it comes while the graph is still live. Once they confirm, stop the server (`./references/GRAPH-SERVER.md`).

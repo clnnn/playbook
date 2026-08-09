@@ -181,6 +181,12 @@
       "skillPath": "skills/workshop-facilitation/SKILL.md",
       "computedHash": "1d315dcbea3ced1797af41c96258204474a81f3946bca0d9bb82ef400d08570d"
     },
+    "writing-for-agents": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/productivity/writing-for-agents/SKILL.md",
+      "computedHash": "ccfa1e94d8f6ab5c6a1edd55293ca477faf93c39207771331efdb1e798ed21d6"
+    },
     "writing-great-skills": {
       "source": "mattpocock/skills",
       "sourceType": "github",
