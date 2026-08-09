@@ -5,7 +5,8 @@
 ```
 /
 ├── docs/
-│   └── CONTEXT-MAP.yaml              ← system-wide context map
+│   ├── CONTEXT-MAP.yaml              ← system-wide context map
+│   └── adr/                          ← every ADR, whatever it affects
 ├── src/ (or packages/, libs/, …)
 │   ├── ordering/
 │   │   └── docs/

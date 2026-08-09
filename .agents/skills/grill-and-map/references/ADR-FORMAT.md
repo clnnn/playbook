@@ -1,6 +1,6 @@
 # ADR Format
 
-A decision that affects the whole system goes in `/docs/adr/`. A decision that affects one context goes in an `adr/` directory beside that context's `CONTEXT.yaml`. Create either directory lazily — only when its first ADR is needed.
+Every ADR goes in `/docs/adr/`, whatever it affects. There is one ADR directory in the repo, and no second place to look. Create it lazily — only when the first ADR is needed.
 
 ## Template
 
@@ -22,7 +22,7 @@ Only include these when they add genuine value. Most ADRs won't need them.
 
 ## Numbering
 
-Sequential per directory: `0001-slug.md`, `0002-slug.md`. Scan the directory the ADR is going into for the highest existing number and increment by one.
+Sequential: `0001-slug.md`, `0002-slug.md`. Scan `/docs/adr/` for the highest existing number and increment by one.
 
 ## When to offer an ADR
 

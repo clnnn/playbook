@@ -98,9 +98,9 @@ Every session establishes at least one context, and every term lives in the `lan
 - A resolved term → `CONTEXT.yaml` (`./references/CONTEXT-FORMAT.md`)
 - A context established or tagged → `CONTEXT-MAP.yaml` (`./references/CONTEXT-MAP-FORMAT.md`)
 - A relationship labelled → `CONTEXT-MAP.yaml` (same file)
-- A decision that passes all three gates → an ADR (`./references/ADR-FORMAT.md`)
+- A decision that passes all three gates → an ADR in `/docs/adr/` (`./references/ADR-FORMAT.md`)
 
-`CONTEXT.yaml` and `CONTEXT-MAP.yaml` are a glossary and a boundary map. Decisions, trade-offs and implementation details belong in ADRs.
+`CONTEXT.yaml` and `CONTEXT-MAP.yaml` are a glossary and a boundary map. Decisions, trade-offs and implementation details belong in ADRs. Every ADR lives in `/docs/adr/`, whatever it affects — one directory, no second place to look.
 
 **[ ] Item 2 — Validate**
 
