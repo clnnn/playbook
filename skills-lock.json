@@ -13,6 +13,12 @@
       "skillPath": "skills/discovery-interview-prep/SKILL.md",
       "computedHash": "b6a30665e24f963eb78347e84e4dffb56f186b0d4a79ab7ff2ece3cc7221a264"
     },
+    "domain-modeling": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/domain-modeling/SKILL.md",
+      "computedHash": "363cb0f53b0b431e7c00086ad1f823500b7e1b70b5616ee969c979f0934e9e6e"
+    },
     "epic-breakdown-advisor": {
       "source": "deanpeters/product-manager-skills",
       "sourceType": "github",

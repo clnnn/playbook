@@ -7,13 +7,13 @@ disable-model-invocation: true
 
 # Backlog
 
-Compile the upstream product documents into GitHub issues an agent can execute: milestones, labels, epics, dependency-ordered stories, and one foundational issue. Fourth step in `/prd → /domain-discovery → /story-map → /backlog`. The deliverable is GitHub issues only — no backlog document, nothing published to `.okf/`.
+Compile the upstream product documents into GitHub issues an agent can execute: milestones, labels, epics, dependency-ordered stories, and one foundational issue. Third step in `/prd → /story-map → /backlog`. The deliverable is GitHub issues only — no backlog document, nothing published to `.okf/`.
 
 A full run has exactly two interaction points — the **stack decision** and the **plan gate**. Everything between them is legwork. GitHub stays untouched until the gate opens.
 
 ## Inputs
 
-**Required:** the PRD and the story map. **Optional:** the context map and per-context glossaries from `/domain-discovery`.
+**Required:** the PRD and the story map. **Optional:** the context map and per-context glossaries from `/grill-and-map`.
 
 Each source is a *resolvable reference*, not necessarily a repo path: an `.okf/` bundle document (discover per `docs/agents/okf-workflows.md`), a file path, a URL, or a GitHub Discussion fetched with `gh`.
 
@@ -27,7 +27,7 @@ Each source is a *resolvable reference*, not necessarily a repo path: an `.okf/`
 
 Resolve every source and restate what each one is — initiative, personas, release slices, bounded contexts — so a wrong document is caught before anything derives from it. Announce degradations in the same breath, as one block:
 
-- **No context map** → no `context:` labels, no glossary inlining, no boundary checks. Recommend `/domain-discovery` first; continue only on the user's say-so.
+- **No context map** → no `context:` labels, no glossary inlining, no boundary checks. Recommend `/grill-and-map` first; continue only on the user's say-so.
 - **PRD §6/§7 missing** → the foundational issue covers stack gaps only, and fitness functions are declared unavailable rather than invented.
 
 **Done when** `gh` is authenticated, every source is restated and confirmed, and every degradation is on the table.

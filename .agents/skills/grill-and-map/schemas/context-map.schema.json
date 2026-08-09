@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://domain-discovery/context-map.schema.json",
+  "$id": "https://grill-and-map/context-map.schema.json",
   "title": "CONTEXT-MAP.yaml",
   "description": "System-wide map of bounded contexts and their relationships. Boundaries only — no implementation details.",
   "type": "object",

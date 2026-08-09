@@ -1,11 +1,14 @@
 # Boundary Signals: hearing DDD structure in plain business talk
 
 This is the decoder ring. The user speaks business; you hear domain structure.
-Use it when the domain is big or tangled and you want to be systematic about not
-missing a seam. Each signal below is something a person naturally says or a
-question you naturally ask — followed by the boundary it usually reveals.
+Read it when you are testing whether the boundary bank arms, and again when the
+domain is big or tangled and you want to be systematic about not missing a seam.
+Each signal below is something a person naturally says or a question you
+naturally ask — followed by the boundary it usually reveals.
 
 ## Signals that a bounded context boundary runs here
+
+The first three are the **arming test**. Any one of them, heard in the user's own answer, arms the boundary bank. The last two sharpen a boundary you already suspect; they do not arm it on their own.
 
 - **One word, two meanings.** "Customer" to the sales team is a lead with a
   pipeline stage; to the support team it's an account with a ticket history; to

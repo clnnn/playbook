@@ -15,10 +15,15 @@
  * Semantic rules ("no implementation details", tag justified in description)
  * are NOT checked here — those stay with the grilling loop.
  *
+ * --final adds the end-of-session completeness checks: at least one context
+ * exists, and every context defines at least one term. These are off by
+ * default because a map is legitimately empty during round one.
+ *
  * Usage
  * -----
  *   node validate_context.js                       # auto-discover CONTEXT-MAP.yaml
  *   node validate_context.js docs/CONTEXT-MAP.yaml # explicit path
+ *   node validate_context.js --final               # + completeness checks
  *
  * Exit code: 0 = valid, 1 = errors found, 2 = could not locate inputs
  */
@@ -101,13 +106,18 @@ function loadYaml(file, label) {
 }
 
 // ─── main ────────────────────────────────────────────────────────────────────
-function validate(mapPath) {
+function validate(mapPath, final) {
   const label = path.basename(mapPath);
   const data = loadYaml(mapPath, label);
   if (data === null) return;
 
   // stage 1 — schema
   reportAjv(validateMapSchema, data, label);
+
+  // stage 3 — completeness (--final only)
+  if (final && !(data.contexts || []).length) {
+    err(label, 'no contexts defined — every session establishes at least one');
+  }
 
   const base = path.dirname(mapPath);
   const contextNames = new Set();
@@ -131,7 +141,12 @@ function validate(mapPath) {
         err(at, `path does not exist: ${ctx.path}`);
       } else {
         const ctxData = loadYaml(resolved, ctx.path);
-        if (ctxData !== null) reportAjv(validateContextSchema, ctxData, ctx.path);
+        if (ctxData !== null) {
+          reportAjv(validateContextSchema, ctxData, ctx.path);
+          if (final && !(ctxData.language || []).length) {
+            err(ctx.path, 'no terms defined — every context carries at least one');
+          }
+        }
       }
     }
   }
@@ -181,7 +196,9 @@ function findContextMap(start) {
 }
 
 // ─── entry point ─────────────────────────────────────────────────────────────
-const arg = process.argv[2];
+const argv  = process.argv.slice(2);
+const final = argv.includes('--final');
+const arg   = argv.find(a => !a.startsWith('--'));
 let mapPath;
 
 if (arg) {
@@ -198,9 +215,9 @@ if (arg) {
   }
 }
 
-validate(mapPath);
+validate(mapPath, final);
 
-console.log(`Validated: ${mapPath}`);
+console.log(`Validated: ${mapPath}${final ? ' (--final)' : ''}`);
 if (warnings.length) {
   console.log(`\n⚠ ${warnings.length} warning(s):`);
   warnings.forEach(w => console.log(`  - ${w}`));
@@ -211,5 +228,5 @@ if (errors.length) {
   console.log('\nFix these before asking the next question.');
   process.exit(1);
 }
-console.log('\n✓ All checks passed (schema + references).');
+console.log(`\n✓ All checks passed (schema + references${final ? ' + completeness' : ''}).`);
 process.exit(0);

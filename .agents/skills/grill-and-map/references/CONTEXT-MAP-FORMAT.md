@@ -1,5 +1,24 @@
 # CONTEXT-MAP.yaml format
 
+## Where the files live
+
+```
+/
+├── docs/
+│   └── CONTEXT-MAP.yaml              ← system-wide context map
+├── src/ (or packages/, libs/, …)
+│   ├── ordering/
+│   │   └── docs/
+│   │       └── CONTEXT.yaml
+│   └── billing/
+│       └── docs/
+│           └── CONTEXT.yaml
+```
+
+With one context, use this layout without asking. Ask the user to confirm a layout only when a second context arrives.
+
+## The map
+
 ```yaml
 contexts:
   - name: Ordering

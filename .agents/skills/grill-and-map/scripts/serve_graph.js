@@ -210,10 +210,8 @@ function serve(watcher, port) {
 
     if (url === '/' || url === '/index.html') {
       const viewer = path.join(SCRIPTS_DIR, 'context_map_viewer.html');
-      const fallback = path.join(SCRIPTS_DIR, 'polygraph_3d_graph_v4.html');
-      const file = fs.existsSync(viewer) ? viewer : fallback;
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-      res.end(fs.readFileSync(file));
+      res.end(fs.readFileSync(viewer));
 
     } else if (url === '/api/data') {
       res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });

@@ -18,7 +18,7 @@ Only the fitness functions that can run against the walking skeleton ride this i
 
 One Nx project boundary per bounded context on the context map — the moat context gets its own project. Tag each project (`scope:<context>`) and wire `@nx/enforce-module-boundaries` so the ESLint dependency constraints mirror the context map's allowed dependency directions. Acceptance criterion: **a forbidden import fails lint in CI.**
 
-With no context map (a declared degradation), this section is omitted, and the body says the boundaries await `/domain-discovery`.
+With no context map (a declared degradation), this section is omitted, and the body says the boundaries await `/grill-and-map`.
 
 ## Body
 
