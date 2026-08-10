@@ -51,10 +51,6 @@ The default:
 │   └── billing/
 │       └── docs/
 │           └── CONTEXT.yaml
-└── apps/
-    └── web/
-        └── docs/
-            └── CONTEXT.yaml
 ```
 
 One `CONTEXT.yaml` per context, in a `docs/` folder beside the code it describes. Where exploration found a different code layout — a single `src/`, one package, some other root — propose that same shape mapped onto it. Ask one question: accept the proposal, or name the layout.
