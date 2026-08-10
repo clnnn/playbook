@@ -13,7 +13,7 @@ A full run has exactly two interaction points — the **stack decision** and the
 
 ## Inputs
 
-**Required:** the PRD and the story map. **Optional:** the context map and per-context glossaries from `/grill-and-map`.
+**Required:** the PRD and the story map. **Optional:** the context map and per-context glossaries from `/grill-and-align`.
 
 Each source is a *resolvable reference*, not necessarily a repo path: an `.okf/` bundle document (discover per `docs/agents/okf-workflows.md`), a file path, a URL, or a GitHub Discussion fetched with `gh`.
 
@@ -27,7 +27,7 @@ Each source is a *resolvable reference*, not necessarily a repo path: an `.okf/`
 
 Resolve every source and restate what each one is — initiative, personas, release slices, bounded contexts — so a wrong document is caught before anything derives from it. Announce degradations in the same breath, as one block:
 
-- **No context map** → no `context:` labels, no glossary inlining, no boundary checks. Recommend `/grill-and-map` first; continue only on the user's say-so.
+- **No context map** → no `context:` labels, no glossary inlining, no boundary checks. Recommend `/grill-and-align` first; continue only on the user's say-so.
 - **PRD §6/§7 missing** → the foundational issue covers stack gaps only, and fitness functions are declared unavailable rather than invented.
 
 **Done when** `gh` is authenticated, every source is restated and confirmed, and every degradation is on the table.

@@ -4,11 +4,11 @@ One server for the whole session. It watches every context file and pushes live 
 
 ## Start
 
-Start it once, when the boundary bank arms.
+Start it once, right after you write `docs/CONTEXT-MAP.yaml` for the first time. The server reads that file at startup, so it fails before the file exists.
 
 ```bash
 curl -s http://localhost:8765/api/hash >/dev/null 2>&1 || \
-  nohup node "$(git rev-parse --show-toplevel)/.agents/skills/grill-and-map/scripts/serve_graph.js" \
+  nohup node "$(git rev-parse --show-toplevel)/.agents/skills/grill-and-align/scripts/serve_graph.js" \
     --no-browser > /tmp/context-graph.log 2>&1 &
 ```
 

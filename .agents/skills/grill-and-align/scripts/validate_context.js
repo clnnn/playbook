@@ -5,9 +5,9 @@
  *
  * Two stages:
  *   1. Schema      — each file is validated against its JSON Schema in
- *                    ../schemas via ajv. Covers syntax, required keys, enums
- *                    (tag, relationship label), shapes (peers is a 2-item
- *                    list), and the directed-vs-symmetric relationship rule.
+ *                    ../schemas via ajv. Covers syntax, required keys, the
+ *                    tag enum, shapes (peers is a 2-item list), and the
+ *                    directed-vs-symmetric relationship rule.
  *   2. Referential — checks a schema fundamentally cannot express:
  *                    every `path:` resolves on disk, every relationship name
  *                    is a defined context, and no context name is duplicated.

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://grill-and-map/context-map.schema.json",
+  "$id": "https://grill-and-align/context-map.schema.json",
   "title": "CONTEXT-MAP.yaml",
   "description": "System-wide map of bounded contexts and their relationships. Boundaries only — no implementation details.",
   "type": "object",
@@ -41,21 +41,12 @@
     "relationship": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["label", "implication"],
+      "required": ["description"],
       "properties": {
-        "label": {
-          "enum": [
-            "Customer-Supplier",
-            "ACL",
-            "Conformist",
-            "Open Host Service (Published Language)",
-            "Shared Kernel"
-          ]
-        },
-        "implication": {
+        "description": {
           "type": "string",
           "minLength": 1,
-          "description": "One sentence capturing the autonomy consequence."
+          "description": "One sentence naming what crosses the boundary, and who adapts when the other side changes."
         },
         "upstream": { "type": "string", "minLength": 1 },
         "downstream": { "type": "string", "minLength": 1 },
@@ -68,33 +59,18 @@
       },
       "oneOf": [
         {
-          "description": "Directed relationship: uses upstream/downstream with a directed label.",
+          "description": "Directed relationship: uses upstream and downstream.",
           "required": ["upstream", "downstream"],
-          "not": { "required": ["peers"] },
-          "properties": {
-            "label": {
-              "enum": [
-                "Customer-Supplier",
-                "ACL",
-                "Conformist",
-                "Open Host Service (Published Language)"
-              ]
-            }
-          }
+          "not": { "required": ["peers"] }
         },
         {
-          "description": "Symmetric relationship: uses a two-item peers list with a symmetric label.",
+          "description": "Symmetric relationship: uses a two-item peers list.",
           "required": ["peers"],
           "not": {
             "anyOf": [
               { "required": ["upstream"] },
               { "required": ["downstream"] }
             ]
-          },
-          "properties": {
-            "label": {
-              "enum": ["Shared Kernel"]
-            }
           }
         }
       ]
