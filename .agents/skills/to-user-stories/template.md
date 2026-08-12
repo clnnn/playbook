@@ -21,19 +21,15 @@ Every story uses exactly these sections, in this order. The bracketed notes are 
   otherwise wander into: the next slice's tasks, the adjacent
   workflow step, variations split off during derivation]
 
-## 3. Context you can't infer
+## 3. Upstream decisions
 
-[What a fresh agent cannot read from the code:]
+[What a fresh agent cannot read from the code. Cite, don't restate:
+an ADR number, or a product or sequencing call made outside the
+code. Only decisions an implementer would otherwise re-open or
+silently reverse — not design guidance. "None" when the code
+speaks for itself.]
 
-**Upstream decisions**
-- [choices already made — architecture, product, sequencing — with a one-line why]
-
-**Code touchpoints**
-- [project → file → symbol the work starts from; "greenfield" if none]
-
-**Glossary**
-- **[Term]** — [meaning]. [Every domain term the story body uses is
-  defined here or inline at its first use — no exceptions.]
+- **[ADR-NNN | product | sequencing]** — [the decision]. [one-line why]
 
 ## 4. Acceptance criteria
 

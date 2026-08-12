@@ -8,11 +8,6 @@ argument-hint: "[epic, notes, PRD, or references]"
 
 Convert whatever material is at hand — the current conversation, pasted notes, a PRD, a story map, linked files or issues — into implementation-ready user stories, each written for a **fresh agent**: an implementer with the code in front of them but none of this conversation. Every story passes the checks gate, the user confirms the set, and only then do the stories become GitHub issues wired with blocked-by edges.
 
-## Input
-
-**Works best with:** an epic or feature plus its PRD (the persona and glossary come from there).
-**Also useful:** the story map, discovery notes, existing issues the work hangs off.
-
 ## Facilitation
 
 - One question per turn, numbered quick-select options plus `Other (specify)` where natural; accept `1`, `1,3`, or free text.
@@ -38,7 +33,7 @@ Present the resulting slice list — title, one-line value, proposed order — w
 Write each accepted slice as a story using [`template.md`](template.md) — all six sections, in order. While writing:
 
 - §2 **Out** names the neighbouring work this story's siblings own — pull it straight from the slice list; derivation just told you what got split off.
-- §3 is written for the fresh agent: upstream decisions, code touchpoints (project, file, symbol — verify they exist before citing them), and glossary entries for every domain term the body uses.
+- §3 cites decisions, it never restates them — an ADR number from `docs/adr/`, or a product or sequencing call made outside the code. Code locations are the implementer's to find;
 - §5 is generated from each blocker's §2 **In** list — what that story promises to leave behind — and always phrased **expected — verify against code before trusting it**.
 - §6 uses placeholder refs (`#S1`, `#S2`) for stories not yet published; real numbers arrive in the relations pass.
 
@@ -52,7 +47,7 @@ Run every check against every story. A failure is fixed in the draft and the sto
 |---|---|
 | 1 | §1 persona is the grounded persona, verbatim |
 | 2 | §2 Out list is non-empty and names real neighbouring work |
-| 3 | Every domain term in the body is defined in §3 or inline at first use — no exceptions |
+| 3 | Every domain term in the body is a term defined in `CONTEXT.yaml`, never defined inside the story |
 | 4 | Every §4 scenario has exactly one When and one Then |
 | 5 | §4 covers: happy path + every edge case + every failure mode |
 | 6 | Every Then is observable — a state, message, or number someone can check ("better/faster/improved" fails) |
