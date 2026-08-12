@@ -50,7 +50,7 @@ Read the repo for the stack that already runs, and write each item against it. T
 |---|---|
 | Success-metric instrumentation | the §7 primary metric, wired where the step producing it ships |
 
-It folds to the seed shipping that step, and moves to foundation when several seeds feed the metric. With no PRD it becomes an open line: *no primary metric declared — run `/prd`*.
+It folds to the seed shipping that step, and moves to foundation when several seeds feed the metric. With no PRD it becomes an open line: *no primary metric declared — nothing to instrument yet*.
 
 **Conditional, default disposition `fold`. Each applies when:**
 
@@ -84,8 +84,8 @@ in this product's words] — runs in CI with the harness green.
 - [ ] **Datastore setup** — *applies because:* §6 DUR-1 requires an invoice to
       survive a restart — *done when:* the migration command runs in CI against
       an empty database
-- [ ] **Module structure & boundaries** — *applies because:* the context map
-      splits billing from ordering — *done when:* an import from ordering into
+- [ ] **Module structure & boundaries** — *applies because:* the domain docs
+      split billing from ordering — *done when:* an import from ordering into
       billing fails the build
 
 ## Folded into stories

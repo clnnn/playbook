@@ -18,18 +18,16 @@ A run is **legwork** with one interaction point: the **gate**. GitHub stays unto
 
 ## Input
 
-Sources are discovered, never guessed. Read `AGENTS.md` for the two conventions `/setup` writes: the **knowledge base** section (`docs/agents/knowledge.md`) locates the story map and the PRD; the **domain docs** section (`docs/agents/domain.md`) locates the context map and its `CONTEXT.yaml` glossaries. A path passed with the invocation overrides discovery. A missing convention section means `/setup` has not run — say so, and continue on the user's word.
+Sources are discovered, never guessed. Read `AGENTS.md` for the **knowledge base** section — it locates the story map and the PRD. Bounded contexts and glossary terms come from the domain docs `AGENTS.md` already points at. A path passed with the invocation overrides discovery. A missing knowledge-base section leaves the story map unlocatable — say so, and continue on the user's word.
 
 | Source | Status | Carries |
 |---|---|---|
 | Story map | **Required** | release slices, activities, steps, tasks, the Who block |
 | PRD | Optional | §6 quality-attribute scenarios, §7 primary metric |
-| Context map | Optional | bounded contexts, per-context glossary |
 
-Announce every degradation at preflight, as one block:
+Announce degradation at preflight:
 
-- **No PRD** — persona, segment and narrative come from the map's Who block. Foundation applicability is inferred and marked 🔶. Success-metric instrumentation becomes an open line recommending `/prd`.
-- **No context map** — the glossary falls back to the PRD, and module boundaries await `/grill-and-align`.
+- **No PRD** — persona, segment and narrative come from the map's Who block. Foundation applicability is inferred and marked 🔶. Success-metric instrumentation becomes an open line naming the undeclared metric.
 
 ## Branches
 
@@ -44,9 +42,9 @@ Both branches run the flow below.
 
 `gh auth status` is the first act of every run. Unauthenticated halts the run, handing the user the exact `gh auth login` command.
 
-Resolve every source and restate each in one line — initiative, persona, slice names — so a wrong document is caught before anything derives from it. Announce the degradations here.
+Resolve every source and restate each in one line — initiative, persona, slice names — so a wrong document is caught before anything derives from it. Announce any degradation here.
 
-**Done when** `gh` is authenticated, every source is restated, and every degradation is on the table.
+**Done when** `gh` is authenticated, every source is restated, and any degradation is on the table.
 
 ### 2. Coverage
 
