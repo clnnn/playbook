@@ -1,8 +1,7 @@
 ---
 name: to-user-stories
-description: Turn a conversation, notes, or references into 6-section user stories (Humanizing Work splitting), then publish them as dependency-linked GitHub issues after confirmation.
+description: Turn material — a conversation, notes, a PRD, a story map, a backlog slice brief — into 6-section user stories, then publish them as dependency-linked GitHub issues. Use when a feature needs implementation-ready stories, when an implemented story changed, or when a backlog slice brief arrives for writing.
 argument-hint: "[epic, notes, PRD, or references]"
-disable-model-invocation: true
 ---
 
 # To User Stories
