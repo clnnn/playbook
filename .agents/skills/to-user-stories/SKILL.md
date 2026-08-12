@@ -14,10 +14,6 @@ Convert whatever material is at hand — the current conversation, pasted notes,
 **Works best with:** an epic or feature plus its PRD (the persona and glossary come from there).
 **Also useful:** the story map, discovery notes, existing issues the work hangs off.
 
-Anything supplied with the invocation — text after the skill name, a pasted dump, an `ARGUMENTS:` line, the conversation so far — counts as material already given. Use it and skip whatever it covers; don't re-ask.
-
-**Arriving empty-handed? That works too.** Open by asking for the epic or notes to convert.
-
 ## Facilitation
 
 - One question per turn, numbered quick-select options plus `Other (specify)` where natural; accept `1`, `1,3`, or free text.
@@ -30,7 +26,6 @@ Establish, from the material or by asking:
 
 - **Persona** — the PRD's named persona. Every story's §1 uses this persona by name; if no PRD exists, name one now with the user and note it as the acting PRD persona.
 - **Glossary** — the domain terms the material uses, each with its meaning. This feeds every story's §3.
-- **Foundational issue** — the epic-level issue (or first slice) carrying cross-cutting **fitness functions**: automated, measurable quality checks (a latency budget, a dependency rule) that downstream stories inherit as acceptance scenarios. "None" is a valid answer.
 - **Repository** — where issues will land (`gh repo view` confirms the default).
 
 **Advance when** persona, glossary, and target repo are stated back and confirmed.
@@ -49,7 +44,6 @@ Write each accepted slice as a story using [`template.md`](template.md) — all 
 
 - §2 **Out** names the neighbouring work this story's siblings own — pull it straight from the slice list; derivation just told you what got split off.
 - §3 is written for the fresh agent: upstream decisions, code touchpoints (project, file, symbol — verify they exist before citing them), and glossary entries for every domain term the body uses.
-- §4 inherits the foundational issue's fitness-function checks as scenarios.
 - §5 is generated from each blocker's §2 **In** list — what that story promises to leave behind — and always phrased **expected — verify against code before trusting it**.
 - §6 uses placeholder refs (`#S1`, `#S2`) for stories not yet published; real numbers arrive in the relations pass.
 
@@ -65,7 +59,7 @@ Run every check against every story. A failure is fixed in the draft and the sto
 | 2 | §2 Out list is non-empty and names real neighbouring work |
 | 3 | Every domain term in the body is defined in §3 or inline at first use — no exceptions |
 | 4 | Every §4 scenario has exactly one When and one Then |
-| 5 | §4 covers: happy path + every edge case + every failure mode + inherited fitness checks |
+| 5 | §4 covers: happy path + every edge case + every failure mode |
 | 6 | Every Then is observable — a state, message, or number someone can check ("better/faster/improved" fails) |
 | 7 | Each §5 entry traces to a blocker's Scope and carries the expected-verify phrasing |
 | 8 | Each §6 dependency line carries its reason |

@@ -38,10 +38,8 @@ Every story uses exactly these sections, in this order. The bracketed notes are 
 ## 4. Acceptance criteria
 
 [Gherkin. One When/Then per scenario. One scenario for the happy
-path, one per edge case, one per failure mode, plus any
-fitness-function checks inherited from the foundational issue.
-Every Then observable: a state, message, or number someone can
-check.]
+path, one per edge case, one per failure mode. Every Then
+observable: a state, message, or number someone can check.]
 
 ```gherkin
 Scenario: [happy path]
