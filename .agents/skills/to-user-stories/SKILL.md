@@ -21,13 +21,9 @@ Convert whatever material is at hand — the current conversation, pasted notes,
 
 ## Step 1/5 — Ground
 
-Establish, from the material or by asking:
+Name the **persona** the stories are written for: the PRD's named persona, taken from the material. No PRD — agree one with the user now and note it as the acting PRD persona.
 
-- **Persona** — the PRD's named persona. Every story's §1 uses this persona by name; if no PRD exists, name one now with the user and note it as the acting PRD persona.
-- **Glossary** — the domain terms the material uses, each with its meaning. This feeds every story's §3.
-- **Repository** — where issues will land (`gh repo view` confirms the default).
-
-**Advance when** persona, glossary, and target repo are stated back and confirmed.
+**Advance when** the persona is stated back and confirmed.
 
 ## Step 2/5 — Derive
 
@@ -54,7 +50,7 @@ Run every check against every story. A failure is fixed in the draft and the sto
 
 | # | Check |
 |---|---|
-| 1 | §1 persona is the PRD's named persona, verbatim |
+| 1 | §1 persona is the grounded persona, verbatim |
 | 2 | §2 Out list is non-empty and names real neighbouring work |
 | 3 | Every domain term in the body is defined in §3 or inline at first use — no exceptions |
 | 4 | Every §4 scenario has exactly one When and one Then |
@@ -71,7 +67,7 @@ Show the user the gate result as a compact per-story table.
 
 ## Step 5/5 — Confirm & publish
 
-1. **Confirm** — present the final stories (or a summary plus one full sample) and ask explicitly: publish these N stories as GitHub issues in `<repo>`? Publishing waits for a yes; edits loop back to the step they touch.
+1. **Confirm** — present the final stories (or a summary plus one full sample) and ask explicitly: publish these N stories as GitHub issues in `<repo>` (`gh repo view` for the default)? Publishing waits for a yes; edits loop back to the step they touch.
 2. **Create** — `gh issue create` per story in dependency order (blockers first), title = story title, body = the six sections, labels/milestone as agreed. Record each returned issue number.
 3. **Relations pass** — the step that keeps the two renders of each dependency in sync:
    - Replace every placeholder ref in §5 and §6 bodies with the real issue numbers (`gh issue edit`).

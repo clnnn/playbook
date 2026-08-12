@@ -7,7 +7,7 @@ Every story uses exactly these sections, in this order. The bracketed notes are 
 
 ## 1. Story
 
-**As a** [the PRD's named persona — never a generic "user"]
+**As a** [the grounded persona, by name]
 **I want to** [action]
 **so that** [outcome]
 
