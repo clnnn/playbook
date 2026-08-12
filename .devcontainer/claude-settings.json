@@ -1,6 +1,7 @@
 {
   "effortLevel": "high",
   "theme": "dark",
+  "autoMemoryEnabled": false,
   "permissions": {
     "defaultMode": "auto"
   }
