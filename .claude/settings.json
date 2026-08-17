@@ -2,6 +2,5 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "autoMemoryEnabled": false,
-  "enabledMcpjsonServers": ["shadcn", "nx-mcp"]
+  "autoMemoryEnabled": false
 }

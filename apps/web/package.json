@@ -1,9 +1,0 @@
-{
-  "name": "@workspace/web",
-  "version": "0.0.1",
-  "private": true,
-  "dependencies": {
-    "@workspace/ui": "workspace:*"
-  },
-  "devDependencies": {}
-}
