@@ -28,11 +28,22 @@ Every foundation line ends on a runnable command or an observable state — "a f
 
 Read the repo for the stack that already runs, and write each item against it. This list names no tool.
 
+### Repo shape
+
+Every other line in **Module structure & boundaries** inherits one call, so make it first: **monorepo** — each module a separately buildable package declaring its dependencies — or **single project** — modules as directories inside one build.
+
+The repo usually answers it: a workspace manifest or a package-per-module layout *is* the shape, recorded rather than re-opened. Where no shape exists yet the call is the user's at the gate — name the one the slice's module count justifies, and mark it 🔶.
+
+The shape decides the done-signal the category's enforcement line ends on:
+
+- **monorepo** — the graph builds every package, and an import across a boundary absent from the importing module's manifest fails that package's build
+- **single project** — the boundary check names the module directories, and an import across them fails the build
+
 **Always considered, default disposition `foundation`:**
 
 | Category | What it covers |
 |---|---|
-| Module structure & boundaries | one project per bounded context, dependency direction enforced |
+| Module structure & boundaries | the repo shape, one module per bounded context, dependency direction enforced |
 | Testing tooling | the runner, the fixtures, one green test |
 | Architecture test | an automated check that the boundaries hold |
 | E2E testing | one test driving the skeleton path end to end |
@@ -85,8 +96,9 @@ in this product's words] — runs in CI with the harness green.
       survive a restart — *done when:* the migration command runs in CI against
       an empty database
 - [ ] **Module structure & boundaries** — *applies because:* the domain docs
-      split billing from ordering — *done when:* an import from ordering into
-      billing fails the build
+      split billing from ordering — *shape:* monorepo, one package per context
+      — *done when:* the graph builds both packages and an import from ordering
+      into billing fails billing's build
 
 ## Folded into stories
 
