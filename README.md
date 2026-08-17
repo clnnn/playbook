@@ -111,64 +111,167 @@ Cross-cutting, available at any stage:
 ## Flows
 
 That lifecycle is a **map, not a mandate** — nothing in the repo enforces the
-full run. The stages exist so you can pick the ones your situation needs. Every skill runs standalone; the artifacts
-are what make them compose, and a missing upstream artifact is handled
-explicitly rather than fatally.
+full run. The stages exist so you can pick the ones your situation needs. Every
+skill runs standalone; the artifacts are what make them compose, and a missing
+upstream artifact is handled explicitly rather than fatally.
 
 ```
- ① NEW PRODUCT — 0→1, nothing exists but a hunch
-   /lean-product-canvas → /prd → /story-map → /grill-and-align → /backlog
-     → build → /backlog promote R2 → build → …
-   The only flow that runs the whole chain. The canvas earns its cost here:
-   killing a bad idea in 8 boxes beats killing it in 8 sprints. Bare
-   /backlog compiles Release 1 — the walking skeleton — and every later
-   slice arrives with promote, one at a time.
+   ┌────────┐          ╭──────╮          ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
+   │ /skill │          │ auto │          ╎ build             ╎
+   └────────┘          ╰──────╯          ╎ + codebase-design ╎
+   you invoke it       the agent         └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
+                       reaches for it    yours — the repo stops
+                                         here, the vocabulary doesn't
 
- ② NEW FEATURE IN AN EXISTING APP — the common case, two ways
-   long   /prd → /story-map → /grill-and-align → /backlog → build
-   short  /grill-and-align → /to-user-stories → build
-   Skip discovery either way; the business problem is already settled.
-   Take the SHORT path when the feature is one slice you can already
-   describe — align on the language and the contexts it touches, then write
-   the stories straight from the interview. Take the LONG path when it
-   spans releases and you need a map to slice against, and keep promoting
-   as the releases land.
-
- ③ INHERITED CODEBASE — undocumented, nobody left who wrote it
-   /grill-and-align → codebase-design → docs/adr/
-   No product work at all. The deliverable is a context map, a glossary, and
-   ADRs for the decisions already baked into the code. Run it before you
-   promise anyone a date.
-
- ④ EPIC HANDED TO YOU — a stakeholder wrote three paragraphs
-   /to-user-stories → build
-   Standalone. INVEST pre-check, 9 splitting patterns, six-section issues.
-   No PRD needed; it names an acting persona and says so.
-
- ⑤ VALIDATE, THEN STOP — the idea might not deserve a repo
-   /lean-product-canvas → decide
-   A complete flow that produces no code on purpose. The smallest experiment
-   is box 8; run that, not the build.
-
- ⑥ FEASIBILITY OR COST QUESTION — "can we even afford this?"
-   napkin-math → /lean-product-canvas or /prd
-   Order-of-magnitude first. A number that ends the conversation early is the
-   cheapest artifact in the repo.
-
- ⑦ REFACTOR OR ARCHITECTURE CLEANUP — no new behaviour
-   codebase-design → /grill-and-align (ADRs only)
-   Design it twice, then record why. The ADR is the point: the next agent
-   inherits the reasoning, not just the shape.
-
- ⑧ BUG FIX OR SMALL CHANGE — one afternoon
-   build
-   codebase-design auto-loads if the fix touches a seam. Nothing else fires.
-   Ceremony you can skip is ceremony the pipeline should not impose.
-
- ⑨ WORK THAT OUTLIVES ONE SESSION — context window ends, work does not
-   … → /handoff → …
-   Drops into any flow above, at any point. The next agent reads the doc.
+   ──►  next stage      ╌╌►  only if it applies      ▸  what it leaves
 ```
+
+Every build box carries `codebase-design`: it auto-loads whenever the work
+touches a module or a seam, so the deep-module vocabulary is present in each
+build no matter which executor runs it.
+
+**1. NEW PRODUCT** — 0→1, nothing exists but a hunch
+
+```
+   ┌──────────────────────┐   ┌──────┐   ┌────────────┐
+   │ /lean-product-canvas │──►│ /prd │──►│ /story-map │──┐
+   └──────────────────────┘   └──────┘   └────────────┘  │
+   ┌──────────────────┐                                  │
+   │ /grill-and-align │◄─────────────────────────────────┘
+   └───────┬──────────┘
+           ▼
+   ┌───────────────┐   ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐   ┌─────────────────────┐
+   │ /backlog · R1 │──►╎ build             ╎──►│ /backlog promote Rn │
+   └───────────────┘   ╎ + codebase-design ╎   └──────────┬──────────┘
+                       └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘              │
+                                ▲                         │
+                                ╰─────────────────────────╯  one slice per run
+```
+
+The only flow that runs the whole chain. The canvas earns its cost here:
+killing a bad idea in 8 boxes beats killing it in 8 sprints. Bare `/backlog`
+compiles Release 1 — the walking skeleton — and every later slice arrives
+with `promote`, one at a time.
+
+**2. NEW FEATURE IN AN EXISTING APP** — the common case, two ways
+
+```
+   LONG · it spans releases, so you need a map to slice against
+   ┌──────┐   ┌────────────┐   ┌──────────────────┐   ┌──────────┐
+   │ /prd │──►│ /story-map │──►│ /grill-and-align │──►│ /backlog │──┐
+   └──────┘   └────────────┘   └──────────────────┘   └──────────┘  │
+   ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐                                           │
+   ╎ build             ╎◄──────────────────────────────────────────┘
+   ╎ + codebase-design ╎
+   └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
+        ▸ then /backlog promote R2, R3 … as the releases land
+
+   SHORT · one slice you can already describe
+   ┌──────────────────┐   ┌──────────────────┐   ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
+   │ /grill-and-align │──►│ /to-user-stories │──►╎ build             ╎
+   └──────────────────┘   └──────────────────┘   ╎ + codebase-design ╎
+                                                 └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
+        ▸ stories written straight from the interview
+```
+
+Skip discovery either way; the business problem is already settled. Take the
+SHORT path when the feature is one slice — align on the language and the
+contexts it touches, then write the stories from the interview. Take the LONG
+path when it spans releases and you need a map to slice against.
+
+**3. INHERITED CODEBASE** — undocumented, nobody left who wrote it
+
+```
+   ┌──────────────────┐
+   │ /grill-and-align │
+   └──────────────────┘
+        ▸ docs/CONTEXT-MAP.yaml · CONTEXT.yaml · docs/adr/
+```
+
+No product work at all. The deliverable is a context map, a glossary, and ADRs
+for the decisions already baked into the code. Run it before you promise
+anyone a date.
+
+**4. EPIC HANDED TO YOU** — a stakeholder wrote three paragraphs
+
+```
+   a stakeholder's        ┌──────────────────┐   ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
+   three paragraphs   ───►│ /to-user-stories │──►╎ build             ╎
+                          └──────────────────┘   ╎ + codebase-design ╎
+                                                 └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
+        ▸ INVEST pre-check · 9 splitting patterns · 6-section issues
+```
+
+Standalone. No PRD needed; it names an acting persona and says so.
+
+**5. VALIDATE, THEN STOP** — the idea might not deserve a repo
+
+```
+   ┌──────────────────────┐   ┌───────────────────────────────────┐
+   │ /lean-product-canvas │──►│  box 8 · the smallest experiment  │
+   └──────────────────────┘   └────────────────┬──────────────────┘
+                             ┌─────────────────┴──────────────────┐
+                             ▼                                    ▼
+                     run the experiment                      walk away
+```
+
+A complete flow that produces no code on purpose. The smallest experiment is
+box 8; run that, not the build.
+
+**6. FEASIBILITY OR COST QUESTION** — "can we even afford this?"
+
+```
+   ╭─────────────╮      ┌──────────────────────┐
+   │ napkin-math │──┬──►│ /lean-product-canvas │
+   ╰─────────────╯  │   └──────────────────────┘
+                    │   ┌──────┐
+                    ├──►│ /prd │
+                    │   └──────┘
+                    ╰──▸ or the number ends the conversation right here
+```
+
+Order-of-magnitude first. A number that ends the conversation early is the
+cheapest artifact in the repo.
+
+**7. REFACTOR OR ARCHITECTURE CLEANUP** — no new behaviour
+
+```
+   ┌──────────────────────────────┐   ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
+   │ /grill-and-align · ADRs only │──►╎ build             ╎
+   └──────────────────────────────┘   ╎ + codebase-design ╎
+                                      └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
+        ▸ docs/adr/ — the reasoning, not just the shape
+```
+
+Design it twice, then record why — no separate design step to invoke, since
+the vocabulary comes with the build. The ADR is the point: the next agent
+inherits the reasoning.
+
+**8. BUG FIX OR SMALL CHANGE** — one afternoon
+
+```
+   one afternoon's    ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
+   fix or bug     ───►╎ build             ╎   nothing else fires — and
+                      ╎ + codebase-design ╎   the vocabulary loads only
+                      └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘   if the fix touches a seam
+```
+
+Ceremony you can skip is ceremony the pipeline should not impose.
+
+**9. WORK THAT OUTLIVES ONE SESSION** — context window ends, work does not
+
+```
+   … any flow above, at any point …
+        │
+        ▼
+   ┌──────────┐
+   │ /handoff │   ▸ a doc the next agent picks up cold
+   └────┬─────┘
+        ▼
+   … the same flow, next session, fresh agent …
+```
+
+Drops into any flow above, at any point. The next agent reads the doc.
 
 Three rules hold across all of them:
 
@@ -323,10 +426,15 @@ Four decisions worth stealing even if you never clone this repo.
 
 ```
 ╭────────────────────────────────────────────────────────────────────────────╮
-│  1 · THE PROCESS IS THE PRODUCT                                            │
-│      A model with a documented process beats a better model with a         │
-│      one-line prompt. Skills encode the process, so every run of a         │
-│      stage takes the same path — even when the output differs.             │
+│  1 · VISUAL-ASSISTED — YOU LOOK AT IT, NOT JUST READ IT                    │
+│      Some skills draw the thing while they build it, so you correct a      │
+│      picture instead of proof-reading prose. A wrong backbone is obvious   │
+│      on a board and invisible in a paragraph.                              │
+│                                                                            │
+│        /story-map            live whiteboard, refreshed as the map grows,  │
+│                              then an interactive walking-skeleton page     │
+│        /grill-and-align      the context map, drawn as the interview goes  │
+│                              so you see the boundaries before naming them  │
 ├────────────────────────────────────────────────────────────────────────────┤
 │  2 · WRITE FOR THE FRESH AGENT                                             │
 │      Assume the next agent has the code and none of the conversation.      │
