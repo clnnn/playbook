@@ -1,6 +1,6 @@
 # Playbook
 
-**A workspace where the whole product lifecycle — from "we think there's a problem" to a merged pull request — runs through agent skills instead of tribal knowledge.**
+**A workspace where the whole product lifecycle, from "we think there's a problem" to a merged pull request, runs through agent skills instead of tribal knowledge.**
 
 Three layers, and each one only holds up because of the one beneath it:
 
@@ -26,9 +26,9 @@ Three layers, and each one only holds up because of the one beneath it:
 
 ## The lifecycle
 
-Every stage has a skill. Every skill leaves an artifact the next stage reads. Nothing is passed by conversation alone — that's the point.
+Every stage has a skill. Every skill leaves an artifact the next stage reads. Nothing is passed by conversation alone. That's the point.
 
-The last stage is the exception: **BUILD is yours.** This repo takes the work up to implementation-ready issues and stops. What executes them is your choice — see [The build layer is yours](#the-build-layer-is-yours).
+The last stage is the exception: **BUILD is yours.** This repo takes the work up to implementation-ready issues and stops. What executes them is your choice; see [The build layer is yours](#the-build-layer-is-yours).
 
 ```
 ┌─ DISCOVER ─────────────────────────────────────────────────────────────────┐
@@ -75,7 +75,7 @@ The last stage is the exception: **BUILD is yours.** This repo takes the work up
 │                                     │                                      │
 │  /to-user-stories                   ▼                                      │
 │                           INVEST pre-check, 9 splitting patterns, then     │
-│                           6-section stories written for a FRESH agent —    │
+│                           6-section stories written for a FRESH agent:     │
 │                           one with the code but none of the conversation.  │
 │                                                                            │
 │                  leaves ▸ GitHub issues, wired with blocked-by edges       │
@@ -88,7 +88,7 @@ The last stage is the exception: **BUILD is yours.** This repo takes the work up
 │                           seam, testable through that interface.           │
 │                           Design it twice before you write it once.        │
 │                                                                            │
-│  YOUR EXECUTOR            Vocabulary, not a loop — nothing here dictates   │
+│  YOUR EXECUTOR            Vocabulary, not a loop. Nothing here dictates    │
 │  (bring your own)         the implementation flow. Plain Claude Code on    │
 │                           an issue · superpowers · an AI-DLC-style loop ·  │
 │                           your own /implement. The issue body is the seam. │
@@ -110,7 +110,7 @@ Cross-cutting, available at any stage:
 
 ## Flows
 
-That lifecycle is a **map, not a mandate** — nothing in the repo enforces the
+That lifecycle is a **map, not a mandate**. Nothing in the repo enforces the
 full run. The stages exist so you can pick the ones your situation needs. Every
 skill runs standalone; the artifacts are what make them compose, and a missing
 upstream artifact is handled explicitly rather than fatally.
@@ -120,7 +120,7 @@ upstream artifact is handled explicitly rather than fatally.
    │ /skill │          │ auto │          ╎ build             ╎
    └────────┘          ╰──────╯          ╎ + codebase-design ╎
    you invoke it       the agent         └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
-                       reaches for it    yours — the repo stops
+                       reaches for it    yours; the repo stops
                                          here, the vocabulary doesn't
 
    ──►  next stage      ╌╌►  only if it applies      ▸  what it leaves
@@ -130,7 +130,7 @@ Every build box carries `codebase-design`: it auto-loads whenever the work
 touches a module or a seam, so the deep-module vocabulary is present in each
 build no matter which executor runs it.
 
-**1. NEW PRODUCT** — 0→1, nothing exists but a hunch
+**1. NEW PRODUCT** · 0→1, nothing exists but a hunch
 
 ```
    ┌──────────────────────┐   ┌──────┐   ┌────────────┐
@@ -150,10 +150,10 @@ build no matter which executor runs it.
 
 The only flow that runs the whole chain. The canvas earns its cost here:
 killing a bad idea in 8 boxes beats killing it in 8 sprints. Bare `/backlog`
-compiles Release 1 — the walking skeleton — and every later slice arrives
+compiles Release 1, the walking skeleton, and every later slice arrives
 with `promote`, one at a time.
 
-**2. NEW FEATURE IN AN EXISTING APP** — the common case, two ways
+**2. NEW FEATURE IN AN EXISTING APP** · the common case, two ways
 
 ```
    LONG · it spans releases, so you need a map to slice against
@@ -175,11 +175,11 @@ with `promote`, one at a time.
 ```
 
 Skip discovery either way; the business problem is already settled. Take the
-SHORT path when the feature is one slice — align on the language and the
+SHORT path when the feature is one slice: align on the language and the
 contexts it touches, then write the stories from the interview. Take the LONG
 path when it spans releases and you need a map to slice against.
 
-**3. INHERITED CODEBASE** — undocumented, nobody left who wrote it
+**3. INHERITED CODEBASE** · undocumented, nobody left who wrote it
 
 ```
    ┌──────────────────┐
@@ -192,7 +192,7 @@ No product work at all. The deliverable is a context map, a glossary, and ADRs
 for the decisions already baked into the code. Run it before you promise
 anyone a date.
 
-**4. EPIC HANDED TO YOU** — a stakeholder wrote three paragraphs
+**4. EPIC HANDED TO YOU** · a stakeholder wrote three paragraphs
 
 ```
    a stakeholder's        ┌──────────────────┐   ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
@@ -204,7 +204,7 @@ anyone a date.
 
 Standalone. No PRD needed; it names an acting persona and says so.
 
-**5. VALIDATE, THEN STOP** — the idea might not deserve a repo
+**5. VALIDATE, THEN STOP** · the idea might not deserve a repo
 
 ```
    ┌──────────────────────┐   ┌───────────────────────────────────┐
@@ -218,7 +218,7 @@ Standalone. No PRD needed; it names an acting persona and says so.
 A complete flow that produces no code on purpose. The smallest experiment is
 box 8; run that, not the build.
 
-**6. FEASIBILITY OR COST QUESTION** — "can we even afford this?"
+**6. FEASIBILITY OR COST QUESTION** · "can we even afford this?"
 
 ```
    ╭─────────────╮      ┌──────────────────────┐
@@ -233,32 +233,32 @@ box 8; run that, not the build.
 Order-of-magnitude first. A number that ends the conversation early is the
 cheapest artifact in the repo.
 
-**7. REFACTOR OR ARCHITECTURE CLEANUP** — no new behaviour
+**7. REFACTOR OR ARCHITECTURE CLEANUP** · no new behaviour
 
 ```
    ┌──────────────────────────────┐   ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
    │ /grill-and-align · ADRs only │──►╎ build             ╎
    └──────────────────────────────┘   ╎ + codebase-design ╎
                                       └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
-        ▸ docs/adr/ — the reasoning, not just the shape
+        ▸ docs/adr/ · the reasoning, not just the shape
 ```
 
-Design it twice, then record why — no separate design step to invoke, since
-the vocabulary comes with the build. The ADR is the point: the next agent
+Design it twice, then record why. There is no separate design step to invoke,
+since the vocabulary comes with the build. The ADR is the point: the next agent
 inherits the reasoning.
 
-**8. BUG FIX OR SMALL CHANGE** — one afternoon
+**8. BUG FIX OR SMALL CHANGE** · one afternoon
 
 ```
    one afternoon's    ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
-   fix or bug     ───►╎ build             ╎   nothing else fires — and
+   fix or bug     ───►╎ build             ╎   nothing else fires, and
                       ╎ + codebase-design ╎   the vocabulary loads only
                       └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘   if the fix touches a seam
 ```
 
 Ceremony you can skip is ceremony the pipeline should not impose.
 
-**9. WORK THAT OUTLIVES ONE SESSION** — context window ends, work does not
+**9. WORK THAT OUTLIVES ONE SESSION** · context window ends, work does not
 
 ```
    … any flow above, at any point …
@@ -280,7 +280,7 @@ Three rules hold across all of them:
   directly. Nothing checks whether you ran the earlier stage.
 - **One slice at a time, then promote.** Any flow with a story map compiles
   exactly one release per run: `/backlog` for Release 1, then
-  `/backlog promote R2` (or `2`, or the slice's own name — it resolves
+  `/backlog promote R2` (or `2`, or the slice's own name; it resolves
   against the map and restates the resolution before scoping) for each
   slice after it. Promotion doesn't wait for the previous slice to close;
   the issues still open are named at the gate.
@@ -293,14 +293,14 @@ Three rules hold across all of them:
 ## The build layer is yours
 
 Everything upstream of BUILD produces artifacts. BUILD itself is deliberately
-the thinnest thing in this repo — and that is a design decision, not an
+the thinnest thing in this repo, and that is a design decision, not an
 omission.
 
 `codebase-design` ships **vocabulary, not a loop**: module, interface, seam,
 adapter, depth. It tells an implementer how to talk and what "good" means. It
 does not tell them to write the test first, spawn a subagent per file, or open
 the PR at step 9. Those calls belong to your stack, your test runner, and your
-review norms — and implementation loops are the fastest-moving, most opinionated
+review norms. Implementation loops are also the fastest-moving, most opinionated
 part of the whole ecosystem. Pinning one here is the decision most likely to be
 wrong for your repo.
 
@@ -319,14 +319,14 @@ So the harness hands over a package and gets out of the way:
 ```
 
 The seam is the issue body. Anything that can read a GitHub issue and write
-code can stand downstream of this pipeline — which is the same reason the
+code can stand downstream of this pipeline, which is the same reason the
 stories are written for an agent with none of the conversation.
 
 ---
 
 ## Quick start
 
-**Prerequisites** — Docker, and either VS Code with the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension or a GitHub Codespace. That's it; everything else installs itself.
+**Prerequisites:** Docker, and either VS Code with the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension or a GitHub Codespace. That's it; everything else installs itself.
 
 ```
   1  ── Get the workspace ─────────────────────────────────────────────────
@@ -366,7 +366,7 @@ stories are written for an agent with none of the conversation.
         /backlog promote R2                           ← the next slice
 ```
 
-That is one flow of several — see [Flows](#flows) for the shape that matches your situation, and **enter at the stage where your knowledge starts**.
+That is one flow of several. See [Flows](#flows) for the shape that matches your situation, and **enter at the stage where your knowledge starts**.
 
 ---
 
@@ -386,7 +386,7 @@ That is one flow of several — see [Flows](#flows) for the shape that matches y
 | `handoff` | any | `/handoff` | Handoff doc for the next session |
 | `writing-for-agents` | meta | **auto** | Skills, `AGENTS.md`, and pointers that fire reliably |
 
-**auto** means the agent reaches for it on its own when the work matches — you never type the name. Everything else is explicit-invocation only (`disable-model-invocation: true`), because a facilitated workshop should start when *you* say so, not when a keyword happens to match.
+**auto** means the agent reaches for it on its own when the work matches; you never type the name. Everything else is explicit-invocation only (`disable-model-invocation: true`), because a facilitated workshop should start when *you* say so, not when a keyword happens to match.
 
 ---
 
@@ -400,13 +400,13 @@ The skills are facilitators, not generators. Expect to be asked things.
                                   then moves. Progress label every turn:
                                   `Box 3 of 8 — Users`, `Step 2/5 — Derive`.
 
-  ▸ THREE WAYS IN.                1. Guided       — one question at a time
-                                  2. Context dump — paste it all, the skill routes it
-                                  3. Best guess   — it infers, and labels every
+  ▸ THREE WAYS IN.                1. Guided       · one question at a time
+                                  2. Context dump · paste it all, the skill routes it
+                                  3. Best guess   · it infers, and labels every
                                                     inference 🔶 Assumption
 
   ▸ NUMBERED OPTIONS, WITH A      You can answer `1`, `#1`, `1,3`, or free text.
-    RECOMMENDATION FIRST.         The recommendation is marked (Recommended) —
+    RECOMMENDATION FIRST.         The recommendation is marked (Recommended);
                                   disagreeing with it is the useful part.
 
   ▸ GATES, NOT SURPRISES.         `/backlog` touches GitHub only after the plan
@@ -426,7 +426,7 @@ Four decisions worth stealing even if you never clone this repo.
 
 ```
 ╭────────────────────────────────────────────────────────────────────────────╮
-│  1 · VISUAL-ASSISTED — YOU LOOK AT IT, NOT JUST READ IT                    │
+│  1 · VISUAL-ASSISTED: YOU LOOK AT IT, NOT JUST READ IT                     │
 │      Some skills draw the thing while they build it, so you correct a      │
 │      picture instead of proof-reading prose. A wrong backbone is obvious   │
 │      on a board and invisible in a paragraph.                              │
@@ -438,10 +438,10 @@ Four decisions worth stealing even if you never clone this repo.
 ├────────────────────────────────────────────────────────────────────────────┤
 │  2 · WRITE FOR THE FRESH AGENT                                             │
 │      Assume the next agent has the code and none of the conversation.      │
-│      Every artifact — story, ADR, glossary entry — is written to be        │
+│      Every artifact (story, ADR, glossary entry) is written to be          │
 │      picked up cold. Context windows end; the repo doesn't.                │
 ├────────────────────────────────────────────────────────────────────────────┤
-│  3 · TASK-FIRST — AN ISSUE BEFORE ANY IMPLEMENTATION                       │
+│  3 · TASK-FIRST: AN ISSUE BEFORE ANY IMPLEMENTATION                        │
 │      Every work request becomes a GitHub Issue before any code is written. │
 │      An issue is durable, reviewable and linkable; a chat request is none  │
 │      of the three. The six-section body is the entire brief, blocked-by    │
@@ -461,15 +461,15 @@ Four decisions worth stealing even if you never clone this repo.
 
 These skills distill other people's work, and it's worth reading the sources:
 
-- **Jeff Gothelf** — Lean Product Canvas, and outcomes over outputs
-- **Marty Cagan** — the four risks a product idea has to survive
-- **Jeff Patton** — user story mapping and the walking skeleton
-- **John Ousterhout** — deep modules, *A Philosophy of Software Design*
-- **Michael Feathers** — seams, *Working Effectively with Legacy Code*
-- **Bill Wake** — INVEST
-- **[Matt Pocock](https://www.aihero.dev)** — writing for agents, and treating context as the thing you engineer
-- **[sirupsen/napkin-math](https://github.com/sirupsen/napkin-math)** — the base-rate tables
-- **[OpenKnowledge](https://openknowledge.sh)** — the OKF bundle format
+- **Jeff Gothelf**: Lean Product Canvas, and outcomes over outputs
+- **Marty Cagan**: the four risks a product idea has to survive
+- **Jeff Patton**: user story mapping and the walking skeleton
+- **John Ousterhout**: deep modules, *A Philosophy of Software Design*
+- **Michael Feathers**: seams, *Working Effectively with Legacy Code*
+- **Bill Wake**: INVEST
+- **[Matt Pocock](https://www.aihero.dev)**: writing for agents, and treating context as the thing you engineer
+- **[sirupsen/napkin-math](https://github.com/sirupsen/napkin-math)**: the base-rate tables
+- **[OpenKnowledge](https://openknowledge.sh)**: the OKF bundle format
 
 ---
 
