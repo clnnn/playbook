@@ -1,4 +1,4 @@
-# AI-First App Development
+# Playbook
 
 **A workspace where the whole product lifecycle — from "we think there's a problem" to a merged pull request — runs through agent skills instead of tribal knowledge.**
 
@@ -331,7 +331,7 @@ stories are written for an agent with none of the conversation.
 ```
   1  ── Get the workspace ─────────────────────────────────────────────────
 
-        git clone https://github.com/clnnn/ai-first-app-development my-app
+        git clone https://github.com/clnnn/playbook my-app
         code my-app
 
   2  ── Reopen in Container ───────────────────────────────────────────────
