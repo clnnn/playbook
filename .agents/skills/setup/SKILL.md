@@ -9,7 +9,7 @@ disable-model-invocation: true
 Scaffold the per-repo configuration the skills assume, and the pointers that route agents to it:
 
 - **Domain docs** — an empty context map, and the rules for reading it, the `CONTEXT.yaml` files and the ADRs. Written by `grill-and-align`, read by every skill that explores the codebase.
-- **Knowledge base** — the OKF bundle holding product documents, and the publish, discover and update convention. Read and written by `prd`, `lean-product-canvas` and `story-map`.
+- **Knowledge base** — the OKF bundle holding product documents, and the publish, discover and update convention. Read and written by `prd` and `lean-product-canvas`.
 
 This is prompt-driven, not a script. Explore, present what you found, confirm with the user, then write.
 
@@ -22,7 +22,7 @@ Read the repo's starting state. Read what exists; assume nothing:
 - `docs/CONTEXT-MAP.yaml`, any `docs/<slug>/CONTEXT.yaml`, `docs/adr/` — are domain docs already in place?
 - An OKF bundle already here — `docs/knowledge/`, or any directory holding `.openknowledge.toml`.
 - `okn version` — is the CLI installed?
-- Which skills are installed (a skill folder alongside this one, or the name in your available skills). `grill-and-align` decides whether Section A runs; `prd`, `lean-product-canvas` and `story-map` decide whether Section B runs.
+- Which skills are installed (a skill folder alongside this one, or the name in your available skills). `grill-and-align` decides whether Section A runs; `prd` and `lean-product-canvas` decide whether Section B runs.
 
 Done when you can state, for each section, whether it runs and what it holds.
 
@@ -84,7 +84,7 @@ Where a section below already exists in that file, update it in place. Keep the 
 ```markdown
 ## Knowledge base
 
-PRDs, Lean Product Canvases, and Story Maps live in the OKF bundle at `docs/knowledge/`. Publishing, discovery, and updates follow `docs/agents/knowledge.md`.
+PRDs and Lean Product Canvases live in the OKF bundle at `docs/knowledge/`. Publishing, discovery, and updates follow `docs/agents/knowledge.md`.
 
 ## Domain docs
 

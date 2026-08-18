@@ -8,17 +8,17 @@ Keep it **thin**. It holds what several stories stand on. Everything else folds 
 
 Every category below takes one of three:
 
-- **foundation** — the end-to-end path cannot run without it, or several seeds need it. It rides the issue.
-- **fold** — one capability needs it, so it rides that seed's scope and acceptance criteria and reaches `/to-user-stories` in the brief.
+- **foundation** — the end-to-end path cannot run without it, or several stories need it. It rides the issue.
+- **fold** — one capability needs it, so it rides that story's §2 Scope and §4 acceptance criteria.
 - **exclude** — nothing in this slice reaches it. Name the reason, and the **trigger** when it arrives later: *"applies at Release 2 — payment tasks land there."*
 
-A folded category that two or more seeds need moves to foundation. Run that test after the seeds exist.
+A folded category that two or more stories need moves to foundation, which is why the disposition pass runs after Derive.
 
 ## Evidence
 
-Every applicable category names what made it apply: a §6 scenario id, the §7 metric, a map task, or the persona. A category that names only itself is scope creep — exclude it.
+Every applicable category names what made it apply: a §6 scenario id, the §7 metric, a task from the slice issue, or the persona. A category that names only itself is scope creep — exclude it.
 
-With no PRD, infer applicability from the map's tasks and the repo, and mark each call 🔶. The gate is where the user strikes the wrong ones.
+With no PRD, infer applicability from the slice issue's tasks and the repo, and mark each call 🔶. The disposition list you present is where the user strikes the wrong ones.
 
 ## Done-signals
 
@@ -61,7 +61,7 @@ The shape decides the done-signal the category's enforcement line ends on:
 |---|---|
 | Success-metric instrumentation | the §7 primary metric, wired where the step producing it ships |
 
-It folds to the seed shipping that step, and moves to foundation when several seeds feed the metric. With no PRD it becomes an open line: *no primary metric declared — nothing to instrument yet*.
+It folds to the story shipping that step, and moves to foundation when several stories feed the metric. With no PRD it becomes an open line: *no primary metric declared — nothing to instrument yet*.
 
 **Conditional, default disposition `fold`. Each applies when:**
 
@@ -102,7 +102,7 @@ in this product's words] — runs in CI with the harness green.
 
 ## Folded into stories
 
-- **Authentication** → seed 3 (sign in to the workspace) — §6 SEC-2
+- **Authentication** → story 3 (sign in to the workspace) — §6 SEC-2
 
 ## Considered and excluded
 
@@ -115,6 +115,6 @@ Labels: `foundation` plus the release label. Every story in the slice is blocked
 
 ## Later slices
 
-`promote` re-reads the excluded group's triggers first — they are the record of what this run deferred, so the next run reads a pointer instead of rediscovering the decision.
+A slice issue past Release 1 opens by reading the earlier slices' foundation issues — their excluded group holds the triggers, the record of what those runs deferred, so this run reads a pointer instead of rediscovering the decision.
 
-A category that now applies folds into the story needing it. Where several stories in the promoted slice need it, it becomes one delta issue, `Foundation: <release name>`, blocking those stories. An already-closed foundation issue stays closed.
+A category that now applies folds into the story needing it. Where several stories in this slice need it, it becomes one delta issue, `Foundation: <release name>`, blocking those stories. An already-closed foundation issue stays closed.

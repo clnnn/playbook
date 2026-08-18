@@ -47,13 +47,6 @@ The last stage is the exception: **BUILD is yours.** This repo takes the work up
 │                           Cagan's four risks. No hand-waving allowed.      │
 │                                                                            │
 │                  leaves ▸ docs/knowledge/product/<slug>/prd.md             │
-│                                     │                                      │
-│  /story-map                         ▼                                      │
-│                           Patton story mapping on a LIVE whiteboard, then  │
-│                           an interactive HTML prototype of the walking     │
-│                           skeleton. Release slices, not a feature list.    │
-│                                                                            │
-│                  leaves ▸ story-map.md + prototype.html                    │
 └────────────────────────────────────┬───────────────────────────────────────┘
                                      ▼
 ┌─ ALIGN ────────────────────────────────────────────────────────────────────┐
@@ -68,15 +61,17 @@ The last stage is the exception: **BUILD is yours.** This repo takes the work up
                                      ▼
 ┌─ SLICE ────────────────────────────────────────────────────────────────────┐
 │                                                                            │
-│  /backlog                 Compile ONE release slice into GitHub issues.    │
-│  /backlog promote R2      One thin foundation issue plus the slice's       │
-│                           stories, one release per run. GitHub stays       │
-│                           untouched until you open the plan gate.          │
+│  /to-story-map            Patton story mapping on a LIVE whiteboard, then  │
+│                           TWO adversaries attack it before you cut one     │
+│                           GitHub issue per release slice.                  │
 │                                     │                                      │
 │  /to-user-stories                   ▼                                      │
 │                           INVEST pre-check, 9 splitting patterns, then     │
 │                           6-section stories written for a FRESH agent:     │
 │                           one with the code but none of the conversation.  │
+│                                                                            │
+│  /prototype               An interactive HTML click-through of the walking │
+│                           skeleton, built from the Release 1 issue.        │
 │                                                                            │
 │                  leaves ▸ GitHub issues, wired with blocked-by edges       │
 └────────────────────────────────────┬───────────────────────────────────────┘
@@ -133,38 +128,37 @@ build no matter which executor runs it.
 **1. NEW PRODUCT** · 0→1, nothing exists but a hunch
 
 ```
-   ┌──────────────────────┐   ┌──────┐   ┌────────────┐
-   │ /lean-product-canvas │──►│ /prd │──►│ /story-map │──┐
-   └──────────────────────┘   └──────┘   └────────────┘  │
-   ┌──────────────────┐                                  │
-   │ /grill-and-align │◄─────────────────────────────────┘
-   └───────┬──────────┘
+   ┌──────────────────────┐   ┌──────┐   ┌──────────────────┐
+   │ /lean-product-canvas │──►│ /prd │──►│ /grill-and-align │──┐
+   └──────────────────────┘   └──────┘   └──────────────────┘  │
+   ┌───────────────┐                                           │
+   │ /to-story-map │◄──────────────────────────────────────────┘
+   └───────┬───────┘
            ▼
-   ┌───────────────┐   ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐   ┌─────────────────────┐
-   │ /backlog · R1 │──►╎ build             ╎──►│ /backlog promote Rn │
-   └───────────────┘   ╎ + codebase-design ╎   └──────────┬──────────┘
-                       └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘              │
-                                ▲                         │
-                                ╰─────────────────────────╯  one slice per run
+   ┌───────────────────────┐   ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
+   │ /to-user-stories · R1 │──►╎ build             ╎
+   └───────────────────────┘   ╎ + codebase-design ╎
+                               └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
+        ▸ then /to-user-stories on the R2 and R3 issues, one per run
 ```
 
 The only flow that runs the whole chain. The canvas earns its cost here:
-killing a bad idea in 8 boxes beats killing it in 8 sprints. Bare `/backlog`
-compiles Release 1, the walking skeleton, and every later slice arrives
-with `promote`, one at a time.
+killing a bad idea in 8 boxes beats killing it in 8 sprints. `/to-story-map`
+cuts one issue per release slice up front, so the whole roadmap is visible on
+day one; each slice is broken into stories when you reach it.
 
 **2. NEW FEATURE IN AN EXISTING APP** · the common case, two ways
 
 ```
    LONG · it spans releases, so you need a map to slice against
-   ┌──────┐   ┌────────────┐   ┌──────────────────┐   ┌──────────┐
-   │ /prd │──►│ /story-map │──►│ /grill-and-align │──►│ /backlog │──┐
-   └──────┘   └────────────┘   └──────────────────┘   └──────────┘  │
-   ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐                                           │
-   ╎ build             ╎◄──────────────────────────────────────────┘
+   ┌──────┐   ┌──────────────────┐   ┌───────────────┐   ┌──────────────────┐
+   │ /prd │──►│ /grill-and-align │──►│ /to-story-map │──►│ /to-user-stories │──┐
+   └──────┘   └──────────────────┘   └───────────────┘   └──────────────────┘  │
+   ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐                                                       │
+   ╎ build             ╎◄──────────────────────────────────────────────────────┘
    ╎ + codebase-design ╎
    └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
-        ▸ then /backlog promote R2, R3 … as the releases land
+        ▸ then /to-user-stories on the R2 and R3 issues as the releases land
 
    SHORT · one slice you can already describe
    ┌──────────────────┐   ┌──────────────────┐   ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
@@ -276,17 +270,16 @@ Drops into any flow above, at any point. The next agent reads the doc.
 Three rules hold across all of them:
 
 - **Enter where your knowledge starts.** Arriving with a PRD? Start at
-  `/story-map`. Arriving with a rough epic? `/to-user-stories` takes it
+  `/to-story-map`. Arriving with a rough epic? `/to-user-stories` takes it
   directly. Nothing checks whether you ran the earlier stage.
-- **One slice at a time, then promote.** Any flow with a story map compiles
-  exactly one release per run: `/backlog` for Release 1, then
-  `/backlog promote R2` (or `2`, or the slice's own name; it resolves
-  against the map and restates the resolution before scoping) for each
-  slice after it. Promotion doesn't wait for the previous slice to close;
-  the issues still open are named at the gate.
-- **Degradation is announced, not silent.** `/backlog` with no PRD says which
-  inputs it lost, marks every inference 🔶, and carries on. You always know
-  what the artifact was built from.
+- **The whole roadmap up front, one slice at a time after.** `/to-story-map`
+  cuts every release slice as its own GitHub issue the moment you approve the
+  map, so the plan is visible on day one. Breaking a slice into stories is a
+  separate run against that issue — `/to-user-stories` on R1, then on R2 and
+  R3 as you reach them, each with its own foundation call.
+- **Degradation is announced, not silent.** `/to-user-stories` with no PRD says
+  which inputs it lost, marks every inference 🔶, and carries on. You always
+  know what the artifact was built from.
 
 ---
 
@@ -346,7 +339,7 @@ stories are written for an agent with none of the conversation.
   3  ── Authenticate ───────────────────────────────────────────────────────
 
         claude          then /login
-        gh auth login   (needed by /backlog and /to-user-stories)
+        gh auth login   (needed by /to-story-map and /to-user-stories)
 
   4  ── Wire the repo, once ─────────────────────────────────────────────────
 
@@ -359,11 +352,11 @@ stories are written for an agent with none of the conversation.
 
         /lean-product-canvas   we think checkout is losing us money
         /prd                   checkout redesign
-        /story-map             checkout, cart to confirmation
         /grill-and-align
-        /backlog               checkout-redesign      ← Release 1
+        /to-story-map          checkout, cart to confirmation
+        /to-user-stories  #1                          ← Release 1
         …build the slice…
-        /backlog promote R2                           ← the next slice
+        /to-user-stories  #2                          ← the next slice
 ```
 
 That is one flow of several. See [Flows](#flows) for the shape that matches your situation, and **enter at the stage where your knowledge starts**.
@@ -377,10 +370,10 @@ That is one flow of several. See [Flows](#flows) for the shape that matches your
 | `setup` | once | `/setup` | Domain-doc + knowledge-base pointers in `AGENTS.md` |
 | `lean-product-canvas` | discover | `/lean-product-canvas` | Gothelf Lean Product Canvas v3, 8 boxes |
 | `prd` | define | `/prd` | 10-section engineering-ready PRD + self-assessment |
-| `story-map` | define | `/story-map` | Story map doc + walking-skeleton HTML prototype |
 | `grill-and-align` | align | `/grill-and-align` | `CONTEXT-MAP.yaml`, `CONTEXT.yaml`, ADRs |
-| `backlog` | slice | `/backlog` · `/backlog promote <release>` | GitHub issues for one release slice, behind a gate |
+| `to-story-map` | slice | `/to-story-map` | Live whiteboard + one GitHub issue per release slice |
 | `to-user-stories` | slice | auto **+** `/to-user-stories` | 6-section stories as `blocked-by`-linked issues |
+| `prototype` | slice | `/prototype` | Walking-skeleton HTML click-through from the R1 issue |
 | `codebase-design` | build | **auto** | Deep-module vocabulary carried into plan and code |
 | `napkin-math` | any | **auto** | Order-of-magnitude estimate from real base rates |
 | `handoff` | any | `/handoff` | Handoff doc for the next session |
@@ -409,9 +402,9 @@ The skills are facilitators, not generators. Expect to be asked things.
     RECOMMENDATION FIRST.         The recommendation is marked (Recommended);
                                   disagreeing with it is the useful part.
 
-  ▸ GATES, NOT SURPRISES.         `/backlog` touches GitHub only after the plan
-                                  gate opens. `/prd` won't advance a section until
-                                  every field passes. Slow is the feature.
+  ▸ GATES, NOT SURPRISES.         `/to-story-map` touches GitHub only after the
+                                  write gate opens. `/prd` won't advance a section
+                                  until every field passes. Slow is the feature.
 
   ▸ ARTIFACTS, NOT CHAT LOGS.     Every stage writes a file or an issue. The next
                                   stage reads the file, not the transcript. That's
@@ -431,8 +424,8 @@ Four decisions worth stealing even if you never clone this repo.
 │      picture instead of proof-reading prose. A wrong backbone is obvious   │
 │      on a board and invisible in a paragraph.                              │
 │                                                                            │
-│        /story-map            live whiteboard, refreshed as the map grows,  │
-│                              then an interactive walking-skeleton page     │
+│        /to-story-map         live whiteboard, refreshed as the map grows   │
+│        /prototype            an interactive walking-skeleton page          │
 │        /grill-and-align      the context map, drawn as the interview goes  │
 │                              so you see the boundaries before naming them  │
 ├────────────────────────────────────────────────────────────────────────────┤
