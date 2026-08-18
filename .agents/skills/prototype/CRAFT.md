@@ -1,12 +1,14 @@
-# Prototype craft bar
+# Craft bar
 
-The bar the walking-skeleton prototype is judged against — pixels, words, and mocked data. Read it before the first line of CSS.
+The bar a prototype's surface is judged against — pixels, words, and mocked data. Read it before the first line of CSS.
+
+A page built from scratch — a walking skeleton, a logic demo — is judged against all of it. Variants living inside an existing app inherit identity, materials, type, and spacing from that app's design system; what still binds them is [States](#states) and [Words and data](#words-and-data).
 
 Two words carry the file. A **tell** is a pattern reached for by reflex rather than chosen for this product; it is what makes an interface read as machine-assembled. **Earned familiarity** is the target: someone fluent in the category's best tools sits down, trusts the screen, and never pauses at an off-looking control. This is product UI — the interface disappears into the task, and the stakeholder's attention stays on the flow.
 
-## Identity, derived from the map
+## Identity, derived from the scene
 
-Write one concrete scene sentence from the segment and narrative: who works here, where, under what ambient light, in what mood. Make it specific enough that light-versus-dark follows from the sentence instead of from habit.
+Write one concrete scene sentence from the persona and the setting they work in: who works here, where, under what ambient light, in what mood. Make it specific enough that light-versus-dark follows from the sentence instead of from habit.
 
 Compose the palette in OKLCH from that scene: one primary, one accent, a neutral ramp tinted 0.005–0.015 chroma toward the primary's hue, and a second neutral layer for nav, sidebar, and toolbars. The accent appears on the primary action, the current selection, and state indicators; everything decorative uses neutrals.
 
@@ -14,7 +16,7 @@ Three palettes arrive by reflex and read as tells whatever the scene says: indig
 
 ## Materials, fixed by the one-file contract
 
-The page ships self-contained (`PUBLISHING.md`), which settles every asset question:
+The page ships self-contained ([`PUBLISHING.md`](PUBLISHING.md)), which settles every asset question:
 
 - **Type:** the system stack (`ui-sans-serif`, `-apple-system`, `Segoe UI`, `Roboto`), one family, hierarchy from size and weight.
 - **Motion:** CSS transitions, keyframes, and Web Animations, 150–250 ms on an ease-out curve. Each animation reports a state change and carries a `prefers-reduced-motion` alternative that crossfades or lands instantly.
@@ -37,7 +39,7 @@ Every interactive control ships default, hover, focus-visible, active, and disab
 ## Words and data
 
 - Buttons and links read verb + object and name what happens: "Send invoice", "Add line item", "View payment history".
-- Copy uses the segment's own nouns and the numbers of its domain. Punctuate with commas, colons, semicolons, periods, and parentheses.
+- Copy uses the domain's own nouns and the numbers that go with them. Punctuate with commas, colons, semicolons, periods, and parentheses.
 - Mocked data reads like an export from one real account: amounts that are not round, dates clustered near today, proper nouns that vary in length and origin, and at least one record awkward in the way real records are — a company name too long for its column, a partial payment, a line item that came back rejected.
 
 ## Before publishing

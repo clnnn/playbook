@@ -1,6 +1,6 @@
 # Knowledge base
 
-Product documents — PRDs, Lean Product Canvases, Story Maps — live in an OKF bundle at `docs/knowledge/`, one directory per initiative under `docs/knowledge/product/`. The [`okn`](https://openknowledge.sh) CLI queries and validates the bundle; documents themselves are markdown you write directly, then validate.
+Product documents — PRDs, Lean Product Canvases — live in an OKF bundle at `docs/knowledge/`, one directory per initiative under `docs/knowledge/product/`. The [`okn`](https://openknowledge.sh) CLI queries and validates the bundle; documents themselves are markdown you write directly, then validate.
 
 `okn <command> --help` is the authority on syntax, and `docs/knowledge/SPEC.md` is the bundle's pinned copy of the OKF spec. Where `okn` falls short of the spec, documents follow the spec.
 
@@ -12,24 +12,23 @@ Write the document to `docs/knowledge/product/<subject>/<file>.md`, where `<subj
 |---|---|---|---|
 | PRD | `prd.md` | `PRD` | `PRD: <Subject>` |
 | Lean Product Canvas | `canvas.md` | `Lean Product Canvas` | `Lean Product Canvas: <Subject>` |
-| Story map | `story-map.md` | `Story Map` | `Story Map: <Subject>` |
 
 ### Frontmatter
 
 ```yaml
 ---
-type: Story Map
-title: "Story Map: Checkout Redesign"
-description: Release-sliced backbone of the checkout flow, from cart to confirmation.
+type: PRD
+title: "PRD: Checkout Redesign"
+description: Requirements for the checkout flow, from cart to confirmation.
 tags: [checkout-redesign, product]
 status: draft
-generated: { by: story-map/claude-opus-5, at: 2026-08-04T09:12:00Z }
+generated: { by: prd/claude-opus-5, at: 2026-08-04T09:12:00Z }
 stale_after: 2027-02-04
 sources:
-  - id: prd
-    resource: /product/checkout-redesign/prd.md
-    title: "PRD: Checkout Redesign"
-    author: prd/claude-opus-5
+  - id: canvas
+    resource: /product/checkout-redesign/canvas.md
+    title: "Lean Product Canvas: Checkout Redesign"
+    author: lean-product-canvas/claude-opus-5
     last_modified: 2026-08-01
 ---
 ```
@@ -46,9 +45,9 @@ sources:
 Where the prose refers to a source, cite it with a footnote whose label is that source's `id`:
 
 ```markdown
-The release slices follow the PRD's phasing.[^prd]
+The problem statement follows the canvas.[^canvas]
 
-[^prd]: PRD: Checkout Redesign
+[^canvas]: Lean Product Canvas: Checkout Redesign
 ```
 
 The label is the join key into `sources`; the definition text is for the reader.
@@ -69,7 +68,7 @@ okn list docs/knowledge
 
 `validate` checks the bundle against the spec: frontmatter, reserved files, log dates, and whether every local markdown link resolves. Publishing stops on any failed check. `list` prints the tree with each document's type, title and trust state — confirm the new document appears where you expect, as `[unverified, draft]`.
 
-Then offer a commit covering the document, `index.md` and `log.md`, e.g. `docs(product): publish Story Map for checkout-redesign`.
+Then offer a commit covering the document, `index.md` and `log.md`, e.g. `docs(product): publish PRD for checkout-redesign`.
 
 ## Discover
 
