@@ -70,9 +70,6 @@ The last stage is the exception: **BUILD is yours.** This repo takes the work up
 │                           6-section stories written for a FRESH agent:     │
 │                           one with the code but none of the conversation.  │
 │                                                                            │
-│  /prototype               An interactive HTML click-through of the walking │
-│                           skeleton, built from the Release 1 issue.        │
-│                                                                            │
 │                  leaves ▸ GitHub issues, wired with blocked-by edges       │
 └────────────────────────────────────┬───────────────────────────────────────┘
                                      ▼
@@ -97,6 +94,7 @@ Cross-cutting, available at any stage:
 ```
    /handoff              Compact this conversation into a doc the next agent picks up
    /napkin-math          Fermi estimation with real base rates before you build the thing. Useful for feasibility, cost, and sizing questions.
+   /prototype            Throwaway code that answers ONE question. Three shapes: a state model driven by hand, N radically different UI variants, a walking-skeleton click-through of a whole flow.
    /writing-for-agents   Write the next skill · edit AGENTS.md · context-pointer theory
    /setup                One-time wiring: where domain docs live, where knowledge lives
 ```
@@ -373,7 +371,7 @@ That is one flow of several. See [Flows](#flows) for the shape that matches your
 | `grill-and-align` | align | `/grill-and-align` | `CONTEXT-MAP.yaml`, `CONTEXT.yaml`, ADRs |
 | `to-story-map` | slice | `/to-story-map` | Live whiteboard + one GitHub issue per release slice |
 | `to-user-stories` | slice | auto **+** `/to-user-stories` | 6-section stories as `blocked-by`-linked issues |
-| `prototype` | slice | `/prototype` | Walking-skeleton HTML click-through from the R1 issue |
+| `prototype` | any | auto **+** `/prototype` | Throwaway code answering one question: state model, UI variants, or walking skeleton |
 | `codebase-design` | build | **auto** | Deep-module vocabulary carried into plan and code |
 | `napkin-math` | any | **auto** | Order-of-magnitude estimate from real base rates |
 | `handoff` | any | `/handoff` | Handoff doc for the next session |
@@ -425,7 +423,7 @@ Four decisions worth stealing even if you never clone this repo.
 │      on a board and invisible in a paragraph.                              │
 │                                                                            │
 │        /to-story-map         live whiteboard, refreshed as the map grows   │
-│        /prototype            an interactive walking-skeleton page          │
+│        /prototype            a walking-skeleton page, or N UI variants     │
 │        /grill-and-align      the context map, drawn as the interview goes  │
 │                              so you see the boundaries before naming them  │
 ├────────────────────────────────────────────────────────────────────────────┤

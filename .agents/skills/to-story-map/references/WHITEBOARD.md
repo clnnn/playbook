@@ -4,7 +4,7 @@ One self-contained HTML file that renders the current map. Created at Q3 (backbo
 
 ## Publish and refresh
 
-Before writing the file, read [`PUBLISHING.md`](../../../references/PUBLISHING.md) — it holds the page contract and the delivery path. Title `Story Map — <Subject>`, favicon `🗺️`.
+Before writing the file, read [`PUBLISHING.md`](PUBLISHING.md) — it holds the page contract and the delivery path. Title `Story Map — <Subject>`, favicon `🗺️`.
 
 ## Data-driven render — the drift guard
 

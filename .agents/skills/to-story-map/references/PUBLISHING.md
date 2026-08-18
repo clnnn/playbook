@@ -1,6 +1,6 @@
 # Publishing a render
 
-Shared reference for any skill that hands the user a live HTML page — the story map whiteboard, the walking-skeleton prototype. Each render's own reference file names its file, title, and favicon; this file holds the page contract and the delivery path.
+How the story map whiteboard reaches the user. [`WHITEBOARD.md`](WHITEBOARD.md) names its file, title, and favicon; this file holds the page contract and the delivery path.
 
 ## The page
 
@@ -10,7 +10,7 @@ One self-contained `<!DOCTYPE html>` document: hand-written CSS, inline vanilla 
 
 Take this path whenever the Artifact tool is available.
 
-1. **Load the `artifact-design` skill before writing the page.** It calibrates how much design investment the page warrants, and different renders sit at different points on that scale.
+1. **Load the `artifact-design` skill before writing the page.** It calibrates how much design investment the page warrants; the board is a working surface the session refreshes as the map grows, not a finished deliverable.
 2. Write the file, then publish it with the Artifact tool, following that tool's own publishing requirements.
 3. Every refresh republishes the **same file path**, so the URL never changes and the user reloads one open tab.
 
