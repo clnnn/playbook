@@ -5,15 +5,22 @@ How the skills consume this repo's domain documentation when exploring the codeb
 ## Before exploring, read these
 
 - **`docs/CONTEXT-MAP.yaml`** — the system-wide map, and the entry point even when the repo has one context. Every context appears here with its `core` / `supporting` / `generic` tag and its relationships.
-- **The `CONTEXT.yaml` each map entry's `path` points at** — one per context, holding that context's ubiquitous language. Read the ones covering the area you're about to work in. Follow the `path`; the map is the truth about where these files sit.
+- **The `CONTEXT.yaml` each map entry's `path` points at** — one per context, at `docs/<slug>/CONTEXT.yaml`, holding that context's ubiquitous language. Read the ones covering the area you're about to work in. Follow the `path`; the map is the truth about where these files sit.
 - **`docs/adr/`** — every ADR in the repo lives here, whatever it affects. Read the ones that touch the area you're about to work in, on demand; filenames are `NNNN-slug.md`, so the slugs are the index.
 
-If any of these files don't exist, **proceed silently**. The `grill-and-align` skill creates them lazily, when terms, boundaries or decisions actually get resolved.
+An empty map, a missing `CONTEXT.yaml`, no `adr/` — **proceed silently**. The `grill-and-align` skill fills them lazily, when terms, boundaries or decisions actually get resolved.
 
 ## File structure
 
 ```
-<LAYOUT>
+/
+└── docs/
+    ├── CONTEXT-MAP.yaml       ← system-wide context map
+    ├── adr/                   ← every ADR, whatever it affects
+    ├── ordering/
+    │   └── CONTEXT.yaml
+    └── billing/
+        └── CONTEXT.yaml
 ```
 
 Field-level formats live in the `grill-and-align` skill's `references/` folder — `CONTEXT-MAP-FORMAT.md`, `CONTEXT-FORMAT.md` and `ADR-FORMAT.md`.

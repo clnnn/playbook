@@ -4,23 +4,18 @@
 
 ```
 /
-├── docs/
-│   ├── CONTEXT-MAP.yaml              ← system-wide context map
-│   └── adr/                          ← every ADR, whatever it affects
-├── packages/
-│   ├── ordering/
-│   │   └── docs/
-│   │       └── CONTEXT.yaml
-│   └── billing/
-│       └── docs/
-│           └── CONTEXT.yaml
-└── apps/
+└── docs/
+    ├── CONTEXT-MAP.yaml       ← system-wide context map
+    ├── adr/                   ← every ADR, whatever it affects
+    ├── ordering/
+    │   └── CONTEXT.yaml
+    ├── billing/
+    │   └── CONTEXT.yaml
     └── web/
-        └── docs/
-            └── CONTEXT.yaml
+        └── CONTEXT.yaml
 ```
 
-One context is one directory under `packages/`. That directory holds the `CONTEXT.yaml` and may hold several Nx projects below it. A context whose code lives in an app takes the same layout under `apps/`.
+One context is one directory under `docs/`, named for the context slugified — `Ordering` → `docs/ordering/`. The code it describes may live anywhere: one package, several Nx projects, an app.
 
 Use this layout from the first context onward, without asking. The map's `path` entry is the truth about where a `CONTEXT.yaml` sits, so a later move costs one line.
 
@@ -29,17 +24,17 @@ Use this layout from the first context onward, without asking. The map's `path` 
 ```yaml
 contexts:
   - name: Ordering
-    path: ../packages/ordering/docs/CONTEXT.yaml
+    path: ./ordering/CONTEXT.yaml
     tag: core
     description: Receives and tracks customer orders; the real-time rerouting algorithm is the differentiator.
 
   - name: Billing
-    path: ../packages/billing/docs/CONTEXT.yaml
+    path: ./billing/CONTEXT.yaml
     tag: supporting
     description: Generates invoices and processes payments.
 
   - name: Auth
-    path: ../packages/auth/docs/CONTEXT.yaml
+    path: ./auth/CONTEXT.yaml
     tag: generic
     description: Identity and session management; using Clerk.
 
@@ -58,7 +53,7 @@ relationships:
     description: Both share the CustomerId and Money types.
 ```
 
-`path` is relative to the map file, which sits in `docs/`. A package one level below the repo root is therefore `../packages/<slug>/docs/CONTEXT.yaml`.
+`path` is relative to the map file, which sits in `docs/`. Every context is therefore `./<slug>/CONTEXT.yaml`.
 
 ## Relationship shape
 

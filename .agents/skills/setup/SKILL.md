@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Configure this repo for the skills — the domain doc layout and the product knowledge base. Run once, before first use.
+description: Configure this repo for the skills — the domain docs and the product knowledge base. Run once, before first use.
 disable-model-invocation: true
 ---
 
@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Scaffold the per-repo configuration the skills assume, and the pointers that route agents to it:
 
-- **Domain docs** — where the context map, the `CONTEXT.yaml` files and the ADRs live, and the rules for reading them. Written by `grill-and-align`, read by every skill that explores the codebase.
+- **Domain docs** — an empty context map, and the rules for reading it, the `CONTEXT.yaml` files and the ADRs. Written by `grill-and-align`, read by every skill that explores the codebase.
 - **Knowledge base** — the OKF bundle holding product documents, and the publish, discover and update convention. Read and written by `prd`, `lean-product-canvas` and `story-map`.
 
 This is prompt-driven, not a script. Explore, present what you found, confirm with the user, then write.
@@ -19,41 +19,35 @@ Read the repo's starting state. Read what exists; assume nothing:
 
 - `AGENTS.md` and `CLAUDE.md` at the root — which exists, and does either already carry a `## Domain docs` or `## Knowledge base` section?
 - `docs/agents/` — did a previous run already write `domain.md` or `knowledge.md`?
-- `docs/CONTEXT-MAP.yaml`, any `CONTEXT.yaml`, `docs/adr/` — are domain docs already in place?
-- The code layout — `packages/`, `apps/`, `src/`, or a single root package. This is what a `CONTEXT.yaml` sits beside, so it drives the Section A default.
+- `docs/CONTEXT-MAP.yaml`, any `docs/<slug>/CONTEXT.yaml`, `docs/adr/` — are domain docs already in place?
 - An OKF bundle already here — `docs/knowledge/`, or any directory holding `.openknowledge.toml`.
 - `okn version` — is the CLI installed?
 - Which skills are installed (a skill folder alongside this one, or the name in your available skills). `grill-and-align` decides whether Section A runs; `prd`, `lean-product-canvas` and `story-map` decide whether Section B runs.
 
-Done when you can state, for each section, whether it runs and what it defaults to.
+Done when you can state, for each section, whether it runs and what it holds.
 
 ## 2. Present findings and ask
 
-Summarise what's present and what's missing. Then take the sections in order — one section, one answer, then the next.
+Summarise what's present and what's missing. Then take the sections in order. Skip a section outright when no skill that reads it is installed.
 
-Lead each section with the recommended answer so the user can accept it in a word. Skip a section outright when no skill that reads it is installed.
+Section A asks nothing — state the layout and move on. Section B asks; lead it with the recommended answer so the user can accept it in a word.
 
 ### Section A — Domain doc layout
 
-`grill-and-align` writes the map to `docs/CONTEXT-MAP.yaml` and every ADR to `docs/adr/`. Those two are fixed. The layout question is where the per-context `CONTEXT.yaml` files sit.
-
-The default:
+The layout is fixed:
 
 ```
 /
-├── docs/
-│   ├── CONTEXT-MAP.yaml              ← system-wide context map
-│   └── adr/                          ← every ADR, whatever it affects
-├── packages/
-│   ├── ordering/
-│   │   └── docs/
-│   │       └── CONTEXT.yaml
-│   └── billing/
-│       └── docs/
-│           └── CONTEXT.yaml
+└── docs/
+    ├── CONTEXT-MAP.yaml       ← system-wide context map
+    ├── adr/                   ← every ADR, whatever it affects
+    ├── ordering/
+    │   └── CONTEXT.yaml
+    └── billing/
+        └── CONTEXT.yaml
 ```
 
-One `CONTEXT.yaml` per context, in a `docs/` folder beside the code it describes. Where exploration found a different code layout — a single `src/`, one package, some other root — propose that same shape mapped onto it. Ask one question: accept the proposal, or name the layout.
+One `CONTEXT.yaml` per context, at `docs/<slug>/CONTEXT.yaml`, where `<slug>` is the context's name kebab-cased. `grill-and-align` writes those files lazily, from the first resolved context onward; this skill only lays down the empty map.
 
 ### Section B — Knowledge base
 
@@ -77,6 +71,7 @@ Show the user a draft of:
 
 - The section blocks to add to the chosen root file (step 4 picks the file)
 - The contents of `docs/agents/domain.md` and `docs/agents/knowledge.md`
+- The files step 4 creates — the seed `docs/CONTEXT-MAP.yaml`, and the OKF bundle at the chosen root
 
 Let them edit before anything is written.
 
@@ -100,9 +95,18 @@ Write only the sections whose skills are installed, and match each one's paths t
 
 Then write the docs files from the seed templates in this skill folder:
 
-- [domain.md](./domain.md) → `docs/agents/domain.md`, with the `<LAYOUT>` placeholder replaced by the layout the user settled in Section A.
+- [domain.md](./domain.md) → `docs/agents/domain.md`, verbatim.
 - [knowledge.md](./knowledge.md) → `docs/agents/knowledge.md`, with `docs/knowledge` replaced throughout where the user chose another bundle root.
+
+Where Section A ran, create `docs/CONTEXT-MAP.yaml` holding both top-level keys, so `grill-and-align` has a map to append to and the graph server has a file it can parse:
+
+```yaml
+contexts: []
+relationships: []
+```
+
+Where a `docs/CONTEXT-MAP.yaml` is already there, leave its contents untouched and say so.
 
 ## 5. Done
 
-Tell the user which skills now read from these files, and that `docs/agents/*.md` is theirs to edit directly — re-running this skill is for switching the layout or the bundle root, or starting over.
+Tell the user which skills now read from these files, and that `docs/agents/*.md` is theirs to edit directly — re-running this skill is for switching the bundle root, or starting over.
