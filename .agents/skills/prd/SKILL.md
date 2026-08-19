@@ -43,7 +43,7 @@ Three rules govern every turn. They are the whole skill; the sections below just
 
 ## Output
 
-Fill `template.md` — it is the deliverable: field structure and inline examples for each section. This skill drives the conversation; the template captures the result, in a new document that leaves the template itself untouched. Before publishing it, review the draft with design + engineering — a PRD written alone gets no buy-in.
+Fill `template.md` — it is the deliverable: field structure and inline examples for each section. Read a section's block on entering that section, not the whole file up front. This skill drives the conversation; the template captures the result, in a new document that leaves the template itself untouched. Before publishing it, review the draft with design + engineering — a PRD written alone gets no buy-in.
 
 ---
 
@@ -122,15 +122,15 @@ Fill `template.md` — it is the deliverable: field structure and inline example
 
 **Goal:** Pin how well the §5 features must behave, in numbers an engineer can design against.
 
-**Method (quality attribute scenarios).** Read [`references/NFR-SIGNALS.md`](references/NFR-SIGNALS.md) before the first question — it holds the ten attributes, their ID prefixes, the breakage question that opens each, the signal table, the ranking rubric, and the tradeoff pairs. Then five moves:
+**Method (quality attribute scenarios).** Read [`references/NFR-SIGNALS.md`](references/NFR-SIGNALS.md) before the first question — it holds the ten attributes, their ID prefixes, the breakage question that opens each, the signal table, the ranking rubric, the anchoring and landing-zone rules, and the tradeoff pairs. It is the authority on all of them; these five moves say only where each lands in the flow:
 
-1. **Derive.** Match what this product *does* — money moves, regulated data, field work, a time-based §7 metric, a third-party dependency — to candidate attributes, reading §2, §3 and §5 against the signal table. Candidates come from this document, not from a checklist walked out of habit.
+1. **Derive.** Read §2, §3 and §5 against the signal table. Candidates come from this document, not from a checklist walked out of habit.
 2. **Admit.** Every candidate names a §5 key feature **and** a §2 pain or the §7 primary metric. One that names only itself is scope creep — drop it.
-3. **Rank** survivors on business importance × technical risk. High importance is pinned; everything else is ruled out *in the document* with a one-line reason, since you can only deliberately exclude from a closed list. Past ~8 pinned, ask which three would delay launch and rule out the rest — a silent truncation reads as coverage.
-4. **Pin** each survivor as a scenario on the template's nine fields. Ask the **breakage**, never the metric — "how long before they give up waiting?" gets an answer, "what's your p99 target?" does not — then offer a number to accept, raise, or reject. Three follow-ups is the floor here, one more than the contract's two: still waving → a **landing zone**; genuinely unknown → 🔵 into §10; a measure with no evidence behind it → 🔶.
-5. **Reconcile.** Walk the pinned set against the reference's **tradeoff** pairs — each is one design decision pulling two attributes apart, and eight individually plausible numbers make a collectively impossible set. Name the winner and amend the loser's Response Measure on the spot, since a settled tradeoff usually rewrites a number. A tradeoff nobody will settle today is a 🔵 into §10 with an owner.
+3. **Rank** survivors on the rubric's two axes and pin what it says to pin. Past ~8 pinned, ask which three would delay launch and rule out the rest — a silent truncation reads as coverage.
+4. **Pin** each survivor as a scenario on the template's nine fields, opening with the attribute's **breakage** question and **anchoring** the number. Three follow-ups is the floor here, one more than the contract's two: still waving → a **landing zone**; genuinely unknown → 🔵 into §10; a measure with no evidence behind it → 🔶.
+5. **Reconcile.** Walk the pinned set against the reference's **tradeoff** pairs and settle each one there — eight individually plausible numbers make a collectively impossible set.
 
-Latency, throughput, concurrency, data-volume and cost measures get a `napkin-math` check; surface the verdict alone. A number the envelope calls implausible is pinned *and* mirrored into §9 as a feasibility risk, as is any pinned scenario that ranked high on technical risk.
+A pinned number the reference's `napkin-math` check calls implausible is mirrored into §9 as a feasibility risk, as is any pinned scenario that ranked high on technical risk.
 
 A rule nobody gets to tune — a mandated database, an enterprise licence, a data-residency decree — is a **constraint**, not a quality attribute: it goes in its own subsection, since forcing a threshold onto it produces nonsense.
 
@@ -188,9 +188,9 @@ For each: current baseline → target → timeline.
 
 **Goal:** A one-page read on how far this PRD can be trusted, shared alongside it.
 
-**Method.** Run the diagnostic in the template's final section: name the **strongest** and **weakest** sections, collect every 🔶 Assumption into the risk table (assumption · section · risk if wrong · proposed validation), and state the single **recommended next step** before the PRD goes to stakeholders.
+**Method.** Reopen §1 first and refine the executive summary against the finished §2–§8, as §1 promised. Then run the diagnostic in the template's final section: name the **strongest** and **weakest** sections, collect every 🔶 Assumption into the risk table (assumption · section · risk if wrong · proposed validation), and state the single **recommended next step** before the PRD goes to stakeholders.
 
-**Advance when:** the strongest and weakest calls each name a section and the reason for it, every 🔶 in the document appears in the table with a risk-if-wrong and a proposed validation, and the recommended next step is one action with a named first move — not a list.
+**Advance when:** §1 has been reread against the finished sections and either refined or confirmed as still accurate, the strongest and weakest calls each name a section and the reason for it, every 🔶 in the document appears in the table with a risk-if-wrong and a proposed validation, and the recommended next step is one action with a named first move — not a list.
 
 ---
 
