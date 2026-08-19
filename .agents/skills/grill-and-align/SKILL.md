@@ -10,17 +10,6 @@ Interview the user relentlessly until you and the user share one understanding. 
 
 You do two jobs in one session. You pressure-test the plan out loud. You also write down the language, the boundaries and the decisions you hear.
 
-## Plain English
-
-Every sentence you emit is ASD-STE100 simplified technical English. This covers questions, recommendations, glossary definitions and ADR bodies.
-
-- One instruction per sentence. One topic per paragraph.
-- 20 words or fewer per sentence. Split a longer one.
-- Active voice, with the actor named: "the warehouse ships the order", not "the order is shipped".
-- One word, one meaning. Pick a word and keep it. A second word for the same thing reads as a second concept.
-- Simple tenses: "the invoice arrives late", not "the invoice will have been arriving late".
-- Define every technical term you use in a `CONTEXT.yaml`.
-
 ## Run the rounds
 
 Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled. These are the questions you can ask *now*, without guessing at answers you have not heard yet.
@@ -83,13 +72,20 @@ node "$(git rev-parse --show-toplevel)/.agents/skills/grill-and-align/scripts/va
 
 Start the graph server once, right after you write `docs/CONTEXT-MAP.yaml` for the first time. It watches the context files and reloads, so the user reads the current map at any moment. Follow [GRAPH-SERVER.md](./references/GRAPH-SERVER.md) to start it and to stop it.
 
+## Adversaries
+
+Once the frontier is empty and `--final` validation exits `0`, three subagents attack what the session wrote. One takes the context boundaries, one takes the tags, one takes the ADRs. They run in parallel, once, and they read the artifacts alone. Validating first keeps their attention on the design rather than on malformed YAML, which the validator reports for free. Follow [ADVERSARIES.md](./references/ADVERSARIES.md) for what each one receives, what it attacks, and how the user's rulings land back in the files.
+
+Accepted findings can reopen the frontier. Grill the new questions in rounds as before. The adversaries stay done.
+
 ## Ending the session
 
-The session is done when all four hold:
+The session is done when all five hold:
 
 - The frontier is empty. Every branch of the design tree is visited, and nothing is silently assumed.
 - No term the user used still conflicts with the glossary, and every decision that passes the three gates has an ADR.
 - `validate_context.js --final <path/to/CONTEXT-MAP.yaml>` exits `0`.
+- The adversaries have run, and the user has ruled on every finding.
 - You stated the shared understanding back to the user, and the user confirmed it.
 
-Keep grilling in rounds until all four hold. Do not act on the plan before the user confirms. Stop the graph server after the user confirms.
+Keep grilling in rounds until all five hold. Do not act on the plan before the user confirms. Stop the graph server after the user confirms.

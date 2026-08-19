@@ -54,7 +54,8 @@ The last stage is the exception: **BUILD is yours.** This repo takes the work up
 │  /grill-and-align         A relentless interview that walks a design tree  │
 │                           and writes what it hears into the repo:          │
 │                           ubiquitous language, context boundaries, ADRs.   │
-│                           Simplified technical English, 20 words a line.   │
+│                           THREE adversaries attack the boundaries,         │
+│                           the tags and the ADRs before you confirm.        │
 │                                                                            │
 │                  leaves ▸ docs/CONTEXT-MAP.yaml · CONTEXT.yaml · docs/adr/ │
 └────────────────────────────────────┬───────────────────────────────────────┘
