@@ -16,7 +16,7 @@ A folded category that two or more stories need moves to foundation, which is wh
 
 ## Evidence
 
-Every applicable category names what made it apply: a §6 scenario id, the §7 metric, a task from the slice issue, or the persona. A category that names only itself is scope creep — exclude it.
+Every applicable category names what made it apply: a PRD quality-requirement id, its ⭑ success criterion, a task from the slice issue, or the persona. A category that names only itself is scope creep — exclude it.
 
 With no PRD, infer applicability from the slice issue's tasks and the repo, and mark each call 🔶. The disposition list you present is where the user strikes the wrong ones.
 
@@ -59,9 +59,9 @@ The shape decides the done-signal the category's enforcement line ends on:
 
 | Category | What it covers |
 |---|---|
-| Success-metric instrumentation | the §7 primary metric, wired where the step producing it ships |
+| Success-criterion instrumentation | the PRD's ⭑ success criterion, wired where the step producing it ships |
 
-It folds to the story shipping that step, and moves to foundation when several stories feed the metric. With no PRD it becomes an open line: *no primary metric declared — nothing to instrument yet*.
+It folds to the story shipping that step, and moves to foundation when several stories feed the criterion. With no PRD it becomes an open line: *no success criterion declared — nothing to instrument yet*.
 
 **Conditional, default disposition `fold`. Each applies when:**
 
@@ -92,7 +92,7 @@ in this product's words] — runs in CI with the harness green.
 
 ## In this issue
 
-- [ ] **Datastore setup** — *applies because:* §6 DUR-1 requires an invoice to
+- [ ] **Datastore setup** — *applies because:* DATA-01 requires an invoice to
       survive a restart — *done when:* the migration command runs in CI against
       an empty database
 - [ ] **Module structure & boundaries** — *applies because:* the domain docs
@@ -102,7 +102,7 @@ in this product's words] — runs in CI with the harness green.
 
 ## Folded into stories
 
-- **Authentication** → story 3 (sign in to the workspace) — §6 SEC-2
+- **Authentication** → story 3 (sign in to the workspace) — SEC-01
 
 ## Considered and excluded
 

@@ -1,8 +1,8 @@
 # NFR Signals
 
-Lookup reference for §6 of [`prd`](../SKILL.md): the ten quality attributes, the signals that raise them, the rubric that decides which get pinned, and the tradeoffs that make a pinned set impossible.
+Lookup reference for the **Quality requirements & constraints** section of [`prd`](../SKILL.md): the ten quality attributes, the signals that raise them, the rubric that decides which get pinned, and the tradeoffs that make a pinned set impossible.
 
-A **signal** is something already written in §2, §3 or §5 that tells you a quality matters. Derivation runs off the document, so a product that never touches money never fields a payment-integrity question, and a desk-bound persona never fields an offline one.
+A **signal** is something already written in **What & why** or **Solution & user flow** that tells you a quality matters. Derivation runs off the document, so a product that never touches money never fields a payment-integrity question, and a desk-bound persona never fields an offline one.
 
 ## The ten attributes
 
@@ -27,13 +27,13 @@ IDs number per attribute — `PERF-01`, `PERF-02`, `RESIL-01`.
 
 ## The signal table
 
-| Signal in §2 / §3 / §5 | Raises |
+| Signal in What & why / Solution & user flow | Raises |
 |---|---|
 | Money changes hands, or a balance/price/total is displayed | `DATA` `SEC` `AVAIL` — a wrong number is worse than no number |
 | Personal, health, financial or location data is stored | `SEC` `COMP` |
-| §4 or §9 names a regulation, a customer contract, or a data-residency rule | `COMP` |
+| A regulation, a customer contract, or a data-residency rule is named anywhere in the document | `COMP` |
 | The persona works in the field, on the move, or on customer premises | `REACH` `RESIL` |
-| The §7 primary metric is time-based — time-to-first-action, time-to-value | `PERF` |
+| The ⭑ success criterion is time-based — time-to-first-action, time-to-value | `PERF` |
 | A key feature aggregates or fans out across several sources | `PERF` `RESIL` |
 | Usage concentrates — a deadline, a shift change, a campaign, a season | `SCALE` |
 | The feature is live or collaborative — real-time updates, several people at once | `PERF` `SCALE` `RESIL` |
@@ -52,7 +52,7 @@ Signals over-generate on purpose: a payments feature legitimately raises eight a
 
 **Business importance**
 
-- **High** — missing it means the §2 problem persists, the §7 primary metric misses, or a contract or regulation breaks.
+- **High** — missing it means the problem persists, the ⭑ success criterion misses, or a contract or regulation breaks.
 - **Medium** — it degrades the experience without defeating the outcome.
 - **Low** — nobody who matters notices this release.
 
@@ -68,17 +68,16 @@ High importance is pinned, whatever its risk. Everything else is ruled out in th
 
 An anchor pulls a sharper answer than a blank, so offer a number rather than asking for one: *"3 seconds on 4G is the usual bar for a screen someone opens in front of a customer — accept, raise, or reject?"* This is also where realism gets its teeth. Run the `napkin-math` check on latency, throughput, concurrency, data-volume and cost measures and surface only the verdict: *"5k concurrent at p99 400ms across four aggregated sources is roughly 3× what a single region gives you — 700ms is the honest launch number, or this needs a caching design."*
 
-When the user is still waving between numbers, record a **landing zone** instead of stalling:
+When the user is still waving between numbers, record a **landing zone** instead of stalling — two tiers, written on one line as `target (floor)`:
 
-- **Minimal** — below this, the release is off.
 - **Target** — the number to design for.
-- **Outstanding** — worth celebrating.
+- **Floor** — below this, the release is off.
 
-A landing zone is a real requirement engineering can design against, not a failed answer. Reserve 🔵 for a number that needs discovery nobody has done yet.
+A landing zone is a real requirement engineering can design against, not a failed answer. Reserve 🔶 for a number that needs discovery nobody has done yet.
 
 ## Tradeoff pairs
 
-The anchor check tests one number. This tests the **set** — eight individually plausible scenarios can be collectively impossible, and only a pairwise pass catches it. Each row is one design decision that moves two attributes in opposite directions.
+The anchor check tests one number. This tests the **set** — five individually plausible entries can be collectively impossible, and only a pairwise pass catches it. Each row is one design decision that moves two attributes in opposite directions.
 
 | Pair | The decision that forces the choice |
 |---|---|
@@ -91,4 +90,4 @@ The anchor check tests one number. This tests the **set** — eight individually
 | `OPS` ↔ `SEC` | The logging that makes 2am debuggable is the logging that puts personal data in an aggregator |
 | `AVAIL` ↔ viability | Each nine multiplies infrastructure and on-call cost; four nines is a staffing decision wearing a technical hat |
 
-Resolving one is a **business** call, not a technical one: say which side wins, in the §2 persona's terms ("a leaked balance costs us the client; a slow balance costs us a reload"), then amend the losing scenario's Response Measure so the pinned set stays honest. A tradeoff nobody will settle today goes to §10 with an owner rather than sitting in §6 looking settled.
+Resolving one is a **business** call, not a technical one: say which side wins, in the persona's terms ("a leaked balance costs us the client; a slow balance costs us a reload"), then amend the losing entry's number so the pinned set stays honest. A tradeoff nobody will settle today goes to **Risks & open questions** with an owner rather than sitting in the requirements looking settled.

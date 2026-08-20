@@ -1,233 +1,170 @@
 ---
 name: prd
 argument-hint: "[feature or initiative]"
-description: Build an engineering-ready PRD — problem through non-functional requirements — via a strict guided, section-by-section flow.
+description: Build a lean, engineering-ready PRD — problem through quality requirements — in seven capped sections, one turn each.
 disable-model-invocation: true
 ---
 
 ## Purpose
 
-Guide a product manager through a complete PRD (Product Requirements Document), section by section, from executive summary to open questions — in one self-contained pass.
+Guide a product manager through a PRD that says what to build, in seven sections and about 170 lines.
 
-Contributing methods are embedded inline: problem statement (§2), proto-persona and jobs-to-be-done (§3), Cagan's four risks (§9). Quality attribute scenarios (§6) are the one exception — their attribute list, ranking rubric and tradeoff pairs are large enough to live in [`references/NFR-SIGNALS.md`](references/NFR-SIGNALS.md), read on entry to that section.
+The PRD owns two things nothing upstream covers: **the solution's shape** and **the requirements it must hold to**.
 
-User stories, epic breakdown, and acceptance criteria are out of scope — produced separately afterward in the dedicated user-story skill.
-
-The PRD is a living alignment device, not a frozen spec: strategic context, the customer problem, the proposed solution, and how success is measured.
+The skill is standalone. A lean product canvas is useful input, never a prerequisite. User stories, epics and acceptance criteria come afterward.
 
 ## Input
 
-Anything supplied with the invocation — text after `/prd`, a pasted context dump, discovery notes, or a referenced file — is material already given. Read it, then route each piece through the gate.
-
-Arriving empty-handed works too: the flow starts at the executive summary and builds up.
+Anything supplied at invocation — text after `/prd`, a pasted dump, discovery notes, a referenced file, a canvas — is material already given. Read it, route each piece through the gate, and never re-ask what it answers. Arriving empty-handed works too: the flow opens at **What & why**.
 
 ## Operating contract
 
-Three rules govern every turn. They are the whole skill; the sections below just apply them.
+Three rules govern every turn. The sections below only apply them.
 
-**Strict flow.** Complete Sections 1–10 in order, then the Self-Assessment. Finish one section fully — every field gate-passed and its **Advance when** criterion met — before starting the next.
+**Strict flow.** Seven sections in order. Finish one — every field gate-passed, cap respected, **Advance when** met — before opening the next.
 
-**The gate.** Every field the PRD needs passes one of three ways:
+**The gate.** Every field passes one of three ways:
 
-- **Found** — supplied in the invocation, a dump, or a readable file. Restate it back and ask the user to confirm or correct. Never silently accept found input as final.
-- **Missing** — ask one focused question to get it. **Anchor** it: offer a candidate answer to accept, correct, or reject, since an anchor pulls a sharper reply than a blank does. A vague answer earns two follow-ups before you settle for it.
-- **Unanswerable** — the user genuinely doesn't know. Tag the gap inline where it appears: 🔶 **Assumption** (plausible but unvalidated) or 🔵 **Open Question** (unknown, needs discovery). Every 🔵 collects into §10; every 🔶 collects into the Self-Assessment table, and a 🔶 carrying stakes also lands in §9 as a risk. Never invent facts, data, quotes, or approvals.
+- **Found** — in the invocation, a dump, or a readable file. Restate it and have the user confirm or correct it.
+- **Missing** — one focused question carrying an **anchor**: a candidate answer to accept, correct, or reject, since an anchor pulls a sharper reply than a blank does. A vague answer earns one follow-up.
+- **Unanswerable** — the user genuinely doesn't know. Tag it 🔶 inline where it sits, and carry it to **Risks & open questions**. Write what is known and mark what isn't; facts, data, quotes and approvals come from the user.
 
-**Facilitation.** Run it as a guided workshop:
+**The cap.** Every section carries a line cap, checked at the gate alongside **Advance when**. At the cap you **cut**, you do not append — and you record the cut in one line at the end of the section: `Cut for length: rate limiting, i18n`. A silent cut and a forgotten item read identically six months on.
 
-- Open with a one-line heads-up (≈90–150 min, 10 sections) and offer three entry modes:
-  1. **Guided** — one question at a time.
-  2. **Context dump** — paste what you have; the skill routes it and gates the gaps.
-  3. **Best guess** — infer missing detail, label every inference 🔶.
-- One question per turn. Show an honest progress label each turn — `Section X/10`. If the invocation already answered a field, skip it and advance the label.
-- Offer numbered quick-select options when a question has natural choices; include `Other (specify)` when open-ended. Accept `1`, `#1`, `1 and 3`, `1,3`, or free text.
-- Surface a numbered recommendation only at genuine decision points (which persona is primary, which metric is the one), not after every answer.
-- On an interruption ("how many left?"), answer, restate progress and the pending question, then resume. On "stop/pause", halt and wait for explicit resume.
+The document carries no table of contents, no change log, no document-information block and no tag legend.
+
+**Facilitation.**
+
+- Open with a heads-up — ~20–30 min, seven sections — and three ways in: **Guided** (a turn per section), **Context dump** (paste what you have; the skill routes it and gates the gaps), **Best guess** (infer the rest, every inference 🔶).
+- One turn per section: ask that section's fields together, then wait. Label progress every turn — `Section 3/7 — Out of scope`.
+- Numbered options where a question has natural choices, your recommendation first, `Other (specify)` when open-ended. Accept `1`, `#1`, `1 and 3`, `1,3`, or free text.
+- On "how many left?", answer and resume. On "stop", halt and wait for an explicit resume.
 
 ## Output
 
-Fill `template.md` — it is the deliverable: field structure and inline examples for each section. Read a section's block on entering that section; for §3 and §6 read it before the first question of the section, since their field layouts are what the output has to match. This skill drives the conversation; the template captures the result, in a new document that leaves the template itself untouched.
-
-**Format contract.** Reproduce the template's structure literally — every field its own bullet, every table a table, every NFR scenario a fenced block. The template is the sole authority on the deliverable's layout.
-
-Before publishing it, review the draft with design + engineering — a PRD written alone gets no buy-in.
+Fill `template.md` — it is the sole authority on the deliverable's layout. Read a section's block on entering that section, and reproduce its structure literally. The caps live in this contract, not in the template.
 
 ---
 
-## Section 1 — Executive Summary
+## Section 1/7 — What & why · cap ~10 lines
 
-**Goal:** A one-paragraph overview a stakeholder reads in 30 seconds.
+**Goal:** a stakeholder knows what is being built, for whom, and why, in 30 seconds.
 
-**Method.** Format: *"We're building [solution] for [persona] to solve [problem], which will result in [impact]."* Draft it first to force clarity, refine it last once Sections 2–8 exist. If it needs more than one sentence to state, the scope is unclear.
+Three lines:
 
-**Advance when:** all four slots — solution, persona, problem, impact — are filled, the named problem has evidence (or is tagged 🔶), the persona maps to a real segment you can detail in §3, and the impact is a measurable outcome, not an aspiration.
+1. **Building** — *"We're building [solution] for [persona] to solve [problem], which will result in [impact]."* Needing more than one sentence means the scope is still unclear.
+2. **Persona** — a type label, one line of build-relevant traits, and the one pain this product removes. Two personas at most, and a second only when it changes what gets built.
+3. **Problem** — one sentence, concrete and observable.
 
----
+A canvas already holds all three: carry the lines across and confirm them. With no canvas, ask for them plainly.
 
-## Section 2 — Problem Statement
+The problem names what the persona cannot do today. "We lack an AI layer" is a solution, "revenue is down" is a business metric, "users need a dashboard" is a feature request — each is a different question than the one this line answers.
 
-**Goal:** Frame the customer problem with evidence, before any solution.
-
-**Method (embedded problem-statement).** Build the statement from the persona's point of view, then synthesize:
-
-1. **Framing narrative** — five fields:
-   - *I am* — a specific persona, not "busy professionals".
-   - *Trying to* — a desired outcome, not a task.
-   - *But* — the barriers.
-   - *Because* — the root cause, not a symptom.
-   - *Which makes me feel* — emotions grounded in research.
-2. **Context & constraints** — concrete geographic, technical, time, or demographic factors that shape design.
-3. **Final statement** — one sentence: *[Persona] needs a way to [outcome] because [root cause], which currently [emotional/practical impact].*
-4. **Evidence** — interviews, analytics, support signals, a verbatim customer quote. If all evidence is missing or 🔶, say so plainly — an unevidenced problem is a risk.
-
-**Reject** solution smuggling ("we lack AI analytics"), business problems ("revenue is down"), feature requests ("users need a dashboard"), and symptoms dressed as root causes.
-
-**Advance when:** the problem is stated in concrete, observable terms, the "who" is specific enough to build a persona around, both user impact and business impact are named with the business one tied to a metric leadership tracks, and evidence includes at least one quote or data point (else run discovery first).
+**Advance when:** all three lines are filled, the persona is the product's user or buyer, the problem is observable, and the section is ≤10 lines.
 
 ---
 
-## Section 3 — Target Users & Personas
+## Section 2/7 — Solution & user flow · cap ~50 lines
 
-**Goal:** Build for a specific person, not an abstraction.
+**Goal:** a builder can see the shape of the thing.
 
-**Method (embedded proto-persona + jobs-to-be-done).** Read the §3 block of `template.md` before the first question — it fixes the field layout this section outputs.
+**The flow is the spine.** Draw the end-to-end path as an ASCII diagram — trigger through every step to the terminal state. It carries the section; the prose serves it.
 
-*Proto-persona* — for the primary persona (and secondary if relevant):
+Then at most three sentences on what the product does, and an **Also built** list naming only what the diagram leaves implicit: an audit trail, a reject-to-user path, a reminder cadence.
 
-- **Name** — a realistic individual name, the kind a real person has.
-- **Bio/demographics** — only context-relevant ones.
-- **3 Quotes** — reveal mindset, not facts.
-- **3 Pains**
-- **What they're trying to accomplish** — observable, outcome-focused.
-- **3 Goals**
-- **Attitudes & influences** — decision authority, influencers, beliefs.
+**Trace** each feature to the problem line, in conversation. One that traces to nothing moves to **Out of scope** or gets cut. The traces stay out of the document.
 
-Tag anything inferred 🔶; tag missing quotes as needing research. Start with 1–2 personas, not ten.
+Keep it high-level — design owns the UI, so no button labels and no pixels.
 
-*Jobs-to-be-done* — capture jobs verb-driven and solution-agnostic ("communicate with team" ≠ "use Slack"):
-
-- **Jobs**
-  - Functional
-  - Social
-  - Emotional
-- **Pains**
-  - Challenges
-  - Costliness
-  - Common mistakes
-  - Unresolved problems
-- **Gains**
-  - Expectations
-  - Savings
-  - Adoption factors
-  - Life improvement
-
-**Advance when:** the primary persona carries every proto-persona field, functional, social and emotional jobs are each captured, the persona's biggest pain matches §2's problem, the persona is the product's *user/buyer* (not your team or PM audience), and any inferred JTBD is tagged 🔶.
+**Advance when:** the flow runs trigger to terminal state with no gap, every feature has traced, and the section is ≤50 lines.
 
 ---
 
-## Section 4 — Strategic Context
+## Section 3/7 — Out of scope · cap ~14 lines
 
-**Goal:** Explain why this matters to the business and why now.
+**Goal:** scope creep meets a written boundary.
 
-**Method.** Two parts only:
+- **Not included** — one line each, `exclusion — rationale`, at most six. The valuable entries are the ones someone will be disappointed about; give those the strongest rationale.
+- **Future considerations** — a bare list, at most five, no rationales. Its only job is stopping a settled question from reopening.
 
-1. **Business goals** — tie the initiative to a company OKR or strategic priority, and to the revenue/retention/cost impact. The quantified goal becomes the success threshold in §7.
-2. **Why now** — the urgency: what changed that makes this the right time? A manufactured "why now" reads as manufactured. The root cause behind "why now" scopes what to build.
+An exclusion that is really a dependency — "mobile out of scope" when the persona is phone-first — moves to **Risks & open questions**.
 
-**Advance when:** the initiative is tied to a named OKR or strategic priority with a quantified impact, the "why now" names what actually changed, and you can draw a straight line — business goal → problem (§2) → persona (§3) → this initiative. A weak link means the solution in §5 may be wrong.
-
----
-
-## Section 5 — Solution Overview
-
-**Goal:** Describe what you're building at a high level. Keep it high-level — design owns the UI.
-
-**Method.**
-
-1. **Solution description** — 2–3 paragraphs on what the product does and how.
-2. **Key features** — the capabilities it provides.
-3. **User flows / wireframes** *(optional)* — only for complex features needing a visual.
-
-**Advance when:** every key feature traces to a §2 pain or §3 job (a feature that solves no stated problem is scope creep — move it to §8 or justify it), the description stays high-level (no button labels or pixel dimensions), and you can name a metric that will move if it works.
+**Advance when:** every exclusion carries a rationale, nothing here also appears in **Solution & user flow**, and the section is ≤14 lines.
 
 ---
 
-## Section 6 — Non-Functional Requirements
+## Section 4/7 — Success criteria · cap ~8 lines
 
-**Goal:** Pin how well the §5 features must behave, in numbers an engineer can design against.
+**Goal:** a number that settles, after launch, whether this worked.
 
-**Method (quality attribute scenarios).** Read two things before the first question: [`references/NFR-SIGNALS.md`](references/NFR-SIGNALS.md) — the ten attributes, their ID prefixes, the breakage question that opens each, the signal table, the ranking rubric, the anchoring and landing-zone rules, and the tradeoff pairs — and the §6 block of `template.md`, which fixes the nine-field layout every pinned scenario is written in. The reference is the authority on all of those; these five moves say only where each lands in the flow:
+Three to five criteria, one line each: `[observable thing] reaches [number], measured [window]`. Mark exactly one `⭑` — the one to instrument, which is what the downstream story work wires up. Close with one line of what must not regress.
 
-1. **Derive.** Read §2, §3 and §5 against the signal table. Candidates come from this document, not from a checklist walked out of habit.
-2. **Admit.** Every candidate names a §5 key feature **and** a §2 pain or the §7 primary metric. One that names only itself is scope creep — drop it.
-3. **Rank** survivors on the rubric's two axes and pin what it says to pin. Past ~8 pinned, ask which three would delay launch and rule out the rest — a silent truncation reads as coverage.
-4. **Pin** each survivor as a scenario on the template's nine fields, opening with the attribute's **breakage** question and **anchoring** the number. Three follow-ups is the floor here, one more than the contract's two: still waving → a **landing zone**; genuinely unknown → 🔵 into §10; a measure with no evidence behind it → 🔶.
-5. **Reconcile.** Walk the pinned set against the reference's **tradeoff** pairs and settle each one there — eight individually plausible numbers make a collectively impossible set.
+**Anchor** every number: offer one rather than asking for one. A number with no evidence behind it still gets written, tagged 🔶.
 
-A pinned number the reference's `napkin-math` check calls implausible is mirrored into §9 as a feasibility risk, as is any pinned scenario that ranked high on technical risk.
-
-A rule nobody gets to tune — a mandated database, an enterprise licence, a data-residency decree — is a **constraint**, not a quality attribute: it goes in its own subsection, since forcing a threshold onto it produces nonsense.
-
-**Advance when:** every pinned scenario carries a Response Measure or landing zone and traces to a feature and a pain/metric, every attribute the signal table raised is pinned or ruled out with a stated reason, every tradeoff pair the reference lists has a named winner or a 🔵 owner, every mandated rule sits under Constraints rather than wearing a threshold, and every implausible or high-risk number appears in §9.
+**Advance when:** exactly one criterion carries `⭑`, every criterion holds a number and a measurement window, one must-not-regress line is present, and the section is ≤8 lines.
 
 ---
 
-## Section 7 — Success Metrics
+## Section 5/7 — Quality requirements & constraints · cap ~20 lines
 
-**Goal:** Define how you'll know it worked.
+**Goal:** how well the flow must behave, in numbers engineering can design against.
 
-**Method.**
+Capabilities live in **Solution & user flow**. This section holds behaviour under named conditions, plus rules nobody gets to tune.
 
-1. **Primary metric** — the ONE metric this must move. If you can't name one, the initiative isn't focused. It must directly measure the §2 problem.
-2. **Secondary metrics** — monitored, not optimized for.
-3. **Guardrail metrics** — what must NOT regress. Every initiative has side effects; name at least one. Guardrails are business outcomes; system qualities are §6's job, so a threshold like "p99 under 400ms" belongs there as a scenario.
+Read [`references/NFR-SIGNALS.md`](references/NFR-SIGNALS.md) on entering — it is the authority on the ten attributes, their breakage questions, the signal table, the ranking rubric, anchoring, and the tradeoff pairs. Five moves:
 
-For each: current baseline → target → timeline.
+1. **Derive.** Read **What & why** and **Solution & user flow** against the signal table. Candidates come from this document, not from a checklist walked out of habit.
+2. **Admit.** Every candidate names a solution step **and** either the problem or a success criterion. One that names only itself is scope creep.
+3. **Rank** survivors on the rubric's two axes, then **cut to five**. Past five, ask which five would delay launch.
+4. **Pin** each survivor on three lines, opening with the attribute's breakage question and **anchoring** the number:
 
-**Advance when:** exactly one primary metric is named and it directly measures the §2 problem, every metric carries baseline → target → timeline (a missing baseline tagged 🔶 and flagged to analytics now, not after launch), secondary metrics read as monitored rather than optimised for, and at least one guardrail is named.
+```
+PERF-01  Chat turn completes in ≤6s (10s floor) on 4G, 15 turns deep; first token ≤2s
+   Why:  Solution step "agent chat" — a stalled chat is the abandonment this product removes
+   From: Launch, pilot cohort; tightens to 3s before an award-year peak
+```
 
----
+   Still waving after one follow-up → write the target with its floor in brackets, as above. Genuinely unknown → 🔶.
 
-## Section 8 — Out of Scope
+5. **Reconcile.** Walk the pinned set against the reference's tradeoff pairs and settle each in conversation — five individually plausible numbers make a collectively impossible set. Only the amended number and a half-line reason reach the entry.
 
-**Goal:** State what you're NOT building, so scope doesn't creep.
+Then **Constraints**: a bare list of rules nobody gets to tune, each with who mandates it. These carry no number — a threshold on a constraint produces nonsense.
 
-**Method.** List excluded capabilities, each with a rationale, plus future considerations. The valuable entries are the ones someone will be disappointed about — give those the strongest rationale.
+A number the reference's `napkin-math` check calls implausible crosses to **Risks & open questions**, as does any entry that ranked high on technical risk.
 
-**Advance when:** every exclusion carries a rationale, future considerations are listed, nothing here also appears in §5, and any exclusion that is a dependency in disguise (e.g. "mobile out of scope" when 40% of the persona is mobile) is moved to §9 as a risk.
-
----
-
-## Section 9 — Dependencies & Risks
-
-**Goal:** Surface what could block or derail you, with mitigations.
-
-**Method.** Map technical, external, and team dependencies. Assess risk with **Cagan's four risks** — value (will they want it?), usability (can they use it?), feasibility (can we build it?), viability (does the business case hold?); most PRDs overweight feasibility and underweight value. Each mitigation needs an owner and a trigger — "monitor closely" is not a mitigation.
-
-**Advance when:** technical, external and team dependencies are each mapped, all four of Cagan's risks are considered, every §6 feasibility risk has crossed over into the template's Feasibility Risks table, every mitigation has an owner and a trigger, and every stakes-carrying 🔶 Assumption from earlier sections appears here as a risk.
+**Advance when:** at most five entries, each carrying a number, a `Why` and a `From`; every attribute the signal table raised is either pinned or named on the cut line; every mandated rule sits under Constraints rather than wearing a threshold; every implausible number appears in **Risks & open questions**; and the section is ≤20 lines.
 
 ---
 
-## Section 10 — Open Questions
+## Section 6/7 — Dependencies · cap ~8 lines
 
-**Goal:** Make the unknowns visible so they're resolved deliberately.
+**Goal:** name what this build waits on.
 
-**Method.** A table of unresolved decisions, each with an owner, a deadline, and a status.
+A flat list of five to eight, each with its state — *built* / *absent today* / *unresolved* / *blocked on X*.
 
-**Advance when:** every 🔵 tagged earlier in the document appears in the table, and each row names an owner and a deadline — an open question with no name against it is one nobody will answer.
+**Advance when:** every dependency carries a state, anything unresolved that blocks the build also appears in **Risks & open questions**, and the section is ≤8 lines.
 
 ---
 
-## Self-Assessment
+## Section 7/7 — Risks & open questions · cap ~20 lines
 
-**Goal:** A one-page read on how far this PRD can be trusted, shared alongside it.
+**Goal:** every gap has a name against it.
 
-**Method.** Reopen §1 first and refine the executive summary against the finished §2–§8, as §1 promised. Then run the diagnostic in the template's final section: name the **strongest** and **weakest** sections, collect every 🔶 Assumption into its risk table, and state the single **recommended next step** before the PRD goes to stakeholders.
+One table: `Risk or unknown | Why it matters | Owner | Next move`. Four sources fill it:
 
-**Advance when:** §1 has been reread against the finished sections and either refined or confirmed as still accurate, the strongest and weakest calls each name a section and the reason for it, every 🔶 in the document appears in the table with a risk-if-wrong and a proposed validation, and the recommended next step is one action with a named first move — not a list.
+- Every inline 🔶 in the document.
+- The crossovers from **Quality requirements & constraints** and **Dependencies**.
+- Any exclusion that turned out to be a dependency in disguise.
+- A pass over **Cagan's four risks** — value (will they want it?), usability (can they use it?), feasibility (can we build it?), viability (does the business case hold?). Most PRDs fill feasibility and leave value empty; this pass exists to catch that.
+
+Every `Next move` is an action someone takes, with the trigger that fires it. "Monitor closely" is not one.
+
+**Advance when:** every inline 🔶 has a row, all four of Cagan's risks have been walked, every row names an owner and a next move, and the section is ≤20 lines.
 
 ---
 
 ## Publishing
 
-Publish the finished PRD as a product document, following whatever product-document convention this repo documents for agents. Where the repo has no such convention, save it as a markdown file in the working directory and report the path.
+Publish as a product document, following whatever product-document convention this repo documents for agents. With no such convention, save it as markdown in the working directory and report the path.
+
+Then send it to design and engineering: a PRD written alone gets no buy-in.
