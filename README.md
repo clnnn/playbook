@@ -42,9 +42,9 @@ The last stage is the exception: **BUILD is yours.** This repo takes the work up
                                      ▼
 ┌─ DEFINE ───────────────────────────────────────────────────────────────────┐
 │                                                                            │
-│  /prd                     10 sections, strict gate on every field.         │
-│                           Problem → solution → quality attributes →        │
-│                           Cagan's four risks. No hand-waving allowed.      │
+│  /prd                     7 sections, one turn each. Problem →             │
+│                           flow-first solution → scope → success criteria   │
+│                           → quality requirements. Gated throughout.        │
 │                                                                            │
 │                  leaves ▸ docs/knowledge/product/<slug>/prd.md             │
 └────────────────────────────────────┬───────────────────────────────────────┘
@@ -368,7 +368,7 @@ That is one flow of several. See [Flows](#flows) for the shape that matches your
 |---|---|---|---|
 | `setup` | once | `/setup` | Domain-doc + knowledge-base pointers in `AGENTS.md` |
 | `lean-product-canvas` | discover | `/lean-product-canvas` | Gothelf Lean Product Canvas v3, 8 boxes |
-| `prd` | define | `/prd` | 10-section engineering-ready PRD + self-assessment |
+| `prd` | define | `/prd` | 7-section engineering-ready PRD |
 | `grill-and-align` | align | `/grill-and-align` | `CONTEXT-MAP.yaml`, `CONTEXT.yaml`, ADRs |
 | `to-story-map` | slice | `/to-story-map` | Live whiteboard + one GitHub issue per release slice |
 | `to-user-stories` | slice | auto **+** `/to-user-stories` | 6-section stories as `blocked-by`-linked issues |
@@ -387,10 +387,13 @@ That is one flow of several. See [Flows](#flows) for the shape that matches your
 The skills are facilitators, not generators. Expect to be asked things.
 
 ```
-  ▸ ONE QUESTION PER TURN.        Stacked questions are bewildering. Every
-                                  facilitated skill asks one thing, waits,
-                                  then moves. Progress label every turn:
-                                  `Box 3 of 8 — Users`, `Step 2/5 — Derive`.
+  ▸ ONE TURN, ONE TOPIC.          Stacked questions are bewildering. Most
+                                  facilitated skills ask one thing, wait, then
+                                  move; `/prd` asks one short section's fields
+                                  together, because its sections are small
+                                  enough to hold in one answer. Either way a
+                                  progress label every turn: `Box 3 of 8 —
+                                  Users`, `Section 3/7 — Out of scope`.
 
   ▸ THREE WAYS IN.                1. Guided       · one question at a time
                                   2. Context dump · paste it all, the skill routes it
