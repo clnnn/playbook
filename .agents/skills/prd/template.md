@@ -1,6 +1,6 @@
 # PRD layout
 
-The deliverable's structure for the [`prd`](SKILL.md) skill. Section caps and gate conditions live in `SKILL.md`; this file is layout only.
+The deliverable's structure for the [`prd`](SKILL.md) skill. Item limits and gate conditions live in `SKILL.md`; this file is layout only.
 
 Bracketed text is a placeholder with one example each. Reproduce the headings and shapes literally.
 
@@ -69,7 +69,7 @@ PERF-01  Dashboard renders a complete balance in ≤400ms p99 (700ms floor) at 5
 
 - [Rule + who mandates it *(e.g. "all customer data stays in EU regions — group data-residency policy")*]
 
-*Cut for length:* [Attributes raised and not pinned *(e.g. uptime, caching, i18n)*]
+*Raised, not pinned:* [Attributes the signal table raised that the cut to five dropped *(e.g. uptime, caching, i18n)*]
 
 ## Dependencies
 
@@ -79,5 +79,5 @@ PERF-01  Dashboard renders a complete balance in ≤400ms p99 (700ms floor) at 5
 
 | Risk or unknown | Why it matters | Owner | Next move |
 |---|---|---|---|
-| [From a 🔶, a crossover, or the Cagan pass] | [What breaks if it's wrong] | [Name] | [An action, with the trigger that fires it] |
+| [From a 🔶, a cross, or the Cagan pass] | [What breaks if it's wrong] | [Name] | [An action, with the trigger that fires it] |
 | [*(e.g. the ~4h baseline is one anecdote)*] | [*(e.g. both the target and the must-not-regress line lean on it)*] | [*(e.g. Amber)*] | [*(e.g. time-track 10 manual cases before the measurement window opens)*] |

@@ -66,7 +66,7 @@ High importance is pinned, whatever its risk. Everything else is ruled out in th
 
 ## Anchoring and landing zones
 
-An anchor pulls a sharper answer than a blank, so offer a number rather than asking for one: *"3 seconds on 4G is the usual bar for a screen someone opens in front of a customer — accept, raise, or reject?"* This is also where realism gets its teeth. Run the `napkin-math` check on latency, throughput, concurrency, data-volume and cost measures and surface only the verdict: *"5k concurrent at p99 400ms across four aggregated sources is roughly 3× what a single region gives you — 700ms is the honest launch number, or this needs a caching design."*
+**Anchor** every number: *"3 seconds on 4G is the usual bar for a screen someone opens in front of a customer — accept, raise, or reject?"* This is also where realism gets its teeth. Run the `napkin-math` check on latency, throughput, concurrency, data-volume and cost measures and surface only the verdict: *"5k concurrent at p99 400ms across four aggregated sources is roughly 3× what a single region gives you — 700ms is the honest launch number, or this needs a caching design."*
 
 When the user is still waving between numbers, record a **landing zone** instead of stalling — two tiers, written on one line as `target (floor)`:
 
@@ -90,4 +90,4 @@ The anchor check tests one number. This tests the **set** — five individually 
 | `OPS` ↔ `SEC` | The logging that makes 2am debuggable is the logging that puts personal data in an aggregator |
 | `AVAIL` ↔ viability | Each nine multiplies infrastructure and on-call cost; four nines is a staffing decision wearing a technical hat |
 
-Resolving one is a **business** call, not a technical one: say which side wins, in the persona's terms ("a leaked balance costs us the client; a slow balance costs us a reload"), then amend the losing entry's number so the pinned set stays honest. A tradeoff nobody will settle today goes to **Risks & open questions** with an owner rather than sitting in the requirements looking settled.
+Resolving one is a **business** call, not a technical one: say which side wins, in the persona's terms ("a leaked balance costs us the client; a slow balance costs us a reload"), then amend the losing entry's number so the pinned set stays honest. A tradeoff nobody will settle today **crosses** to **Risks & open questions** with an owner rather than sitting in the requirements looking settled.
