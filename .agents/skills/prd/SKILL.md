@@ -35,7 +35,10 @@ Three rules govern every turn. They are the whole skill; the sections below just
 
 **Facilitation.** Run it as a guided workshop:
 
-- Open with a one-line heads-up (≈90–150 min, 10 sections) and offer three entry modes: **1. Guided** (one question at a time) · **2. Context dump** (paste what you have; the skill routes it and gates the gaps) · **3. Best guess** (infer missing detail, label every inference 🔶).
+- Open with a one-line heads-up (≈90–150 min, 10 sections) and offer three entry modes:
+  1. **Guided** — one question at a time.
+  2. **Context dump** — paste what you have; the skill routes it and gates the gaps.
+  3. **Best guess** — infer missing detail, label every inference 🔶.
 - One question per turn. Show an honest progress label each turn — `Section X/10`. If the invocation already answered a field, skip it and advance the label.
 - Offer numbered quick-select options when a question has natural choices; include `Other (specify)` when open-ended. Accept `1`, `#1`, `1 and 3`, `1,3`, or free text.
 - Surface a numbered recommendation only at genuine decision points (which persona is primary, which metric is the one), not after every answer.
@@ -43,7 +46,11 @@ Three rules govern every turn. They are the whole skill; the sections below just
 
 ## Output
 
-Fill `template.md` — it is the deliverable: field structure and inline examples for each section. Read a section's block on entering that section, not the whole file up front. This skill drives the conversation; the template captures the result, in a new document that leaves the template itself untouched. Before publishing it, review the draft with design + engineering — a PRD written alone gets no buy-in.
+Fill `template.md` — it is the deliverable: field structure and inline examples for each section. Read a section's block on entering that section; for §3 and §6 read it before the first question of the section, since their field layouts are what the output has to match. This skill drives the conversation; the template captures the result, in a new document that leaves the template itself untouched.
+
+**Format contract.** Reproduce the template's structure literally — every field its own bullet, every table a table, every NFR scenario a fenced block. The template is the sole authority on the deliverable's layout.
+
+Before publishing it, review the draft with design + engineering — a PRD written alone gets no buy-in.
 
 ---
 
@@ -63,7 +70,12 @@ Fill `template.md` — it is the deliverable: field structure and inline example
 
 **Method (embedded problem-statement).** Build the statement from the persona's point of view, then synthesize:
 
-1. **Framing narrative** — five fields: *I am* (specific persona, not "busy professionals") · *Trying to* (a desired outcome, not a task) · *But* (the barriers) · *Because* (the root cause, not a symptom) · *Which makes me feel* (emotions grounded in research).
+1. **Framing narrative** — five fields:
+   - *I am* — a specific persona, not "busy professionals".
+   - *Trying to* — a desired outcome, not a task.
+   - *But* — the barriers.
+   - *Because* — the root cause, not a symptom.
+   - *Which makes me feel* — emotions grounded in research.
 2. **Context & constraints** — concrete geographic, technical, time, or demographic factors that shape design.
 3. **Final statement** — one sentence: *[Persona] needs a way to [outcome] because [root cause], which currently [emotional/practical impact].*
 4. **Evidence** — interviews, analytics, support signals, a verbatim customer quote. If all evidence is missing or 🔶, say so plainly — an unevidenced problem is a risk.
@@ -78,14 +90,36 @@ Fill `template.md` — it is the deliverable: field structure and inline example
 
 **Goal:** Build for a specific person, not an abstraction.
 
-**Method (embedded proto-persona + jobs-to-be-done).**
+**Method (embedded proto-persona + jobs-to-be-done).** Read the §3 block of `template.md` before the first question — it fixes the field layout this section outputs.
 
-*Proto-persona* — for the primary persona (and secondary if relevant): **Name** (alliterative, memorable) · **Bio/demographics** (only context-relevant ones) · **3 Quotes** (reveal mindset, not facts) · **3 Pains** · **What they're trying to accomplish** (observable, outcome-focused) · **3 Goals** · **Attitudes & influences** (decision authority, influencers, beliefs). Tag anything inferred 🔶; tag missing quotes as needing research. Start with 1–2 personas, not ten.
+*Proto-persona* — for the primary persona (and secondary if relevant):
+
+- **Name** — a realistic individual name, the kind a real person has.
+- **Bio/demographics** — only context-relevant ones.
+- **3 Quotes** — reveal mindset, not facts.
+- **3 Pains**
+- **What they're trying to accomplish** — observable, outcome-focused.
+- **3 Goals**
+- **Attitudes & influences** — decision authority, influencers, beliefs.
+
+Tag anything inferred 🔶; tag missing quotes as needing research. Start with 1–2 personas, not ten.
 
 *Jobs-to-be-done* — capture jobs verb-driven and solution-agnostic ("communicate with team" ≠ "use Slack"):
-- **Jobs**: Functional · Social · Emotional
-- **Pains**: Challenges · Costliness · Common Mistakes · Unresolved Problems
-- **Gains**: Expectations · Savings · Adoption Factors · Life Improvement
+
+- **Jobs**
+  - Functional
+  - Social
+  - Emotional
+- **Pains**
+  - Challenges
+  - Costliness
+  - Common mistakes
+  - Unresolved problems
+- **Gains**
+  - Expectations
+  - Savings
+  - Adoption factors
+  - Life improvement
 
 **Advance when:** the primary persona carries every proto-persona field, functional, social and emotional jobs are each captured, the persona's biggest pain matches §2's problem, the persona is the product's *user/buyer* (not your team or PM audience), and any inferred JTBD is tagged 🔶.
 
@@ -122,7 +156,7 @@ Fill `template.md` — it is the deliverable: field structure and inline example
 
 **Goal:** Pin how well the §5 features must behave, in numbers an engineer can design against.
 
-**Method (quality attribute scenarios).** Read [`references/NFR-SIGNALS.md`](references/NFR-SIGNALS.md) before the first question — it holds the ten attributes, their ID prefixes, the breakage question that opens each, the signal table, the ranking rubric, the anchoring and landing-zone rules, and the tradeoff pairs. It is the authority on all of them; these five moves say only where each lands in the flow:
+**Method (quality attribute scenarios).** Read two things before the first question: [`references/NFR-SIGNALS.md`](references/NFR-SIGNALS.md) — the ten attributes, their ID prefixes, the breakage question that opens each, the signal table, the ranking rubric, the anchoring and landing-zone rules, and the tradeoff pairs — and the §6 block of `template.md`, which fixes the nine-field layout every pinned scenario is written in. The reference is the authority on all of those; these five moves say only where each lands in the flow:
 
 1. **Derive.** Read §2, §3 and §5 against the signal table. Candidates come from this document, not from a checklist walked out of habit.
 2. **Admit.** Every candidate names a §5 key feature **and** a §2 pain or the §7 primary metric. One that names only itself is scope creep — drop it.
@@ -188,7 +222,7 @@ For each: current baseline → target → timeline.
 
 **Goal:** A one-page read on how far this PRD can be trusted, shared alongside it.
 
-**Method.** Reopen §1 first and refine the executive summary against the finished §2–§8, as §1 promised. Then run the diagnostic in the template's final section: name the **strongest** and **weakest** sections, collect every 🔶 Assumption into the risk table (assumption · section · risk if wrong · proposed validation), and state the single **recommended next step** before the PRD goes to stakeholders.
+**Method.** Reopen §1 first and refine the executive summary against the finished §2–§8, as §1 promised. Then run the diagnostic in the template's final section: name the **strongest** and **weakest** sections, collect every 🔶 Assumption into its risk table, and state the single **recommended next step** before the PRD goes to stakeholders.
 
 **Advance when:** §1 has been reread against the finished sections and either refined or confirmed as still accurate, the strongest and weakest calls each name a section and the reason for it, every 🔶 in the document appears in the table with a risk-if-wrong and a proposed validation, and the recommended next step is one action with a named first move — not a list.
 

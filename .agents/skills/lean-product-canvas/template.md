@@ -12,7 +12,10 @@ Title of initiative: [title]  ·  Date: [date]  ·  Iteration: [n]
 - **Assumption to validate:** [one unvalidated assumption / how we may be part of the problem]
 
 ### 2. Business Outcomes
-- **Money trail:** Stakeholders → [role each] · Path: [payer]→[…intermediaries…]→[capturer] · Final money-capturer: [who keeps the money when this succeeds]
+- **Money trail:**
+  - Stakeholders: [each party and its role — uses / buys / pays / builds / bills]
+  - Path: [payer]→[…intermediaries…]→[capturer]
+  - Final money-capturer: [who keeps the money when this succeeds]
 - **Status-quo beneficiary:** [who benefits if the problem persists / who loses if it's solved]
 - **Outcome (key results):** [who — does what — by how much: segment, behavior change, baseline→target, timeframe — moving money toward the final money-capturer]
   <!-- One key result per hop between the behavior and the money-capturer. If the behavior IS the money event, one line. If money is downstream, add: -->

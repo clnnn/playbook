@@ -27,7 +27,10 @@ Anything supplied with the invocation counts as material already given — text 
 ## Facilitation
 
 - One question per turn, numbered quick-select options plus `Other (specify)` where natural; accept `1`, `1,3`, or free text.
-- Open with a heads-up of the six steps below, then offer entry modes: **1. Guided** · **2. Context dump** (paste everything; the skill routes it) · **3. Best guess** (infer gaps, label every inference 🔶 Assumption).
+- Open with a heads-up of the six steps below, then offer entry modes:
+  1. **Guided**
+  2. **Context dump** — paste everything; the skill routes it.
+  3. **Best guess** — infer gaps, label every inference 🔶 Assumption.
 - Show a progress label each turn (`Step X/6 — name`).
 
 ## Step 1/6 — Ground

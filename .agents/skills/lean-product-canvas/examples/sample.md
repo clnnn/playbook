@@ -14,7 +14,12 @@ Insurers pay for expensive ER visits that a nurse hotline or urgent-care redirec
 ### 2. Business Outcomes
 
 **Following the money (Phase 2a):**
-- **Stakeholders:** Member/patient (*uses* the app, pays nothing) · Employer (*buys* the health plan) · Insurer (*pays* the startup a per-member/month fee) · Startup (*builds* the app) · ER/provider (*bills* the insurer per visit).
+- **Stakeholders:**
+  - Member/patient — *uses* the app, pays nothing.
+  - Employer — *buys* the health plan.
+  - Insurer — *pays* the startup a per-member/month fee.
+  - Startup — *builds* the app.
+  - ER/provider — *bills* the insurer per visit.
 - **Money path, hop by hop:** Employer pays insurer a premium → insurer pays the startup a per-member fee → members who'd have gone to the ER get redirected to cheaper care → the ER *doesn't* bill the insurer for those avoided visits → **the insurer keeps the avoided-cost difference.**
 - **Final money-capturer:** the **insurer** — it captures ER-avoidance savings far larger than the fee it pays the startup. (The startup's revenue depends entirely on making that capture visible and real.)
 - **Status-quo beneficiary:** the **ER/provider** profits from every avoidable visit and *loses* billed revenue if triage works — expect it to resist referral integrations. Internally, the insurer's own claims-ops team, staffed around today's ER volume, has no incentive to champion the change either.
