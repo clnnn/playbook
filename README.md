@@ -124,7 +124,7 @@ Some work skips `[ build ]` having any upstream at all. A bug fix you can finish
 Install with [`gh skill install`](https://cli.github.com/manual/gh_skill_install) — a GitHub CLI preview command:
 
 ```sh
-gh skill install clnnn/playbook --all
+gh skill install clnnn/playbook --allow-hidden-dirs --all
 ```
 
 Then wire the repo up, once, before any other skill runs:
