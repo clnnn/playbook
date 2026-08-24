@@ -8,6 +8,24 @@ The pipeline deliberately stops at `[ build ]`. What executes the issues is your
 
 ---
 
+## Installation
+
+Install with [`gh skill install`](https://cli.github.com/manual/gh_skill_install) — a GitHub CLI preview command:
+
+```sh
+gh skill install clnnn/playbook --allow-hidden-dirs --all
+```
+
+Then wire the repo up, once, before any other skill runs:
+
+```
+/setup-playbook-skills
+```
+
+It detects your issue tracker, domain-doc layout, and knowledge base and records them in `AGENTS.md` — the file every tracker- or docs-writing skill downstream reads.
+
+---
+
 ## All 10 skills
 
 ### Discover — frame the problem
@@ -116,24 +134,6 @@ The lifecycle is a **map, not a mandate**. Every skill runs standalone; the arti
 `[ build ]` is the layer this repo does not own. Nothing here tells an implementer to write the test first, spawn a subagent per file, or open the PR at step 9 — those calls belong to your stack, your test runner, and your review norms. The seam is the issue body: anything that can read an issue and write code can stand downstream, which is the same reason the stories are written for an agent with none of the conversation.
 
 Some work skips `[ build ]` having any upstream at all. A bug fix you can finish in an afternoon needs no ceremony, and ceremony you can skip is ceremony the pipeline should not impose.
-
----
-
-## Installation
-
-Install with [`gh skill install`](https://cli.github.com/manual/gh_skill_install) — a GitHub CLI preview command:
-
-```sh
-gh skill install clnnn/playbook --allow-hidden-dirs --all
-```
-
-Then wire the repo up, once, before any other skill runs:
-
-```
-/setup-playbook-skills
-```
-
-It detects your issue tracker, domain-doc layout, and knowledge base and records them in `AGENTS.md` — the file every tracker- or docs-writing skill downstream reads.
 
 ---
 
