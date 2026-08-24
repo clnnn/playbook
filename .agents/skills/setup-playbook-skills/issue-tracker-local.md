@@ -30,13 +30,3 @@ Every operation a skill names, and what it means here. This table is the authori
 | **apply / remove a label** | Add or drop the string on the ticket's `Labels:` line. |
 | **link A blocked by B** | Add B's number to A's `Blocked by:` line. This prose line is the only render of the edge, so no fallback applies. A ticket is unblocked when every number it lists is `closed`. |
 | **close** | Append the closing comment, then set `Status: closed`. |
-
-## Wayfinding operations
-
-Used by `/wayfinder`. The **map** is a file with one **child** file per ticket.
-
-- **Map**: `.scratch/<effort>/map.md` (the Notes / Decisions-so-far / Fog body).
-- **Child ticket**: a ticket as above, with the question in the body. A `Type:` line in the header records `research`/`prototype`/`grilling`/`task`, and `Status: claimed` records the claim.
-- **Frontier**: scan the effort's tickets for open, unblocked, unclaimed files; first by number wins.
-- **Claim**: set `Status: claimed` and save before any work.
-- **Resolve**: append the answer under an `## Answer` heading, set `Status: closed`, then append a context pointer (gist + link) to the map's Decisions-so-far in `map.md`.

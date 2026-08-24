@@ -26,14 +26,3 @@ Every operation a skill names, and the command that performs it here. This table
 `glab mr ...` mirrors the table above: `glab mr view <n> --comments`, `glab mr diff <n>`, `glab mr note --message`, `glab mr update --label`, `glab mr close`.
 
 GitLab numbers issues and MRs separately, so `#42` is unambiguous once you know which surface is meant.
-
-## Wayfinding operations
-
-Used by `/wayfinder`. The **map** is a single issue with **child** issues as tickets.
-
-- **Map**: an issue labelled `wayfinder:map`, holding the Notes / Decisions-so-far / Fog body. (On tiers with native epics, an epic may hold the map instead; a labelled issue works everywhere.)
-- **Child ticket**: an issue carrying `Part of #<map>` at the top of its description and labels `wayfinder:<type>` (`research`/`prototype`/`grilling`/`task`). Once claimed, the ticket is assigned to the driving dev.
-- **Blocking**: the **link A blocked by B** row above. A ticket is unblocked when every blocker is closed.
-- **Frontier query**: `glab issue list -F json` scoped to the map's children, drop any with an open blocker or an assignee; first in map order wins.
-- **Claim**: `glab issue update <n> --assignee @me`, the session's first write.
-- **Resolve**: note the answer, close the issue, then append a context pointer (gist + link) to the map's Decisions-so-far.
