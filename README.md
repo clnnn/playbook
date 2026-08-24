@@ -121,7 +121,19 @@ Some work skips `[ build ]` having any upstream at all. A bug fix you can finish
 
 ## Installation
 
-_TODO_
+Install with [`gh skill install`](https://cli.github.com/manual/gh_skill_install) — a GitHub CLI preview command:
+
+```sh
+gh skill install clnnn/playbook --all
+```
+
+Then wire the repo up, once, before any other skill runs:
+
+```
+/setup-playbook-skills
+```
+
+It detects your issue tracker, domain-doc layout, and knowledge base and records them in `AGENTS.md` — the file every tracker- or docs-writing skill downstream reads.
 
 ---
 
