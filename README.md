@@ -39,7 +39,7 @@ It detects your issue tracker, domain-doc layout, and knowledge base and records
 
 | Skill | What It Does | Use When |
 |---|---|---|
-| [to-prd](.agents/skills/to-prd/SKILL.md) | Builds an engineering-ready PRD in 8 gated sections, one turn each: problem → flow-first solution → scope → success criteria → quality requirements | A problem is settled and the solution's shape and requirements need pinning down |
+| [to-prd](.agents/skills/to-prd/SKILL.md) | Builds an engineering-ready PRD in 9 gated sections, one turn each: problem → flow-first solution → scope → success criteria → quality requirements | A problem is settled and the solution's shape and requirements need pinning down |
 | [prototype](.agents/skills/prototype/SKILL.md) | Throwaway code that answers exactly one question — a hand-driven state model, N radically different UI variants, or a walking-skeleton click-through | A design question is cheaper to answer by building than by arguing |
 
 ### Align — pin the language and the decisions
