@@ -1,7 +1,7 @@
 ---
 name: to-prd
 argument-hint: "[feature or initiative]"
-description: Build a lean, engineering-ready PRD — problem through quality requirements — in eight sections, one turn each.
+description: Build a lean, engineering-ready PRD — problem through quality requirements — in nine sections, one turn each.
 disable-model-invocation: true
 ---
 
@@ -19,20 +19,20 @@ Anything supplied at invocation — text after `/to-prd`, a pasted dump, discove
 
 Three rules govern every turn. The sections below only apply them.
 
-**Strict flow.** Eight sections in order. Finish one — every field gate-passed, **Advance when** met — before opening the next.
+**Strict flow.** Nine sections in order. Finish one — every field gate-passed, **Advance when** met — before opening the next.
 
 **The gate.** Every field passes one of three ways:
 
 - **Found** — in the invocation, a dump, or a readable file. Restate it and have the user confirm or correct it.
 - **Missing** — one focused question carrying an **anchor**: a candidate answer to accept, correct, or reject, since an anchor pulls a sharper reply than a blank does. A vague answer earns one follow-up.
-- **Unanswerable** — the user genuinely doesn't know. Tag it 🔶 inline where it sits, and carry it to **Risks & open questions**. Write what is known and mark what isn't; facts, data, quotes and approvals come from the user.
+- **Unanswerable** — the user genuinely doesn't know. Tag it 🔶 inline where it sits, and carry it to **Open questions**. Write what is known and mark what isn't; facts, data, quotes and approvals come from the user.
 
-**The cross.** An item carrying risk its own section can't hold **crosses** to **Risks & open questions** and gains a row there.
+**The cross.** An item carrying risk its own section can't hold **crosses** to **Open questions** and gains a row there.
 
 **Facilitation.**
 
-- Open with a heads-up — eight sections, a turn each. **Guided** whatever arrives: a dump fills fields ahead of the turn, and the turn still runs so the user confirms them.
-- One turn per section: ask that section's fields together, then wait. Label progress every turn — `Section 4/8 — Out of scope`.
+- Open with a heads-up — nine sections, a turn each. **Guided** whatever arrives: a dump fills fields ahead of the turn, and the turn still runs so the user confirms them.
+- One turn per section: ask that section's fields together, then wait. Label progress every turn — `Section 4/9 — Out of scope`.
 - Numbered options where a question has natural choices, your recommendation first, `Other (specify)` when open-ended. Accept `1`, `#1`, `1 and 3`, `1,3`, or free text.
 - On "how many left?", answer and resume. On "stop", halt and wait for an explicit resume.
 
@@ -42,7 +42,7 @@ Fill `template.md` — it is the sole authority on the deliverable's layout: the
 
 ---
 
-## Section 1/8 — What & why
+## Section 1/9 — What & why
 
 **Goal:** a stakeholder knows what is being built, for whom, and why, in 30 seconds.
 
@@ -60,7 +60,7 @@ The problem names what the persona cannot do today. "We lack an AI layer" is a s
 
 ---
 
-## Section 2/8 — Solution & user flow
+## Section 2/9 — Solution & user flow
 
 **Goal:** a builder can see the shape of the thing.
 
@@ -76,7 +76,7 @@ Keep it high-level — design owns the UI, so no button labels and no pixels.
 
 ---
 
-## Section 3/8 — In scope
+## Section 3/9 — In scope
 
 **Goal:** the build list — every workstream this release ships, at a grain a team can break into stories.
 
@@ -90,7 +90,7 @@ Derive them from **Solution & user flow**. Every step the diagram draws is built
 
 ---
 
-## Section 4/8 — Out of scope
+## Section 4/9 — Out of scope
 
 **Goal:** scope creep meets a written boundary.
 
@@ -104,7 +104,7 @@ An exclusion that is really a dependency — "mobile out of scope" when the pers
 
 ---
 
-## Section 5/8 — Success criteria
+## Section 5/9 — Success criteria
 
 **Goal:** a number that settles, after launch, whether this worked.
 
@@ -118,7 +118,7 @@ One line each: `[observable thing] reaches [number], measured [window]`.
 
 ---
 
-## Section 6/8 — Quality requirements
+## Section 6/9 — Quality requirements
 
 **Goal:** how well the flow must behave, in numbers engineering can design against.
 
@@ -141,7 +141,7 @@ A number the reference's `napkin-math` check calls implausible **crosses**, as d
 
 ---
 
-## Section 7/8 — Dependencies
+## Section 7/9 — Dependencies
 
 **Goal:** name what this build waits on.
 
@@ -151,19 +151,26 @@ A flat list of at most eight, each with its state — *built* / *absent today* /
 
 ---
 
-## Section 8/8 — Risks & open questions
+## Section 8/9 — Open questions
 
 **Goal:** every gap has a name against it.
 
-One table: `Risk or unknown | Why it matters | Owner | Next move`. Three sources fill it:
+One table: `Open question | Why it matters`. Two sources fill it:
 
 - Every inline 🔶 in the document.
 - Every **cross**.
-- A pass over **Cagan's four risks** — value (will they want it?), usability (can they use it?), feasibility (can we build it?), viability (does the business case hold?). Most PRDs fill feasibility and leave value empty; this pass exists to catch that.
 
-Every `Next move` is an action someone takes, with the trigger that fires it. "Monitor closely" is not one.
+**Advance when:** every inline 🔶 and every **cross** has a row.
 
-**Advance when:** every inline 🔶 and every **cross** has a row, all four of Cagan's risks have been walked, and every row names an owner and a next move.
+---
+
+## Section 9/9 — Risks
+
+**Goal:** catch the risk a PRD is most likely to skip.
+
+One table: `Risk | Why it matters`, filled by a pass over **Cagan's four risks** — value (will they want it?), usability (can they use it?), feasibility (can we build it?), viability (does the business case hold?). Most PRDs fill feasibility and leave value empty; this pass exists to catch that. A risk raised here that turns out to be an unknown someone must go answer **crosses** to **Open questions** instead.
+
+**Advance when:** all four of Cagan's risks have been walked and each surfaced risk has a row.
 
 ---
 

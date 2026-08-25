@@ -8,7 +8,7 @@ Bracketed text is a placeholder with one example each. Reproduce the headings an
 
 # PRD: [Subject]
 
-> 🔶 marks anything not established — inferred, assumed, or unknown. Every 🔶 has a row in Risks & open questions.
+> 🔶 marks anything not established — inferred, assumed, or unknown. Every 🔶 has a row in Open questions.
 
 ## What & why
 
@@ -80,9 +80,16 @@ Dashboard renders a complete balance in ≤400ms p99 (700ms floor) at 5k concurr
 
 - [Dependency] — [state *(e.g. "SMS/email delivery — built, needs publishing"; "PDF generation — absent today"; "model provider choice — unresolved")*]
 
-## Risks & open questions
+## Open questions
 
-| Risk or unknown | Why it matters | Owner | Next move |
-|---|---|---|---|
-| [From a 🔶, a cross, or the Cagan pass] | [What breaks if it's wrong] | [Name] | [An action, with the trigger that fires it] |
-| [*(e.g. the ~4h baseline is one anecdote)*] | [*(e.g. the ⭑ criterion's target leans on it)*] | [*(e.g. Amber)*] | [*(e.g. time-track 10 manual cases before the measurement window opens)*] |
+| Open question | Why it matters |
+|---|---|
+| [From a 🔶 or a cross] | [What breaks if it's wrong] |
+| [*(e.g. the ~4h baseline is one anecdote)*] | [*(e.g. the ⭑ criterion's target leans on it)*] |
+
+## Risks
+
+| Risk | Why it matters |
+|---|---|
+| [From the Cagan pass — value, usability, feasibility, or viability] | [What breaks if it's wrong] |
+| [*(e.g. no evidence advisors will trust an AI-generated summary — value)*] | [*(e.g. the ⭑ activation criterion assumes adoption)*] |
