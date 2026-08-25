@@ -1,0 +1,23 @@
+#!/bin/bash
+set -euo pipefail
+
+# Enforces conventional-commit type prefixes. Enable with:
+#   git config core.hooksPath .githooks
+
+TYPES="feat|fix|chore|docs|refactor|test"
+PATTERN="^(${TYPES})(\([a-z0-9./_-]+\))?!?: .+"
+
+MSG_FILE="$1"
+HEADER="$(head -n1 "$MSG_FILE")"
+
+# Let merge and revert commits through untouched.
+if [[ "$HEADER" =~ ^Merge ]] || [[ "$HEADER" =~ ^Revert ]]; then
+  exit 0
+fi
+
+if ! [[ "$HEADER" =~ $PATTERN ]]; then
+  echo "error: commit message must start with one of: ${TYPES//|/, }" >&2
+  echo "  e.g. \"feat: add login form\" or \"fix(api): handle null response\"" >&2
+  echo "got: \"$HEADER\"" >&2
+  exit 1
+fi

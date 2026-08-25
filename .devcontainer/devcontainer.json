@@ -19,7 +19,7 @@
     "CLAUDE_CONFIG_DIR": "/home/vscode/.claude",
     "NX_DAEMON": "true"
   },
-  "postCreateCommand": "bash .devcontainer/setup-claude.sh && bash .devcontainer/setup-okn.sh",
+  "postCreateCommand": "bash .devcontainer/setup-claude.sh && bash .devcontainer/setup-okn.sh && git config core.hooksPath .githooks",
   "customizations": {
     "vscode": {
       "extensions": [
