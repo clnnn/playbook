@@ -129,6 +129,87 @@ The lifecycle is a **map, not a mandate**. Every skill runs standalone; the arti
 
 ---
 
+## What to settle between the PRD and the stories
+
+`/grill-with-docs` sits in the middle of the pipeline because a PRD settles *what* and stories need *enough of the how* to be splittable. The frontier below is the usual shape of that gap — worked roughly in dependency order, since the early rows unblock the later ones.
+
+**Tier 1 — blocks story wording**
+
+| Decision | Why a story can't be written without it |
+|---|---|
+| Ubiquitous language | The nouns and verbs the stories are written in. Lands in `CONTEXT.md`, not an ADR |
+| Entity lifecycle | Acceptance criteria are assertions about state transitions; no machine, no criteria |
+| Source of truth & identity | Decides whether a story is "read it" or "read it, reconcile it, handle the disagreement" |
+| AuthZ & tenancy | A clause in nearly every story's AC — pin it once or write it inconsistently thirty times |
+
+**Tier 2 — blocks splitting and sequencing**
+
+| Decision | Why a story can't be written without it |
+|---|---|
+| System boundaries & ownership | One ticket, or two tickets plus a contract — and whether two teams can run in parallel |
+| Contract shape at each seam | A frozen shape and a versioning rule are what let stories either side of it run concurrently |
+| Sync vs. async, and the consistency promised | "Immediately" and "within a minute" are different products, different ACs, different stories |
+| Failure semantics at integrations | Idempotency, retry, timeout, third-party down. A policy once, or a hidden unhappy path per story |
+| Migration, rollout, flagging | Changes no story's text; *adds* stories — backfill, dual-write, dark launch — and fixes their order |
+
+**Tier 3 — makes "done" testable**
+
+| Decision | Why a story can't be written without it |
+|---|---|
+| NFRs as numbers | `/napkin-math` turns "should be fast" into an AC — or kills the design before forty tickets exist |
+| Operational definition of done | Logging, metrics, alerting, flag hygiene — shared, so it isn't copy-pasted into every story |
+| Build vs. buy vs. reuse | Moves estimates by an order of magnitude, and sometimes deletes an epic |
+
+Two filters keep this from becoming ceremony:
+
+- **Story test** — would a different answer change a story's text, its split, or its position in the order? If not, defer it to `[ build ]`, explicitly.
+- **ADR test** — hard to reverse, *and* surprising without context, *and* the result of a real trade-off. All three, or it isn't an ADR. Most rows above resolve into `CONTEXT.md` or into the story body; typically only a handful earn a document.
+
+What does *not* belong here: internal file layout, library choices inside a module, naming, test framework. Deciding those at spec time produces ADRs nobody reads and constrains the implementer for nothing.
+
+---
+
+## What a prototype has to show you
+
+`/prototype` earns its place when a decision is cheaper to *see* than to argue about. Which means the prototype is finished when the thing you needed to see is on screen — not when the code is nice. Each branch hunts a different risk, so each has a different "I can decide now" bar.
+
+**Logic — "does this state model feel right?"**
+
+| What you need to see | Why the decision waits on it |
+|---|---|
+| Every state reachable by hand | A machine you can't drive into a state is a machine nobody has checked |
+| The transitions you *don't* want, attempted | The model is defined as much by what it refuses as by what it allows |
+| The full state after each action, labelled | A verdict on a model you're inferring from the UI is a verdict on the UI |
+| The awkward cases as guided walkthroughs | Concurrency, double-submit, expiry, out-of-order — the paths nobody reasons about correctly on paper |
+| A non-developer driving it unaided | Domain experts catch the wrong-model bugs; they only catch them if they can click |
+
+**UI — "what should this look like?"**
+
+| What you need to see | Why the decision waits on it |
+|---|---|
+| Several variants that genuinely disagree | Two variants of the same idea is a choice between nothing |
+| One switch, side by side, same data | Comparison happens in the same minute or it doesn't happen |
+| Real content at real length | Names, empty states, the 40-row list — placeholder data flatters every layout equally |
+| A surface finished enough to judge | An unpolished screen collects feedback about the polish instead of about the design |
+
+**Skeleton — "does this whole flow hang together?"**
+
+| What you need to see | Why the decision waits on it |
+|---|---|
+| Every activity as a screen, in order | The missing step is visible as a gap in the walk, never in the PRD |
+| Values carried forward | A flow that forgets what you typed hides the handoff that will break |
+| A stakeholder walking it end to end | The point is their surprise, out loud, before forty tickets exist |
+| Where the walk stalls | A stall is the finding — a misordered step, a decision nobody has made, an actor with no screen |
+
+Two filters keep a prototype from turning into a first draft of the product:
+
+- **Question test** — name the decision waiting on it, and what a *no* would change. If nothing downstream moves either way, you're building early, not prototyping.
+- **Enough test** — stop at the moment the answer is visible. Everything past that is production code on a throwaway branch, and it will argue to be kept.
+
+What a prototype is *not* for: proving performance (that's `/napkin-math`, or a load test against the real thing), validating an integration you could read the docs for, or de-risking implementation — a prototype answers a design question, and the answer is a sentence on the issue plus a branch nobody merges.
+
+---
+
 ## Build
 
 `[ build ]` is the layer this repo does not own. Nothing here tells an implementer to write the test first, spawn a subagent per file, or open the PR at step 9 — those calls belong to your stack, your test runner, and your review norms. The seam is the issue body: anything that can read an issue and write code can stand downstream, which is the same reason the stories are written for an agent with none of the conversation.
