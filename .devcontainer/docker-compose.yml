@@ -5,6 +5,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ../..:/workspaces:cached
+      - /var/run/docker.sock:/var/run/docker.sock
     command: sleep infinity
 
   # Add companion services below, for example:
