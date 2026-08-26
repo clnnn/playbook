@@ -78,15 +78,15 @@ Keep it high-level — design owns the UI, so no button labels and no pixels.
 
 ## Section 3/9 — In scope
 
-**Goal:** the build list — every workstream this release ships, at a grain a team can break into stories.
+**Goal:** the build list — every workstream this release ships, in build order, at a grain a team can break into stories.
 
-**Included** — one line each, `**workstream** — what it covers`, at most eight. **Epic-sized**: "Data ingestion", never "parse the ISIR header row" and never "the platform". Past eight, ask which ones merge.
+**Included** — one line each, `**workstream** — what it covers`, at most eight, in **build order**: an entry never sits ahead of something it depends on. **Epic-sized**: "Data ingestion", never "parse the ISIR header row" and never "the platform". Past eight, ask which ones merge.
 
-Derive them from **Solution & user flow**. Every step the diagram draws is built by something here, and so is everything it leaves implicit — the audit trail, the reminder cadence, the authentication behind a reviewer's panel. Reworking something that already exists is a workstream like any other.
+Derive them from **Solution & user flow**. Every step the diagram draws is built by something here, and so is everything it leaves implicit — the audit trail, the reminder cadence, the authentication behind a reviewer's panel. Reworking something that already exists is a workstream like any other. Build order follows dependency, not diagram position: a step the diagram draws last but everything else depends on — the data model, authentication — leads the list.
 
 **Trace** each entry to the problem line, in conversation. One that traces to nothing moves to **Out of scope** or gets cut. The traces stay out of the document.
 
-**Advance when:** at most eight entries, each naming a workstream and what it covers on one line, every diagram step covered by one of them, and every entry traced.
+**Advance when:** at most eight entries, each naming a workstream and what it covers on one line, no entry ahead of something it depends on, every diagram step covered by one of them, and every entry traced.
 
 ---
 
