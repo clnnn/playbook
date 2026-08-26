@@ -42,13 +42,15 @@ all steps done → completion state
 
 ## Out of scope
 
-- [Exclusion — rationale *(e.g. "Per-persona checklists — adds branching before the simple version has been tested.")*]
+**Won't build:**
+
+- [Exclusion — rationale *(e.g. "SSO login — this persona has no IT department to administer it.")*]
 - [Exclusion — rationale]
 
 **Future considerations:**
 
-- [Future consideration, no rationale *(e.g. "Mobile-optimised onboarding")*]
-- [Second future consideration]
+- [Future consideration, no rationale *(e.g. "Per-persona checklists")*]
+- [Second future consideration *(e.g. "Mobile-optimised onboarding")*]
 
 ## Success criteria
 

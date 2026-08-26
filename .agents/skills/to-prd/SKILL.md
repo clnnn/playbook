@@ -94,13 +94,15 @@ Derive them from **Solution & user flow**. Every step the diagram draws is built
 
 **Goal:** scope creep meets a written boundary.
 
-**Not included** — one line each, `exclusion — rationale`, at most six. The valuable entries are the ones someone will be disappointed about; give those the strongest rationale.
+**Won't build** — one line each, `exclusion — rationale`, at most six. The valuable entries are the ones someone will be disappointed about; give those the strongest rationale.
 
-**Future considerations** — its own bulleted list under the exclusions, at most five, one line each, no rationales. Its only job is stopping a settled question from reopening.
+**Future considerations** — its own bulleted list under Won't build, at most five, one line each, no rationales. Its only job is stopping a settled question from reopening.
 
-An exclusion that is really a dependency — "mobile out of scope" when the persona is phone-first — is no exclusion: drop it and **cross** it.
+**Sort by permanence.** Can you name a concrete condition under which you'd build this later — more users, a signed contract, a specific metric? Yes → Future considerations. No, full stop, you looked at it and the answer is no → Won't build, even if someone could theoretically revisit it someday.
 
-**Advance when:** every exclusion carries a rationale, future considerations are their own bulleted list, and nothing here also appears in **Solution & user flow** or **In scope**.
+An exclusion that is really a dependency — "mobile out of scope" when the persona is phone-first — is no exclusion: drop it and **cross** it. An item that won't sort — no nameable trigger condition, but not confidently permanent either — **crosses** the same way.
+
+**Advance when:** every Won't build entry carries a rationale, future considerations are their own bulleted list, every entry has sorted on the trigger-condition test or crossed, and nothing here also appears in **Solution & user flow** or **In scope**.
 
 ---
 
