@@ -7,15 +7,13 @@ disable-model-invocation: true
 
 # To Story Map
 
-Facilitate a Jeff Patton story mapping session in which the user watches the map grow on a **live whiteboard**, put the finished map in front of two adversaries, then cut one issue per release slice.
+Facilitate a story mapping session in which the user watches the map grow on a **live whiteboard**, put the finished map in front of three adversaries, then cut one issue per release slice.
 
-The map is a strategic artifact: it shows *how* users reach their goal, which is what tells you what to build. It changes as the team learns.
-
-The three slice issues are the map's record. Anything the session decides that a later reader needs — the map itself, what the review changed, what stayed an assumption — rides in them, because they are what `/to-user-stories` and `/prototype` read and what a resumed session reconstructs from.
+The three slice issues are the map's record — the map itself, what the review changed, what stayed an assumption. A later reader, and a resumed session, get only what rides in them.
 
 ## Repo wiring
 
-Two pointers, both written by `/setup-playbook-skills`. A missing one: tell the user to run that skill and hold.
+Two pointers. A missing one stops the session: name the file, say it is the repo's playbook wiring, and hold.
 
 - **`docs/agents/issue-tracker.md`** — reached from the `### Issue tracker` sub-block of `## Agent skills` in `AGENTS.md` or `CLAUDE.md`. Its operation table defines every tracker verb this skill names in **bold** — **publish**, **list**, **link A blocked by B** and the rest — and is the authority on both the command to run and the fallback when a tracker cannot express an edge. Read it at the write gate.
 - **`docs/agents/domain.md`** — the rules for reading this repo's `CONTEXT.md` glossary and its ADRs. Followed at Preflight.
@@ -25,23 +23,14 @@ Two pointers, both written by `/setup-playbook-skills`. A missing one: tell the 
 **Works best with:** the system or workflow to map.
 **Also useful:** primary users/personas, workflow steps already known, what the map must decide (MVP scope, release plan).
 
-Anything supplied with the invocation itself — text after the skill name, a pasted context dump, or an appended `ARGUMENTS:` line — counts as answers already given. Use it and skip whatever it covers; don't re-ask.
-
-**Arriving empty-handed? That works too.** Open at Q1.
-
 ## Facilitation protocol
 
-- **Open with a heads-up** — rough time estimate and about 6 questions — then offer an entry mode:
-  1. **Guided** — one question at a time
-  2. **Context dump** — paste what you know; I skip whatever it covers
-  3. **Best guess** — I infer missing details and label every assumption
-- **One question per turn.** Wait for the answer before continuing; asking several at once is bewildering. Show the progress label (`Map Qx/6`) each turn.
-- **Quick-select options:** give concise numbered options plus `Other (specify)` when likely answers are open-ended. Accept `1`, `#1`, `1,3`, `1 and 3`, or custom text; synthesize multi-selects.
-- **Credit what's already given:** context from the invocation or earlier answers counts as answered — open at the first unanswered question and keep progress labels honest (start at `Map Q2/6` if Q1 was covered).
-- **Recommendations only at decision points** (backbone approval, slice cuts, the review gate, adversary findings), numbered, with one marked `(Recommended)` — not after every answer.
-- **Interruptions:** answer a meta question directly ("how many left?"), restate progress and the pending question, resume. On stop/pause, halt immediately and wait for an explicit resume.
-- **Best-guess sessions** carry an `Assumptions to validate` list into every slice issue.
-- **Fast path:** if the user asks for a single-shot output, skip the questions but still produce the whiteboard, run the review gate and the adversarial pass, and cut the issues.
+- **Open with a heads-up** — rough time estimate, about six questions, and an invitation to paste whatever is already known so those questions can be skipped. Then ask **one question per turn**, carrying the progress label (`Map Qx/6`).
+- **Credit what's already given.** Anything arriving with the invocation — text after the skill name, a pasted dump, an appended `ARGUMENTS:` line — and every earlier answer counts as answered. Open at the first unanswered question, with honest progress labels (`Map Q2/6` when Q1 was covered).
+- **Recommendations only at decision points** (backbone approval, slice cuts, the review gate, adversary findings), numbered, one marked `(Recommended)`.
+- **Interruptions:** answer a meta question directly, restate progress and the pending question, resume. On stop/pause, halt and wait for an explicit resume.
+- **Inferred detail** — anything filled in rather than answered — is labelled as an assumption and carried into every slice issue's `Assumptions to validate` list.
+- **Fast path:** on a request for single-shot output, skip the questions but still produce the whiteboard, run the review gate and the adversarial pass, and cut the issues.
 
 ## The map is the single source of truth
 
@@ -94,7 +83,9 @@ Once the user has seen the activities, dispatch a subagent to build the board: h
 
 Give the user the link. Ask whether to add, remove, or reorder activities — every accepted change lands on the board.
 
-**Done when** the user approves the backbone *and* the whiteboard shows exactly the approved activities.
+With the backbone settled the map's size is known, so offer how Q5 fills it in: all activities in one turn, or one activity per turn. Recommend one-per-turn from 6 activities up, where a single turn's worth of tasks stops being reviewable. Steps stay one-shot either way.
+
+**Done when** the user approves the backbone, picks the Q5 mode, *and* the whiteboard shows exactly the approved activities.
 
 ### Q4: Steps — `Map Q4/6`
 
@@ -105,6 +96,8 @@ Under each activity, generate 3–5 steps: actionable, observable (you could wat
 ### Q5: Tasks — `Map Q5/6`
 
 Under each step, generate 3–7 tasks — small, specific, prioritizable actions — stacked vertically, most essential on top. Cover both halves of the step: the user-facing action *and* the behind-the-scenes work it depends on ("send the invoice" **and** "receive payment confirmation"), so the slices carry real work rather than reading as UI-only. Refresh the whiteboard, ask whether tasks and their vertical order are right.
+
+Per-activity mode works one activity per turn: carry the label `Map Q5/6 · Activity N/M — <name>`, refresh the board after each, and switch mode mid-loop whenever the user asks, in either direction.
 
 **Done when** every step has approved, ordered tasks and the board shows them.
 
@@ -131,19 +124,21 @@ Walk the board with the user and ask exactly:
 - Are there opportunities to delight users?
 - Do all activities flow logically?
 
+A pain point or an opportunity the user names is recorded as a `note` on the step it lands on, in their words, and rides the map into the slice issues. One the model spots rather than hears is an assumption.
+
 Fold every accepted answer into the map and refresh the whiteboard. Loop until the user confirms the map is right.
 
 **Done when** the user confirms the map and the board matches it.
 
 ### Adversarial pass
 
-Put the reviewed map in front of two adversaries, per [`references/ADVERSARIES.md`](references/ADVERSARIES.md) — one attacking the skeleton claim, one attacking coverage and vocabulary. They run once, in parallel, on the post-review map.
+Put the reviewed map in front of three adversaries, per [`references/ADVERSARIES.md`](references/ADVERSARIES.md) — one attacking the skeleton claim, one attacking coverage and vocabulary, one attacking continuity. They run once, in parallel, on the post-review map.
 
-Present every finding they return, numbered, in their words. The user rules on each one. Accepted findings fold into the map and refresh the board; rejected findings are kept with the reason, because a recorded rejection is what stops the next reader re-raising it. Both outcomes reach the slice issues as review notes.
+That file also holds how findings are collapsed, presented, and ruled, and the four checks that run once the rulings are folded in — an accepted change can break what an adversary already cleared. Both outcomes of every ruling reach the slice issues as review notes.
 
 Re-run the pass only when the user asks for it.
 
-**Done when** every finding carries a ruling and the board matches the ruled map.
+**Done when** every finding carries a ruling, the four checks pass or their findings are ruled too, and the board matches the ruled map.
 
 ### Approval gate
 
@@ -173,7 +168,7 @@ Dispatch one subagent with the approved map, the write plan, `docs/agents/issue-
 
 ### Report
 
-The three ticket refs with their labels and blockers, the board's link, and the next steps: `/to-user-stories <slice-issue>` to break a slice into stories, `/prototype <r1-issue>` to build the walking skeleton.
+The three ticket refs with their labels and blockers, and the board's link.
 
 ## Pitfalls
 
@@ -184,7 +179,3 @@ The three ticket refs with their labels and blockers, the board's link, and the 
 - **Backbone sprawl** (10+ activities): the map stops being readable and the walking skeleton stops being thin. It means activities and steps got mixed — roll the fine-grained ones down into steps under a broader activity.
 - **Vague tasks** ("handle the payment"): unprioritizable and unbuildable, so the slice cut becomes guesswork. Name the object and the action — "enter the client's email in the Bill To field".
 - **Laundered findings:** the adversaries' findings reach the user in their own words, including the ones the map's author disagrees with. Pre-filtering them costs the pass its entire value.
-
-## References
-
-- Jeff Patton, *User Story Mapping* (2014) — origin of the backbone / walking-skeleton framework
