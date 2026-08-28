@@ -62,10 +62,10 @@ Collapse the duplicates first: two findings sharing a `target` and proposing the
 
 Findings reach the user numbered and in the adversary's own words. The user rules on each one, in batches where they want to: `accept 1, 3, 5-7` and `reject the rest` both count. A rejection carries a reason, and one reason may cover a batch.
 
-- **Accepted** — fold the change into the map.
-- **Rejected** — keep the finding and the reason.
+- **Accepted** — edit the map itself: add, rewrite, reorder, or re-slice exactly what the `change` names, then show the edited activity or step as an outline before the next ruling.
+- **Rejected** — the map stands unchanged; say so and say why.
 
-Both outcomes reach `## Review notes` in the slice issues. A recorded rejection is the more useful half: it stops the next reader raising the same thing and re-deciding it from scratch.
+The map is the pass's only record. An accepted change is visible in it; a rejection leaves it as it was — so where the reason is a standing constraint rather than a one-off call, record it as a `note` on the finding's `target` step, in the user's words, and it rides the map into the slice issues.
 
 ## After the rulings
 
@@ -82,4 +82,4 @@ A failed check reaches the user as a finding with `lens: assertion`, ruled like 
 
 Where a ruling moved a task across slices, re-run **Adversary 1 alone**, once, on the folded map, and rule what it returns.
 
-That is the last round. Rulings made here fold into the map and stand; a ruling that moves a task across slices at this point is reported to the user as unverified and recorded in `## Review notes`.
+That is the last round. Rulings made here fold into the map and stand; a ruling that moves a task across slices at this point is reported to the user as unverified.

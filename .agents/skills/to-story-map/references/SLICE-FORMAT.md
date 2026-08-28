@@ -27,15 +27,16 @@ for R2, nice-to-haves and edge cases for R3]
 
 [every activity as a heading and every step under it, in map order —
 the whole map's outline, so this issue is readable alone. Under each step,
-this slice's tasks in priority order, led by the step's recorded pain points
-and opportunities. A step whose tasks all live in other slices carries no task
-lines, and that absence is the whole signal.]
+this slice's tasks in priority order, led by the step's recorded pain points,
+opportunities, and constraints. A step whose tasks all live in other slices
+carries no task lines, and that absence is the whole signal.]
 
 ### [Activity 1]
 
 - **[Step 1.1]**
   - 🔴 Pain: [recorded pain point]
   - 💡 Opportunity: [recorded opportunity]
+  - 🚧 Constraint: [why a finding here was rejected, in the user's words]
   - [Task]
 - **[Step 1.2]**
 
@@ -54,15 +55,6 @@ lines, and that absence is the whole signal.]
 
 [Release 1 only — one sentence: the complete workflow, each step in its
 simplest form.]
-
-## Review notes
-
-[What the review gate and the adversarial pass changed, and what they raised
-that the user rejected, with the reason. Findings about the map as a whole
-appear in all three issues; findings about this slice appear here alone.]
-
-- [finding] — **accepted:** [what changed]
-- [finding] — **rejected:** [why]
 
 ## Assumptions to validate
 
@@ -95,7 +87,7 @@ A resumed session rebuilds the map from the tickets carrying `map:<slug>`:
 - **Subject** — the issue title. **Slug** — the `map:` label.
 - **Segment, persona, narrative** — `## Who`, from any of the three.
 - **Activities and their order, steps and their order** — `## Map` heading and list order, from any of the three. This is why the outline is complete in every issue rather than only in Release 1's.
-- **Pain points and opportunities** — the `🔴` and `💡` lines under each step, from any of the three.
+- **Pain points, opportunities, and constraints** — the `🔴`, `💡`, and `🚧` lines under each step, from any of the three. A `🚧` line is a decision already made: it stops a resumed pass re-raising what was ruled out.
 - **Tasks** — the union across all three, each tagged with the slice whose issue carried it.
 - **Priority order within a step** — concatenate by slice rank (r1, then r2, then r3), preserving each issue's own order. Slices are cuts by priority, so an R1 task sits above an R2 task in the same step.
 
@@ -103,10 +95,9 @@ Report what reconstruction found: which slices were present, and any step that c
 
 ## Caches that can go stale
 
-Three pieces of every issue are copies of something owned elsewhere, kept so the issue reads alone:
+Two pieces of every issue are copies of something owned elsewhere, kept so the issue reads alone:
 
 - `## Deferred to later slices` copies what the next slices own.
-- `## Map`'s outline, each step's `🔴` and `💡` lines included, is the same outline in all three issues.
-- Findings about the whole map are copied into all three `## Review notes`.
+- `## Map`'s outline, each step's `🔴`, `💡`, and `🚧` lines included, is the same outline in all three issues.
 
 Editing one slice issue later leaves the other two stale. The write gate's edit-in-place path refreshes open issues; a closed slice issue keeps the copy it shipped with, which is correct — it describes work that already landed.

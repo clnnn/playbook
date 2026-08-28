@@ -9,7 +9,7 @@ disable-model-invocation: true
 
 Facilitate a story mapping session that builds the map question by question, put the finished map in front of three adversaries, then cut one issue per release slice and publish the map as a **whiteboard**.
 
-The three slice issues are the map's record — the map itself, what the review changed, what stayed an assumption. A later reader, and a resumed session, get only what rides in them.
+The three slice issues are the map's record — the map as the review and the pass left it, and what stayed an assumption. A later reader, and a resumed session, get only what rides in them.
 
 ## Repo wiring
 
@@ -134,11 +134,11 @@ Fold every accepted answer into the map. Loop until the user confirms the map is
 
 Put the reviewed map in front of three adversaries, per [`references/ADVERSARIES.md`](references/ADVERSARIES.md) — one attacking the skeleton claim, one attacking coverage and vocabulary, one attacking continuity. They run once, in parallel, on the post-review map.
 
-That file also holds how findings are collapsed, presented, and ruled, and the four checks that run once the rulings are folded in — an accepted change can break what an adversary already cleared. Both outcomes of every ruling reach the slice issues as review notes.
+That file also holds how findings are collapsed, presented, and ruled, and the four checks that run once the rulings are folded in — an accepted change can break what an adversary already cleared.
 
 Re-run the pass only when the user asks for it.
 
-**Done when** every finding carries a ruling and the four checks pass or their findings are ruled too.
+**Done when** every finding carries a ruling, every accepted `change` is visible in the map, and the four checks pass or their findings are ruled too.
 
 ### Approval gate
 
