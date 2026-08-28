@@ -1,4 +1,4 @@
-# Publishing a render
+# Publishing the whiteboard
 
 How the story map whiteboard reaches the user. [`WHITEBOARD.md`](WHITEBOARD.md) names its file, title, and favicon; this file holds the page contract and the delivery path.
 
@@ -10,21 +10,20 @@ One self-contained `<!DOCTYPE html>` document: hand-written CSS, inline vanilla 
 
 Take this path whenever the Artifact tool is available.
 
-1. **Load the `artifact-design` skill before writing the page.** It calibrates how much design investment the page warrants; the board is a working surface the session refreshes as the map grows, not a finished deliverable.
+1. **Load the `artifact-design` skill before writing the page.** It calibrates how much design investment the page warrants; the board is the session's visual record of one map, read far more often than it is edited.
 2. Write the file, then publish it with the Artifact tool, following that tool's own publishing requirements.
-3. Every refresh republishes the **same file path**, so the URL never changes and the user reloads one open tab.
 
 ## Fallback — Parcel dev server
 
 Take this path when the agent has no Artifact tool.
 
-1. Start one dev server in the background, once per session, with build output kept out of the repo:
+1. Start the dev server in the background, with build output kept out of the repo:
 
    ```bash
    npx --yes parcel <dir>/<file>.html --port 4321 \
      --dist-dir <scratchpad>/.parcel-dist --cache-dir <scratchpad>/.parcel-cache
    ```
 
-2. Give the user `http://localhost:4321/<file>.html`. Parcel rebuilds on save, so the tab live-reloads after every refresh with no manual step. If the port is taken, pick another and report the one you used.
+2. Give the user `http://localhost:4321/<file>.html`. If the port is taken, pick another and report the one you used.
 
-If Parcel won't start at all, hand over the file path and ask the user to open it in a browser and reload after each update.
+If Parcel won't start at all, hand over the file path and ask the user to open it in a browser.

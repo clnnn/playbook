@@ -61,7 +61,7 @@ Collapse the duplicates first: two findings sharing a `target` and proposing the
 
 Findings reach the user numbered and in the adversary's own words. The user rules on each one, in batches where they want to: `accept 1, 3, 5-7` and `reject the rest` both count. A rejection carries a reason, and one reason may cover a batch.
 
-- **Accepted** — fold the change into the map, refresh the board.
+- **Accepted** — fold the change into the map.
 - **Rejected** — keep the finding and the reason.
 
 Both outcomes reach `## Review notes` in the slice issues. A recorded rejection is the more useful half: it stops the next reader raising the same thing and re-deciding it from scratch.

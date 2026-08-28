@@ -25,7 +25,7 @@ for R2, nice-to-haves and edge cases for R3]
 
 ## Map
 
-[every activity as a heading and every step under it, in whiteboard order —
+[every activity as a heading and every step under it, in map order —
 the whole map's outline, so this issue is readable alone. Under each step,
 this slice's tasks in priority order, led by the step's recorded pain points
 and opportunities. A step whose tasks all live in other slices carries no task
@@ -77,10 +77,6 @@ Blocked by **#NN** (Release N-1). / Blocks **#NN** (Release N+1).
 [Release 1 blocks R2 and is itself blocked by nothing, unless the user named
 a cross-initiative dependency at the write gate.]
 
-## Whiteboard
-
-[published URL, else the scratchpad path it was served from]
-
 ## Stories
 
 [Appended when the slice is broken down into stories, never written at creation.
@@ -103,7 +99,7 @@ A resumed session rebuilds the map from the tickets carrying `map:<slug>`:
 - **Tasks** — the union across all three, each tagged with the slice whose issue carried it.
 - **Priority order within a step** — concatenate by slice rank (r1, then r2, then r3), preserving each issue's own order. Slices are cuts by priority, so an R1 task sits above an R2 task in the same step.
 
-Report what reconstruction found: which slices were present, and any step that carries no task in any issue. A silent gap becomes a board that looks complete and isn't.
+Report what reconstruction found: which slices were present, and any step that carries no task in any issue. A silent gap becomes a map that looks complete and isn't.
 
 ## Caches that can go stale
 
