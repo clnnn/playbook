@@ -27,6 +27,7 @@ Is the map complete, and written in the domain's words?
 - Name a step the persona must perform that no activity lists.
 - Name any task describing a user-facing action whose behind-the-scenes counterpart is absent, or the reverse.
 - Name any activity, step, or task written as what the product provides ("comparison dashboard") rather than what the user does ("compare quotes").
+- Name any step you could not watch the persona perform — a state or a category ("manage documents") standing where an act belongs.
 - Name any task too vague to prioritize or build ("handle the payment").
 - Name any activity out of narrative order, and say whether the backbone has grown past 8 by mixing in steps.
 - Name any recorded pain point with no task addressing it.

@@ -89,9 +89,9 @@ With the backbone settled the map's size is known, so offer how Q5 fills it in: 
 
 ### Q4: Steps — `Map Q4/6`
 
-Under each activity, generate 3–5 steps: actionable, observable (you could watch someone perform it), in natural order. Show them under their activities and ask for corrections.
+Under each activity, generate 3–5 steps in natural order, every one **watchable** — something you could stand behind the persona and see them do, named as object and action: "attach the signed contract", not "manage documents". A step you cannot picture someone performing is a state, a category, or a whole activity wearing a step's name; rewrite it as the act itself. Show them under their activities and ask for corrections.
 
-**Done when** every activity has approved steps.
+**Done when** every activity has approved steps and every step is watchable.
 
 ### Q5: Tasks — `Map Q5/6`
 
