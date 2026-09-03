@@ -1,6 +1,6 @@
 # Story template
 
-The five sections, in this order. The bracketed notes are instructions to the writer — delete them from the finished story.
+The six sections, in this order. The bracketed notes are instructions to the writer — delete them from the finished story.
 
 # [Story title — user-value-focused, verb first]
 
@@ -37,7 +37,22 @@ Scenario: [failure mode]
   Then [observable error state or message]
 ```
 
-## 4. Implementation decisions
+## 4. Design decisions
+
+[The reference is the source of truth for what the surface looks
+like — cite it, never transcribe it. Record the decisions the
+reference cannot show, and the states it leaves undesigned.
+
+Where the story changes nothing a user sees, this section is
+empty.]
+
+- **Reference** — [link, plus the frame or artboard name]
+- **States** — [designed: empty, loading, populated, error… | undesigned: …]
+- **Components** — [reused from the codebase | new]
+- **Deviations** — [where the reference and the design system disagree, and which wins]
+- **Beyond the frame** — [breakpoints, focus and keyboard order, motion, real copy]
+
+## 5. Implementation decisions
 
 [The decisions already made — modules built or modified and the
 interfaces that change, architectural calls and the ADRs they
@@ -52,7 +67,7 @@ note where it came from.]
 
 - **[module | interface | schema | contract | ADR-NNN]** — [the decision]
 
-## 5. Testing decisions
+## 6. Testing decisions
 
 [A good test exercises external behaviour through a seam — never
 implementation details. Name the seams this story is tested

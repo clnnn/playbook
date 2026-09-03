@@ -13,21 +13,41 @@ Synthesise what this conversation already holds into implementation-ready storie
 
 - Use the project's domain glossary vocabulary throughout the user story, and respect any ADRs in the area you're touching.
 - Tracker verbs this skill names in **bold** — **publish**, **link A blocked by B**, **apply a label** — are defined by the project's issue tracker doc.
-- The `codebase-design` skill is the seam vocabulary; its terms (module, interface, seam, adapter, depth) are the words §4 and §5 use.
+- The `codebase-design` skill is the seam vocabulary; its terms (module, interface, seam, adapter, depth) are the words §5 and §6 use.
 
-## Step 1/5 — Ground
+## Step 1/6 — Ground
 
 The feature is whatever the invocation named, else the one this conversation is about.
 
-Ground in **one dispatch**: an exploring subagent for the current state of the code the feature touches — what already runs, what the change has to reach — sent in the same message as your own reads of the glossary (its exact words carry the Step 5 checks, and a subagent's summary loses them), the ADRs covering the area, the issue tracker doc, and the `codebase-design` skill. Everything the run needs arrives before its one gate, and the tracker verbs are in context long before Step 5 writes.
+Ground in **one dispatch**: an exploring subagent for the current state of the code the feature touches — what already runs, what the change has to reach — sent in the same message as your own reads of the design references the invocation or the conversation names, the glossary (its exact words carry the Step 6 checks, and a subagent's summary loses them), the ADRs covering the area, the issue tracker doc, and the `codebase-design` skill. Everything the run needs arrives before its one gate, and the tracker verbs are in context long before Step 6 writes.
 
 The glossary's vocabulary carries through every story. Where a story's work contradicts an ADR, surface it — *"contradicts ADR-0003, worth reopening because…"* — rather than silently overriding.
 
-**Advance when** the touched code, the glossary terms, the ADRs covering the area, the tracker verbs, and the seam vocabulary are all in context.
+**Advance when** the touched code, the design references, the glossary terms, the ADRs covering the area, the tracker verbs, and the seam vocabulary are all in context.
 
-## Step 2/5 — Seams
+## Step 2/6 — Design
 
-Sketch the seams at which the feature gets tested, in the `codebase-design` skill's words.
+Every story that puts something on screen carries its design decisions. Extract them here, from the **reference** — the Figma frames, Claude Design canvas, `/prototype` output, or screenshots this conversation names.
+
+**No UI surface** — the feature changes nothing a user sees. Say so, and the design section of each story stays empty.
+
+**Reference in hand** — read it: images and local canvas or prototype files directly, a published Claude Design canvas by its URL, Figma frames through a connected Figma tool, else ask for them exported as images. Then record, per surface:
+
+- **Reference** — the link plus the frame or artboard name. Cite it; a screen transcribed into prose goes stale the moment the designer moves a pixel.
+- **States** — the states the reference designs: empty, loading, populated, long-content, error, and the disabled or in-flight variant of every action. A state the reference leaves out is named as undesigned, and stays undesigned — inventing one here buries a design decision in a ticket.
+- **Components** — the components already in the codebase this surface reuses, and the ones that have to be new.
+- **Deviations** — where the reference departs from the design system in the repo, and which of the two wins.
+- **Beyond the frame** — what a static reference cannot show: responsive breakpoints, focus and keyboard order, motion, and the real copy behind its placeholder text.
+
+**No reference** — the design question is open. Name it and recommend `/prototype`'s UI branch or a Claude Design canvas. The run continues: the first slice ships the plainest surface that delivers the value, and every polish decision waiting on a reference is split off at Step 5, Pattern 5.
+
+Variations the reference does show — a richer input, a second breakpoint, an animated transition — go to Step 5 as Pattern 5 and 7 candidates rather than into the first slice.
+
+**Advance when** every state the feature's flows pass through is either designed in the reference or named undesigned, and every surface carries its cited reference.
+
+## Step 3/6 — Seams
+
+Sketch the seams at which the feature gets tested, in the `codebase-design` skill's words. A designed surface is seamed through the components Step 2 named, existing ones first.
 
 - **Existing over new.** A seam already in the codebase costs nothing to test through.
 - **Highest possible.** The seam that observes the most behaviour per unit of interface a test has to learn. A new seam is proposed at the highest point it can sit.
@@ -37,7 +57,7 @@ Present each seam — where it sits, existing or new, what a test sees through i
 
 **Advance when** the user confirms the seams.
 
-## Step 3/5 — INVEST pre-check
+## Step 4/6 — INVEST pre-check
 
 Run the material through this before any split:
 
@@ -48,11 +68,11 @@ Run the material through this before any split:
 | Valuable | Observable user value? | **Stop. Don't split a technical task** — combine it with related work into a meaningful increment |
 | Estimable | Team can size it roughly? | Run a spike first (Pattern 9) |
 | Testable | Concrete pass/fail acceptance criteria? | Refine criteria before splitting |
-| Small | Completable in ≈1–5 days? | Too big is the normal case — Step 4 is what fixes it |
+| Small | Completable in ≈1–5 days? | Too big is the normal case — Step 5 is what fixes it |
 
 **Advance when** every row passes or carries its stated remedy.
 
-## Step 4/5 — Split
+## Step 5/6 — Split
 
 Every story is a **vertical slice**: it cuts through all layers and delivers observable user value. Walk the patterns in order and take the first that fits — a clean "no, next pattern" is the correct move.
 
@@ -82,7 +102,7 @@ Neither satisfied → try the next pattern. Any resulting story still failing Sm
 
 **Advance when** every slice is vertical, INVEST-passing including Small, and its producing pattern is named.
 
-## Step 5/5 — Write & publish
+## Step 6/6 — Write & publish
 
 Read [`template.md`](template.md) and write each slice with it. The pass that follows runs **in flight** rather than as a phase after the writing: a story's agent goes out the moment that story is written, while the remaining slices are still being written.
 
@@ -104,11 +124,13 @@ Read [`template.md`](template.md) and write each slice with it. The pass that fo
 | 3 | Every §3 scenario has exactly one When and one Then |
 | 4 | §3 covers the happy path, every edge case, every failure mode |
 | 5 | Every Then is observable — a state, message, or number someone can check ("better/faster/improved" fails) |
-| 6 | §4 and §5 name modules, interfaces and seams — no file paths, and no code beyond a decision-encoding snippet; both go stale within the week |
-| 7 | §5's seams are the seams confirmed at Step 2 |
+| 6 | §4 cites each surface's reference by link and frame name, and every line under it is a decision the reference itself cannot show — §4 is empty only where the story changes nothing a user sees |
+| 7 | Every state a §3 scenario asserts on is designed in §4 or named there as undesigned |
+| 8 | §5 and §6 name modules, interfaces and seams — no file paths, and no code beyond a decision-encoding snippet; both go stale within the week |
+| 9 | §6's seams are the seams confirmed at Step 3 |
 
-**Rulings** — one round. Every finding is a check failure: rewrite, then re-verify the sections the rewrite touched, and re-dispatch a fresh agent for the stories whose §3, §4, or §5 changed. The fresh agent is the one that tests this skill's premise, so its questions outrank the checks table: a story it cannot implement is not ready, all-green or not — and that alone earns a second round.
+**Rulings** — one round. Every finding is a check failure: rewrite, then re-verify the sections the rewrite touched, and re-dispatch a fresh agent for the stories whose §3, §4, §5, or §6 changed. The fresh agent is the one that tests this skill's premise, so its questions outrank the checks table: a story it cannot implement is not ready, all-green or not — and that alone earns a second round.
 
-**Publish** — create every ticket in one batch, title = story title, body = the five sections. Creates are independent of each other; dependency order lives in the edges, not in the order of creation. Record each returned number, then **link A blocked by B** for every dependency the INVEST pre-check flagged, and **apply a label** named for the feature to every ticket in the run. Report each story title with its ticket ref and blockers, plus any slice the split flagged as killable.
+**Publish** — create every ticket in one batch, title = story title, body = the six sections. Creates are independent of each other; dependency order lives in the edges, not in the order of creation. Record each returned number, then **link A blocked by B** for every dependency the INVEST pre-check flagged, and **apply a label** named for the feature to every ticket in the run. Report each story title with its ticket ref and blockers, plus any slice the split flagged as killable.
 
 **Done when** every story has survived the pass, holds a ticket ref, and every flagged dependency has an edge.
