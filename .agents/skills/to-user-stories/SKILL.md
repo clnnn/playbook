@@ -1,113 +1,113 @@
 ---
 name: to-user-stories
-description: Turn material — a conversation, notes, a PRD, a story map slice issue — into 6-section user stories, then publish them as dependency-linked tickets in the project issue tracker. Use when a feature needs implementation-ready stories, or when a release slice issue arrives for breakdown.
-argument-hint: "[epic, notes, PRD, or a slice issue]"
+description: Synthesise the current conversation into implementation-ready user stories and publish them as tickets.
+argument-hint: "[optional: the feature or epic to slice]"
+disable-model-invocation: true
 ---
 
 # To User Stories
 
-Convert whatever material is at hand — the current conversation, pasted notes, a PRD, a release slice issue — into implementation-ready user stories, each written for a **fresh agent**: an implementer with the code in front of them but none of this conversation. Every story passes the checks gate, the user confirms the set, and only then do the stories become tickets wired with blocked-by edges.
+Synthesise what this conversation already holds into implementation-ready stories, each written for a **fresh agent**: an implementer with the code in front of them but none of this conversation. No interview — the conversation is the material. One checkpoint: the seams.
 
-## Repo wiring
+## Ground rules
 
-Two pointers, both written by `/setup-playbook-skills`. A missing one: tell the user to run that skill and hold.
+- Use the project's domain glossary vocabulary throughout the user story, and respect any ADRs in the area you're touching.
+- Tracker verbs this skill names in **bold** — **publish**, **link A blocked by B**, **apply a label** — are defined by the project's issue tracker doc. Read it before the first write.
+- The `codebase-design` skill is the seam vocabulary. Read it at Seams; its terms (module, interface, seam, adapter, depth) are the words §4 and §5 use.
 
-- **`docs/agents/issue-tracker.md`** — reached from the `### Issue tracker` sub-block of `## Agent skills` in `AGENTS.md` or `CLAUDE.md`. Its operation table defines every tracker verb this skill names in **bold** — **publish**, **fetch**, **link A blocked by B** and the rest — and is the authority on both the command to run and the fallback when a tracker cannot express an edge. Read it before the first write.
-- **`docs/agents/domain.md`** — the rules for reading this repo's `CONTEXT.md` glossary and its ADRs. Follow it at Ground, so the stories name domain concepts in the glossary's words (check 3) and cite ADR numbers rather than restating decisions (§3).
+## Step 1/5 — Ground
 
-## Input
+The feature is whatever the invocation named, else the one this conversation is about.
 
-Anything supplied with the invocation counts as material already given — text after the skill name, a pasted dump, the conversation so far.
+Explore the repo for the current state of the code the feature touches — what already runs, what the change has to reach. Read the glossary and the ADRs covering the area in the same step.
 
-**A slice issue** given as a number, path, or URL is **fetched** from the tracker. It carries everything a breakdown needs, and the sections map straight onto the steps below:
+The glossary's vocabulary carries through every story. Where a story's work contradicts an ADR, surface it — *"contradicts ADR-0003, worth reopening because…"* — rather than silently overriding.
 
-| Issue section | Feeds |
-|---|---|
-| `## Who` | the persona for Step 1 |
-| `## Map` | the tasks to split, each under the activity and step it came from |
-| `## Deferred to later slices` | §2 **Out** — the neighbouring work the next slices own |
-| `## Review notes`, `## Assumptions to validate` | decisions already made, and what stays 🔶 |
-| `map:` and `release:` labels | the labels every issue this run creates inherits |
+**Advance when** the touched code, the glossary terms, and the ADRs covering the area are all in context.
 
-**Arriving empty-handed? That works too.** Open by asking for the epic or notes to convert.
+## Step 2/5 — Seams
 
-## Facilitation
+Sketch the seams at which the feature gets tested, in the `codebase-design` skill's words.
 
-- One question per turn, numbered quick-select options plus `Other (specify)` where natural; accept `1`, `1,3`, or free text.
-- Open with a heads-up of the six steps below, then offer entry modes:
-  1. **Guided**
-  2. **Context dump** — paste everything; the skill routes it.
-  3. **Best guess** — infer gaps, label every inference 🔶 Assumption.
-- Show a progress label each turn (`Step X/6 — name`).
+- **Existing over new.** A seam already in the codebase costs nothing to test through.
+- **Highest possible.** The seam that observes the most behaviour per unit of interface a test has to learn. A new seam is proposed at the highest point it can sit.
+- **Fewest.** One seam across the whole feature is the target; each extra one is a cost to justify.
 
-## Step 1/6 — Ground
+Present each seam — where it sits, existing or new, what a test sees through it — and ask the user whether they match expectations. This is the skill's one gate: hold until the answer comes, and apply their corrections before splitting.
 
-Name the **persona** the stories are written for: the slice issue's `## Who` persona, or the PRD's named persona, taken from the material. Neither present — agree one with the user now and note it as the acting PRD persona.
+**Advance when** the user confirms the seams.
 
-Read the domain docs per `docs/agents/domain.md` in the same step, so the glossary's vocabulary and the ADRs covering this area are in context before a single story is drafted. Nothing there yet: proceed silently.
+## Step 3/5 — INVEST pre-check
 
-**Advance when** the persona is stated back and confirmed, and the domain docs are read or found absent.
+Run the material through this before any split:
 
-## Step 2/6 — Derive
+| Check | Question | On failure |
+|---|---|---|
+| Independent | Prioritizable without hard technical dependencies? | Flag the dependency; it becomes a **blocked by** edge at publish |
+| Negotiable | Room for the team to discover implementation, not a prescriptive spec? | Reframe before splitting |
+| Valuable | Observable user value? | **Stop. Don't split a technical task** — combine it with related work into a meaningful increment |
+| Estimable | Team can size it roughly? | Run a spike first (Pattern 9) |
+| Testable | Concrete pass/fail acceptance criteria? | Refine criteria before splitting |
+| Small | Completable in ≈1–5 days? | Too big is the normal case — Step 4 is what fixes it |
 
-Read [`references/SPLITTING-PATTERNS.md`](references/SPLITTING-PATTERNS.md) and walk it: INVEST pre-check, then the 9 patterns in order, meta-pattern inside whichever fits, split evaluation after. Material already story-sized skips the patterns but still passes the INVEST pre-check.
+**Advance when** every row passes or carries its stated remedy.
 
-Present the resulting slice list — title, one-line value, proposed order — with the pattern that produced it and what the split revealed (killable low-value slices are a finding, not a footnote; recommend dropping them). From a slice issue, carry each task's activity and step onto the stories it produced: that provenance is what tells an implementer which workflow moment the story sits in.
+## Step 4/5 — Split
 
-**Advance when** the user accepts the slice list (adds, drops, and reorders applied).
+Every story is a **vertical slice**: it cuts through all layers and delivers observable user value. Walk the patterns in order and take the first that fits — a clean "no, next pattern" is the correct move.
 
-## Step 3/6 — Foundation
+1. **Workflow Steps** — multi-step workflow? Split into thin end-to-end slices, never step-by-step. Story 1 = the full workflow via the simplest path (upload → live, no reviews); later stories add intermediate steps (editorial review, legal approval). Each story delivers the whole workflow at increasing sophistication.
+2. **Operations (CRUD)** — "manage / handle / maintain" signals bundled operations. One story per operation: create, view, edit, delete.
+3. **Business Rule Variations** — identical functionality under different rules (tiers, regions, conditions)? One story per rule.
+4. **Data Variations** — different data types, formats, or structures? One story per variation, simplest first, added just-in-time.
+5. **Data Entry Methods** — fancy UI (date picker, autocomplete, drag-and-drop) riding on core functionality? Story 1 = plain input, later stories = UI polish.
+6. **Major Effort** — first implementation carries the weight, additions are trivial (the first card network builds the whole payment pipeline)? Story 1 = implement one, Story 2 = add the remaining variants.
+7. **Simple/Complex** — ask "what's the simplest version that still delivers value?" That's Story 1; each stripped-away complexity becomes its own story.
+8. **Defer Performance** — split "make it work" from "make it fast." Story 1 = functional, Story 2 = meet the performance/scale target.
+9. **Break Out a Spike** — none of 1–8 fit ⇒ uncertainty is the blocker. Time-box a short investigation answering one named question (feasibility, approach, what the API returns). A spike produces learning, not shippable code, so it cannot be split further: write it as a story whose §3 is the question answered, publish it as the only ticket of this run, and stop — the next run restarts at Pattern 1 with the answer in hand.
 
-Read [`references/FOUNDATION.md`](references/FOUNDATION.md) and give every category it lists a disposition: **foundation**, **fold** into a named story, or **exclude** with a reason and its trigger. Read the repo for the stack that already runs and write each item against it.
+**Meta-pattern — runs inside whichever pattern fits:**
 
-Present the three disposition groups with the evidence behind each call, 🔶 on every inference. The user strikes the wrong ones here.
+1. Identify the core complexity — what makes this epic hard?
+2. List all variations.
+3. Reduce to **one complete slice** — the simplest variation that still delivers end-to-end value.
+4. Make every other variation its own story.
 
-**Advance when** every category carries a disposition and its evidence, and the user accepts the groups.
+**Split evaluation.** A split earns its keep by at least one of:
 
-## Step 4/6 — Write
+- **It reveals low-value work** — the 80/20 exposed: a slice to deprioritize or kill ("flexible dates is rarely used → defer"). Report it as a finding and recommend dropping it.
+- **It yields roughly equal-sized stories** — equal slices give the product owner reordering freedom.
 
-Write each accepted slice as a story using [`template.md`](template.md) — all six sections, in order. While writing:
+Neither satisfied → try the next pattern. Any resulting story still failing Small → restart it at Pattern 1 and split again.
 
-- §2 **Out** names the neighbouring work this story's siblings own — pull it straight from the slice list, and from `## Deferred to later slices` where the material was a slice issue.
-- §2 **In** and §4 carry the categories folded into this story at Step 3.
-- §3 cites decisions, it never restates them — an ADR number, or a product or sequencing call made outside the code. Code locations are the implementer's to find;
-- §5 is generated from each blocker's §2 **In** list — what that story promises to leave behind — and always phrased **expected — verify against code before trusting it**.
-- §6 uses placeholder refs for tickets not yet published: `#F` for the foundation ticket, which blocks every story, and `#S1`, `#S2` for sibling stories. Real numbers arrive in the relations pass.
+**Advance when** every slice is vertical, INVEST-passing including Small, and its producing pattern is named.
 
-**Advance when** every accepted slice has a complete six-section draft.
+## Step 5/5 — Write & publish
 
-## Step 5/6 — Checks gate
+Read [`template.md`](template.md) and write each slice with it, then run the checks, then the adversarial pass, then publish.
 
-Run every check against every story. A failure is fixed in the draft and the story re-checked; the gate passes only when the table is all-green for all stories.
+**Checks** — every story, all-green before publishing:
 
 | # | Check |
 |---|---|
-| 1 | §1 persona is the grounded persona, verbatim |
-| 2 | §2 Out list is non-empty and names real neighbouring work |
-| 3 | Every domain term in the body is a term defined in `CONTEXT.md`, never defined inside the story |
-| 4 | Every §4 scenario has exactly one When and one Then |
-| 5 | §4 covers: happy path + every edge case + every failure mode |
-| 6 | Every Then is observable — a state, message, or number someone can check ("better/faster/improved" fails) |
-| 7 | Each §5 entry traces to a blocker's Scope and carries the expected-verify phrasing |
-| 8 | Each §6 dependency line carries its reason |
-| 9 | §6 lines and the planned **blocked by** edges are the same set, foundation included |
-| 10 | Story is a vertical slice and INVEST-passes — including Small (≈1–5 days) — else back to Derive for that story |
+| 1 | §2 **Out** is non-empty and names real neighbouring work: the next slice's tasks, the adjacent workflow step, variations split off during the split |
+| 2 | Every domain term is a glossary term, used in the glossary's words and never redefined — an `_Avoid_` synonym never appears |
+| 3 | Every §3 scenario has exactly one When and one Then |
+| 4 | §3 covers the happy path, every edge case, every failure mode |
+| 5 | Every Then is observable — a state, message, or number someone can check ("better/faster/improved" fails) |
+| 6 | §4 and §5 name modules, interfaces and seams — no file paths, and no code beyond a decision-encoding snippet; both go stale within the week |
+| 7 | §5's seams are the seams confirmed at Step 2 |
 
-Show the user the gate result as a compact per-story table.
+**Adversarial pass** — dispatch three subagents per story, in parallel, once the checks are green. Each is briefed to *break* the story; a report of "looks fine" is a failed dispatch. Treat every finding as a check failure: rewrite and re-run the checks.
 
-**Advance when** all checks pass for all stories.
+| Agent | Context it gets | Charge |
+|---|---|---|
+| Fresh agent | The story body and the repo — no conversation, no other story | Plan the implementation, reading only. Every question you have to ask to plan it is a gap. |
+| Slice auditor | One story body | Prove this slice is not vertical: name a layer it fails to cut, or user-observable value it fails to deliver. |
+| Glossary cop | One story body, the glossary, the ADRs covering the area | Name every term that is not a glossary term, every glossary term used in other words, and every line contradicting an ADR. |
 
-## Step 6/6 — Confirm & publish
+The fresh agent is the one that tests this skill's premise, so its questions outrank the checks table: a story it cannot implement is not ready, all-green or not.
 
-1. **Confirm** — **check auth** on the tracker, then present the final stories (or a summary plus one full sample) and ask explicitly: publish these N stories to `<tracker>`? Publishing waits for a yes; edits loop back to the step they touch. A failed auth check stops here with the drafts intact — hand the user the tracker doc's auth command and hold.
-2. **Labels** — **create a label** for each missing one: `foundation`, plus the `map:` and `release:` labels inherited from the slice issue. Every ticket this run creates **applies** the inherited labels; the foundation ticket applies `foundation` too.
-3. **Foundation** — write and **publish** the foundation ticket per FOUNDATION.md, ahead of the stories, so each story cites a real number. An open foundation ticket from an earlier run on this slice is **edited** in place, with its diff shown at Confirm.
-4. **Publish** — one ticket per story in dependency order (blockers first), title = story title, body = the six sections. Record each returned number.
-5. **Relations pass** — the step that keeps the two renders of each dependency in sync:
-   - **Edit** each body to replace every placeholder ref in §5 and §6 with the real numbers.
-   - For each edge, **link A blocked by B** per the tracker doc. Where the tracker cannot express the edge, the §6 prose becomes its single render — take the doc's stated fallback and say so plainly.
-   - **Fetch** one linked pair back and verify prose and edge agree.
-6. **Index the slice** — where the material was a slice issue, **edit** it to append a `## Stories` checklist linking every ticket this run created, so the slice issue stays the index of its own breakdown.
-7. **Report** — list each story title with its ticket ref, its blockers, the foundation ticket, the excluded categories with their triggers, and any slices the split flagged as killable that the user chose to defer.
+**Publish** — one ticket per story in dependency order, title = story title, body = the five sections. Record each returned number, then **link A blocked by B** for every dependency the INVEST pre-check flagged, and **apply a label** named for the feature to every ticket in the run. Report each story title with its ticket ref and blockers, plus any slice the split flagged as killable.
 
-**Done when** every story has a ticket ref, every §6 line has a matching edge (or the stated fallback), and the slice issue lists them.
+**Done when** every story has survived the adversarial pass, holds a ticket ref, and every flagged dependency has an edge.

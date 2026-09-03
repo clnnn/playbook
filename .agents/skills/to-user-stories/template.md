@@ -1,13 +1,12 @@
 # Story template
 
-Every story uses exactly these sections, in this order. The bracketed notes are instructions to the writer — delete them from the finished story.
+The five sections, in this order. The bracketed notes are instructions to the writer — delete them from the finished story.
 
-```markdown
 # [Story title — user-value-focused, verb first]
 
 ## 1. Story
 
-**As a** [the grounded persona, by name]
+**As a** [the persona this conversation names]
 **I want to** [action]
 **so that** [outcome]
 
@@ -17,25 +16,9 @@ Every story uses exactly these sections, in this order. The bracketed notes are 
 - [what this story delivers — the one complete slice]
 
 **Out**
-- [never empty. Name the neighbouring work an implementer would
-  otherwise wander into: the next slice's tasks, the adjacent
-  workflow step, variations split off during derivation]
+- [the neighbouring work the next slices own]
 
-## 3. Upstream decisions
-
-[What a fresh agent cannot read from the code. Cite, don't restate:
-an ADR number, or a product or sequencing call made outside the
-code. Only decisions an implementer would otherwise re-open or
-silently reverse — not design guidance. "None" when the code
-speaks for itself.]
-
-- **[ADR-NNN | product | sequencing]** — [the decision]. [one-line why]
-
-## 4. Acceptance criteria
-
-[Gherkin. One When/Then per scenario. One scenario for the happy
-path, one per edge case, one per failure mode. Every Then
-observable: a state, message, or number someone can check.]
+## 3. Acceptance criteria
 
 ```gherkin
 Scenario: [happy path]
@@ -54,27 +37,28 @@ Scenario: [failure mode]
   Then [observable error state or message]
 ```
 
-## 5. Inherited from upstream
+## 4. Implementation decisions
 
-[One entry per blocker, generated from that story's Scope section:
-the domain concepts, module, or interface it is expected to leave
-behind. Omit the section only when the story has no blockers.]
+[The decisions already made — modules built or modified and the
+interfaces that change, architectural calls and the ADRs they
+follow, schema changes, API contracts, specific interactions,
+clarifications the developer gave in conversation. Cite an ADR by
+number rather than restating it.
 
-- From **#NN [blocker title]** — expected to exist: [concepts /
-  module / interface]. **Expected — verify against code before
-  trusting it**; the upstream story may have landed differently.
+Exception: a snippet that encodes a decision more precisely than
+prose can — a state machine, a reducer, a schema, a type shape.
+Inline it in its decision, trimmed to the decision-rich part, and
+note where it came from.]
 
-## 6. Dependencies & Constraints
+- **[module | interface | schema | contract | ADR-NNN]** — [the decision]
 
-**Dependencies** — the stories this one depends on, and why. Prose
-mirror of the native blocked-by edges: same fact, two renders, kept
-in sync by the relations pass. "None" if independent.
+## 5. Testing decisions
 
-- Blocked by **#NN** — [reason, e.g. "needs the Order aggregate from #12"]
+[A good test exercises external behaviour through a seam — never
+implementation details. Name the seams this story is tested
+through, the modules under test, and the prior art: the tests
+already in this repo that these should look like.]
 
-**Constraints**
-- [only those that actually bind *this* story — never forced; drop
-  the block entirely when none apply. Draw from: explicit scope
-  boundaries, an explicit do-not list, non-functional requirements,
-  environment constraints, data constraints.]
-```
+- **Seam** — [where the test observes, existing or new]
+- **Under test** — [modules]
+- **Prior art** — [the existing tests of this shape]
