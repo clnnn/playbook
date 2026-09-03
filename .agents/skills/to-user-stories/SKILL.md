@@ -12,18 +12,18 @@ Synthesise what this conversation already holds into implementation-ready storie
 ## Ground rules
 
 - Use the project's domain glossary vocabulary throughout the user story, and respect any ADRs in the area you're touching.
-- Tracker verbs this skill names in **bold** — **publish**, **link A blocked by B**, **apply a label** — are defined by the project's issue tracker doc. Read it before the first write.
-- The `codebase-design` skill is the seam vocabulary. Read it at Seams; its terms (module, interface, seam, adapter, depth) are the words §4 and §5 use.
+- Tracker verbs this skill names in **bold** — **publish**, **link A blocked by B**, **apply a label** — are defined by the project's issue tracker doc.
+- The `codebase-design` skill is the seam vocabulary; its terms (module, interface, seam, adapter, depth) are the words §4 and §5 use.
 
 ## Step 1/5 — Ground
 
 The feature is whatever the invocation named, else the one this conversation is about.
 
-Explore the repo for the current state of the code the feature touches — what already runs, what the change has to reach. Read the glossary and the ADRs covering the area in the same step.
+Ground in **one dispatch**: an exploring subagent for the current state of the code the feature touches — what already runs, what the change has to reach — sent in the same message as your own reads of the glossary (its exact words carry the Step 5 checks, and a subagent's summary loses them), the ADRs covering the area, the issue tracker doc, and the `codebase-design` skill. Everything the run needs arrives before its one gate, and the tracker verbs are in context long before Step 5 writes.
 
 The glossary's vocabulary carries through every story. Where a story's work contradicts an ADR, surface it — *"contradicts ADR-0003, worth reopening because…"* — rather than silently overriding.
 
-**Advance when** the touched code, the glossary terms, and the ADRs covering the area are all in context.
+**Advance when** the touched code, the glossary terms, the ADRs covering the area, the tracker verbs, and the seam vocabulary are all in context.
 
 ## Step 2/5 — Seams
 
@@ -84,9 +84,18 @@ Neither satisfied → try the next pattern. Any resulting story still failing Sm
 
 ## Step 5/5 — Write & publish
 
-Read [`template.md`](template.md) and write each slice with it, then run the checks, then the adversarial pass, then publish.
+Read [`template.md`](template.md) and write each slice with it. The pass that follows runs **in flight** rather than as a phase after the writing: a story's agent goes out the moment that story is written, while the remaining slices are still being written.
 
-**Checks** — every story, all-green before publishing:
+**Fresh agent** — one per story, dispatched as its story is finished, with that story body and the repo: no conversation, no other story. A context holding exactly one story is the whole point of this agent, so it is the one charge that stays per-story. Its charge: *plan the implementation, reading only — every question you have to ask to plan it is a gap.*
+
+**Set auditors** — two agents over every story body at once, both dispatched in one message as the last slice lands. Reading the stories as a set is what catches the cross-story failures a per-story critic is blind to: one domain term used two ways across two stories, one story's §2 **Out** naming work no other story owns. Each is briefed to *break* the stories; a report of "looks fine" is a failed dispatch.
+
+| Agent | Context it gets | Charge |
+|---|---|---|
+| Slice auditor | Every story body | Per story, prove this slice is not vertical: name a layer it fails to cut, or user-observable value it fails to deliver. Across the set, name any two stories that overlap and any slice no story covers. |
+| Glossary cop | Every story body, the glossary, the ADRs covering the area | Name every term that is not a glossary term, every glossary term used in other words, every term used one way in one story and another way in another, and every line contradicting an ADR. |
+
+**Checks** — run these over every story while the set auditors work:
 
 | # | Check |
 |---|---|
@@ -98,16 +107,8 @@ Read [`template.md`](template.md) and write each slice with it, then run the che
 | 6 | §4 and §5 name modules, interfaces and seams — no file paths, and no code beyond a decision-encoding snippet; both go stale within the week |
 | 7 | §5's seams are the seams confirmed at Step 2 |
 
-**Adversarial pass** — dispatch three subagents per story, in parallel, once the checks are green. Each is briefed to *break* the story; a report of "looks fine" is a failed dispatch. Treat every finding as a check failure: rewrite and re-run the checks.
+**Rulings** — one round. Every finding is a check failure: rewrite, then re-verify the sections the rewrite touched, and re-dispatch a fresh agent for the stories whose §3, §4, or §5 changed. The fresh agent is the one that tests this skill's premise, so its questions outrank the checks table: a story it cannot implement is not ready, all-green or not — and that alone earns a second round.
 
-| Agent | Context it gets | Charge |
-|---|---|---|
-| Fresh agent | The story body and the repo — no conversation, no other story | Plan the implementation, reading only. Every question you have to ask to plan it is a gap. |
-| Slice auditor | One story body | Prove this slice is not vertical: name a layer it fails to cut, or user-observable value it fails to deliver. |
-| Glossary cop | One story body, the glossary, the ADRs covering the area | Name every term that is not a glossary term, every glossary term used in other words, and every line contradicting an ADR. |
+**Publish** — create every ticket in one batch, title = story title, body = the five sections. Creates are independent of each other; dependency order lives in the edges, not in the order of creation. Record each returned number, then **link A blocked by B** for every dependency the INVEST pre-check flagged, and **apply a label** named for the feature to every ticket in the run. Report each story title with its ticket ref and blockers, plus any slice the split flagged as killable.
 
-The fresh agent is the one that tests this skill's premise, so its questions outrank the checks table: a story it cannot implement is not ready, all-green or not.
-
-**Publish** — one ticket per story in dependency order, title = story title, body = the five sections. Record each returned number, then **link A blocked by B** for every dependency the INVEST pre-check flagged, and **apply a label** named for the feature to every ticket in the run. Report each story title with its ticket ref and blockers, plus any slice the split flagged as killable.
-
-**Done when** every story has survived the adversarial pass, holds a ticket ref, and every flagged dependency has an edge.
+**Done when** every story has survived the pass, holds a ticket ref, and every flagged dependency has an edge.
