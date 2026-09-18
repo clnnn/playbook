@@ -8,7 +8,7 @@ _Not decided yet._
 
 ### Greenfield project
 
-1. **`/to-prd`** → `docs/prd/<slug>.md`. Captures what we're building and why. Feed it whatever raw material you have: lean product canvas, discovery notes, client call transcripts, sketches, whatever plans already exist.
+1. **`/to-prd`** → `docs/prd.md`. Captures what we're building and why. Feed it whatever raw material you have: lean product canvas, discovery notes, client call transcripts, sketches, whatever plans already exist.
 2. **Set the technology stack**, working from the PRD:
    - **`/grilling`** → **`/to-spec`**: have the AI pressure-test your stack choices, then turn that session into a spec.
    - **Ad hoc**: for something small and obvious, settle the stack with the AI directly.

@@ -1,4 +1,4 @@
-# PRD layout
+# Lean PRD layout
 
 The deliverable's structure for the [`to-prd`](SKILL.md) skill. Item limits and gate conditions live in `SKILL.md`; this file is layout only.
 
@@ -6,7 +6,9 @@ Bracketed text is a placeholder with one example each. Reproduce the headings an
 
 ***
 
-# PRD: [Subject]
+# Lean PRD: [Subject]
+
+Scope and shape, plus the quality numbers the build holds to. Functional requirements — stories, epics, acceptance criteria — live in the story map this document feeds.
 
 > 🔶 marks anything not established — inferred, assumed, or unknown. Every 🔶 has a row in Open questions.
 

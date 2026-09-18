@@ -7,7 +7,7 @@ disable-model-invocation: true
 
 ## Purpose
 
-The PRD owns two things nothing upstream covers: **the solution's shape** and **the requirements it must hold to**.
+The lean PRD owns two things nothing upstream covers: **the solution's shape** and **the requirements it must hold to**.
 
 The skill is standalone. A lean product canvas is useful input, never a prerequisite. User stories, epics and acceptance criteria come afterward.
 
@@ -38,7 +38,7 @@ Three rules govern every turn. The sections below only apply them.
 
 ## Output
 
-Fill `template.md` — it is the sole authority on the deliverable's layout: the sections it shows are the sections the document has, and it carries no table of contents, no change log and no document-information block. Read a section's block on entering that section, and reproduce its structure literally. Each section's item limits live in this contract, not in the template.
+Fill `template.md` — it is the sole authority on the deliverable's layout: the sections it shows are the sections the document has, opening on its heading and the line beneath it. Read a section's block on entering that section, and reproduce its structure literally. Each section's item limits live in this contract, not in the template.
 
 ---
 
@@ -178,4 +178,4 @@ One table: `Risk | Why it matters`, filled by a pass over **Cagan's four risks**
 
 ## Publishing
 
-Publish as a product document, following whatever product-document convention this repo documents for agents. With no such convention, save it as markdown in the working directory and report the path.
+Save as `docs/prd.md` and report the path.
