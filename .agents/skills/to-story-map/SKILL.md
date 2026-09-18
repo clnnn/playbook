@@ -27,7 +27,7 @@ Anything supplied at invocation — text after `/to-story-map`, a pasted dump, a
 
 ## The board
 
-`docs/story-map/<slug>/map.json` is the map. The **board** renders it in the browser and re-reads it about once a second, so every edit is on screen before the next question is asked. It scales the whole map to the window, so nothing scrolls; the body cards are coloured by slice, and a chip per slice hides it.
+`docs/story-map/<slug>/map.json` is the map. The **board** renders it in the browser and re-reads it about once a second, so every edit is on screen before the next question is asked. Steps keep a readable width and the backbone wraps onto the next line when it runs out of room, like text — one drawn spine runs under the steps and carries the narrative round into the next line, and the steps are numbered so the order survives the wrap. The body cards are sticky notes coloured by slice; a chip per slice hides it (keys `1`, `2`, `3`, and `0` for unsliced).
 
 The file grows a row at a time — activities, then their steps, then the cards under each step, then each card's slice:
 

@@ -4,18 +4,33 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Story map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&display=swap">
 <style>
+  /*
+    The board is a grey wall with sticky notes on it. The backbone is one drawn
+    spine: it runs under the steps, and when it runs out of room it does a
+    typewriter carriage return into the next line. Time reads left to right,
+    then top to bottom. Depth reads down each column.
+  */
   :root {
-    --ink: #11151b;
-    --panel: #1a212a;
-    --rule: #2c3743;
-    --chalk: #e6ebf0;
-    --dim: #8d9aa8;
-    --r1: #ffb648;
-    --r2: #58c1b0;
-    --r3: #8a92e0;
+    --board: #d5dbe0;
+    --board-deep: #c6ced5;
+    --ink: #1b252e;
+    --pencil: #66737f;
+    --pencil-light: #9aa5ae;
+    --paper: #fbfbf7;
+    --r1: #ffe14d;
+    --r2: #8fe0cf;
+    --r3: #c9b8f4;
+    --shade: rgba(27, 37, 46, 0.18);
     --gap: 10px;
-    --pad: 22px;
+    --pad-x: 44px;
+    --pad-y: 28px;
+    --stave-gap: 64px;
+    --step-w: 176px;
+    --z: 1;
+    --font: "Bricolage Grotesque", "Avenir Next", "Segoe UI Variable", "Helvetica Neue", system-ui, sans-serif;
   }
 
   * { box-sizing: border-box; }
@@ -23,211 +38,253 @@
   html, body {
     height: 100%;
     margin: 0;
-    overflow: hidden;
-    background: var(--ink);
-    color: var(--chalk);
-    font-family: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--board);
+    color: var(--ink);
+    font-family: var(--font);
+    font-optical-sizing: auto;
     -webkit-font-smoothing: antialiased;
   }
 
-  body {
-    display: flex;
-    flex-direction: column;
-  }
+  body { display: flex; flex-direction: column; overflow: hidden; }
 
   /* ---- header ------------------------------------------------------- */
 
   header {
     flex: 0 0 auto;
     display: flex;
-    align-items: baseline;
-    gap: 24px;
-    padding: 18px var(--pad) 14px;
-    border-bottom: 1px solid var(--rule);
+    align-items: flex-end;
+    gap: 28px;
+    padding: 22px var(--pad-x) 16px;
   }
 
+  #title { min-width: 0; }
+
   #subject {
-    font-size: 19px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
     margin: 0;
+    font-size: 27px;
+    font-weight: 620;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  #axis {
-    font-size: 12.5px;
-    color: var(--dim);
-    white-space: nowrap;
+  #how {
+    margin: 6px 0 0;
+    font-size: 13px;
+    color: var(--pencil);
+    line-height: 1.35;
   }
 
   #filters {
     margin-left: auto;
     display: flex;
-    gap: 8px;
+    gap: 10px;
     flex: 0 0 auto;
+    align-items: flex-end;
   }
 
   .chip {
-    display: inline-flex;
+    display: grid;
+    grid-template-columns: auto auto;
     align-items: baseline;
-    gap: 7px;
-    padding: 5px 11px 6px;
-    border: 1px solid var(--rule);
-    border-radius: 2px;
-    background: transparent;
-    color: var(--dim);
+    column-gap: 8px;
+    padding: 8px 12px 9px 10px;
+    border: 0;
+    border-top: 5px solid color-mix(in srgb, var(--slice, var(--paper)) 78%, var(--ink));
+    background: var(--slice, var(--paper));
+    color: var(--ink);
     font: inherit;
-    font-size: 12.5px;
+    font-size: 13px;
+    font-weight: 520;
     line-height: 1;
     cursor: pointer;
-  }
-
-  .chip .swatch {
-    width: 9px;
-    height: 9px;
-    border-radius: 1px;
-    background: var(--slice, var(--rule));
-    opacity: 0.35;
-    transform: translateY(0.5px);
+    box-shadow: 0 1px 0 var(--shade), 0 4px 10px -6px var(--shade);
+    transition: transform 140ms ease, opacity 140ms ease, box-shadow 140ms ease;
   }
 
   .chip .count {
     font-variant-numeric: tabular-nums;
-    font-size: 11.5px;
-    opacity: 0.7;
+    font-weight: 400;
+    color: color-mix(in srgb, var(--ink) 70%, var(--slice, var(--paper)));
   }
 
-  .chip[aria-pressed="true"] {
-    color: var(--chalk);
-    border-color: color-mix(in srgb, var(--slice, var(--rule)) 55%, transparent);
+  .chip[aria-pressed="false"] {
+    opacity: 0.5;
+    transform: translateY(2px);
+    box-shadow: none;
+    background: color-mix(in srgb, var(--slice, var(--paper)) 35%, var(--board));
+    border-top-color: var(--pencil-light);
   }
 
-  .chip[aria-pressed="true"] .swatch { opacity: 1; }
-
-  .chip:focus-visible {
-    outline: 2px solid var(--chalk);
-    outline-offset: 2px;
+  .chip.unsliced {
+    border-top-color: var(--pencil-light);
+    outline: 1px dashed var(--pencil-light);
+    outline-offset: -3px;
   }
 
-  /* ---- stage -------------------------------------------------------- */
+  .chip:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+  /* ---- stage: the wall ---------------------------------------------- */
 
   #stage {
     flex: 1 1 auto;
     position: relative;
-    overflow: hidden;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--pencil-light) transparent;
   }
 
   #map {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform-origin: 0 0;
+    position: relative;
+    zoom: var(--z);
     display: flex;
-    align-items: flex-start;
-    gap: 18px;
-    padding: var(--pad);
+    flex-direction: column;
+    gap: var(--stave-gap);
+    padding: 6px calc(var(--pad-x) / var(--z)) var(--pad-y);
+    width: max-content;
+    min-width: 100%;
   }
 
-  /* ---- activities --------------------------------------------------- */
+  #spine {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  #spine .rail { stroke: var(--ink); stroke-width: 2.25; fill: none; stroke-linecap: round; }
+  #spine .return { stroke: var(--pencil); stroke-width: 1.5; fill: none; stroke-dasharray: 4 5; stroke-linecap: round; }
+  #spine .cap { fill: var(--ink); }
+  #spine .pin { fill: var(--ink); }
+
+  /* ---- staves: one line of the wrapped backbone ---------------------- */
+
+  .stave {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), var(--step-w));
+    grid-template-rows: auto auto auto;
+    column-gap: var(--gap);
+    align-items: start;
+  }
 
   .activity {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap);
-  }
-
-  .activity > h2 {
+    grid-row: 1;
     display: flex;
     align-items: baseline;
-    gap: 9px;
-    margin: 0 0 2px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--chalk);
-    font-size: 15px;
+    gap: 8px;
+    margin: 0 0 12px;
+    padding: 0 2px 7px;
+    border-bottom: 1.5px solid var(--ink);
+    font-size: 17px;
     font-weight: 600;
-    letter-spacing: -0.005em;
+    letter-spacing: -0.012em;
+    line-height: 1.2;
+    min-width: 0;
   }
 
-  .activity > h2 .n {
+  .activity .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  .activity.continued { border-bottom-style: dashed; border-bottom-width: 1.5px; color: var(--pencil); font-weight: 500; }
+  .activity .cont {
     font-size: 11.5px;
-    font-weight: 500;
-    font-variant-numeric: tabular-nums;
-    color: var(--dim);
+    font-weight: 400;
+    color: var(--pencil);
+    white-space: nowrap;
   }
-
-  .steps {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--gap);
-  }
-
-  /* ---- steps and body ----------------------------------------------- */
 
   .step {
+    grid-row: 2;
+    align-self: stretch;
+    position: relative;
+    margin: 0 0 22px; /* room for the spine to pass under the card */
+    padding: 9px 11px 10px 12px;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 13.5px;
+    font-weight: 540;
+    line-height: 1.25;
+    box-shadow: 0 1px 0 var(--shade);
+    min-height: 44px;
     display: flex;
-    flex-direction: column;
-    gap: var(--gap);
-    width: 148px;
+    gap: 9px;
+    align-items: flex-start;
   }
 
-  .step > h3 {
-    margin: 0;
-    padding: 9px 11px 10px;
-    background: var(--panel);
-    border-left: 2px solid var(--dim);
-    font-size: 13px;
-    font-weight: 500;
-    line-height: 1.25;
+  .step .n {
+    flex: 0 0 auto;
+    min-width: 1.5ch;
+    font-size: 11px;
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+    color: var(--pencil);
+    padding-top: 2px;
   }
 
   .body {
+    grid-row: 3;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 7px;
+    padding-top: 6px;
   }
 
   .card {
     position: relative;
-    padding: 8px 10px 9px;
-    border-radius: 2px;
-    font-size: 12px;
+    padding: 10px 11px 12px;
+    background: var(--slice);
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 450;
     line-height: 1.3;
-    background: color-mix(in srgb, var(--slice) 17%, var(--ink));
-    color: color-mix(in srgb, var(--slice) 45%, var(--chalk));
-    box-shadow: inset 2px 0 0 var(--slice);
+    box-shadow: 0 1px 0 var(--shade), 0 6px 12px -8px var(--shade);
+    transform-origin: 50% 0;
   }
 
-  .card.unassigned {
-    --slice: var(--rule);
-    color: var(--dim);
-    box-shadow: inset 2px 0 0 var(--rule);
+  /* the glue strip along the top of a sticky note */
+  .card::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: 0;
+    height: 6px;
+    background: color-mix(in srgb, var(--ink) 9%, transparent);
   }
 
-  .card.changed { animation: land 1.6s ease-out; }
-
-  @keyframes land {
-    0%, 30% {
-      background: color-mix(in srgb, var(--slice) 62%, var(--ink));
-      color: var(--chalk);
-    }
-    100% {
-      background: color-mix(in srgb, var(--slice) 17%, var(--ink));
-      color: color-mix(in srgb, var(--slice) 45%, var(--chalk));
-    }
+  .card.unsliced {
+    --slice: var(--paper);
+    color: color-mix(in srgb, var(--ink) 75%, var(--paper));
+    box-shadow: none;
+    outline: 1.5px dashed var(--pencil-light);
+    outline-offset: -1.5px;
   }
+  .card.unsliced::before { display: none; }
 
-  @media (prefers-reduced-motion: reduce) {
-    .card.changed { animation: none; }
+  .card.changed { animation: stick 900ms cubic-bezier(.2,.8,.2,1); }
+
+  @keyframes stick {
+    0%   { transform: scale(1.06) translateY(-4px); box-shadow: 0 10px 22px -8px var(--shade), 0 2px 0 var(--shade); }
+    100% { transform: scale(1) translateY(0);     box-shadow: 0 1px 0 var(--shade), 0 6px 12px -8px var(--shade); }
   }
 
   .empty {
-    padding: 9px 11px;
-    border: 1px dashed var(--rule);
-    border-radius: 2px;
-    font-size: 11.5px;
-    color: var(--dim);
+    padding: 9px 11px 10px;
+    border: 1.5px dashed var(--pencil-light);
+    color: var(--pencil);
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .slot { min-height: 34px; border: 1.5px dashed color-mix(in srgb, var(--pencil-light) 70%, var(--board)); }
+
+  .step.empty { background: transparent; box-shadow: none; font-weight: 450; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card.changed { animation: none; }
+    .chip { transition: none; }
   }
 
   /* ---- waiting ------------------------------------------------------ */
@@ -246,30 +303,44 @@
 
   #waiting.on { display: flex; }
 
-  #waiting p {
-    margin: 0;
-    font-size: 14px;
-    color: var(--dim);
-    max-width: 46ch;
-    line-height: 1.5;
+  #waiting .note {
+    background: var(--paper);
+    padding: 22px 26px 26px;
+    max-width: 44ch;
+    box-shadow: 0 1px 0 var(--shade), 0 10px 24px -12px var(--shade);
+    border-top: 7px solid var(--board-deep);
   }
 
-  #waiting .lede { font-size: 17px; color: var(--chalk); }
+  #waiting p { margin: 0; font-size: 14px; color: var(--pencil); line-height: 1.5; }
+  #waiting .lede { font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+
+  @media (max-width: 720px) {
+    :root { --pad-x: 24px; --stave-gap: 52px; }
+    header { flex-direction: column; align-items: stretch; gap: 14px; padding-top: 16px; }
+    #filters { margin-left: 0; }
+    #subject { white-space: normal; font-size: 23px; }
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <h1 id="subject">Story map</h1>
-  <span id="axis">left to right: time &nbsp;·&nbsp; down: depth</span>
+  <div id="title">
+    <h1 id="subject">Story map</h1>
+    <p id="how">Time runs left to right and wraps onto the next line. Depth runs down each column.</p>
+  </div>
   <div id="filters"></div>
 </header>
 
 <div id="stage">
-  <div id="map" aria-live="polite"></div>
+  <div id="map" aria-live="polite">
+    <svg id="spine" aria-hidden="true"></svg>
+  </div>
   <div id="waiting" class="on">
-    <p class="lede">Waiting for the map.</p>
-    <p id="waiting-detail">The board reads map.json beside it, about once a second. It fills as the session goes.</p>
+    <div class="note">
+      <p class="lede">Waiting for the map.</p>
+      <p id="waiting-detail">The board reads map.json beside it, about once a second. It fills as the session goes.</p>
+    </div>
   </div>
 </div>
 
@@ -282,10 +353,14 @@ const SLICES = [
 
 const SOURCE = new URLSearchParams(location.search).get("map") || "map.json";
 
+const STEP_MIN = 164;   // narrowest a step column goes
+const STEP_MAX = 224;   // widest a step column goes
+const ZOOM_MIN = 0.72;  // the board shrinks this far to avoid a scrollbar, then scrolls
+
 const hidden = new Set();
 let lastRaw = null;
 let map = null;
-let seen = null; // card keys from the previous render, to highlight what just landed
+let seen = null; // card keys from the previous render, so what just landed can be shown landing
 
 const el = (tag, cls, text) => {
   const node = document.createElement(tag);
@@ -293,6 +368,8 @@ const el = (tag, cls, text) => {
   if (text != null) node.textContent = text;
   return node;
 };
+
+const cssNum = (name) => parseFloat(getComputedStyle(document.documentElement).getPropertyValue(name));
 
 const sliceOf = (card) => {
   const raw = (card && card.slice ? String(card.slice) : "").toUpperCase();
@@ -319,14 +396,15 @@ function drawFilters() {
   bar.replaceChildren();
 
   const rows = SLICES.map((s) => ({ ...s, n: tally[s.id] }));
-  if (tally.unassigned) rows.push({ id: "unassigned", label: "unsliced", color: "var(--rule)", n: tally.unassigned });
+  if (tally.unassigned) rows.push({ id: "unassigned", label: "unsliced", color: null, n: tally.unassigned });
 
   for (const row of rows) {
-    const chip = el("button", "chip");
+    const chip = el("button", "chip" + (row.color ? "" : " unsliced"));
     chip.type = "button";
-    chip.style.setProperty("--slice", row.color);
+    if (row.color) chip.style.setProperty("--slice", row.color);
     chip.setAttribute("aria-pressed", String(!hidden.has(row.id)));
-    chip.append(el("span", "swatch"), el("span", null, row.label), el("span", "count", row.n));
+    chip.setAttribute("aria-label", `${hidden.has(row.id) ? "Show" : "Hide"} ${row.label} cards`);
+    chip.append(el("span", null, row.label), el("span", "count", row.n));
     chip.addEventListener("click", () => {
       hidden.has(row.id) ? hidden.delete(row.id) : hidden.add(row.id);
       draw();
@@ -336,16 +414,77 @@ function drawFilters() {
 }
 
 document.addEventListener("keydown", (e) => {
-  const key = { 1: "R1", 2: "R2", 3: "R3" }[e.key];
-  if (!key || e.metaKey || e.ctrlKey) return;
+  const key = { 1: "R1", 2: "R2", 3: "R3", 0: "unassigned" }[e.key];
+  if (!key || e.metaKey || e.ctrlKey || e.altKey) return;
   hidden.has(key) ? hidden.delete(key) : hidden.add(key);
   draw();
 });
 
+/* ---- layout: the backbone wraps like text ------------------------------ */
+
+// Step width for a given number of columns at a given board width.
+function stepWidth(width, cols) {
+  const room = Math.max(STEP_MIN, width - cssNum("--pad-x") * 2);
+  const gap = cssNum("--gap");
+  return Math.min(STEP_MAX, Math.floor((room - (cols - 1) * gap) / cols));
+}
+
+// Pick the column count for a board width: the most columns that fit at the
+// narrowest step, then fewer columns while that costs no extra line, so steps
+// come out as wide as the packing allows.
+function plan(width) {
+  const room = Math.max(STEP_MIN, width - cssNum("--pad-x") * 2);
+  const gap = cssNum("--gap");
+  const most = Math.max(1, Math.floor((room + gap) / (STEP_MIN + gap)));
+  let best = null;
+  for (let cols = most; cols >= Math.max(1, most - 5); cols--) {
+    const lines = staves(cols);
+    if (!best || lines.length <= best.lines.length) best = { cols, lines, stepW: stepWidth(width, cols) };
+  }
+  return best;
+}
+
+// Cut the activities into lines. An activity stays whole when it fits on the
+// current line; when it does not fit anywhere it splits, and the later parts
+// are marked as continued.
+function staves(cols) {
+  const lines = [[]];
+  let used = 0;
+  let stepNo = 0;
+
+  activities().forEach((activity, ai) => {
+    const steps = stepsOf(activity);
+    const total = Math.max(1, steps.length); // an activity with no steps still takes a column
+    let from = 0;
+    let part = 0;
+
+    while (from < total) {
+      const left = cols - used;
+      if (left <= 0 || (used > 0 && total - from > left && total - from <= cols)) {
+        lines.push([]); used = 0; continue; // a fresh line fits the whole rest of it
+      }
+      const take = Math.min(total - from, cols - used);
+      const chunk = steps.length ? steps.slice(from, from + take) : [];
+      lines[lines.length - 1].push({
+        ai, activity, chunk, start: used, span: take, continued: part > 0,
+        last: from + take >= total, firstNo: stepNo + 1,
+      });
+      stepNo += chunk.length;
+      used += take;
+      from += take;
+      part++;
+    }
+  });
+
+  return lines.filter((l) => l.length);
+}
+
 /* ---- the map --------------------------------------------------------- */
 
 function draw() {
-  const stage = document.getElementById("map");
+  const stage = document.getElementById("stage");
+  const board = document.getElementById("map");
+  const spine = document.getElementById("spine");
   const waiting = document.getElementById("waiting");
   const list = activities();
 
@@ -353,79 +492,158 @@ function draw() {
   drawFilters();
 
   if (!list.length) {
-    stage.replaceChildren();
+    board.replaceChildren(spine);
+    spine.replaceChildren();
     waiting.classList.add("on");
-    fit();
     return;
   }
   waiting.classList.remove("on");
 
+  // Full size first. If the wall is taller than the window, shrink it a step at
+  // a time (each step also fits more per line) until it fits, or until it hits
+  // the floor and scrolls.
+  for (const z of [1, 0.94, 0.88, 0.82, 0.76, ZOOM_MIN]) {
+    document.documentElement.style.setProperty("--z", z);
+    render(plan(stage.clientWidth / z));
+    if (board.offsetHeight * z <= stage.clientHeight) break;
+  }
+  requestAnimationFrame(drawSpine);
+}
+
+function render({ cols, stepW, lines }) {
+  const board = document.getElementById("map");
+  const spine = document.getElementById("spine");
+  document.documentElement.style.setProperty("--step-w", `${stepW}px`);
+
   const fresh = new Set();
   const frame = document.createDocumentFragment();
+  frame.append(spine);
 
-  list.forEach((activity, i) => {
-    const column = el("div", "activity");
-    const head = el("h2");
-    head.append(el("span", "n", String(i + 1)), el("span", null, activity.name || "—"));
-    column.append(head);
+  for (const line of lines) {
+    const stave = el("section", "stave");
+    stave.style.setProperty("--cols", cols);
 
-    const steps = el("div", "steps");
-    const own = stepsOf(activity);
+    for (const part of line) {
+      const head = el("h2", "activity" + (part.continued ? " continued" : ""));
+      head.style.gridColumn = `${part.start + 1} / span ${part.span}`;
+      head.append(el("span", "name", part.activity.name || "—"));
+      if (part.continued) head.append(el("span", "cont", "continued"));
+      stave.append(head);
 
-    if (!own.length) steps.append(el("div", "empty", "no steps yet"));
+      if (!part.chunk.length) {
+        const ph = el("div", "step empty", "no steps yet");
+        ph.style.gridColumn = `${part.start + 1}`;
+        stave.append(ph);
+        continue;
+      }
 
-    own.forEach((step, j) => {
-      const col = el("div", "step");
-      col.append(el("h3", null, step.name || "—"));
+      part.chunk.forEach((step, k) => {
+        const col = part.start + k + 1;
+        const si = stepsOf(part.activity).indexOf(step);
 
-      const body = el("div", "body");
-      let shown = 0;
+        const head3 = el("h3", "step");
+        head3.style.gridColumn = String(col);
+        head3.append(el("span", "n", String(part.firstNo + k)), el("span", null, step.name || "—"));
+        stave.append(head3);
 
-      cardsOf(step).forEach((card, k) => {
-        const slice = sliceOf(card);
-        if (hidden.has(slice || "unassigned")) return;
-        shown++;
+        const body = el("div", "body");
+        body.style.gridColumn = String(col);
+        let shown = 0;
 
-        const key = `${i}/${j}/${k}/${card.name}/${slice}`;
-        fresh.add(key);
+        cardsOf(step).forEach((card, ci) => {
+          const slice = sliceOf(card);
+          if (hidden.has(slice || "unassigned")) return;
+          shown++;
+          const key = `${part.ai}/${si}/${ci}/${card.name}/${slice}`;
+          fresh.add(key);
+          const note = el("div", "card" + (slice ? "" : " unsliced"), card.name || "—");
+          if (slice) note.style.setProperty("--slice", `var(--${slice.toLowerCase()})`);
+          if (seen && !seen.has(key)) note.classList.add("changed");
+          body.append(note);
+        });
 
-        const node = el("div", "card" + (slice ? "" : " unassigned"), card.name || "—");
-        if (slice) node.style.setProperty("--slice", `var(--${slice.toLowerCase()})`);
-        if (seen && !seen.has(key)) node.classList.add("changed");
-        body.append(node);
+        if (!shown) body.append(cardsOf(step).length ? el("div", "empty", "hidden by a filter") : el("div", "slot"));
+        stave.append(body);
       });
+    }
+    frame.append(stave);
+  }
 
-      if (!shown) body.append(el("div", "empty", cardsOf(step).length ? "filtered out" : "no cards yet"));
-      col.append(body);
-      steps.append(col);
-    });
+  board.replaceChildren(frame);
+  seen = fresh;
+}
 
-    column.append(steps);
-    frame.append(column);
+/* ---- the spine: one line under the steps, with a carriage return -------- */
+
+function drawSpine() {
+  const board = document.getElementById("map");
+  const spine = document.getElementById("spine");
+  const z = cssNum("--z") || 1;
+  const origin = board.getBoundingClientRect();
+  const local = (r) => ({
+    left: (r.left - origin.left) / z, right: (r.right - origin.left) / z,
+    top: (r.top - origin.top) / z, bottom: (r.bottom - origin.top) / z,
   });
 
-  stage.replaceChildren(frame);
-  seen = fresh;
-  fit();
+  const w = board.offsetWidth, h = board.offsetHeight;
+  spine.setAttribute("viewBox", `0 0 ${w} ${h}`);
+  spine.setAttribute("width", w);
+  spine.setAttribute("height", h);
+  spine.replaceChildren();
+
+  const ns = "http://www.w3.org/2000/svg";
+  const path = (d, cls) => {
+    const p = document.createElementNS(ns, "path");
+    p.setAttribute("d", d);
+    p.setAttribute("class", cls);
+    spine.append(p);
+  };
+  const dot = (x, y, r, cls = "cap") => {
+    const c = document.createElementNS(ns, "circle");
+    c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", r);
+    c.setAttribute("class", cls);
+    spine.append(c);
+  };
+
+  const rails = [];
+  for (const stave of board.querySelectorAll(".stave")) {
+    const steps = [...stave.querySelectorAll(".step")];
+    if (!steps.length) continue;
+    const first = local(steps[0].getBoundingClientRect());
+    const last = local(steps[steps.length - 1].getBoundingClientRect());
+    const y = Math.max(...steps.map((s) => local(s.getBoundingClientRect()).bottom)) + 8;
+    const s = local(stave.getBoundingClientRect());
+    const pins = steps.filter((n) => !n.classList.contains("empty")).map((n) => { const r = local(n.getBoundingClientRect()); return (r.left + r.right) / 2; });
+    rails.push({ x0: first.left, x1: last.right, y, top: s.top, bottom: s.bottom, pins });
+  }
+  if (!rails.length) return;
+
+  const R = 16, OUT = 22;
+  let d = "";
+  rails.forEach((r, i) => {
+    d += `M ${r.x0} ${r.y} H ${r.x1} `;
+    const next = rails[i + 1];
+    if (!next) return;
+    const yg = (r.bottom + next.top) / 2;
+    const xr = r.x1 + OUT, xl = next.x0 - OUT;
+    path(
+      `M ${r.x1} ${r.y} H ${xr - R} a ${R} ${R} 0 0 1 ${R} ${R} V ${yg - R} a ${R} ${R} 0 0 1 ${-R} ${R} ` +
+      `H ${xl + R} a ${R} ${R} 0 0 0 ${-R} ${R} V ${next.y - R} a ${R} ${R} 0 0 0 ${R} ${R} H ${next.x0}`,
+      "return"
+    );
+  });
+  path(d, "rail");
+  for (const r of rails) for (const x of r.pins) dot(x, r.y, 4.5, "pin");
+  dot(rails[0].x0, rails[0].y, 4);
+  const end = rails[rails.length - 1];
+  dot(end.x1, end.y, 4);
 }
 
-/* ---- scale to fit: the whole map, never a scrollbar ------------------- */
-
-function fit() {
-  const stage = document.getElementById("stage");
-  const node = document.getElementById("map");
-
-  node.style.transform = "scale(1)";
-  const w = node.scrollWidth;
-  const h = node.scrollHeight;
-  if (!w || !h) return;
-
-  const scale = Math.min(1, stage.clientWidth / w, stage.clientHeight / h);
-  const x = Math.max(0, (stage.clientWidth - w * scale) / 2);
-  node.style.transform = `translate(${x}px, 0) scale(${scale})`;
-}
-
-window.addEventListener("resize", fit);
+let resizeTimer;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => { if (map) draw(); }, 80);
+});
 
 /* ---- the file is the map --------------------------------------------- */
 
