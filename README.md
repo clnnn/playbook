@@ -18,3 +18,18 @@ _Not decided yet._
    > /grill-with-docs the prd settled the what and why, and the story map settled the flows and the R1 slice. Grill the how for R1: settle the ubiquitous language from the map's task names, and the hard, irreversible decisions
 
    The map goes broad first, so the grill knows where to go deep. You only grill the decisions R1 actually takes, and you pull the glossary from concrete task names instead of inventing terms in the abstract.
+
+## Installation
+
+Install the skills in this repo with [`gh skill install`](https://cli.github.com/manual/gh_skill_install), a GitHub CLI preview command:
+
+```sh
+gh skill install clnnn/playbook --allow-hidden-dirs --all
+```
+
+A few steps in the flow call skills from [mattpocock/skills](https://github.com/mattpocock/skills) (MIT). Install those too:
+
+```sh
+claude plugins install mattpocock-skills   # or: npx skills@latest add mattpocock/skills
+/setup-matt-pocock-skills
+```
