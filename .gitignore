@@ -40,3 +40,6 @@ Thumbs.db
 
 .claude/worktrees
 .claude/settings.local.json
+
+# playwright-cli session output (snapshots, screenshots)
+.playwright-cli/

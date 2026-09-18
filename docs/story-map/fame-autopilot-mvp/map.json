@@ -1,0 +1,41 @@
+{
+  "subject": "FAME Autopilot MVP",
+  "activities": [
+    { "name": "flag the student", "steps": [
+      { "name": "ingest the daily ISIR file", "cards": [] },
+      { "name": "extract canonical facts", "cards": [] },
+      { "name": "match workflow rules", "cards": [] },
+      { "name": "assign the work item", "cards": [] }
+    ] },
+    { "name": "reach the student", "steps": [
+      { "name": "send the invitation", "cards": [] },
+      { "name": "remind until resolved", "cards": [] }
+    ] },
+    { "name": "open the chat", "steps": [
+      { "name": "open the invitation link", "cards": [] },
+      { "name": "see what's open", "cards": [] },
+      { "name": "resume where stopped", "cards": [] }
+    ] },
+    { "name": "complete the MPN", "steps": [
+      { "name": "learn what the MPN is", "cards": [] },
+      { "name": "sign it on studentaid.gov", "cards": [] },
+      { "name": "show proof of completion", "cards": [] },
+      { "name": "sign the attestation", "cards": [] }
+    ] },
+    { "name": "complete V1 verification", "steps": [
+      { "name": "answer the worksheet questions", "cards": [] },
+      { "name": "review the pre-filled worksheet", "cards": [] },
+      { "name": "sign the worksheet", "cards": [] },
+      { "name": "upload tax documents", "cards": [] },
+      { "name": "bring in the parent", "cards": [] }
+    ] },
+    { "name": "review the packet", "steps": [
+      { "name": "hand off for review", "cards": [] },
+      { "name": "open the review queue", "cards": [] },
+      { "name": "read the trail and packet", "cards": [] },
+      { "name": "approve or reject", "cards": [] },
+      { "name": "re-collect what's missing", "cards": [] },
+      { "name": "escalate a looping case", "cards": [] }
+    ] }
+  ]
+}
