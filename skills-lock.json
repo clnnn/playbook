@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "humanize": {
+      "source": "aashaexo/soundshuman",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "f60f22fde701ec618ecbb9b23e2e26b5f49c72fce10d4a62e1b7c446a3926711"
+    }
+  }
+}
