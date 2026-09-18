@@ -4,11 +4,7 @@ Three subagents attack the reviewed map from different angles, in parallel, once
 
 ## What each one receives
 
-- **Adversary 1** — the `MAP` data object.
-- **Adversary 2** — the `MAP` data object and the glossary.
-- **Adversary 3** — the `MAP` data object.
-
-Each works from the map alone, with the session transcript left behind. A fresh reader who cannot see how the map was arrived at is the point of the pass; the reasoning that produced a weak slice reads as justification for it.
+`map.json`, and nothing else. Each works from the map alone, with the session transcript left behind. A fresh reader who cannot see how the map was arrived at is the point of the pass; the reasoning that produced a weak slice reads as justification for it.
 
 All three are told the same thing about volume: report what the map actually gets wrong, and return an empty list when it holds up. A quota manufactures findings, and findings the user has to dismiss teach them to skim the next set.
 
@@ -22,7 +18,7 @@ Is Release 1 thin, and does it span the whole backbone?
 
 ## Adversary 2 — the coverage lens
 
-Is the map complete, and written in the domain's words?
+Is the map complete, and is every line of it something the persona does?
 
 - Name a step the persona must perform that no activity lists.
 - Name any task describing a user-facing action whose behind-the-scenes counterpart is absent, or the reverse.
@@ -31,7 +27,6 @@ Is the map complete, and written in the domain's words?
 - Name any task too vague to prioritize or build ("handle the payment").
 - Name any activity out of narrative order, and say whether the backbone has grown past 8 by mixing in steps.
 - Name any recorded pain point with no task addressing it.
-- Name any domain concept called by a word the glossary does not use, and any term the glossary lists under `avoid`.
 
 ## Adversary 3 — the trace lens
 

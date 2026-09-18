@@ -1,27 +1,32 @@
 ---
 name: to-story-map
-description: Facilitated story mapping, adversarially reviewed, ending in one issue per release slice in the project issue tracker and a published whiteboard.
+description: Story mapping facilitated on a live board, adversarially reviewed, ending in one issue per release slice in the project issue tracker.
 argument-hint: "[system or workflow, or an initiative already mapped]"
 disable-model-invocation: true
 ---
 
 # To Story Map
 
-Facilitate a story mapping session that builds the map question by question, put the finished map in front of three adversaries, then cut one issue per release slice and publish the map as a **whiteboard**.
+Facilitate a story mapping session that builds the map question by question on a **board** the user watches fill, put the finished map in front of three adversaries, then cut one issue per release slice.
 
 The three slice issues are the map's record — the map as the review and the pass left it, and what stayed an assumption. A later reader, and a resumed session, get only what rides in them.
 
 ## Repo wiring
 
-Two pointers. A missing one stops the session: name the file, say it is the repo's playbook wiring, and hold.
+One pointer, and its absence stops the session: name the file, say it is the repo's playbook wiring, and hold.
 
 - **`docs/agents/issue-tracker.md`** — reached from the `### Issue tracker` sub-block of `## Agent skills` in `AGENTS.md` or `CLAUDE.md`. Its operation table defines every tracker verb this skill names in **bold** — **publish**, **list**, **link A blocked by B** and the rest — and is the authority on both the command to run and the fallback when a tracker cannot express an edge. Read it at the write gate.
-- **`docs/agents/domain.md`** — the rules for reading this repo's `CONTEXT.md` glossary and its ADRs. Followed at Preflight.
 
 ## Input
 
 **Works best with:** the system or workflow to map.
 **Also useful:** primary users/personas, workflow steps already known, what the map must decide (MVP scope, release plan).
+
+## The board is the map
+
+`docs/story-map/<slug>/map.json` holds the map. A board renders that file in the browser and re-reads it about once a second, so every edit is on screen before the next question is asked — how to run it, the file's shape, and how the `view` key steers what the user is looking at are in [`references/BOARD.md`](references/BOARD.md).
+
+Every answer, ruling, and accepted finding lands in `map.json` first, and the board carries it from there. The reply that follows is the question and nothing else: the pending question, the numbered options a decision point needs, and where to look (`activity 3 is open on the board`). Activities, steps, tasks, notes, and slices belong to the board — typing them into the chat as well puts a second copy in front of the user, and it goes stale the moment the map changes.
 
 ## Facilitation protocol
 
@@ -30,35 +35,33 @@ Two pointers. A missing one stops the session: name the file, say it is the repo
 - **Recommendations only at decision points** (backbone approval, slice cuts, the review gate, adversary findings), numbered, one marked `(Recommended)`.
 - **Interruptions:** answer a meta question directly, restate progress and the pending question, resume. On stop/pause, halt and wait for an explicit resume.
 - **Inferred detail** — anything filled in rather than answered — is labelled as an assumption and carried into every slice issue's `Assumptions to validate` list.
-- **Fast path:** on a request for single-shot output, skip the questions but still run the review gate and the adversarial pass, then cut the issues and publish the whiteboard.
-
-## The map is the single source of truth
-
-Hold session state as one map: subject, segment/persona, narrative, activities → steps → tasks, release slices. Every question, gate, and adversary works on that one map; the whiteboard and the slice issues are both rendered from it at the end of the session, once it is final.
-
-Whenever the map changes, show the affected part of it in the conversation as an indented outline, so the user reviews the map itself rather than a description of it.
+- **Fast path:** on a request for single-shot output, skip the questions but still run the review gate and the adversarial pass, then cut the issues.
 
 ## Session flow
 
 ### Preflight
 
-Read the domain docs per `docs/agents/domain.md` — the `CONTEXT.md` glossary and the ADRs touching this area. Name activities, steps, and tasks in the glossary's words, honouring its `_Avoid_` synonyms, so the stories written from this map inherit the domain's vocabulary. A missing `CONTEXT.md`, no glossary: proceed silently.
+This map is where the initiative's words are coined: name activities, steps, and tasks as the user would say them out loud.
 
-Slugify the subject once — `Freelancer invoicing` → `freelancer-invoicing`. That slug is the initiative's identity for the rest of the session and the `map:` label on every issue it cuts.
+Slugify the subject once — `Freelancer invoicing` → `freelancer-invoicing`. That slug is the initiative's identity for the rest of the session, the folder under `docs/story-map/`, and the `map:` label on every issue it cuts. Where the invocation named no subject, take the slug from Q1's answer instead and open the board there.
 
-Then check whether this initiative is already mapped: **list** the tracker's tickets carrying `map:<slug>`, any state. Tickets found take the resume branch. Nothing found opens at Q1.
+Write `docs/story-map/<slug>/map.json` with what the invocation already gives — subject, slug, the three slices — start the board, and hand over its URL in one line.
 
-**Done when** the slug is fixed and the initiative is known to be new or already mapped.
+Then check whether this initiative is already mapped: an existing `map.json` at that path, and the tracker's tickets carrying `map:<slug>`, any state. Either one takes the resume branch. Nothing found opens at Q1.
+
+**Done when** the board is up with the session's `map.json` behind it, and the initiative is known to be new or already mapped.
 
 ### Resume — an initiative already mapped
 
-Reconstruct the map from the slice issues found at preflight, per the reconstruction rules in [`references/SLICE-FORMAT.md`](references/SLICE-FORMAT.md). Show it, then offer:
+An existing `map.json` is the map: serve it and the board shows what the last session left.
+
+With no such file, reconstruct the map from the slice issues found at preflight, per the reconstruction rules in [`references/SLICE-FORMAT.md`](references/SLICE-FORMAT.md), and write it to `map.json`. Say what reconstruction recovered — three slices or fewer, how many activities, steps, and tasks — so a gap in the record is visible before it is built on.
+
+Then offer:
 
 1. **Review again** — re-enter at the review gate
-2. **Write only** — go straight to the write gate with the map as reconstructed
+2. **Write only** — go straight to the write gate with the map as it stands
 3. **New initiative instead** — the subject is different work; take a new slug and open at Q1
-
-Report what reconstruction recovered — three slices or fewer, how many activities, steps, and tasks — so a gap in the record is visible before it is built on.
 
 **Done when** the user picks a branch.
 
@@ -77,11 +80,13 @@ Who is the primary persona (offer options: single persona / multiple sharing a w
 
 Capture the **segment** the persona belongs to as well — specific enough to exclude someone ("freelance graphic designers billing 5–10 clients", not "users"). Infer it from the persona and confirm it in one line rather than spending a separate question on it; every slice issue carries it.
 
+Persona, segment, and narrative land in the board's header, where they stay in view for every question that follows.
+
 ### Q3: Backbone — `Map Q3/6`
 
 Generate 5–8 **backbone** activities in narrative order, left to right — the sequence you'd use explaining the system to someone. Each activity is something the user *does*, never a product feature or a technical layer. Stay inside 5–8: fewer flattens the journey, and past 8 you're almost certainly listing steps as activities — consolidate them one level up.
 
-Show the activities numbered in narrative order and ask whether to add, remove, or reorder them.
+Ask whether to add, remove, or reorder them; the board is showing the row.
 
 With the backbone settled the map's size is known, so offer how Q5 fills it in: all activities in one turn, or one activity per turn. Recommend one-per-turn from 6 activities up, where a single turn's worth of tasks stops being reviewable. Steps stay one-shot either way.
 
@@ -89,15 +94,17 @@ With the backbone settled the map's size is known, so offer how Q5 fills it in: 
 
 ### Q4: Steps — `Map Q4/6`
 
-Under each activity, generate 3–5 steps in natural order, every one **watchable** — something you could stand behind the persona and see them do, named as object and action: "attach the signed contract", not "manage documents". A step you cannot picture someone performing is a state, a category, or a whole activity wearing a step's name; rewrite it as the act itself. Show them under their activities and ask for corrections.
+Under each activity, generate 3–5 steps in natural order, every one **watchable** — something you could stand behind the persona and see them do, named as object and action: "attach the signed contract", not "manage documents". A step you cannot picture someone performing is a state, a category, or a whole activity wearing a step's name; rewrite it as the act itself. Ask for corrections.
 
 **Done when** every activity has approved steps and every step is watchable.
 
 ### Q5: Tasks — `Map Q5/6`
 
-Under each step, generate 3–7 tasks — small, specific, prioritizable actions, in priority order with the most essential first. Cover both halves of the step: the user-facing action *and* the behind-the-scenes work it depends on ("send the invoice" **and** "receive payment confirmation"), so the slices carry real work rather than reading as UI-only. Show them under their steps in that order and ask whether the tasks and their order are right.
+Under each step, generate 3–7 tasks — small, specific, prioritizable actions, in priority order with the most essential first. Cover both halves of the step: the user-facing action *and* the behind-the-scenes work it depends on ("send the invoice" **and** "receive payment confirmation"), so the slices carry real work rather than reading as UI-only. Ask whether the tasks and their order are right.
 
-Per-activity mode works one activity per turn: carry the label `Map Q5/6 · Activity N/M — <name>`, show that activity's tasks each turn, and switch mode mid-loop whenever the user asks, in either direction.
+Tasks arrive before the slice cut, so tag them all `r1` and set that slice's `short` to `not cut yet` — the top band then reads as the priority order it currently is.
+
+Per-activity mode works one activity per turn: carry the label `Map Q5/6 · Activity N/M — <name>`, point the board's `view` at that activity so its tasks are readable in full, and switch mode mid-loop whenever the user asks, in either direction.
 
 **Done when** every step has approved, ordered tasks.
 
@@ -111,13 +118,13 @@ Cut the map into three horizontal slices:
 
 Three slices is the cut. A fourth ambition is a new initiative with its own slug, mapped on its own and chained to this one at that session's write gate.
 
-Show the map with every task tagged `R1`, `R2`, or `R3`, and ask whether the slices make sense.
+Retag every task and give R1 back its `walking skeleton` label, then point the board at `r1` — the release view marks every step the skeleton misses — and ask whether the slices make sense.
 
 **Done when** the user approves all three slices.
 
 ### Review gate
 
-Walk the map with the user and ask exactly:
+Walk the map with the user, one activity at a time with the board opened on it, and ask exactly:
 
 - Are there missing steps or tasks?
 - Are there pain points we're not addressing?
@@ -132,23 +139,25 @@ Fold every accepted answer into the map. Loop until the user confirms the map is
 
 ### Adversarial pass
 
-Put the reviewed map in front of three adversaries, per [`references/ADVERSARIES.md`](references/ADVERSARIES.md) — one attacking the skeleton claim, one attacking coverage and vocabulary, one attacking continuity. They run once, in parallel, on the post-review map.
+Put the reviewed map in front of three adversaries, per [`references/ADVERSARIES.md`](references/ADVERSARIES.md) — one attacking the skeleton claim, one attacking coverage, one attacking continuity. They run once, in parallel, on the post-review map.
 
 That file also holds how findings are collapsed, presented, and ruled, and the four checks that run once the rulings are folded in — an accepted change can break what an adversary already cleared.
 
+Findings are the one thing the chat carries in full: they are the adversaries' words about the map, not the map. Number them there, and open the board on whatever a finding names as it is ruled.
+
 Re-run the pass only when the user asks for it.
 
-**Done when** every finding carries a ruling, every accepted `change` is visible in the map, and the four checks pass or their findings are ruled too.
+**Done when** every finding carries a ruling, every accepted `change` is visible on the board, and the four checks pass or their findings are ruled too.
 
 ### Approval gate
 
-Show the map's final shape — slice by slice, task counts, what the pass changed — and ask for approval to cut issues.
+Open the board on each release in turn — R1, R2, R3 — say what the pass changed, and ask for approval to cut issues.
 
 **Done when** the user approves the map.
 
 ### Write gate
 
-**Check auth** on the tracker here, at the first step that needs it. A failed check stops at this gate with the map approved: dispatch the whiteboard agent below so the map still reaches the user, hand over the tracker doc's auth command, and hold — nothing before this point is lost.
+**Check auth** on the tracker here, at the first step that needs it. A failed check stops at this gate with the map approved and on screen: hand over the tracker doc's auth command and hold — `map.json` holds everything the session built, so nothing is lost.
 
 **List** the initiative's existing tickets (`map:<slug>`, matched with `release:rN`). An open slice issue is shown as a diff against the approved slice, with edit-in-place offered. A closed slice issue is reported and skipped: its stories are already written beneath it, and editing it would strand them.
 
@@ -158,21 +167,17 @@ Render the write plan — the labels to create, the three slice issues, the bloc
 
 ### Write
 
-Two subagents, dispatched in the same turn.
-
-**Whiteboard** — in the background, so the render never enters this session's context: hand it [`references/WHITEBOARD.md`](references/WHITEBOARD.md), the scratchpad path for `whiteboard.html`, and the final map data, and have it publish the board once and return the link.
-
-**Tracker** — one agent with the approved map, the write plan, `docs/agents/issue-tracker.md`, and [`references/SLICE-FORMAT.md`](references/SLICE-FORMAT.md), working in order, because R2's body cites R1's number:
+Stamp `map.json` with the approval date, then dispatch one subagent with the approved map, the write plan, `docs/agents/issue-tracker.md`, and [`references/SLICE-FORMAT.md`](references/SLICE-FORMAT.md), working in order, because R2's body cites R1's number:
 
 1. **Labels** — **create a label** for each missing one: `map:<slug>`, `release:r1`, `release:r2`, `release:r3`.
 2. **Issues** — **publish** one ticket per slice, R1 first, each body written per SLICE-FORMAT.md, each **applying** `map:<slug>` plus its release label.
 3. **Chain** — **link R2 blocked by R1**, then **R3 blocked by R2**, per the tracker doc. Where the tracker cannot express the edge, the body's `## Dependencies` prose becomes its single render — take the doc's stated fallback and say so plainly.
 
-**Done when** three tickets exist, each labelled, every chain edge is created or its fallback stated, and the whiteboard agent has returned its link.
+**Done when** three tickets exist, each labelled, and every chain edge is created or its fallback stated.
 
 ### Report
 
-The three ticket refs with their labels and blockers, and the board's link.
+The three ticket refs with their labels and blockers, the path to `map.json`, and the command that brings the board back up.
 
 ## Pitfalls
 
