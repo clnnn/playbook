@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Story map</title>
+<style>
+  :root {
+    --ink: #11151b;
+    --panel: #1a212a;
+    --rule: #2c3743;
+    --chalk: #e6ebf0;
+    --dim: #8d9aa8;
+    --r1: #ffb648;
+    --r2: #58c1b0;
+    --r3: #8a92e0;
+    --gap: 10px;
+    --pad: 22px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: var(--ink);
+    color: var(--chalk);
+    font-family: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ---- header ------------------------------------------------------- */
+
+  header {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    padding: 18px var(--pad) 14px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  #subject {
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #axis {
+    font-size: 12.5px;
+    color: var(--dim);
+    white-space: nowrap;
+  }
+
+  #filters {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+    flex: 0 0 auto;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 7px;
+    padding: 5px 11px 6px;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--dim);
+    font: inherit;
+    font-size: 12.5px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .chip .swatch {
+    width: 9px;
+    height: 9px;
+    border-radius: 1px;
+    background: var(--slice, var(--rule));
+    opacity: 0.35;
+    transform: translateY(0.5px);
+  }
+
+  .chip .count {
+    font-variant-numeric: tabular-nums;
+    font-size: 11.5px;
+    opacity: 0.7;
+  }
+
+  .chip[aria-pressed="true"] {
+    color: var(--chalk);
+    border-color: color-mix(in srgb, var(--slice, var(--rule)) 55%, transparent);
+  }
+
+  .chip[aria-pressed="true"] .swatch { opacity: 1; }
+
+  .chip:focus-visible {
+    outline: 2px solid var(--chalk);
+    outline-offset: 2px;
+  }
+
+  /* ---- stage -------------------------------------------------------- */
+
+  #stage {
+    flex: 1 1 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    padding: var(--pad);
+  }
+
+  /* ---- activities --------------------------------------------------- */
+
+  .activity {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+  }
+
+  .activity > h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    margin: 0 0 2px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--chalk);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+
+  .activity > h2 .n {
+    font-size: 11.5px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--dim);
+  }
+
+  .steps {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--gap);
+  }
+
+  /* ---- steps and body ----------------------------------------------- */
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    width: 148px;
+  }
+
+  .step > h3 {
+    margin: 0;
+    padding: 9px 11px 10px;
+    background: var(--panel);
+    border-left: 2px solid var(--dim);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .card {
+    position: relative;
+    padding: 8px 10px 9px;
+    border-radius: 2px;
+    font-size: 12px;
+    line-height: 1.3;
+    background: color-mix(in srgb, var(--slice) 17%, var(--ink));
+    color: color-mix(in srgb, var(--slice) 45%, var(--chalk));
+    box-shadow: inset 2px 0 0 var(--slice);
+  }
+
+  .card.unassigned {
+    --slice: var(--rule);
+    color: var(--dim);
+    box-shadow: inset 2px 0 0 var(--rule);
+  }
+
+  .card.changed { animation: land 1.6s ease-out; }
+
+  @keyframes land {
+    0%, 30% {
+      background: color-mix(in srgb, var(--slice) 62%, var(--ink));
+      color: var(--chalk);
+    }
+    100% {
+      background: color-mix(in srgb, var(--slice) 17%, var(--ink));
+      color: color-mix(in srgb, var(--slice) 45%, var(--chalk));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card.changed { animation: none; }
+  }
+
+  .empty {
+    padding: 9px 11px;
+    border: 1px dashed var(--rule);
+    border-radius: 2px;
+    font-size: 11.5px;
+    color: var(--dim);
+  }
+
+  /* ---- waiting ------------------------------------------------------ */
+
+  #waiting {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    padding: 0 40px;
+  }
+
+  #waiting.on { display: flex; }
+
+  #waiting p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--dim);
+    max-width: 46ch;
+    line-height: 1.5;
+  }
+
+  #waiting .lede { font-size: 17px; color: var(--chalk); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1 id="subject">Story map</h1>
+  <span id="axis">left to right: time &nbsp;·&nbsp; down: depth</span>
+  <div id="filters"></div>
+</header>
+
+<div id="stage">
+  <div id="map" aria-live="polite"></div>
+  <div id="waiting" class="on">
+    <p class="lede">Waiting for the map.</p>
+    <p id="waiting-detail">The board reads map.json beside it, about once a second. It fills as the session goes.</p>
+  </div>
+</div>
+
+<script>
+const SLICES = [
+  { id: "R1", label: "R1", color: "var(--r1)" },
+  { id: "R2", label: "R2", color: "var(--r2)" },
+  { id: "R3", label: "R3", color: "var(--r3)" },
+];
+
+const SOURCE = new URLSearchParams(location.search).get("map") || "map.json";
+
+const hidden = new Set();
+let lastRaw = null;
+let map = null;
+let seen = null; // card keys from the previous render, to highlight what just landed
+
+const el = (tag, cls, text) => {
+  const node = document.createElement(tag);
+  if (cls) node.className = cls;
+  if (text != null) node.textContent = text;
+  return node;
+};
+
+const sliceOf = (card) => {
+  const raw = (card && card.slice ? String(card.slice) : "").toUpperCase();
+  return SLICES.some((s) => s.id === raw) ? raw : null;
+};
+
+const activities = () => (map && Array.isArray(map.activities) ? map.activities : []);
+const stepsOf = (a) => (Array.isArray(a.steps) ? a.steps : []);
+const cardsOf = (s) => (Array.isArray(s.cards) ? s.cards : []);
+
+function counts() {
+  const tally = { R1: 0, R2: 0, R3: 0, unassigned: 0 };
+  for (const a of activities())
+    for (const s of stepsOf(a))
+      for (const c of cardsOf(s)) tally[sliceOf(c) || "unassigned"]++;
+  return tally;
+}
+
+/* ---- filters --------------------------------------------------------- */
+
+function drawFilters() {
+  const tally = counts();
+  const bar = document.getElementById("filters");
+  bar.replaceChildren();
+
+  const rows = SLICES.map((s) => ({ ...s, n: tally[s.id] }));
+  if (tally.unassigned) rows.push({ id: "unassigned", label: "unsliced", color: "var(--rule)", n: tally.unassigned });
+
+  for (const row of rows) {
+    const chip = el("button", "chip");
+    chip.type = "button";
+    chip.style.setProperty("--slice", row.color);
+    chip.setAttribute("aria-pressed", String(!hidden.has(row.id)));
+    chip.append(el("span", "swatch"), el("span", null, row.label), el("span", "count", row.n));
+    chip.addEventListener("click", () => {
+      hidden.has(row.id) ? hidden.delete(row.id) : hidden.add(row.id);
+      draw();
+    });
+    bar.append(chip);
+  }
+}
+
+document.addEventListener("keydown", (e) => {
+  const key = { 1: "R1", 2: "R2", 3: "R3" }[e.key];
+  if (!key || e.metaKey || e.ctrlKey) return;
+  hidden.has(key) ? hidden.delete(key) : hidden.add(key);
+  draw();
+});
+
+/* ---- the map --------------------------------------------------------- */
+
+function draw() {
+  const stage = document.getElementById("map");
+  const waiting = document.getElementById("waiting");
+  const list = activities();
+
+  document.getElementById("subject").textContent = (map && map.subject) || "Story map";
+  drawFilters();
+
+  if (!list.length) {
+    stage.replaceChildren();
+    waiting.classList.add("on");
+    fit();
+    return;
+  }
+  waiting.classList.remove("on");
+
+  const fresh = new Set();
+  const frame = document.createDocumentFragment();
+
+  list.forEach((activity, i) => {
+    const column = el("div", "activity");
+    const head = el("h2");
+    head.append(el("span", "n", String(i + 1)), el("span", null, activity.name || "—"));
+    column.append(head);
+
+    const steps = el("div", "steps");
+    const own = stepsOf(activity);
+
+    if (!own.length) steps.append(el("div", "empty", "no steps yet"));
+
+    own.forEach((step, j) => {
+      const col = el("div", "step");
+      col.append(el("h3", null, step.name || "—"));
+
+      const body = el("div", "body");
+      let shown = 0;
+
+      cardsOf(step).forEach((card, k) => {
+        const slice = sliceOf(card);
+        if (hidden.has(slice || "unassigned")) return;
+        shown++;
+
+        const key = `${i}/${j}/${k}/${card.name}/${slice}`;
+        fresh.add(key);
+
+        const node = el("div", "card" + (slice ? "" : " unassigned"), card.name || "—");
+        if (slice) node.style.setProperty("--slice", `var(--${slice.toLowerCase()})`);
+        if (seen && !seen.has(key)) node.classList.add("changed");
+        body.append(node);
+      });
+
+      if (!shown) body.append(el("div", "empty", cardsOf(step).length ? "filtered out" : "no cards yet"));
+      col.append(body);
+      steps.append(col);
+    });
+
+    column.append(steps);
+    frame.append(column);
+  });
+
+  stage.replaceChildren(frame);
+  seen = fresh;
+  fit();
+}
+
+/* ---- scale to fit: the whole map, never a scrollbar ------------------- */
+
+function fit() {
+  const stage = document.getElementById("stage");
+  const node = document.getElementById("map");
+
+  node.style.transform = "scale(1)";
+  const w = node.scrollWidth;
+  const h = node.scrollHeight;
+  if (!w || !h) return;
+
+  const scale = Math.min(1, stage.clientWidth / w, stage.clientHeight / h);
+  const x = Math.max(0, (stage.clientWidth - w * scale) / 2);
+  node.style.transform = `translate(${x}px, 0) scale(${scale})`;
+}
+
+window.addEventListener("resize", fit);
+
+/* ---- the file is the map --------------------------------------------- */
+
+async function poll() {
+  try {
+    const res = await fetch(`${SOURCE}?t=${Date.now()}`, { cache: "no-store" });
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+    const raw = await res.text();
+    if (raw === lastRaw) return;
+    lastRaw = raw;
+    map = JSON.parse(raw);
+    draw();
+  } catch (err) {
+    if (map) return; // a half-written file during a save: keep the last good map on screen
+    document.getElementById("waiting-detail").textContent =
+      `Nothing readable at ${SOURCE} yet (${err.message}). The board re-reads it about once a second.`;
+  }
+}
+
+poll();
+setInterval(poll, 1000);
+</script>
+</body>
+</html>
