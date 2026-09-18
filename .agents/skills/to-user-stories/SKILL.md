@@ -13,13 +13,13 @@ Synthesise what this conversation already holds into implementation-ready storie
 
 - Use the project's domain glossary vocabulary throughout the user story, and respect any ADRs in the area you're touching.
 - Tracker verbs this skill names in **bold** — **publish**, **link A blocked by B**, **apply a label** — are defined by the project's issue tracker doc.
-- The `codebase-design` skill is the seam vocabulary; its terms (module, interface, seam, adapter, depth) are the words §5 and §6 use.
+- Seam vocabulary — module, interface, seam, adapter, depth — is what §5 and §6 are written in; keep to those terms rather than substituting "component," "service," or "boundary."
 
 ## Step 1/6 — Ground
 
 The feature is whatever the invocation named, else the one this conversation is about.
 
-Ground in **one dispatch**: an exploring subagent for the current state of the code the feature touches — what already runs, what the change has to reach — sent in the same message as your own reads of the design references the invocation or the conversation names, the glossary (its exact words carry the Step 6 checks, and a subagent's summary loses them), the ADRs covering the area, the issue tracker doc, and the `codebase-design` skill. Everything the run needs arrives before its one gate, and the tracker verbs are in context long before Step 6 writes.
+Ground in **one dispatch**: an exploring subagent for the current state of the code the feature touches — what already runs, what the change has to reach — sent in the same message as your own reads of the design references the invocation or the conversation names, the glossary (its exact words carry the Step 6 checks, and a subagent's summary loses them), the ADRs covering the area and the issue tracker doc. Everything the run needs arrives before its one gate, and the tracker verbs are in context long before Step 6 writes.
 
 The glossary's vocabulary carries through every story. Where a story's work contradicts an ADR, surface it — *"contradicts ADR-0003, worth reopening because…"* — rather than silently overriding.
 
@@ -47,7 +47,7 @@ Variations the reference does show — a richer input, a second breakpoint, an a
 
 ## Step 3/6 — Seams
 
-Sketch the seams at which the feature gets tested, in the `codebase-design` skill's words. A designed surface is seamed through the components Step 2 named, existing ones first.
+Sketch the seams at which the feature gets tested, in the seam vocabulary. A designed surface is seamed through the components Step 2 named, existing ones first.
 
 - **Existing over new.** A seam already in the codebase costs nothing to test through.
 - **Highest possible.** The seam that observes the most behaviour per unit of interface a test has to learn. A new seam is proposed at the highest point it can sit.
