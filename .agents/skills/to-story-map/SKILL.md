@@ -1,7 +1,7 @@
 ---
 name: to-story-map
 argument-hint: "[product or feature]"
-description: Build a Patton-style user story map on a live board — activities, backbone, body — one row per turn, then open the three release slices as GitHub issues.
+description: Build a Patton-style user story map on a live board — activities, backbone, body — one row per turn, then open the three release slices as issues in the repo's tracker.
 disable-model-invocation: true
 ---
 
@@ -23,7 +23,7 @@ Anything supplied at invocation — text after `/to-story-map`, a pasted dump, a
 
 **Anchor every question.** Ask with a candidate answer to accept, correct, or reject — an anchor pulls a sharper reply than a blank does. Numbered options where the answer has natural choices, your recommendation first, `Other (specify)` when open-ended. Accept `1`, `1 and 3`, `1,3`, or free text.
 
-**Facilitation.** Open with a heads-up — four rows, a turn each, three GitHub issues at the end. Label progress every turn — `Row 3/4 — Body`. One turn per row: write the whole row into `map.json`, ask, then wait. On "stop", halt and wait for an explicit resume.
+**Facilitation.** Open with a heads-up — four rows, a turn each, three issues at the end. Label progress every turn — `Row 3/4 — Body`. One turn per row: write the whole row into `map.json`, ask, then wait. On "stop", halt and wait for an explicit resume.
 
 ## The board
 
@@ -121,7 +121,7 @@ Set every card's slice, then ask the user to confirm R1 is walkable end to end a
 
 ## Publishing
 
-The map ships as three issues, one per slice — together they carry every card, so nothing else is written down. Once Row 4 is confirmed, create each with `gh issue create`, then report the URLs and the path to `map.json`.
+The map ships as three issues, one per slice — together they carry every card, so nothing else is written down. Once Row 4 is confirmed, publish each to the issue tracker: `docs/agents/issue-tracker.md`, written by `/setup-playbook`, says how; without it, use GitHub via `gh issue create`. Then report the URLs and the path to `map.json`.
 
 Title: `R1 — [subject]`, `R2 — [subject]`, `R3 — [subject]`.
 
@@ -131,8 +131,8 @@ Body, three parts in this order:
 - **Cards.** A checklist in backbone order, one line per card as `- [ ] [step] — [card]`.
 - **Done when.** One line. R1: the narrative walks end to end against the built thing. R2 and R3: every card checked.
 
-Label each issue `story-map` and `R1` / `R2` / `R3`, creating a missing label with `gh label create` first.
+Label each issue `story-map` and `R1` / `R2` / `R3`, creating a missing label first.
 
 A card dropped along the way goes in a closing **Dropped** line on the R3 issue, one per line as `[card] — [why]`.
 
-No repo, or `gh` unauthenticated: print the three issue bodies in the chat and say what blocked the create.
+Tracker unreachable — no repo, or its CLI unauthenticated: print the three issue bodies in the chat and say what blocked the create.

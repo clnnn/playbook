@@ -1,0 +1,5 @@
+interface:
+  display_name: "Setup Playbook"
+  short_description: "Decide where the PRD and story-map issues live"
+policy:
+  allow_implicit_invocation: false
