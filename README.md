@@ -8,7 +8,7 @@ _Not decided yet._
 
 ### Greenfield project
 
-1. **`/to-prd`** → the PRD path set by `/setup-playbook` (`docs/prd.md` by default). Captures what we're building and why. Feed it whatever raw material you have: lean product canvas, discovery notes, client call transcripts, sketches, whatever plans already exist.
+1. **`/to-prd`** → the PRD path set by `/setup-playbook` (`docs/product/prd.md` by default). Captures what we're building and why. Feed it whatever raw material you have: lean product canvas, discovery notes, client call transcripts, sketches, whatever plans already exist.
 2. **Set the technology stack**, working from the PRD:
    - **`/grilling`** → **`/to-spec`**: have the AI pressure-test your stack choices, then turn that session into a spec.
    - **Ad hoc**: for something small and obvious, settle the stack with the AI directly.
@@ -27,7 +27,7 @@ Install the skills in this repo with [`gh skill install`](https://cli.github.com
 gh skill install clnnn/playbook --allow-hidden-dirs --all
 ```
 
-Then run **`/setup-playbook`** once per repo. It decides where `/to-prd` publishes the PRD and where `/to-story-map` opens its release-slice issues, and records both under `docs/agents/`.
+Then run **`/setup-playbook`** once per repo. It decides where `/to-prd` publishes the PRD, and records the choice under `docs/agents/`.
 
 A few steps in the flow call skills from [mattpocock/skills](https://github.com/mattpocock/skills) (MIT). Install those too:
 

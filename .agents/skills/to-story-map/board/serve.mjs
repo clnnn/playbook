@@ -1,5 +1,5 @@
 // Serves the board at / and the session's map at /map.json. No dependencies.
-//   node board/serve.mjs tmp/story-map/<slug>/map.json [port]
+//   node board/serve.mjs docs/product/story-map/<slug>/map.json [port]
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";

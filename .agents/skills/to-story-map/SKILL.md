@@ -1,7 +1,7 @@
 ---
 name: to-story-map
 argument-hint: "[product or feature]"
-description: Build a Patton-style user story map on a live board — activities, backbone, body — one row per turn, then open the release slices as issues in the repo's tracker, R1 as one issue per demo.
+description: Build a Patton-style user story map on a live board — activities, backbone, body — one row per turn, then cut the release slices and open R1's demos as issues in the repo's tracker.
 disable-model-invocation: true
 ---
 
@@ -27,7 +27,7 @@ Anything supplied at invocation — text after `/to-story-map`, a pasted dump, a
 
 ## The board
 
-`tmp/story-map/<slug>/map.json` is the map. The **board** renders it in the browser and re-reads it about once a second, so every edit is on screen before the next question is asked. Steps keep a readable width and the backbone wraps onto the next line when it runs out of room, like text — one drawn spine runs under the steps and carries the narrative round into the next line, and the steps are numbered so the order survives the wrap. The body cards are sticky notes coloured by slice; a chip per slice hides it (keys `1`, `2`, `3`, and `0` for unsliced).
+`docs/product/story-map/<slug>/map.json` is the map. The **board** renders it in the browser and re-reads it about once a second, so every edit is on screen before the next question is asked. Steps keep a readable width and the backbone wraps onto the next line when it runs out of room, like text — one drawn spine runs under the steps and carries the narrative round into the next line, and the steps are numbered so the order survives the wrap. The body cards are sticky notes coloured by slice; a chip per slice hides it (keys `1`, `2`, `3`, and `0` for unsliced).
 
 The file grows a row at a time — activities, then their steps, then the cards under each step, then each card's slice:
 
@@ -49,10 +49,10 @@ Every card lands in `map.json` first, and the user reads it on the board. The ch
 
 ## Setup
 
-Slugify the subject — `Freelancer invoicing` → `freelancer-invoicing`. Write `tmp/story-map/<slug>/map.json` carrying the subject and whatever the input already gives, then start the board and hand over its URL in one line:
+Slugify the subject — `Freelancer invoicing` → `freelancer-invoicing`. Write `docs/product/story-map/<slug>/map.json` carrying the subject and whatever the input already gives, then start the board and hand over its URL in one line:
 
 ```bash
-node <skill-dir>/board/serve.mjs tmp/story-map/<slug>/map.json 4321 &
+node <skill-dir>/board/serve.mjs docs/product/story-map/<slug>/map.json 4321 &
 ```
 
 On a taken port, pick another and say which.
@@ -121,7 +121,7 @@ Set every card's slice, then ask the user to confirm R1 is walkable end to end a
 
 ## Publishing
 
-The map ships as issues, and together they carry every card, so nothing else is written down. Once Row 4 is confirmed, publish to the issue tracker: `docs/agents/issue-tracker.md`, written by `/setup-playbook`, says how; without it, use GitHub via `gh issue create`. Then report the URLs.
+The map is the record: `map.json` carries every card and its slice, and it outlives the session. Only R1 becomes issues — walking R1 is what tells you whether R2 and R3 were sliced right, so they stay on the map until then.
 
 **R1 ships as demos.** A **demo** is a group of R1's cards you can show to someone who does not read code, and a day or two of work. Group every R1 card into demos in backbone order, then order them so the earliest demos reach a walk of the whole narrative — the cheapest path from the first step to the last — before any later one deepens it. A group nobody can be shown is a layer: fold it into the first demo that needs it.
 
@@ -135,20 +135,20 @@ Thin a demo that runs past that:
 
 A rule thinned out of a demo that no R2 or R3 card already carries goes back on the board as a card in its column, so the map stays the single record.
 
-Show the user the demos and their order in one message, ask them to merge, split or reorder, then create the issues.
+Show the user the demos and their order in one message, ask them to merge, split or reorder, then create the issues where the repo says issues go — its `CLAUDE.md` or `AGENTS.md`, and whatever they point at. No convention written down: use GitHub via `gh issue create`.
 
-Titles: `R1.1 — [demo]` through `R1.N — [demo]`, then `R2 — [subject]`, `R3 — [subject]`.
+Titles: `R1.1 — [demo]` through `R1.N — [demo]`.
 
 Body, three parts in this order:
 
-- **Walk it.** The narrative the issue covers, one sentence per step, so a reader can walk it. Each R1 demo walks its own steps and the demos together walk end to end; R2 and R3 walk only the steps they deepen.
+- **Walk it.** The narrative the demo covers, one sentence per step, so a reader can walk it. Each demo walks its own steps, and the demos together walk end to end.
 - **Cards.** A checklist in backbone order, one line per card as `- [ ] [step] — [card]`.
-- **Done when.** One line. An R1 demo: it is shown against the built thing. R2 and R3: every card checked.
+- **Done when.** One line: the demo is shown against the built thing.
 
-Label each issue `story-map` and `R1` / `R2` / `R3`, creating a missing label first.
+Label each issue `story-map` and `R1`, creating a missing label first.
 
-A card dropped along the way goes in a closing **Dropped** line on the R3 issue, one per line as `[card] — [why]`.
+Close with the URLs, and with any card dropped along the way, one per line as `[card] — [why]`.
 
 Tracker unreachable — no repo, or its CLI unauthenticated: print the issue bodies in the chat and say what blocked the create.
 
-**Published when:** every R1 card appears in exactly one demo issue, every R2 and R3 card appears in its slice's issue, and the user has the URLs.
+**Published when:** every R1 card appears in exactly one demo issue, `map.json` carries every card with its slice, and the user has the URLs.

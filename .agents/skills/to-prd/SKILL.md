@@ -178,4 +178,4 @@ One table: `Risk | Why it matters`, filled by a pass over **Cagan's four risks**
 
 ## Publishing
 
-Publish the PRD where `docs/agents/prd.md` says; `/setup-playbook` writes that file. Without it, save as `docs/prd.md`. Report the path.
+Publish the PRD where `docs/agents/prd.md` says; `/setup-playbook` writes that file. Without it, save as `docs/product/prd.md`. Report the path.
