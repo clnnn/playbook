@@ -24,7 +24,7 @@ Read the repo's starting state. Every finding settles or skips a question in ste
 - `git remote -v`: GitHub, GitLab (`gitlab.com` or self-hosted), or no remote
 - `CLAUDE.md` and `AGENTS.md` at the repo root: which exists, whether one is a symlink to the other, and whether either already carries an `## Agent skills` section
 - `docs/agents/prd.md` and `docs/agents/issue-tracker.md`: prior output of this skill, or of `/setup-matt-pocock-skills`, which writes the same `issue-tracker.md`
-- Existing PRDs: `prd.md`, `docs/prd.md`, `docs/prd/*.md`, and any `docs/**/prd*.md`. One file means a single-PRD repo; several, or more than one `docs/story-map/*/`, means the repo hosts several initiatives
+- Existing PRDs: `prd.md`, `docs/prd.md`, `docs/prd/*.md`, and any `docs/**/prd*.md`. One file means a single-PRD repo; several means the repo hosts several initiatives
 - `.scratch/`: a local-markdown issue tracker convention already in use
 - `gh auth status` or `glab auth status`, whichever matches the remote: is the CLI installed and signed in?
 
@@ -43,7 +43,7 @@ Lead each section with the recommended answer so the user can accept it in a wor
 Recommend from the evidence: an existing PRD's path when one was found, else `docs/prd.md`. Offer:
 
 - **Single file**: `docs/prd.md`, the repo builds one product
-- **Per initiative**: `docs/prd/<slug>.md`, one file per subject, sharing its slug with `docs/story-map/<slug>/`
+- **Per initiative**: `docs/prd/<slug>.md`, one file per subject, sharing its slug with `tmp/story-map/<slug>/`
 - **Other** (Notion, Confluence, a separate docs repo): ask the user to describe where the PRD lives and how to write it, in one paragraph, and record it as freeform prose
 
 The user may name a different path for either shape. The shape is the decision; the path is a detail. Record the choice in `docs/agents/prd.md`.

@@ -1,7 +1,7 @@
 ---
 name: to-story-map
 argument-hint: "[product or feature]"
-description: Build a Patton-style user story map on a live board — activities, backbone, body — one row per turn, then open the three release slices as issues in the repo's tracker.
+description: Build a Patton-style user story map on a live board — activities, backbone, body — one row per turn, then open the release slices as issues in the repo's tracker, R1 as one issue per demo.
 disable-model-invocation: true
 ---
 
@@ -23,11 +23,11 @@ Anything supplied at invocation — text after `/to-story-map`, a pasted dump, a
 
 **Anchor every question.** Ask with a candidate answer to accept, correct, or reject — an anchor pulls a sharper reply than a blank does. Numbered options where the answer has natural choices, your recommendation first, `Other (specify)` when open-ended. Accept `1`, `1 and 3`, `1,3`, or free text.
 
-**Facilitation.** Open with a heads-up — four rows, a turn each, three issues at the end. Label progress every turn — `Row 3/4 — Body`. One turn per row: write the whole row into `map.json`, ask, then wait. On "stop", halt and wait for an explicit resume.
+**Facilitation.** Open with a heads-up — four rows, a turn each, then the issues. Label progress every turn — `Row 3/4 — Body`. One turn per row: write the whole row into `map.json`, ask, then wait. On "stop", halt and wait for an explicit resume.
 
 ## The board
 
-`docs/story-map/<slug>/map.json` is the map. The **board** renders it in the browser and re-reads it about once a second, so every edit is on screen before the next question is asked. Steps keep a readable width and the backbone wraps onto the next line when it runs out of room, like text — one drawn spine runs under the steps and carries the narrative round into the next line, and the steps are numbered so the order survives the wrap. The body cards are sticky notes coloured by slice; a chip per slice hides it (keys `1`, `2`, `3`, and `0` for unsliced).
+`tmp/story-map/<slug>/map.json` is the map. The **board** renders it in the browser and re-reads it about once a second, so every edit is on screen before the next question is asked. Steps keep a readable width and the backbone wraps onto the next line when it runs out of room, like text — one drawn spine runs under the steps and carries the narrative round into the next line, and the steps are numbered so the order survives the wrap. The body cards are sticky notes coloured by slice; a chip per slice hides it (keys `1`, `2`, `3`, and `0` for unsliced).
 
 The file grows a row at a time — activities, then their steps, then the cards under each step, then each card's slice:
 
@@ -49,10 +49,10 @@ Every card lands in `map.json` first, and the user reads it on the board. The ch
 
 ## Setup
 
-Slugify the subject — `Freelancer invoicing` → `freelancer-invoicing`. Write `docs/story-map/<slug>/map.json` carrying the subject and whatever the input already gives, then start the board and hand over its URL in one line:
+Slugify the subject — `Freelancer invoicing` → `freelancer-invoicing`. Write `tmp/story-map/<slug>/map.json` carrying the subject and whatever the input already gives, then start the board and hand over its URL in one line:
 
 ```bash
-node <skill-dir>/board/serve.mjs docs/story-map/<slug>/map.json 4321 &
+node <skill-dir>/board/serve.mjs tmp/story-map/<slug>/map.json 4321 &
 ```
 
 On a taken port, pick another and say which.
@@ -121,18 +121,34 @@ Set every card's slice, then ask the user to confirm R1 is walkable end to end a
 
 ## Publishing
 
-The map ships as three issues, one per slice — together they carry every card, so nothing else is written down. Once Row 4 is confirmed, publish each to the issue tracker: `docs/agents/issue-tracker.md`, written by `/setup-playbook`, says how; without it, use GitHub via `gh issue create`. Then report the URLs and the path to `map.json`.
+The map ships as issues, and together they carry every card, so nothing else is written down. Once Row 4 is confirmed, publish to the issue tracker: `docs/agents/issue-tracker.md`, written by `/setup-playbook`, says how; without it, use GitHub via `gh issue create`. Then report the URLs.
 
-Title: `R1 — [subject]`, `R2 — [subject]`, `R3 — [subject]`.
+**R1 ships as demos.** A **demo** is a group of R1's cards you can show to someone who does not read code, and a day or two of work. Group every R1 card into demos in backbone order, then order them so the earliest demos reach a walk of the whole narrative — the cheapest path from the first step to the last — before any later one deepens it. A group nobody can be shown is a layer: fold it into the first demo that needs it.
+
+Thin a demo that runs past that:
+
+- **Path** — the happy path now, the alternates later.
+- **Data** — one input variant now: one task type, one channel, one file format.
+- **Rule** — a quality rule relaxed now and restored as its own demo: no validation, hardcoded config, no retries.
+- **Interface** — the crudest surface that shows the thing: a flat list, a printed link, a JSON dump.
+- **Spike** — the demo becomes a timeboxed question when its cards cannot be sized until something is learned, and its cards follow in the demo behind it.
+
+A rule thinned out of a demo that no R2 or R3 card already carries goes back on the board as a card in its column, so the map stays the single record.
+
+Show the user the demos and their order in one message, ask them to merge, split or reorder, then create the issues.
+
+Titles: `R1.1 — [demo]` through `R1.N — [demo]`, then `R2 — [subject]`, `R3 — [subject]`.
 
 Body, three parts in this order:
 
-- **Walk it.** The slice's narrative, one sentence per step, so a reader can walk it. R1 walks end to end; R2 and R3 walk only the steps they deepen.
+- **Walk it.** The narrative the issue covers, one sentence per step, so a reader can walk it. Each R1 demo walks its own steps and the demos together walk end to end; R2 and R3 walk only the steps they deepen.
 - **Cards.** A checklist in backbone order, one line per card as `- [ ] [step] — [card]`.
-- **Done when.** One line. R1: the narrative walks end to end against the built thing. R2 and R3: every card checked.
+- **Done when.** One line. An R1 demo: it is shown against the built thing. R2 and R3: every card checked.
 
 Label each issue `story-map` and `R1` / `R2` / `R3`, creating a missing label first.
 
 A card dropped along the way goes in a closing **Dropped** line on the R3 issue, one per line as `[card] — [why]`.
 
-Tracker unreachable — no repo, or its CLI unauthenticated: print the three issue bodies in the chat and say what blocked the create.
+Tracker unreachable — no repo, or its CLI unauthenticated: print the issue bodies in the chat and say what blocked the create.
+
+**Published when:** every R1 card appears in exactly one demo issue, every R2 and R3 card appears in its slice's issue, and the user has the URLs.

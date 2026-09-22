@@ -1,6 +1,6 @@
 # PRD
 
-PRDs for this repo live one per initiative at `docs/prd/<slug>.md`. The slug is the subject in kebab-case, `Freelancer invoicing` → `freelancer-invoicing`, and it is the slug `/to-story-map` uses for `docs/story-map/<slug>/`, so one initiative's documents share a name.
+PRDs for this repo live one per initiative at `docs/prd/<slug>.md`. The slug is the subject in kebab-case, `Freelancer invoicing` → `freelancer-invoicing`, and it is the slug `/to-story-map` uses for `tmp/story-map/<slug>/`, so one initiative's documents share a name.
 
 ## When a skill says "publish the PRD"
 
