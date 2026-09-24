@@ -10,7 +10,7 @@ _Not decided yet._
 
 1. **`/to-prd`** → the PRD path set by `/setup-playbook` (`docs/product/prd.md` by default). Captures what we're building and why. Feed it whatever raw material you have: lean product canvas, discovery notes, client call transcripts, sketches, whatever plans already exist.
 2. **Set the technology stack**, working from the PRD:
-   - **`/grilling`** → **`/to-spec`**: have the AI pressure-test your stack choices, then turn that session into a spec.
+   - **`/grilling`** → **`/to-tickets`**: have the AI pressure-test your stack choices, then turn that session into a tickets.
    - **Ad hoc**: for something small and obvious, settle the stack with the AI directly.
 3. **`/to-story-map`**: map the flows and cut the release slices (R1 - Walking Skeleton (MVP), R2 - Enhanced, R3 - Polish).
 4. **Strategic alignment**: run **`/grill-with-docs`** to settle the *how*, scoped to the R1 slice.
