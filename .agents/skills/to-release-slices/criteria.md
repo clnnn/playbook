@@ -1,6 +1,6 @@
 # Release slice criteria
 
-The eleven criteria every release slice is cut against. Each carries its **Check**: the question whose answer, in conversation, decides whether the slice passes. Use the names and wording as written.
+The eleven criteria every release slice is cut against. Each carries its **Check**: the question whose answer decides whether the slice passes. Use the names and wording as written.
 
 1. **Tracer bullet.** The slice runs through every layer, from where the work comes in to where a person signs it off. Check: one real case can travel the whole path without anyone patching it by hand.
 2. **Happy path.** Pick the case that is both most common and least branchy. Check: the slice follows exactly one path through the domain's decision tree.
@@ -12,6 +12,6 @@ The eleven criteria every release slice is cut against. Each carries its **Check
 8. **Guardrail.** Compliance, safety and legal rules ship in the first slice, at full strength. Check: every hard rule in the source material is either enforced by the slice or excluded by the fence.
 9. **Walking skeleton.** Later slices add to this one and never tear it down. Check: each piece of the slice is still there in the full version.
 10. **Deferral ledger.** Everything cut from the slice is written down as the next slices, in order. Check: every case the source material covers lands either in the slice or in the ledger.
-11. **Unknowns.** Open questions are sorted into two groups: those that block building (answer them first) and those that block sign-off (take them to the domain owner). Check: each open question has an owner and sits in one of the two groups.
+11. **Unknowns.** Open questions are sorted into two groups: those that block building (answer them first) and those that block sign-off (take them to the domain owner). Each carries a candidate answer, the most likely one. Check: each open question has an owner, a candidate answer, and sits in one of the two groups.
 
 In criterion 3, "already shipped" means what exists before any slice ships for the first slice, and the slice before it for every later one.

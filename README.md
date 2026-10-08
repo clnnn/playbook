@@ -10,14 +10,14 @@ _Not decided yet._
 
 1. **`/to-prd`** → the PRD path set by `/setup-playbook` (`docs/product/prd.md` by default). Captures what we're building and why. Feed it whatever raw material you have: lean product canvas, discovery notes, client call transcripts, sketches, whatever plans already exist.
 2. **Set the technology stack**, working from the PRD:
-   - **`/grilling`** → **`/to-tickets`**: have the AI pressure-test your stack choices, then turn that session into a tickets.
+   - **`/grilling`** → **`/to-tickets`**: have the AI pressure-test your stack choices, then turn that session into tickets.
    - **Ad hoc**: for something small and obvious, settle the stack with the AI directly.
-3. **`/to-story-map`**: map the flows and cut the release slices (R1 - Walking Skeleton (MVP), R2 - Enhanced, R3 - Polish).
+3. **`/to-release-slices`**: from the PRD, lay out the activities people go through, cut the release slices against the eleven criteria in [`criteria.md`](.agents/skills/to-release-slices/criteria.md), have fresh subagents try to break each slice and the sequence, then publish one GitHub issue per slice (`R1 — <name>`, labelled `release-slice`). Each slice is five lines: header, case, flow, fence, assumption. It asks for the material once, then runs to published issues on its own; open questions land in an unknowns list with owners and candidate answers.
 4. **Strategic alignment**: run **`/grill-with-docs`** to settle the *how*, scoped to the R1 slice.
 
-   > /grill-with-docs the prd settled the what and why, and the story map settled the flows and the R1 slice. Grill the how for R1: settle the ubiquitous language from the map's task names, and the hard, irreversible decisions
+   > /grill-with-docs the prd settled the what and why, and the release slices settled the activities and the R1 slice. Grill the how for R1: settle the ubiquitous language from the activities' names, and the hard, irreversible decisions
 
-   The map goes broad first, so the grill knows where to go deep. You only grill the decisions R1 actually takes, and you pull the glossary from concrete task names instead of inventing terms in the abstract.
+   The slices go broad first, so the grill knows where to go deep. A slice holds only its five parts, so everything else about R1 is left for the grill to settle. You only grill the decisions R1 actually takes, and you pull the glossary from concrete activity names instead of inventing terms in the abstract.
 
 ## Installation
 
