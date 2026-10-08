@@ -8,7 +8,7 @@ Bracketed text is a placeholder with one example each. Reproduce the headings an
 
 # Lean PRD: [Subject]
 
-Scope and shape, plus the quality numbers the build holds to. Functional requirements — stories, epics, acceptance criteria — live in the story map this document feeds.
+Scope, plus the quality numbers the build holds to. Functional requirements — stories, epics, acceptance criteria — live in the story map this document feeds.
 
 > 🔶 marks anything not established — inferred, assumed, or unknown. Every 🔶 has a row in Open questions.
 
@@ -19,23 +19,6 @@ Scope and shape, plus the quality numbers the build holds to. Functional require
 **Persona:** [Type label — one line of build-relevant traits. *(e.g. "Solopreneur — 1-person business, no IT support, works from email and spreadsheets. The pain this removes: an empty dashboard with no indication of what to do first.")*]
 
 **Problem:** [One sentence, concrete and observable. *(e.g. "New users abandon within 24 hours because nothing tells them which action comes first.")*]
-
-## Solution & user flow
-
-```
-[ASCII flow — trigger through every step to the terminal state]
-
-signup
-   ▼
-first login → checklist modal (3 steps)
-   │  create project → invite teammate (optional) → complete sample task
-   ▼
-progress bar updates per step
-   ▼
-all steps done → completion state
-```
-
-[At most three sentences on what the product does and how.]
 
 ## In scope
 
@@ -64,7 +47,7 @@ all steps done → completion state
 **[PREFIX-01] — [Label: 2–4 words naming what this requirement is about]**
 [The number under its named conditions, target with the floor in brackets.]
 
-- **Why** — [Solution step, and what the persona does when the number is missed]
+- **Why** — [In-scope workstream, and what the persona does when the number is missed]
 - **From** — [When it holds, and how it tightens]
 
 *Example:*
@@ -72,7 +55,7 @@ all steps done → completion state
 **PERF-01 — Dashboard load**
 Dashboard renders a complete balance in ≤400ms p99 (700ms floor) at 5k concurrent.
 
-- **Why** — Solution step "account dashboard": the advisor reloads twice, then reads from the spreadsheet, and activation misses.
+- **Why** — Workstream "account dashboard": the advisor reloads twice, then reads from the spreadsheet, and activation misses.
 - **From** — Launch; tightens to 250ms p99 at 20k concurrent.
 
 *Raised, not pinned:*

@@ -2,7 +2,7 @@
 
 Lookup reference for the **Quality requirements** section of [`to-prd`](../SKILL.md): the ten quality attributes, the signals that raise them, the rubric that decides which get pinned, and the tradeoffs that make a pinned set impossible.
 
-A **signal** is something already written in **What & why** or **Solution & user flow** that tells you a quality matters. Derivation runs off the document, so a product that never touches money never fields a payment-integrity question, and a desk-bound persona never fields an offline one.
+A **signal** is something already written in **What & why** or **In scope** that tells you a quality matters. Derivation runs off the document, so a product that never touches money never fields a payment-integrity question, and a desk-bound persona never fields an offline one.
 
 ## The ten attributes
 
@@ -27,7 +27,7 @@ IDs number per attribute — `PERF-01`, `PERF-02`, `RESIL-01`.
 
 ## The signal table
 
-| Signal in What & why / Solution & user flow | Raises |
+| Signal in What & why / In scope | Raises |
 |---|---|
 | Money changes hands, or a balance/price/total is displayed | `DATA` `SEC` `AVAIL` — a wrong number is worse than no number |
 | Personal, health, financial or location data is stored | `SEC` `COMP` |
