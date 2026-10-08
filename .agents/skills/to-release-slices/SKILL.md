@@ -31,7 +31,7 @@ Read [`criteria.md`](criteria.md) on entering. Its eleven criteria govern every 
 4. **Fence** — the one written rule that decides what enters, one line.
 5. **Assumption** — the belief shipping this slice proves or disproves, one line.
 
-**Cut the first slice.** Walk the eleven criteria in order. Run each criterion's **Check** against the source material and write one line of evidence per criterion, answering its Check. A check that fails reshapes the slice before it is written down.
+**Cut the first slice.** Walk the eleven criteria in order, answering each criterion's **Check** against the source material. A check that fails reshapes the slice before it is written down. The walk leaves no record of its own: what survives it is the slice's five parts, and the breakers re-derive the rest from the source.
 
 **Cut the next slices.** Criterion 10's ledger names them, in order. Each one gets the same treatment: the full eleven-criteria walk. The last slice's ledger is empty.
 
@@ -48,16 +48,19 @@ Read [`criteria.md`](criteria.md) on entering. Its eleven criteria govern every 
 
 ## Stage 2/3 — Break
 
-Breakers are **fresh eyes**: general-purpose subagents, never forks, so each carries none of the author's reasoning. Spawn them in parallel in one message, one per slice plus one for the set.
+Breakers are **fresh eyes**: general-purpose subagents, never forks, so each carries none of the author's reasoning. Spawn one per slice, in parallel, in one message.
 
-**Brief** each with absolute paths only — the source file, `criteria.md`, `slices.md` — its target, and its charge:
+**Brief** each with absolute paths only — the source file, `criteria.md`, `slices.md` — its target slice, and its charge: run Checks 1 to 10 in `criteria.md` against the source for that slice, and break it.
 
-- **Slice breaker:** run Checks 1 to 10 in `criteria.md` against the source for your slice, and break it. Return one line per criterion, `PASS` or `FAIL`, with the evidence, and for each `FAIL` the smallest reshape that would pass.
-- **Set breaker:** break the sequence. Every case in the source lands in exactly one slice; every activity is reached; each slice builds only on slices before it and R1 builds on nothing; each ledger names the slices that follow it; Check 11 in `criteria.md` passes for the unknowns list. Return one line per claim, `PASS` or `FAIL`, with the evidence.
+**Return lean.** Every breaker answers in the same shape, and nothing else: one line naming the passing criteria by number, then one block per `FAIL` — the criterion, the evidence, the smallest reshape that would pass. A passing check costs a number; only a break earns prose.
 
-**Handle verdicts.** Confirm each `FAIL` against the source before acting; breakers over-report. A `FAIL` the source refutes counts as `PASS`. A confirmed `FAIL` reshapes the slice in `slices.md`, and the reshaped slice goes to a new breaker. Three rounds per slice at most: a `FAIL` that survives the third round joins the unknowns with the breaker's evidence and an owner, and the slice ships as it stands. After the last reshape, a new set breaker runs on the final `slices.md`.
+**Handle verdicts.** Confirm each `FAIL` against the source before acting; breakers over-report. A `FAIL` the source refutes counts as `PASS`. A confirmed `FAIL` reshapes the slice in `slices.md`.
 
-**Done when:** every slice holds ten `PASS`, each from a breaker or a refuted `FAIL`, or its surviving `FAIL`s sit in the unknowns; a set breaker returns all `PASS` on the final `slices.md`.
+**Round two is narrow.** One breaker per reshaped slice, charged with the reshaped criteria alone. A `FAIL` that survives it joins the unknowns with the breaker's evidence and an owner, and the slice ships as it stands. Two rounds per slice is the cap.
+
+**Set breaker runs once**, on the final `slices.md`, after the last reshape. Its charge: every case in the source lands in exactly one slice; every activity is reached; each slice builds only on slices before it and R1 builds on nothing; each ledger names the slices that follow it; Check 11 in `criteria.md` passes for the unknowns list. Same lean return. Its confirmed `FAIL`s reshape `slices.md` directly, and the stage ends there.
+
+**Done when:** every criterion 1 to 10 on every slice is a breaker `PASS`, a refuted `FAIL`, or an unknown with an owner and a candidate answer; the set breaker's claims are all `PASS` or refuted.
 
 ---
 
