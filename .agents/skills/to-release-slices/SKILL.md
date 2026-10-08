@@ -1,7 +1,7 @@
 ---
 name: to-release-slices
 argument-hint: "[conversation, PRD, notes or file to slice]"
-description: Turn a conversation into release slices — activities, then slices cut against eleven criteria, broken by fresh adversarial subagents, published as GitHub issues.
+description: Turn a conversation into release slices — activities, then slices cut against eleven criteria, broken by fresh adversarial subagents, published to the project's issue tracker.
 disable-model-invocation: true
 ---
 
@@ -66,10 +66,12 @@ Breakers are **fresh eyes**: general-purpose subagents, never forks, so each car
 
 ## Stage 3/3 — Publish
 
-Publish with `gh`: one issue per slice, in order, labelled `release-slice`, creating the label once if absent. Title `R1 — <name>`. Body:
+Read `docs/agents/issue-tracker.md` for the tracker and how to publish to it. Without that file, the tracker is the repo: one markdown file per slice in `docs/product/release-slices/`, named `R1-<slug>.md`, its title the `#` heading.
+
+One item per slice, in order, so each header cites the slice it builds on; R1's header ends at its position. Title `R1 — <name>`, labelled `release-slice`. Body:
 
 ```
-**R2 of 3 · builds on** #<issue> R1 — <name>
+**R2 of 3 · builds on** <ref> R1 — <name>
 
 **Case:** <one line>
 
@@ -82,6 +84,6 @@ Publish with `gh`: one issue per slice, in order, labelled `release-slice`, crea
 **Assumption:** <one line>
 ```
 
-Publish in order, so each header cites the issue number of the slice it builds on. R1's header ends at its position.
+A part the tracker has no field for — the label, markdown, a reference to another item — goes in the nearest field it does have, named in the closing message.
 
-Close with one message: every issue URL in order, then the unknowns list in its two groups with owners and candidate answers.
+Close with one message: every slice's link or path in order, then the unknowns list in its two groups with owners and candidate answers.

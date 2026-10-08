@@ -8,28 +8,24 @@ _Not decided yet._
 
 ### Greenfield project
 
-1. **`/to-prd`** → the PRD path set by `/setup-playbook` (`docs/product/prd.md` by default). Captures what we're building and why. Feed it whatever raw material you have: lean product canvas, discovery notes, client call transcripts, sketches, whatever plans already exist.
-2. **Set the technology stack**, working from the PRD:
-   - **`/grilling`** → **`/to-tickets`**: have the AI pressure-test your stack choices, then turn that session into tickets.
-   - **Ad hoc**: for something small and obvious, settle the stack with the AI directly.
-3. **`/to-release-slices`**: from the PRD, lay out the activities people go through, cut the release slices against the eleven criteria in [`criteria.md`](.agents/skills/to-release-slices/criteria.md), have fresh subagents try to break each slice and the sequence, then publish one GitHub issue per slice (`R1 — <name>`, labelled `release-slice`). Each slice is five lines: header, case, flow, fence, assumption. It asks for the material once, then runs to published issues on its own; open questions land in an unknowns list with owners and candidate answers.
-4. **Strategic alignment**: run **`/grill-with-docs`** to settle the *how*, scoped to the R1 slice.
+1. **`/to-prd`** → the PRD, at the path you set with `/setup-playbook`. Feed it whatever you have: lean canvas, discovery notes, call transcripts, sketches.
+2. **Set the technology stack**, from the PRD. Pressure-test the choices with **`/grilling`** → **`/to-tickets`**, or settle them with the AI directly when they're small and obvious.
+3. **`/to-release-slices`** lays out the activities people go through, cuts them into slices, and publishes one item per slice to your tracker (or markdown under `docs/product/release-slices/`). Details in the [skill](.agents/skills/to-release-slices/SKILL.md).
+4. **`/grill-with-docs`** → the *how*, scoped to R1. The slices go broad first, then the grill goes deep.
 
    > /grill-with-docs the prd settled the what and why, and the release slices settled the activities and the R1 slice. Grill the how for R1: settle the ubiquitous language from the activities' names, and the hard, irreversible decisions
 
-   The slices go broad first, so the grill knows where to go deep. A slice holds only its five parts, so everything else about R1 is left for the grill to settle. You only grill the decisions R1 actually takes, and you pull the glossary from concrete activity names instead of inventing terms in the abstract.
+5. **`/to-demos`** cuts R1 into demos — a day or two each, shown to someone who does not read code, the walk of the whole narrative first — and publishes one item per demo. Details in the [skill](.agents/skills/to-demos/SKILL.md).
 
 ## Installation
-
-Install the skills in this repo with [`gh skill install`](https://cli.github.com/manual/gh_skill_install), a GitHub CLI preview command:
 
 ```sh
 gh skill install clnnn/playbook --allow-hidden-dirs --all
 ```
 
-Then run **`/setup-playbook`** once per repo. It decides where `/to-prd` publishes the PRD, and records the choice under `docs/agents/`.
+[`gh skill install`](https://cli.github.com/manual/gh_skill_install) is a GitHub CLI preview command. Then run **`/setup-playbook`** once per repo to pick where the PRD lives.
 
-A few steps in the flow call skills from [mattpocock/skills](https://github.com/mattpocock/skills) (MIT). Install those too:
+A few steps call skills from [mattpocock/skills](https://github.com/mattpocock/skills) (MIT):
 
 ```sh
 claude plugins install mattpocock-skills   # or: npx skills@latest add mattpocock/skills
