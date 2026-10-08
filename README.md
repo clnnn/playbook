@@ -15,7 +15,8 @@ _Not decided yet._
 
    > /grill-with-docs the prd settled the what and why, and the release slices settled the activities and the R1 slice. Grill the how for R1: settle the ubiquitous language from the activities' names, and the hard, irreversible decisions
 
-5. **`/to-demos`** cuts R1 into demos — a day or two each, shown to someone who does not read code, the walk of the whole narrative first — and publishes one item per demo. Details in the [skill](.agents/skills/to-demos/SKILL.md).
+5. **`/to-demos`** cuts R1 into demos — a two-day timebox each, shown to the domain owner, the walking skeleton first — and publishes one item per demo, sorted by fidelity. A **spike** settles a form-or-feel question (*one long form or three pages?*) with a throwaway prototype; a **lo-fi demo** settles a rule, data or flow question. Details in the [skill](.agents/skills/to-demos/SKILL.md).
+6. **Per demo:** prototype the spikes and let the domain owner pick; open each lo-fi demo with **`/grill-with-docs`**, then build it.
 
 ## Installation
 
