@@ -48,7 +48,7 @@ Order: D1, then the flow's order, a spike always before the lo-fi demo that buil
 
 ## Stage 3/3 — Publish
 
-Read `docs/agents/issue-tracker.md` for the tracker and how to publish to it. Without that file, the tracker is the repo: one markdown file per demo in `docs/product/demos/`, named `R1-D1-<slug>.md`, its title the `#` heading.
+`AGENTS.md` names the issue tracker and how to publish to it. Without that line, the tracker is the repo: one markdown file per demo in `docs/product/demos/`, named `R1-D1-<slug>.md`, its title the `#` heading, and a `Demos:` line under `## Product docs` in `AGENTS.md` pointing at the directory.
 
 One item per demo, in order. Title `R1·D1 — <name>`, labelled `demo` plus `spike` or `lo-fi`. Body:
 

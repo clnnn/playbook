@@ -162,4 +162,4 @@ One table: `Risk | Why it matters`, filled by a pass over **Cagan's four risks**
 
 ## Publishing
 
-Publish the PRD where `docs/agents/prd.md` says; `/setup-playbook` writes that file. Without it, save as `docs/product/prd.md`. Report the path.
+Publish to the PRD path `AGENTS.md` names (`CLAUDE.md` where that is the file the repo keeps); without one, `docs/product/prd.md`. An existing file is replaced only after the user has seen the diff and confirmed. Then point `AGENTS.md` at the file so downstream skills find it: a `PRD:` line under `## Product docs`, the section created when missing, the line rewritten when the path changed. Report the path.
