@@ -1,6 +1,6 @@
-# Release slice criteria
+# Slice criteria
 
-The eleven criteria every release slice is cut against. Each carries its **Check**: the question whose answer decides whether the slice passes. Use the names and wording as written.
+The eleven criteria every slice is cut against. Each carries its **Check**: the question whose answer decides whether the slice passes. Use the names and wording as written.
 
 1. **Tracer bullet.** The slice runs through every layer, from where the work comes in to where a person signs it off. Check: one real case can travel the whole path without anyone patching it by hand.
 2. **Happy path.** Pick the case that is both most common and least branchy. Check: the slice follows exactly one path through the domain's decision tree.

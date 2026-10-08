@@ -1,7 +1,7 @@
 ---
 name: to-demos
 argument-hint: "[slice to cut — pasted, or a file]"
-description: Cut a release slice into demos — a two-day timebox each, the walking skeleton first — sorted into spike demos (prototype) and lo-fi demos (/grill-with-docs), published to the project's issue tracker.
+description: Cut a slice into demos — a two-day timebox each, the walking skeleton first — sorted into spike demos (prototype) and lo-fi demos (/grill-with-docs), published to the project's issue tracker.
 disable-model-invocation: true
 ---
 

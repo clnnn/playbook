@@ -1,13 +1,13 @@
 ---
-name: to-release-slices
+name: to-slices
 argument-hint: "[conversation, PRD, notes or file to slice]"
-description: Turn a conversation into release slices — activities, then slices cut against eleven criteria, broken by fresh adversarial subagents, published to the project's issue tracker.
+description: Turn a conversation into slices — activities, then slices cut against eleven criteria, broken by fresh adversarial subagents, published to the project's issue tracker.
 disable-model-invocation: true
 ---
 
 ## Input
 
-The conversation so far, plus anything named at invocation — text after `/to-release-slices`, a pasted dump, a PRD, a referenced file. With nothing to read, ask for the material first. That is the only question the skill asks; from there it runs to published issues on its own.
+The conversation so far, plus anything named at invocation — text after `/to-slices`, a pasted dump, a PRD, a referenced file. With nothing to read, ask for the material first. That is the only question the skill asks; from there it runs to published issues on its own.
 
 ## Operating contract
 
@@ -66,9 +66,9 @@ Breakers are **fresh eyes**: general-purpose subagents, never forks, so each car
 
 ## Stage 3/3 — Publish
 
-Read `docs/agents/issue-tracker.md` for the tracker and how to publish to it. Without that file, the tracker is the repo: one markdown file per slice in `docs/product/release-slices/`, named `R1-<slug>.md`, its title the `#` heading.
+Read `docs/agents/issue-tracker.md` for the tracker and how to publish to it. Without that file, the tracker is the repo: one markdown file per slice in `docs/product/slices/`, named `R1-<slug>.md`, its title the `#` heading.
 
-One item per slice, in order, so each header cites the slice it builds on; R1's header ends at its position. Title `R1 — <name>`, labelled `release-slice`. Body:
+One item per slice, in order, so each header cites the slice it builds on; R1's header ends at its position. Title `R1 — <name>`, labelled `slice`. Body:
 
 ```
 **R2 of 3 · builds on** <ref> R1 — <name>
