@@ -1,7 +1,7 @@
 ---
 name: to-slices
 argument-hint: "[conversation, PRD, notes or file to slice]"
-description: Turn a conversation into slices — activities, then slices cut against eleven criteria, broken by fresh adversarial subagents, published to the project's issue tracker.
+description: Turn a conversation into slices — activities, then slices cut against eleven criteria, broken by fresh adversarial subagents, published to the project's issue tracker, each carrying the unknowns a grill settles next.
 disable-model-invocation: true
 ---
 
@@ -35,7 +35,7 @@ Read [`criteria.md`](criteria.md) on entering. Its eleven criteria govern every 
 
 **Cut the next slices.** Criterion 10's ledger names them, in order. Each one gets the same treatment: the full eleven-criteria walk. The last slice's ledger is empty.
 
-**Unknowns.** Criterion 11's questions are kept as one list across all slices, outside any slice.
+**Unknowns.** Criterion 11's questions are kept as one list across all slices, outside any slice. Each names the first slice it gates; Publish files it under that slice.
 
 **Write it down**, in a scratch directory outside the repo:
 
@@ -68,10 +68,14 @@ Breakers are **fresh eyes**: general-purpose subagents, never forks, so each car
 
 `AGENTS.md` names the issue tracker and how to publish to it. Without that line, the tracker is the repo: one markdown file per slice in `docs/product/slices/`, named `R1-<slug>.md`, its title the `#` heading, and a `Slices:` line under `## Product docs` in `AGENTS.md` pointing at the directory.
 
+**Source first.** A slice is grilled in a fresh session, so each one must lead back to its source. A source that is already a repo file is cited as it stands; any other is published to `docs/product/slices/source.md`, whatever the tracker.
+
 One item per slice, in order, so each header cites the slice it builds on; R1's header ends at its position. Title `R1 — <name>`, labelled `slice`. Body:
 
 ```
 **R2 of 3 · builds on** <ref> R1 — <name>
+
+**Source:** <path or link>
 
 **Case:** <one line>
 
@@ -82,7 +86,13 @@ One item per slice, in order, so each header cites the slice it builds on; R1's 
 **Fence:** <one line>
 
 **Assumption:** <one line>
+
+**Unknowns**
+- <question> · blocks building · settles by <conversation | prototype-logic | prototype-ui> · owner <who> · candidate: <answer>
+- <question> · blocks sign-off · owner <who> · candidate: <answer>
 ```
+
+The unknowns section holds the questions that name this slice as the first they gate, and nothing else; a slice no question gates omits the section.
 
 A part the tracker has no field for — the label, markdown, a reference to another item — goes in the nearest field it does have, named in the closing message.
 

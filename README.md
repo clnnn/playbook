@@ -10,7 +10,8 @@ _Not decided yet._
 
 1. `/to-prd` writes the PRD to `docs/product/prd.md` and points `AGENTS.md` at it. Feed it whatever you have: lean canvas, discovery notes, call transcripts, sketches.
 2. Set the technology stack from the PRD. Pressure-test the choices with `/grilling` and then `/to-tickets`, or settle them with the AI directly when they're small and obvious.
-3. `/to-slices` lays out the activities people go through, cuts them into slices, and publishes one item per slice to your tracker (or markdown under `docs/product/slices/`).
+3. `/to-slices` lays out the activities people go through, cuts them into slices, and publishes one item per slice to your tracker (or markdown under `docs/product/slices/`). Each slice carries its source and the unknowns that gate it.
+4. Take the next slice in order into a fresh session and `/grill-with-docs` it: the slice is the idea, its unknowns the first round, each candidate answer the recommended one. An unknown that settles by `prototype-logic` or `prototype-ui` goes out through `/handoff` to `/prototype`, and its verdict comes back the same way. When the frontier is empty, `/to-spec`, `/to-tickets`, then `/implement`. One slice per session, the way `/implement` is one ticket per session.
 
 ## Installation
 
