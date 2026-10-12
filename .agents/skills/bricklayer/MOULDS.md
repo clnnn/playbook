@@ -1,0 +1,7 @@
+# Moulds
+
+The rules for turning one release slice into an ordered list of moulds, consulted from the _Shape_ step of [`bricklayer`](SKILL.md). A mould settles one cluster of decisions that have to be settled together, and only what is still open: ADRs, the glossary, and earlier bricks are already settled. In order of precedence:
+
+1. **Isolate before you integrate.** When the slice depends on something external or not fully known (a third party, a service whose shape is unclear), its first mould is a **boundary mould** in grill mode: the port the domain talks to, the types that cross it, the failure modes, and an ADR saying everything reaches the thing through the port. Its brick is the port plus an **honest mock** adapter: where the real shape is unknown (pagination, async, partial data) the mock assumes the hard case, and where that unknown would change the port's shape, a prototype mould probes the real thing first and the boundary mould fixes the port after. The real adapter is its own mould, later, replacing only what sits behind the port; until it lands, the slice's promise reads "with sample data".
+2. **Simplicity first, structural pulled forward.** Order moulds easiest-first, then move ahead any mould whose decision every later brick sits on. Local questions stay where they fall.
+3. **One session's worth.** A mould and its cast fit in one fresh context window; a mould that doesn't is two.
