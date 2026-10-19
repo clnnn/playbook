@@ -4,8 +4,8 @@ Source: [sirupsen/napkin-math](https://github.com/sirupsen/napkin-math) — rows
 
 ## Latency & Throughput
 
-Numbers rounded for memorization, not faux precision. Throughput and latency
-columns deliberately don't always reconcile — they're rounded for easy math.
+Throughput and latency columns deliberately don't always reconcile — they're
+rounded for easy math.
 
 | Operation                            | Latency | Throughput | 1 MiB  | 1 GiB  |
 | ------------------------------------ | ------- | ---------- | ------ | ------ |
@@ -124,5 +124,3 @@ Blob storage operations (fewer, larger files is cheaper):
 Rule of thumb: each additional x in compression ratio costs ~10x in CPU time.
 E.g. English Wikipedia at 2x runs ~200 MiB/s, 3x at ~20 MiB/s, 4x at ~1 MB/s.
 Ratios are stable across algorithms; speeds vary by an order of magnitude.
-
-Note: use `10^n` notation in all calculations (e.g. `3 * 10^12` not `3,000,000,000,000`).
