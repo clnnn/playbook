@@ -10,6 +10,7 @@ _Not decided yet._
 
 1. `/to-prd` writes the PRD to `docs/product/prd.md` and points `AGENTS.md` at it. Feed it whatever you have: lean canvas, discovery notes, call transcripts, sketches.
 2. Set the technology stack from the PRD. Pressure-test the choices with `/grilling` and then `/to-tickets`, or settle them with the AI directly when they're small and obvious.
+3. `/cut` turns the conversation and the PRD into release slices under `docs/product/slices/`, each shippable on its own and carrying its quality numbers. Hand each slice to `/wayfinder` in a fresh session to chart its map.
 
 ## Installation
 
