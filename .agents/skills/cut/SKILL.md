@@ -1,6 +1,6 @@
 ---
 name: cut
-description: Cut a conversation into release slices, each shippable on its own, named by the journey it serves, carrying its quality numbers
+description: Cut a conversation into release slices, each shippable on its own, named by the journey it serves
 disable-model-invocation: true
 ---
 
@@ -18,28 +18,15 @@ disable-model-invocation: true
 - **Simplicity first, structural pulled forward.** Order slices easiest-first, then move ahead any slice carrying an unresolved structural risk, and say on the slice why it moved. Local risks stay where they fall.
 - **External dependencies are isolated, not waited on.** Knowing an integration is possible is enough to cut the slice; its details go behind a boundary and work continues against the mock.
 
-## Quality per slice
-
-The journey holds what the slice does; **Quality** holds how well its path must behave, in numbers the slice is measured against before it ships. At most three per slice.
-
-Read [`references/QUALITY.md`](references/QUALITY.md) on entering — it holds the attributes, the signals that raise them, the cut, and the anchoring.
-
-- **Carry over** any requirement the source already pins whose workstream this slice's path touches; its ID and number stay.
-- **Derive the rest** by walking the slice's journey, boundary and mocks against the signal table, and pin only what survives the cut.
-- **The skeleton carries the structural ones** — the attributes every later slice inherits (`SEC` authentication, `DATA` restore, `OPS` alerting) — each in its thinnest measurable form.
-- **Scale and anchor the number** to this slice's conditions with `napkin-math`; the verdict alone reaches the slice.
-- **Name the measurement**: the concrete check run before the slice ships, from the reference's column, and the number it must show.
-
 ## Steps
 
 1. **Cut the skeleton.** List every structural element the product will need — the source's scope and dependencies, or the conversation — and cut the thinnest deployed path that touches each one for real. Write its promise.
 2. **Cut the rest.** One slice per journey, until every path a user takes in the source lands in exactly one slice. Write each promise; a promise that can't be written honestly reshapes the slice until it can.
 3. **Order.** Mark each slice's risk, sort easiest-first, pull structural forward, write the reason on the slice.
-4. **Pin quality** on each slice, as above.
-5. **Review.** Present the slices as a numbered list — name, promise, risk mark, order reason — and ask whether a promise is dishonest, a slice is horizontal, or the order is wrong. Iterate until the user approves. This is the one turn the skill waits on.
-6. **Publish.**
+4. **Review.** Present the slices as a numbered list — name, promise, risk mark, order reason — and ask whether a promise is dishonest, a slice is horizontal, or the order is wrong. Iterate until the user approves. This is the one turn the skill waits on.
+5. **Publish.**
 
-**Done when:** every path in the source lands in exactly one slice; every promise reads "after this slice, a user can ___"; R1 builds on nothing and every later slice builds only on slices before it; every structural risk sits ahead of every slice that depends on it; every quality line carries a number, a measurement and a source; the user has approved.
+**Done when:** every path in the source lands in exactly one slice; every promise reads "after this slice, a user can ___"; R1 builds on nothing and every later slice builds only on slices before it; every structural risk sits ahead of every slice that depends on it; the user has approved.
 
 ## Publishing
 
@@ -64,13 +51,6 @@ Each slice is what `wayfinder` charts from, in a fresh session: the promise is i
 
 ## Mocks
 - <external dependency> — behind <boundary name>; sample data: <what>
-
-## Quality
-- PERF-01 — <number under condition> · measured by <check> · from <source | napkin-math | 🔶>
-- not pinned: <attribute> — <why it can wait>
-
-## Open questions
-- <question> · candidate: <answer>
 ```
 
 R1's header ends at its risk line. A slice with nothing to mock or ask omits that section.
