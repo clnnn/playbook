@@ -1,6 +1,6 @@
 ---
 name: cut
-description: Cut a conversation into release slices — each shippable on its own, named by the journey it serves, carrying its quality numbers
+description: Cut a conversation into release slices, each shippable on its own, named by the journey it serves, carrying its quality numbers
 disable-model-invocation: true
 ---
 
