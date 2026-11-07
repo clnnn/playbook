@@ -11,7 +11,7 @@ disable-model-invocation: true
 - **Named by journey.** Scope and name each slice by what a user is trying to accomplish, so it is demoable and reads at a glance.
 - **Proven by gauges.** An engineer judges a slice the way a civil engineer judges a bridge: not by walking it, but by the numbers. Three parts, one meaning each:
   - The **model** translates the journey into quantities and the relations between them, in the journey's nouns ("invoices sent = rows accepted − rows rejected"), and derives a **predicted** value of each quantity for the one case in `Boundary: In`. The prediction is computed from the model before the slice is built; a value that can only be guessed means the model is missing a relation.
-  - A **gauge** is one quantity of the model, measured by the deployed slice itself and **traced** to the site that emits it (a file and function, a metric name, a table and column). Coverage is the engineer's confidence: at least one gauge per layer the slice touches and one per journey step, so a fault anywhere on the path moves a gauge. In service the same gauge reads real traffic, where there is no prediction, only a decision it names.
+  - A **gauge** is one quantity of the model, measured by the deployed slice itself and **traced** to the site that emits it. A site the codebase already has is named as it is there; a site still to be built is named in the product's nouns (the ingest boundary, the score record, the score-viewed event), so the slice stays technology-neutral and the stack is chosen when the slice is built. Coverage is the engineer's confidence: at least one gauge per layer the slice touches and one per journey step, so a fault anywhere on the path moves a gauge. In service the same gauge reads real traffic, where there is no prediction, only a decision it names.
   - The **proof** is one command that loads the `In` case the way a user would, reads every gauge, and sets predicted beside measured within a **tolerance**; every relation of the model holds within tolerance or the proof fails. Evidence a user would have seen is attached, never described (the file, the screen, the email). The engineer reads the proof and nothing else; it reruns after every change and stays valid when the implementation is swapped, because the gauges hold still while the code behind them moves. A promise whose proof can't be built reshapes the slice until it can.
 
 **Slice 1 is the walking skeleton**: the thinnest path through every layer the product will need, deployed. As simple as possible, but it touches every structural element for real (the auth, the data store, the boundary to each external dependency), each in its thinnest form. Its promise is often modest; its job is to make every later slice cheap.
@@ -61,7 +61,7 @@ Each slice is what `wayfinder` charts from, in a fresh session: the promise is i
 - <quantity> = <relation> · In: <predicted value>
 
 ## Gauges
-- <quantity> — emitted at <file:function | metric name | table.column> · layer: <schema/API/UI> · step: <n> · in service decides <___>
+- <quantity> — emitted at <site, in the codebase's names or the product's nouns> · layer: <schema/API/UI> · step: <n> · in service decides <___>
 
 ## Proof
 Run: `<one command, against the deployed slice>`
