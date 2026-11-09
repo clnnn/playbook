@@ -30,10 +30,7 @@ disable-model-invocation: true
 
 ## Publishing
 
-The issue tracker should have been provided to you. If not, tell the user to run `/setup-matt-pocock-skills`. Publish R1 first, so each slice's **Builds on** names a real identifier:
-
-- **Local files** → one file per slice at `.scratch/<product-slug>/slices/R<N>-<slug>.md`.
-- **A real issue tracker (GitHub, Linear, …)** → one issue per slice, titled `R<N> — <journey name>`, with **Builds on** also set as a blocking edge the way the tracker doc says.
+The issue tracker should have been provided to you. If not, tell the user to run `/setup-playbook`.
 
 Each slice is what `wayfinder` charts from, in a fresh session: the promise is its destination, the boundary its out of scope. Write the body for that session.
 
