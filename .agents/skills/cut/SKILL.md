@@ -30,7 +30,12 @@ disable-model-invocation: true
 
 ## Publishing
 
-`AGENTS.md` names the issue tracker and how to publish to it. Without that line, the tracker is the repo: one file per slice in `docs/product/slices/`, named `R1-<slug>.md`, and a `Slices:` line under `## Product docs` in `AGENTS.md` pointing at the directory. Close with every slice's link or path, in order.
+The issue tracker should have been provided to you. If not, tell the user to run `/setup-matt-pocock-skills`. Publish in order, R1 first, so each slice's **Builds on** can reference a real identifier; the slices are the same either way, only where they land changes:
+
+- **Local files** → one file per slice at `.scratch/<product-slug>/slices/R<N>-<slug>.md`.
+- **A real issue tracker (GitHub, Linear, …)** → one issue per slice, titled `R<N> — <journey name>`. Express **Builds on** as the platform's native blocking relationship where it has one; otherwise as a `Blocked by:` line per the tracker doc.
+
+Close with every slice's link or path, in order.
 
 Each slice is what `wayfinder` charts from, in a fresh session: the promise is its destination, the boundary its out of scope. Write the body for that session.
 
