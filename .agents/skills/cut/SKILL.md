@@ -24,18 +24,16 @@ disable-model-invocation: true
 2. **Cut the rest.** One slice per journey, until every path a user takes in the source lands in exactly one slice. Write each promise; a promise that can't be written honestly reshapes the slice until it can.
 3. **Order.** Mark each slice's risk, sort easiest-first, pull structural forward, write the reason on the slice.
 4. **Review.** Present the slices as a numbered list — name, promise, risk mark, order reason — and ask whether a promise is dishonest, a slice is horizontal, or the order is wrong. Iterate until the user approves. This is the one turn the skill waits on.
-5. **Publish.**
+5. **Publish.** Follow Publishing below.
 
-**Done when:** every path in the source lands in exactly one slice; every promise reads "after this slice, a user can ___"; R1 builds on nothing and every later slice builds only on slices before it; every structural risk sits ahead of every slice that depends on it; the user has approved.
+**Done when:** every path in the source lands in exactly one slice; every promise reads "after this slice, a user can ___"; R1 builds on nothing and every later slice builds only on slices before it; every structural risk sits ahead of every slice that depends on it; the user has approved; every slice is published, R1 first, and its link or path reported.
 
 ## Publishing
 
-The issue tracker should have been provided to you. If not, tell the user to run `/setup-matt-pocock-skills`. Publish in order, R1 first, so each slice's **Builds on** can reference a real identifier; the slices are the same either way, only where they land changes:
+The issue tracker should have been provided to you. If not, tell the user to run `/setup-matt-pocock-skills`. Publish R1 first, so each slice's **Builds on** names a real identifier:
 
 - **Local files** → one file per slice at `.scratch/<product-slug>/slices/R<N>-<slug>.md`.
-- **A real issue tracker (GitHub, Linear, …)** → one issue per slice, titled `R<N> — <journey name>`. Express **Builds on** as the platform's native blocking relationship where it has one; otherwise as a `Blocked by:` line per the tracker doc.
-
-Close with every slice's link or path, in order.
+- **A real issue tracker (GitHub, Linear, …)** → one issue per slice, titled `R<N> — <journey name>`, with **Builds on** also set as a blocking edge the way the tracker doc says.
 
 Each slice is what `wayfinder` charts from, in a fresh session: the promise is its destination, the boundary its out of scope. Write the body for that session.
 
@@ -59,3 +57,5 @@ Each slice is what `wayfinder` charts from, in a fresh session: the promise is i
 ```
 
 R1's header ends at its risk line. A slice with nothing to mock omits that section.
+
+Close with every slice's link or path, in order.
