@@ -8,10 +8,6 @@ disable-model-invocation: true
 
 The playbook extends the vendored engineering skills without editing them: each extension is a skill of its own, and a pointer in `AGENTS.md` tells the agent when to load it. This skill writes those pointers.
 
-Extensions, each with its `setup.md` in its own skill folder alongside this one:
-
-- `property-testing`
-
 ## 1. Base setup
 
 Call the Skill tool with "setup-matt-pocock-skills" and follow it through its "Done" step; when it asks which instructions file to create, recommend `AGENTS.md`. Done when its `## Agent skills` block and `docs/agents/*.md` are written. When `## Agent skills` already exists, ask whether to re-run it (recommended: **no**) and skip to step 2 on no.
@@ -24,12 +20,23 @@ The playbook keeps one instructions file: `AGENTS.md`, which the playbook's othe
 
 ## 3. Extensions
 
-For each extension listed above, read its `setup.md` and draft:
+Check which extensions are installed: a skill folder alongside this one, or the name in your available skills.
 
-- its sub-block in the `## Playbook extensions` block of `AGENTS.md`;
-- the `docs/agents/*.md` file it names.
+| Extension          | Sub-block     | Doc file                 | Seed                       |
+| ------------------ | ------------- | ------------------------ | -------------------------- |
+| `property-testing` | `### Testing` | `docs/agents/testing.md` | [testing.md](./testing.md) |
 
-Show the drafts and let the user edit before writing. Then write: update the `## Playbook extensions` block and each sub-block in place when they exist, create them otherwise, and leave `## Agent skills` and every other section as they are. Done when every listed extension has its sub-block and doc file.
+Draft the `## Playbook extensions` block for `AGENTS.md`, including a sub-block only for an installed extension:
+
+```markdown
+## Playbook extensions
+
+### Testing
+
+Property-based testing extends `tdd` and `diagnosing-bugs`. See `docs/agents/testing.md`.
+```
+
+Draft each installed extension's doc file from its seed. Show the drafts and let the user edit before writing. Then write: update the `## Playbook extensions` block and each sub-block in place when they exist, create them otherwise, and leave `## Agent skills` and every other section as they are. Done when every installed extension has its sub-block and doc file. When none is installed, skip this step and say so in step 4.
 
 ## 4. Done
 
