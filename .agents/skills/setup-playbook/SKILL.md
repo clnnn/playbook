@@ -22,9 +22,10 @@ The playbook keeps one instructions file: `AGENTS.md`, which the playbook's othe
 
 Check which extensions are installed: a skill folder alongside this one, or the name in your available skills.
 
-| Extension          | Sub-block     | Doc file                 | Seed                       |
-| ------------------ | ------------- | ------------------------ | -------------------------- |
-| `property-testing` | `### Testing` | `docs/agents/testing.md` | [testing.md](./testing.md) |
+| Extension                   | Sub-block          | Doc file                      | Seed                                 |
+| --------------------------- | ------------------ | ----------------------------- | ------------------------------------ |
+| `property-testing`          | `### Testing`      | `docs/agents/testing.md`      | [testing.md](./testing.md)           |
+| `create-verification-skill` | `### Verification` | `docs/agents/verification.md` | [verification.md](./verification.md) |
 
 Draft the `## Playbook extensions` block for `AGENTS.md`, including a sub-block only for an installed extension:
 
@@ -34,6 +35,10 @@ Draft the `## Playbook extensions` block for `AGENTS.md`, including a sub-block 
 ### Testing
 
 Property-based testing extends `tdd` and `diagnosing-bugs`. See `docs/agents/testing.md`.
+
+### Verification
+
+The `verify-<app>` skill proves changes in the running app for `implement`, `implement-spec`, `pr`, `triage`, `diagnosing-bugs` and `retro`. See `docs/agents/verification.md`.
 ```
 
 Draft each installed extension's doc file from its seed. Show the drafts and let the user edit before writing. Then write: update the `## Playbook extensions` block and each sub-block in place when they exist, create them otherwise, and leave `## Agent skills` and every other section as they are. Done when every installed extension has its sub-block and doc file. When none is installed, skip this step and say so in step 4.
@@ -41,3 +46,5 @@ Draft each installed extension's doc file from its seed. Show the drafts and let
 ## 4. Done
 
 Name each extension wired in, the skill it extends, and the doc file holding its rules. Those files can be edited directly later; re-run this skill after installing a new extension.
+
+When Verification is wired in and no `verify-*` skill exists: if the app runs, tell the user to run `/create-verification-skill` in a new session; otherwise, tell them it comes once the walking skeleton runs.
