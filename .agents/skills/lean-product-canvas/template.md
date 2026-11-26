@@ -1,6 +1,6 @@
 # Lean Product Canvas (v3) Template
 
-Capture the eight boxes. Box 2 carries both the money trail and the key-result metric ("who does what by how much"). Box 4 is a Jobs-to-be-Done pass. Box 7 prioritizes hypotheses by risk × perceived value.
+Capture the eight boxes. Box 2 carries both the money trail and the key-result metric ("who does what by how much"). Box 4 is a Jobs-to-be-Done pass. Box 7 prioritizes hypotheses by risk × perceived value, and records what that prioritization ruled out.
 
 ## Template
 ```markdown
@@ -41,6 +41,7 @@ Title of initiative: [title]  ·  Date: [date]  ·  Iteration: [n]
 
 ### 7. Learning Priorities
 - **Prioritization (risk × perceived value):** [which hypothesis is high value + high risk → the Test quadrant, test first]
+- **Not doing (and why):** [each discarded or shelved hypothesis + the quadrant that decided it]
 - **Riskiest assumption:** [single riskiest assumption right now, and its risk type: value / usability / feasibility / viability]
 
 ### 8. Experiments

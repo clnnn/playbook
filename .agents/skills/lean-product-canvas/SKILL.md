@@ -170,6 +170,8 @@ Work through a full Jobs-to-be-Done pass, per primary persona:
 4. **Name the gains** — what would exceed today's solutions, the time/money/effort savings that delight, the factors that would make them switch, and how life improves.
 5. **Rank by intensity** — not all pains are equal. Flag the most acute pain and the must-have (vs. nice-to-have) gain; that focus feeds Box 5 and Box 6.
 
+*Painkiller or vitamin — one test on the pain you just flagged.* A **painkiller** gets sought out and switched to; a **vitamin** gets a polite nod and no change in behavior. Two questions settle it: **name three specific people who have this pain right now**, and **what are they doing about it today?** The current workaround is the real competitor, and a pain with no workaround is usually one nobody feels sharply enough to act on. Frequency decides the rest — a daily pain outranks a sharper annual one. A vitamin is not a stop sign, but tag it `[validate]`: it is a **value** risk heading for Box 7.
+
 Keep each specific and measurable — "cut report time from 8h to 1h", not "be more productive". Ground it in real customer signal where you have it; tag anything assumption-based `[validate]`.
 
 **Completion criterion:** explains *why* the user cares — at least one functional, one social/emotional job, and the most acute pain and most-wanted gain — not just what they'll do.
@@ -178,7 +180,14 @@ Keep each specific and measurable — "cut report time from 8h to 1h", not "be m
 
 Ask: **What could we make that solves the business problem and meets this user's need at once?** List product, feature, or enhancement ideas. Push for a wide space — big and small, technical and non-technical, even business-model shifts. These are candidates to test, not a backlog.
 
-**Completion criterion:** at least three distinct candidate solutions. One-idea answers get challenged: "What else could solve this? What if that one fails?"
+*Widen the space — when they stop at one idea, run a lens instead of asking again.* Asking "what else?" a second time returns a variant of the first answer; a lens pushes off a different edge of it. Run the single lens that fits the idea:
+
+- **SCAMPER** the obvious solution — substitute the business model, eliminate a step, reverse who does the work (the user instead of the system, or the opposite), minimize to the single feature that carries the job.
+- **Constraints** — one day to build it, free forever, without [the obvious technology], for ten users or for a billion. A constraint the team can't dodge forces a different shape.
+- **Analogy** — which industry already solved a version of this? Match on *structure*, not surface: "Uber for X" is surface; "a two-sided marketplace that solves trust between strangers" is structural.
+- **First principles** — strip to what is actually true, then ask of each surviving assumption whether it is a law of physics or just how it has been done. Rebuild from the truths.
+
+**Completion criterion:** at least three candidates, distinct in **approach** rather than in feature detail — two framings of the same build count as one. One-idea answers get challenged: "What else could solve this? What if that one fails?"
 
 ### Box 6 — Hypotheses
 
@@ -199,9 +208,13 @@ You now have several hypotheses. This box does two things: **pick which hypothes
 - **Low value + low risk → don't test, usually don't build.** Foundational table-stakes (e.g. payments) that don't differentiate the offering but are operationally required.
 - **Low value + high risk → Discard.** Not worth the exposure — neither test nor build it.
 
-Pick the high-value, high-risk hypothesis (the **Test** quadrant). Then, for it, list all the reasons it might fail (its risks), and choose the single riskiest assumption *right now*. Classify that assumption: **value** (do they want it?), **usability** (can they use it?), **feasibility** (can we build it?), **viability** (does it hit the business outcome / move the money?). Early on, weight risks to **value** over feasibility.
+Pick the high-value, high-risk hypothesis (the **Test** quadrant). **Record what the other quadrants just killed** — every hypothesis being discarded or shelved, each with the quadrant that decided it. The canvas otherwise shows only the bet you took; writing down the ones you said no to, and why, is what stops them arriving again next iteration.
 
-**Completion criterion:** the highest-priority hypothesis is chosen via risk × perceived value (the Test quadrant), and within it one riskiest assumption is named with its risk type and a stated reason — the one that, if wrong, would kill the initiative.
+Then, for the chosen hypothesis, list all the reasons it might fail (its risks), and choose the single riskiest assumption *right now*. Classify that assumption: **value** (do they want it?), **usability** (can they use it?), **feasibility** (can we build it?), **viability** (does it hit the business outcome / move the money?). Early on, weight risks to **value** over feasibility.
+
+*Pre-mortem — to produce that risk list, go forward and look back.* It is twelve months on, you built it, and it flopped. Ask the user to tell the story: what went wrong, and in what order? Failures surface faster from a story than from a list, because the frame makes failure the premise rather than a possibility to argue against. Sort what comes out into **preventable**, **acceptable**, and **would-kill-it**; the would-kill-it ones are the candidates for the riskiest assumption.
+
+**Completion criterion:** the highest-priority hypothesis is chosen via risk × perceived value (the Test quadrant), every other hypothesis is recorded as discarded or shelved with its quadrant, and within the chosen one a single riskiest assumption is named with its risk type and a stated reason — the one that, if wrong, would kill the initiative.
 
 ### Box 8 — Experiments (least work to learn next)
 
