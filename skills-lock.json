@@ -62,6 +62,13 @@
       "skillPath": "skills/productivity/handoff/SKILL.md",
       "computedHash": "f60a2c3688379b7a306b3a7b8dd4120eab39da44c74fa2cb62d6424935f04aa7"
     },
+    "idea-refine": {
+      "source": "addyosmani/agent-skills",
+      "commit": "8c99fa36d90068c82d547f7c12a9d67a3e95f4ee",
+      "sourceType": "github",
+      "skillPath": "skills/idea-refine/SKILL.md",
+      "computedHash": "f93acea3b4a197e2fda976bc9b7aa1aafedfd819fe190c7b33e70eaf745820fb"
+    },
     "implement": {
       "source": "mattpocock/skills",
       "sourceType": "github",
