@@ -10,9 +10,7 @@ The playbook extends the vendored engineering skills without editing them: each 
 
 ## 1. Base setup
 
-Call the Skill tool with "setup-matt-pocock-skills" and follow it through its "Done" step; when it asks which instructions file to create, recommend `AGENTS.md`. Done when its `## Agent skills` block and `docs/agents/*.md` are written. When `## Agent skills` already exists, ask whether to re-run it (recommended: **no**) and skip to step 2 on no.
-
-If the Skill tool refuses the call, stop and tell the user to run `/setup-matt-pocock-skills`, then `/setup-playbook` again.
+`setup-matt-pocock-skills` is user-invoked, so the Skill tool cannot reach it: read [`../setup-matt-pocock-skills/SKILL.md`](../setup-matt-pocock-skills/SKILL.md) and run it as your own instructions, following its pointers to its sibling files, down to its "Done" step. When it asks which instructions file to create, recommend `AGENTS.md`. Done when its `## Agent skills` block and `docs/agents/*.md` are written. When `## Agent skills` already exists, ask whether to re-run it (recommended: **no**) and skip to step 2 on no.
 
 ## 2. Instructions file
 
